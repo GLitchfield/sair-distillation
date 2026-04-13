@@ -1,0 +1,68 @@
+Cheat sheet: example sheets/SimonRJ.txt (5190 bytes)
+Provider: anthropic  Model: claude-haiku-4-5-20251001  Subset: chunk_4_hard3
+
+--- 67 chunk_4_hard3 problems ---
+  11:56:08 [hard3_0269] ✗ got=FALSE exp=TRUE  (1/67)
+  11:56:25 [hard3_0270] ✗ got=TRUE exp=FALSE  (2/67) ETA=14m
+  11:56:35 [hard3_0271] ✓ got=TRUE exp=TRUE  (3/67) ETA=15m
+  11:56:49 [hard3_0272] ✗ got=FALSE exp=TRUE  (4/67) ETA=14m
+  11:57:01 [hard3_0273] ✗ got=FALSE exp=TRUE  (5/67) ETA=13m
+  11:57:11 [hard3_0274] ✓ got=FALSE exp=FALSE  (6/67) ETA=12m
+  11:57:24 [hard3_0275] ✓ got=FALSE exp=FALSE  (7/67) ETA=12m
+  11:57:34 [hard3_0276] ✓ got=FALSE exp=FALSE  (8/67) ETA=12m
+  11:57:45 [hard3_0277] ✓ got=FALSE exp=FALSE  (9/67) ETA=11m
+  11:57:55 [hard3_0278] ✗ got=FALSE exp=TRUE  (10/67) ETA=11m
+  11:58:09 [hard3_0279] ✗ got=FALSE exp=TRUE  (11/67) ETA=11m
+  11:58:18 [hard3_0280] ✓ got=FALSE exp=FALSE  (12/67) ETA=11m
+  11:58:30 [hard3_0281] ✓ got=FALSE exp=FALSE  (13/67) ETA=11m
+  11:58:43 [hard3_0282] ✓ got=FALSE exp=FALSE  (14/67) ETA=10m
+  11:58:53 [hard3_0283] ✗ got=FALSE exp=TRUE  (15/67) ETA=10m
+  11:59:04 [hard3_0284] ✗ got=FALSE exp=TRUE  (16/67) ETA=10m
+  11:59:17 [hard3_0285] ✗ got=FALSE exp=TRUE  (17/67) ETA=10m
+  11:59:26 [hard3_0286] ✓ got=FALSE exp=FALSE  (18/67) ETA=9m
+  11:59:36 [hard3_0287] ✗ got=TRUE exp=FALSE  (19/67) ETA=9m
+  11:59:49 [hard3_0288] ✗ got=FALSE exp=TRUE  (20/67) ETA=9m
+  12:00:00 [hard3_0289] ✓ got=FALSE exp=FALSE  (21/67) ETA=9m
+  12:00:09 [hard3_0290] ✗ got=FALSE exp=TRUE  (22/67) ETA=9m
+  12:00:23 [hard3_0291] ✗ got=FALSE exp=TRUE  (23/67) ETA=8m
+  12:00:33 [hard3_0292] ✗ got=FALSE exp=TRUE  (24/67) ETA=8m
+  12:00:42 [hard3_0293] ✓ got=FALSE exp=FALSE  (25/67) ETA=8m
+  12:00:52 [hard3_0294] ✗ got=FALSE exp=TRUE  (26/67) ETA=8m
+  12:01:05 [hard3_0295] ✓ got=TRUE exp=TRUE  (27/67) ETA=8m
+  12:01:15 [hard3_0296] ✗ got=FALSE exp=TRUE  (28/67) ETA=7m
+  12:01:24 [hard3_0297] ✓ got=TRUE exp=TRUE  (29/67) ETA=7m
+  12:01:38 [hard3_0298] ✗ got=FALSE exp=TRUE  (30/67) ETA=7m
+  12:01:50 [hard3_0299] ✗ got=FALSE exp=TRUE  (31/67) ETA=7m
+  12:02:00 [hard3_0300] ✓ got=FALSE exp=FALSE  (32/67) ETA=7m
+  12:02:13 [hard3_0301] ✓ got=FALSE exp=FALSE  (33/67) ETA=6m
+  12:02:23 [hard3_0302] ✓ got=FALSE exp=FALSE  (34/67) ETA=6m
+  12:02:33 [hard3_0303] ✓ got=FALSE exp=FALSE  (35/67) ETA=6m
+  12:02:46 [hard3_0304] ✓ got=FALSE exp=FALSE  (36/67) ETA=6m
+  12:02:56 [hard3_0305] ✓ got=FALSE exp=FALSE  (37/67) ETA=6m
+  12:03:06 [hard3_0306] ✓ got=FALSE exp=FALSE  (38/67) ETA=5m
+  12:03:15 [hard3_0307] ✗ got=FALSE exp=TRUE  (39/67) ETA=5m
+  12:03:28 [hard3_0308] ✗ got=FALSE exp=TRUE  (40/67) ETA=5m
+  12:03:39 [hard3_0309] ✓ got=FALSE exp=FALSE  (41/67) ETA=5m
+  12:03:49 [hard3_0310] ✓ got=FALSE exp=FALSE  (42/67) ETA=5m
+  12:04:02 [hard3_0311] ✓ got=FALSE exp=FALSE  (43/67) ETA=4m
+  12:04:12 [hard3_0312] ✓ got=FALSE exp=FALSE  (44/67) ETA=4m
+  12:04:21 [hard3_0313] ✗ got=FALSE exp=TRUE  (45/67) ETA=4m
+  12:04:35 [hard3_0314] ✗ got=FALSE exp=TRUE  (46/67) ETA=4m
+  12:04:46 [hard3_0315] ✗ got=FALSE exp=TRUE  (47/67) ETA=4m
+  12:04:56 [hard3_0316] ✗ got=FALSE exp=TRUE  (48/67) ETA=4m
+  12:05:10 [hard3_0317] ✗ got=FALSE exp=TRUE  (49/67) ETA=3m
+  12:05:20 [hard3_0318] ✗ got=FALSE exp=TRUE  (50/67) ETA=3m
+  12:05:28 [hard3_0319] ✗ got=FALSE exp=TRUE  (51/67) ETA=3m
+  12:05:38 [hard3_0320] ✓ got=FALSE exp=FALSE  (52/67) ETA=3m
+  12:05:54 [hard3_0321] ✗ got=FALSE exp=TRUE  (53/67) ETA=3m
+  12:06:05 [hard3_0322] ✗ got=TRUE exp=FALSE  (54/67) ETA=2m
+  12:06:15 [hard3_0323] ✗ got=FALSE exp=TRUE  (55/67) ETA=2m
+  12:06:30 [hard3_0324] ✗ got=FALSE exp=TRUE  (56/67) ETA=2m
+  12:06:40 [hard3_0325] ✗ got=FALSE exp=TRUE  (57/67) ETA=2m
+  12:06:51 [hard3_0326] ✗ got=FALSE exp=TRUE  (58/67) ETA=2m
+  12:07:05 [hard3_0327] ✓ got=FALSE exp=FALSE  (59/67) ETA=2m
+    12:13:17 [retry 1/3 in 2s]: Connection error.
+    12:19:21 [retry 2/3 in 4s]: Connection error.
+    12:25:27 [retry 3/3 in 8s]: Connection error.
+  12:07:15 [hard3_0328] ERROR (all retries exhausted): Connection error.
+    12:37:38 [retry 1/3 in 2s]: Connection error.

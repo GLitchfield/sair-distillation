@@ -1,0 +1,98 @@
+STRATEGY: Determine if Equation 1 implies Equation 2 by following these steps. Stop as soon as you reach a definitive answer. Be concise—one line per magma test is enough. NEVER skip Step 5 before concluding TRUE.
+
+OUTPUT FORMAT WARNING: When writing your final answer, use plain text headers with NO markdown formatting. Write exactly:
+VERDICT: TRUE
+(or VERDICT: FALSE)
+NOT **VERDICT:** or **VERDICT: TRUE** — the colon must be immediately followed by a space and then TRUE or FALSE.
+
+STEP 1: QUICK STRUCTURAL CHECKS
+
+Check 1a - Singleton Detection:
+If Equation 1 has the EXACT form "x = f(y, z, ...)" where:
+  - The LEFT side is a SINGLE BARE VARIABLE (just "x" with no operations), AND
+  - x does NOT appear ANYWHERE on the right side
+Then Equation 1 forces the magma to be a singleton (one element). A singleton satisfies ALL equations. Answer: TRUE.
+
+WHY it forces singleton: The equation holds for ALL assignments of all variables. For any fixed y,z,..., the RHS evaluates to some element e. Since x is also universally quantified, EVERY element must equal e. So the magma has exactly one element.
+
+CRITICAL DISTINCTIONS — these do NOT trigger singleton detection:
+  - "x * y = f(...)" — x is inside a product on LHS, not bare
+  - "x = f(x, y, ...)" — x appears on the RHS
+  - "(x * z) = f(...)" — LHS has an operation
+
+Examples:
+  - "x = y * (z * w)" → YES singleton (bare x, absent from RHS) → TRUE
+  - "x = (y * y) * ((y * z) * w)" → YES singleton (bare x, absent from RHS) → TRUE
+  - "x * y = z * (w * y)" → NO (x*y on LHS, not bare x)
+  - "x = x * (y * z)" → NO (x appears in RHS)
+
+Check 1b - LHS Complexity:
+Count * operations on the LHS (left of =) of each equation.
+If Equation 2's LHS has FEWER * operations than Equation 1's LHS, lean strongly toward FALSE. Proceed to Step 2 to confirm with a counterexample.
+
+STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS
+
+To refute the implication: find a magma that SATISFIES Equation 1 but VIOLATES Equation 2.
+For each magma below, check: does EQ1 hold? does EQ2 hold? If EQ1 holds and EQ2 fails → COUNTEREXAMPLE FOUND → FALSE.
+
+Magma A - "Zero": x*y = 0 for all x,y.
+  Shortcut: every * expression → 0. An equation fails if one side is a bare variable (can be 1) and the other side contains * (which is 0).
+  Rule: holds iff both sides contain * (both→0), or both sides are the same bare variable.
+
+Magma B - "Right Projection": x*y = y for all x,y.
+  Shortcut: any compound expression evaluates to its RIGHTMOST leaf variable.
+  Rule: equation holds iff both sides reduce to the same rightmost variable (or same bare variable).
+
+Magma C - "Left Projection": x*y = x for all x,y.
+  Shortcut: any compound expression evaluates to its LEFTMOST leaf variable.
+  Rule: equation holds iff both sides reduce to the same leftmost variable.
+
+Magma D - "XOR": x*y = x+y mod 2.
+  Shortcut: XOR all variable occurrences. Count occurrences of each variable on each side.
+  Rule: equation holds iff for every variable, its count on LHS and RHS have the same parity (both odd or both even). If any variable has different parity on left vs right, equation fails.
+
+Magma E - "Constant 1": x*y = 1 for all x,y.
+  Shortcut: every * expression → 1. An equation fails if one side is a bare variable (can be 0) and the other side contains * (which is 1).
+  Rule: holds iff both sides contain * (both→1), or both sides are the same bare variable.
+
+Magma F - "Negate-right": x*y = 1-y (flips y).
+  Shortcut: x*y = 1-y. So x*(y*z) = x*(1-z) = 1-(1-z) = z. And (x*y)*z = (1-y)*z = 1-z.
+  Left-nested: ((...)*z) = 1-z. Right-nested: x*(...*z) = z. Depth-2: (a*b)*c = 1-c; a*(b*c) = c.
+
+CRITICAL LOGIC RULE: A magma SATISFIES an equation as a law only if it holds for EVERY assignment of variables — not just some assignments. If your analysis concludes "the equation holds only when x=z" or "holds only when x=y for all x,y", that means the equation FAILS for assignments where x≠z (e.g., x=0,z=1). The magma does NOT universally satisfy that equation. Discard it and move to the next magma. You MUST NOT pick a specific assignment where EQ1 happens to hold and EQ2 fails — that is NOT a valid counterexample unless EQ1 holds for ALL assignments in that magma.
+
+If ANY magma satisfies EQ1 (universally, for ALL variable assignments) but violates EQ2 (for some assignment): the implication is FALSE. Report that magma.
+
+STEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z
+
+If no 2-element counterexample works, try x*y = 2x + y mod 3 (values {0,1,2}).
+Evaluate by computing 2x+y mod 3 for all variable assignments.
+
+STEP 4: ATTEMPT ALGEBRAIC PROOF
+
+If no counterexample was found, try to prove the implication is TRUE.
+
+Method 4a - Variable Specialization:
+Substitute specific values for variables in Equation 1. Try x=y, x=x*x, etc. to derive intermediate identities, then check if you can derive Equation 2.
+
+Method 4b - Direct Rewriting:
+Use Equation 1 as a rewrite rule (substituting any expressions for its variables) to transform one side of Equation 2 into the other.
+
+Method 4c - Consequence Analysis:
+- If Equation 1 forces x*x = x (idempotent), that constrains the structure.
+- If Equation 1 forces x*y = y*x (commutative), check if Equation 2 requires non-commutativity.
+
+STEP 5: DEFAULT JUDGMENT (REQUIRED — run this before concluding TRUE)
+
+Lack of a counterexample is NOT proof. You MUST run this step before saying TRUE.
+If no counterexample found and no proof constructed:
+- Equation 2 introduces new variables not in Equation 1 → lean FALSE (this is a strong signal).
+- Equation 2 uses 2+ fewer variables than Equation 1 → lean TRUE.
+- Equation 2 has deeper nesting or more operations → lean FALSE.
+- If the structural checks in Step 1 pointed toward FALSE → go with FALSE.
+
+IMPORTANT REMINDERS:
+- A magma is just a set with a binary operation. No associativity, commutativity, or identity assumed unless forced.
+- TRUE means EVERY magma satisfying EQ1 also satisfies EQ2. One counterexample makes it FALSE.
+- Always verify a claimed counterexample by checking ALL variable assignments.
+- The constant magmas (A and E) satisfy any equation where both sides contain *.

@@ -1,0 +1,49 @@
+{"id": "hard3_0012", "equation1": "x = x * (y * (x * x))", "equation2": "x * x = (x * y) * (x * x)", "answer": false}
+{"id": "hard3_0082", "equation1": "x = x * (x * ((y * z) * x))", "equation2": "x = ((x * x) * (x * y)) * x", "answer": false}
+{"id": "hard3_0095", "equation1": "x = y * (y * ((z * w) * x))", "equation2": "x = ((y * z) * (z * z)) * x", "answer": false}
+{"id": "hard3_0096", "equation1": "x = y * (z * ((x * w) * x))", "equation2": "x = (x * (x * x)) * x", "answer": false}
+{"id": "hard3_0098", "equation1": "x = y * (z * ((y * y) * x))", "equation2": "x = ((x * x) * x) * (y * x)", "answer": false}
+{"id": "hard3_0101", "equation1": "x = y * (z * ((w * y) * x))", "equation2": "x = ((y * z) * x) * (y * x)", "answer": false}
+{"id": "hard3_0102", "equation1": "x = y * (z * ((w * w) * x))", "equation2": "x = ((x * (y * x)) * z) * x", "answer": false}
+{"id": "hard3_0111", "equation1": "x = y * ((x * z) * (z * x))", "equation2": "x * x = x * ((y * z) * x)", "answer": false}
+{"id": "hard3_0112", "equation1": "x = y * ((y * x) * (x * x))", "equation2": "x = x * (((x * y) * y) * x)", "answer": false}
+{"id": "hard3_0116", "equation1": "x = y * ((y * z) * (y * x))", "equation2": "x = ((y * (z * y)) * z) * x", "answer": false}
+{"id": "hard3_0120", "equation1": "x = y * ((z * z) * (x * x))", "equation2": "x = (x * (y * y)) * (y * x)", "answer": false}
+{"id": "hard3_0172", "equation1": "x = (y * y) * (x * (z * x))", "equation2": "x = y * (x * (z * (x * x)))", "answer": false}
+{"id": "hard3_0177", "equation1": "x = (y * z) * (y * (y * x))", "equation2": "x = (((x * y) * x) * y) * x", "answer": false}
+{"id": "hard3_0180", "equation1": "x = (y * z) * (z * (z * x))", "equation2": "x = ((x * x) * (x * x)) * x", "answer": false}
+{"id": "hard3_0182", "equation1": "x = (y * z) * (w * (w * x))", "equation2": "x = (((x * y) * z) * z) * x", "answer": false}
+{"id": "hard3_0216", "equation1": "x = ((x * x) * y) * (z * z)", "equation2": "x * (y * z) = (x * y) * z", "answer": false}
+{"id": "hard3_0217", "equation1": "x = ((x * x) * y) * (z * w)", "equation2": "x = (x * (y * z)) * y", "answer": false}
+{"id": "hard3_0225", "equation1": "x = ((x * y) * z) * (w * y)", "equation2": "x = (x * (x * (y * x))) * x", "answer": false}
+{"id": "hard3_0226", "equation1": "x = ((x * y) * z) * (w * z)", "equation2": "x = (x * x) * (x * (y * z))", "answer": false}
+{"id": "hard3_0227", "equation1": "x = ((x * y) * z) * (w * z)", "equation2": "x = (((x * y) * z) * z) * z", "answer": false}
+{"id": "hard3_0274", "equation1": "x = ((x * x) * (x * x)) * y", "equation2": "x = (x * (y * (z * w))) * z", "answer": false}
+{"id": "hard3_0275", "equation1": "x = ((x * x) * (y * x)) * y", "equation2": "x * y = (x * (z * z)) * y", "answer": false}
+{"id": "hard3_0281", "equation1": "x = ((x * y) * (y * z)) * w", "equation2": "x = x * (x * (y * (x * y)))", "answer": false}
+{"id": "hard3_0282", "equation1": "x = ((x * y) * (y * z)) * w", "equation2": "x = (x * (y * y)) * (y * y)", "answer": false}
+{"id": "hard3_0287", "equation1": "x = ((x * y) * (z * y)) * x", "equation2": "x * y = (x * x) * (y * y)", "answer": false}
+{"id": "hard3_0289", "equation1": "x = ((x * y) * (z * w)) * z", "equation2": "x = x * (x * (y * (z * x)))", "answer": false}
+{"id": "hard3_0300", "equation1": "x = ((x * (x * x)) * x) * y", "equation2": "x = x * ((y * (z * z)) * x)", "answer": false}
+{"id": "hard3_0306", "equation1": "x = ((x * (y * x)) * z) * w", "equation2": "x = x * ((y * z) * (x * w))", "answer": false}
+{"id": "hard3_0312", "equation1": "x = ((x * (y * z)) * w) * z", "equation2": "x = x * (y * (y * x))", "answer": false}
+{"id": "hard3_0001", "equation1": "x = y * x", "equation2": "x = x * (x * ((y * z) * x))", "answer": true}
+{"id": "hard3_0002", "equation1": "x = x * (x * y)", "equation2": "x = (x * ((x * x) * x)) * x", "answer": true}
+{"id": "hard3_0004", "equation1": "x = y * (z * w)", "equation2": "x * (y * y) = y * (z * w)", "answer": true}
+{"id": "hard3_0006", "equation1": "x * x = x * y", "equation2": "x * (x * x) = x * (y * z)", "answer": true}
+{"id": "hard3_0008", "equation1": "x * x = y * z", "equation2": "x * (x * y) = (y * x) * z", "answer": true}
+{"id": "hard3_0014", "equation1": "x = x * (y * (z * y))", "equation2": "x = (((x * y) * z) * x) * y", "answer": true}
+{"id": "hard3_0015", "equation1": "x = x * (y * (z * z))", "equation2": "x * y = x * (z * (y * w))", "answer": true}
+{"id": "hard3_0020", "equation1": "x = y * (z * (z * x))", "equation2": "x = (x * x) * (x * (y * x))", "answer": true}
+{"id": "hard3_0024", "equation1": "x = x * ((y * z) * z)", "equation2": "x = (x * (y * (z * y))) * x", "answer": true}
+{"id": "hard3_0027", "equation1": "x = y * ((z * x) * x)", "equation2": "x = (y * y) * (x * x)", "answer": true}
+{"id": "hard3_0028", "equation1": "x = y * ((z * x) * x)", "equation2": "x = ((y * z) * w) * (z * x)", "answer": true}
+{"id": "hard3_0030", "equation1": "x = (x * x) * (y * z)", "equation2": "x * y = x * ((x * x) * y)", "answer": true}
+{"id": "hard3_0034", "equation1": "x = (y * y) * (x * x)", "equation2": "x = y * ((x * (z * y)) * x)", "answer": true}
+{"id": "hard3_0036", "equation1": "x = (x * (x * x)) * y", "equation2": "x = (x * x) * (x * (x * x))", "answer": true}
+{"id": "hard3_0043", "equation1": "x = ((x * x) * y) * z", "equation2": "x = ((x * y) * (z * y)) * y", "answer": true}
+{"id": "hard3_0046", "equation1": "x = ((y * z) * y) * x", "equation2": "x = (y * (x * (z * z))) * x", "answer": true}
+{"id": "hard3_0047", "equation1": "x = ((y * z) * y) * x", "equation2": "x * y = ((y * x) * x) * y", "answer": true}
+{"id": "hard3_0049", "equation1": "x = ((y * z) * w) * x", "equation2": "x = y * (z * (x * (w * x)))", "answer": true}
+{"id": "hard3_0051", "equation1": "x * y = z * (x * z)", "equation2": "x * y = (y * (y * y)) * y", "answer": true}
+{"id": "hard3_0052", "equation1": "x * y = z * (y * z)", "equation2": "x * y = (x * z) * (x * w)", "answer": true}

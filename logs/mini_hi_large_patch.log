@@ -1,0 +1,64 @@
+Cheat sheet: cheatsheets/cheatsheet_v8patch.txt (10010 bytes)
+Provider: anthropic  Model: claude-haiku-4-5-20251001  Subset: mini_hi_large
+
+--- 49 mini_hi_large problems ---
+  22:32:14 [hard3_0012] ✗ got=TRUE exp=FALSE  (1/49)
+  22:32:28 [hard3_0082] ✗ got=TRUE exp=FALSE  (2/49) ETA=10m
+  22:32:40 [hard3_0095] ✓ got=FALSE exp=FALSE  (3/49) ETA=10m
+  22:32:52 [hard3_0096] ✓ got=FALSE exp=FALSE  (4/49) ETA=9m
+  22:33:02 [hard3_0098] ✗ got=TRUE exp=FALSE  (5/49) ETA=9m
+  22:33:16 [hard3_0101] ✓ got=FALSE exp=FALSE  (6/49) ETA=9m
+  22:33:28 [hard3_0102] ✗ got=TRUE exp=FALSE  (7/49) ETA=9m
+  22:33:41 [hard3_0111] ✗ got=TRUE exp=FALSE  (8/49) ETA=9m
+  22:33:56 [hard3_0112] ✗ got=TRUE exp=FALSE  (9/49) ETA=9m
+  22:34:10 [hard3_0116] ✓ got=FALSE exp=FALSE  (10/49) ETA=8m
+  22:34:22 [hard3_0120] ✓ got=FALSE exp=FALSE  (11/49) ETA=8m
+  22:34:34 [hard3_0172] ✓ got=FALSE exp=FALSE  (12/49) ETA=8m
+  22:34:46 [hard3_0177] ✗ got=TRUE exp=FALSE  (13/49) ETA=8m
+  22:34:58 [hard3_0180] ✓ got=FALSE exp=FALSE  (14/49) ETA=7m
+  22:35:09 [hard3_0182] ✓ got=FALSE exp=FALSE  (15/49) ETA=7m
+  22:35:20 [hard3_0216] ✗ got=TRUE exp=FALSE  (16/49) ETA=7m
+  22:35:34 [hard3_0217] ✓ got=FALSE exp=FALSE  (17/49) ETA=7m
+  22:35:47 [hard3_0225] ✓ got=FALSE exp=FALSE  (18/49) ETA=6m
+  22:35:59 [hard3_0226] ✗ got=TRUE exp=FALSE  (19/49) ETA=6m
+  22:36:15 [hard3_0227] ✗ got=TRUE exp=FALSE  (20/49) ETA=6m
+  22:36:28 [hard3_0274] ✓ got=FALSE exp=FALSE  (21/49) ETA=6m
+  22:36:40 [hard3_0275] ✗ got=TRUE exp=FALSE  (22/49) ETA=6m
+  22:36:51 [hard3_0281] ✓ got=FALSE exp=FALSE  (23/49) ETA=5m
+  22:37:05 [hard3_0282] ✗ got=TRUE exp=FALSE  (24/49) ETA=5m
+  22:37:16 [hard3_0287] ✗ got=TRUE exp=FALSE  (25/49) ETA=5m
+  22:37:28 [hard3_0289] ✗ got=TRUE exp=FALSE  (26/49) ETA=5m
+  22:37:41 [hard3_0300] ✗ got=TRUE exp=FALSE  (27/49) ETA=5m
+  22:37:54 [hard3_0306] ✓ got=FALSE exp=FALSE  (28/49) ETA=4m
+  22:38:06 [hard3_0312] ✗ got=TRUE exp=FALSE  (29/49) ETA=4m
+  22:38:19 [hard3_0001] ✓ got=TRUE exp=TRUE  (30/49) ETA=4m
+  22:38:34 [hard3_0002] ✓ got=TRUE exp=TRUE  (31/49) ETA=4m
+  22:38:51 [hard3_0004] ✓ got=TRUE exp=TRUE  (32/49) ETA=4m
+  22:39:00 [hard3_0006] ✓ got=TRUE exp=TRUE  (33/49) ETA=3m
+  22:39:18 [hard3_0008] ✓ got=TRUE exp=TRUE  (34/49) ETA=3m
+  22:39:31 [hard3_0014] ✓ got=TRUE exp=TRUE  (35/49) ETA=3m
+  22:39:46 [hard3_0015] ✓ got=TRUE exp=TRUE  (36/49) ETA=3m
+  22:40:02 [hard3_0020] ✓ got=TRUE exp=TRUE  (37/49) ETA=3m
+  22:40:15 [hard3_0024] ✓ got=TRUE exp=TRUE  (38/49) ETA=2m
+  22:40:31 [hard3_0027] ✓ got=TRUE exp=TRUE  (39/49) ETA=2m
+  22:40:44 [hard3_0028] ✓ got=TRUE exp=TRUE  (40/49) ETA=2m
+  22:41:02 [hard3_0030] ✓ got=TRUE exp=TRUE  (41/49) ETA=2m
+  22:41:19 [hard3_0034] ✓ got=TRUE exp=TRUE  (42/49) ETA=2m
+  22:41:36 [hard3_0036] ✗ got=FALSE exp=TRUE  (43/49) ETA=1m
+  22:41:49 [hard3_0043] ✓ got=TRUE exp=TRUE  (44/49) ETA=1m
+  22:42:02 [hard3_0046] ✓ got=TRUE exp=TRUE  (45/49) ETA=1m
+  22:42:15 [hard3_0047] ✗ got=FALSE exp=TRUE  (46/49) ETA=1m
+  22:42:26 [hard3_0049] ✗ got=FALSE exp=TRUE  (47/49) ETA=0m
+  22:42:38 [hard3_0051] ✓ got=TRUE exp=TRUE  (48/49) ETA=0m
+  22:42:51 [hard3_0052] ✓ got=TRUE exp=TRUE  (49/49) ETA=0m
+
+Saved to results/mini_hi_large_patch.json
+
+============================================================
+RESULTS (mini_hi_large)
+============================================================
+  Accuracy: 30/49 = 61.2%
+  TP=17 FP=16 FN=3 TN=13  Unparsed=0
+  Precision: 51.5%  Recall: 85.0%
+  F1: 0.642
+

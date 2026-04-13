@@ -1,0 +1,40 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} with the following operation table:
+
+  * | 0  1  2
+  ---------
+  0 | 0  0  0
+  1 | 2  1  1
+  2 | 1  2  2
+
+To compute a*b, find row a, column b.
+
+Equation 1: x = (x * (x * y)) * x
+Equation 2: x * x = x * ((y * y) * x)
+
+EQ1 holds universally (pre-verified).
+
+Here is a worked example of how to evaluate EQ2 at a specific assignment:
+
+WORKED EXAMPLE — EQ2 at x=2, y=1:
+  LHS: x * x = 2 * 2 = table[2][2] = 2
+  RHS: x * ((y * y) * x)
+    Step 1: y * y = 1 * 1 = table[1][1] = 1
+    Step 2: (y * y) * x = 1 * 2 = table[1][2] = 1
+    Step 3: x * ((y * y) * x) = 2 * 1 = table[2][1] = 2
+  LHS = 2, RHS = 2. Match ✓
+
+Now you evaluate EQ2 at these assignments using the same step-by-step method:
+  x=1, y=0: LHS = ? RHS = ?
+  x=2, y=0: LHS = ? RHS = ?
+  x=0, y=0: LHS = ? RHS = ?
+  x=1, y=1: LHS = ? RHS = ?
+  x=1, y=2: LHS = ? RHS = ?
+  x=2, y=2: LHS = ? RHS = ?
+
+Does EQ2 hold for all assignments, or does it fail for some?
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

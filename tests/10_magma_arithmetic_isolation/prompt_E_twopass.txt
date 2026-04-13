@@ -1,0 +1,27 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} where x*y = (y+1) mod 3.
+
+Full operation table: 0*0=1, 0*1=2, 0*2=0, 1*0=1, 1*1=2, 1*2=0, 2*0=1, 2*1=2, 2*2=0
+
+Equation 1: x = (y * z) * (z * (x * x))
+Equation 2: x = y * (((y * z) * x) * z)
+
+PASS 1 — Simplify each equation's RHS to a formula.
+
+Since x*y = (y+1) mod 3, the left argument never matters. Work inside-out:
+- First, replace every innermost (a * b) with "(b+1) mod 3"
+- Then repeat until the whole expression is a single formula in terms of x, y, z
+
+Show your simplification step by step for EQ1's RHS, then for EQ2's RHS.
+
+PASS 2 — Check if the simplified formula equals the LHS for all values.
+
+For EQ1: does your simplified RHS formula equal x for all x, y, z in {0,1,2}?
+For EQ2: does your simplified RHS formula equal x for all x, y, z in {0,1,2}?
+
+If EQ1 holds universally but EQ2 does not, this magma is a counterexample.
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

@@ -1,0 +1,232 @@
+Workers: 6  Delay: 0.5s  Est. RPM: 720
+WARNING: estimated RPM > 400, may hit rate limits
+Dataset: 400 problems split across 6 workers
+  Chunk 0: 67 problems → results/v18c_hard3_chunk0.json
+  Chunk 1: 67 problems → results/v18c_hard3_chunk1.json
+  Chunk 2: 67 problems → results/v18c_hard3_chunk2.json
+  Chunk 3: 67 problems → results/v18c_hard3_chunk3.json
+  Chunk 4: 67 problems → results/v18c_hard3_chunk4.json
+  Chunk 5: 65 problems → results/v18c_hard3_chunk5.json
+
+  Worker 0 started (PID 31000) → log: results/v18c_hard3_chunk0.log
+  Worker 1 started (PID 31002) → log: results/v18c_hard3_chunk1.log
+  Worker 2 started (PID 31008) → log: results/v18c_hard3_chunk2.log
+  Worker 3 started (PID 31016) → log: results/v18c_hard3_chunk3.log
+  Worker 4 started (PID 31023) → log: results/v18c_hard3_chunk4.log
+  Worker 5 started (PID 31026) → log: results/v18c_hard3_chunk5.log
+
+All 6 workers running. Monitoring...
+
+  [18s] 1/400 (0%) done  Workers: 6 running, 0 finished  ETA: 124m
+  [33s] 7/400 (2%) done  Workers: 6 running, 0 finished  ETA: 31m
+  [52s] 11/400 (3%) done  Workers: 6 running, 0 finished  ETA: 31m
+  [67s] 13/400 (3%) done  Workers: 6 running, 0 finished  ETA: 33m
+  [85s] 13/400 (3%) done  Workers: 6 running, 0 finished  ETA: 43m
+  [100s] 18/400 (4%) done  Workers: 6 running, 0 finished  ETA: 36m
+  [119s] 19/400 (5%) done  Workers: 6 running, 0 finished  ETA: 40m
+  [134s] 19/400 (5%) done  Workers: 6 running, 0 finished  ETA: 45m
+  [153s] 22/400 (6%) done  Workers: 6 running, 0 finished  ETA: 44m
+  [168s] 24/400 (6%) done  Workers: 6 running, 0 finished  ETA: 44m
+  [186s] 24/400 (6%) done  Workers: 6 running, 0 finished  ETA: 49m
+  [201s] 28/400 (7%) done  Workers: 6 running, 0 finished  ETA: 45m
+  [220s] 28/400 (7%) done  Workers: 6 running, 0 finished  ETA: 49m
+  [235s] 32/400 (8%) done  Workers: 6 running, 0 finished  ETA: 45m
+  [250s] 33/400 (8%) done  Workers: 6 running, 0 finished  ETA: 46m
+  [268s] 36/400 (9%) done  Workers: 6 running, 0 finished  ETA: 45m
+  [283s] 38/400 (10%) done  Workers: 6 running, 0 finished  ETA: 45m
+  [302s] 39/400 (10%) done  Workers: 6 running, 0 finished  ETA: 47m
+  [317s] 39/400 (10%) done  Workers: 6 running, 0 finished  ETA: 49m
+  [336s] 42/400 (10%) done  Workers: 6 running, 0 finished  ETA: 48m
+  [351s] 42/400 (10%) done  Workers: 6 running, 0 finished  ETA: 50m
+  [369s] 45/400 (11%) done  Workers: 6 running, 0 finished  ETA: 49m
+  [384s] 46/400 (12%) done  Workers: 6 running, 0 finished  ETA: 49m
+  [403s] 51/400 (13%) done  Workers: 6 running, 0 finished  ETA: 46m
+  [418s] 52/400 (13%) done  Workers: 6 running, 0 finished  ETA: 47m
+  [436s] 55/400 (14%) done  Workers: 6 running, 0 finished  ETA: 46m
+  [451s] 56/400 (14%) done  Workers: 6 running, 0 finished  ETA: 46m
+  [466s] 60/400 (15%) done  Workers: 6 running, 0 finished  ETA: 44m
+  [485s] 61/400 (15%) done  Workers: 6 running, 0 finished  ETA: 45m
+  [500s] 63/400 (16%) done  Workers: 6 running, 0 finished  ETA: 45m
+  [519s] 66/400 (16%) done  Workers: 6 running, 0 finished  ETA: 44m
+  [534s] 66/400 (16%) done  Workers: 6 running, 0 finished  ETA: 45m
+  [552s] 69/400 (17%) done  Workers: 6 running, 0 finished  ETA: 44m
+  [567s] 72/400 (18%) done  Workers: 6 running, 0 finished  ETA: 43m
+  [586s] 72/400 (18%) done  Workers: 6 running, 0 finished  ETA: 45m
+  [601s] 76/400 (19%) done  Workers: 6 running, 0 finished  ETA: 43m
+  [619s] 78/400 (20%) done  Workers: 6 running, 0 finished  ETA: 43m
+  [634s] 78/400 (20%) done  Workers: 6 running, 0 finished  ETA: 44m
+  [653s] 78/400 (20%) done  Workers: 6 running, 0 finished  ETA: 45m
+  [668s] 84/400 (21%) done  Workers: 6 running, 0 finished  ETA: 42m
+  [687s] 84/400 (21%) done  Workers: 6 running, 0 finished  ETA: 43m
+  [702s] 85/400 (21%) done  Workers: 6 running, 0 finished  ETA: 43m
+  [717s] 90/400 (22%) done  Workers: 6 running, 0 finished  ETA: 41m
+  [735s] 90/400 (22%) done  Workers: 6 running, 0 finished  ETA: 42m
+  [750s] 90/400 (22%) done  Workers: 6 running, 0 finished  ETA: 43m
+  [769s] 96/400 (24%) done  Workers: 6 running, 0 finished  ETA: 41m
+  [784s] 96/400 (24%) done  Workers: 6 running, 0 finished  ETA: 41m
+  [802s] 96/400 (24%) done  Workers: 6 running, 0 finished  ETA: 42m
+  [817s] 102/400 (26%) done  Workers: 6 running, 0 finished  ETA: 40m
+  [836s] 102/400 (26%) done  Workers: 6 running, 0 finished  ETA: 41m
+  [851s] 102/400 (26%) done  Workers: 6 running, 0 finished  ETA: 41m
+  [870s] 108/400 (27%) done  Workers: 6 running, 0 finished  ETA: 39m
+  [885s] 108/400 (27%) done  Workers: 6 running, 0 finished  ETA: 40m
+  [903s] 108/400 (27%) done  Workers: 6 running, 0 finished  ETA: 41m
+  [918s] 114/400 (28%) done  Workers: 6 running, 0 finished  ETA: 38m
+  [937s] 114/400 (28%) done  Workers: 6 running, 0 finished  ETA: 39m
+  [952s] 114/400 (28%) done  Workers: 6 running, 0 finished  ETA: 40m
+  [967s] 120/400 (30%) done  Workers: 6 running, 0 finished  ETA: 38m
+  [986s] 121/400 (30%) done  Workers: 6 running, 0 finished  ETA: 38m
+  [1001s] 121/400 (30%) done  Workers: 6 running, 0 finished  ETA: 38m
+  [1019s] 125/400 (31%) done  Workers: 6 running, 0 finished  ETA: 37m
+  [1034s] 128/400 (32%) done  Workers: 6 running, 0 finished  ETA: 37m
+  [1053s] 128/400 (32%) done  Workers: 6 running, 0 finished  ETA: 37m
+  [1068s] 131/400 (33%) done  Workers: 6 running, 0 finished  ETA: 37m
+  [1086s] 134/400 (34%) done  Workers: 6 running, 0 finished  ETA: 36m
+  [1101s] 135/400 (34%) done  Workers: 6 running, 0 finished  ETA: 36m
+  [1120s] 138/400 (34%) done  Workers: 6 running, 0 finished  ETA: 35m
+  [1135s] 141/400 (35%) done  Workers: 6 running, 0 finished  ETA: 35m
+  [1154s] 141/400 (35%) done  Workers: 6 running, 0 finished  ETA: 35m
+  [1169s] 143/400 (36%) done  Workers: 6 running, 0 finished  ETA: 35m
+  [1187s] 147/400 (37%) done  Workers: 6 running, 0 finished  ETA: 34m
+  [1202s] 147/400 (37%) done  Workers: 6 running, 0 finished  ETA: 34m
+  [1217s] 151/400 (38%) done  Workers: 6 running, 0 finished  ETA: 33m
+  [1236s] 156/400 (39%) done  Workers: 6 running, 0 finished  ETA: 32m
+  [1251s] 156/400 (39%) done  Workers: 6 running, 0 finished  ETA: 33m
+  [1269s] 159/400 (40%) done  Workers: 6 running, 0 finished  ETA: 32m
+  [1284s] 162/400 (40%) done  Workers: 6 running, 0 finished  ETA: 31m
+  [1303s] 162/400 (40%) done  Workers: 6 running, 0 finished  ETA: 32m
+  [1318s] 165/400 (41%) done  Workers: 6 running, 0 finished  ETA: 31m
+  [1337s] 169/400 (42%) done  Workers: 6 running, 0 finished  ETA: 30m
+  [1352s] 169/400 (42%) done  Workers: 6 running, 0 finished  ETA: 31m
+  [1370s] 170/400 (42%) done  Workers: 6 running, 0 finished  ETA: 31m
+  [1385s] 175/400 (44%) done  Workers: 6 running, 0 finished  ETA: 30m
+  [1404s] 175/400 (44%) done  Workers: 6 running, 0 finished  ETA: 30m
+  [1419s] 177/400 (44%) done  Workers: 6 running, 0 finished  ETA: 30m
+  [1434s] 181/400 (45%) done  Workers: 6 running, 0 finished  ETA: 29m
+  [1452s] 181/400 (45%) done  Workers: 6 running, 0 finished  ETA: 29m
+  [1467s] 186/400 (46%) done  Workers: 6 running, 0 finished  ETA: 28m
+  [1486s] 188/400 (47%) done  Workers: 6 running, 0 finished  ETA: 28m
+  [1501s] 188/400 (47%) done  Workers: 6 running, 0 finished  ETA: 28m
+  [1520s] 192/400 (48%) done  Workers: 6 running, 0 finished  ETA: 27m
+  [1535s] 193/400 (48%) done  Workers: 6 running, 0 finished  ETA: 27m
+  [1553s] 193/400 (48%) done  Workers: 6 running, 0 finished  ETA: 28m
+  [1568s] 199/400 (50%) done  Workers: 6 running, 0 finished  ETA: 26m
+  [1587s] 199/400 (50%) done  Workers: 6 running, 0 finished  ETA: 27m
+  [1602s] 199/400 (50%) done  Workers: 6 running, 0 finished  ETA: 27m
+  [1620s] 203/400 (51%) done  Workers: 6 running, 0 finished  ETA: 26m
+  [1635s] 204/400 (51%) done  Workers: 6 running, 0 finished  ETA: 26m
+  [1654s] 204/400 (51%) done  Workers: 6 running, 0 finished  ETA: 26m
+  [1669s] 209/400 (52%) done  Workers: 6 running, 0 finished  ETA: 25m
+  [1684s] 211/400 (53%) done  Workers: 6 running, 0 finished  ETA: 25m
+  [1703s] 211/400 (53%) done  Workers: 6 running, 0 finished  ETA: 25m
+  [1718s] 216/400 (54%) done  Workers: 6 running, 0 finished  ETA: 24m
+  [1736s] 217/400 (54%) done  Workers: 6 running, 0 finished  ETA: 24m
+  [1751s] 217/400 (54%) done  Workers: 6 running, 0 finished  ETA: 25m
+  [1770s] 222/400 (56%) done  Workers: 6 running, 0 finished  ETA: 24m
+  [1785s] 223/400 (56%) done  Workers: 6 running, 0 finished  ETA: 24m
+  [1803s] 223/400 (56%) done  Workers: 6 running, 0 finished  ETA: 24m
+  [1819s] 228/400 (57%) done  Workers: 6 running, 0 finished  ETA: 23m
+  [1837s] 228/400 (57%) done  Workers: 6 running, 0 finished  ETA: 23m
+  [1852s] 229/400 (57%) done  Workers: 6 running, 0 finished  ETA: 23m
+  [1871s] 234/400 (58%) done  Workers: 6 running, 0 finished  ETA: 22m
+  [1886s] 234/400 (58%) done  Workers: 6 running, 0 finished  ETA: 22m
+  [1904s] 235/400 (59%) done  Workers: 6 running, 0 finished  ETA: 22m
+  [1919s] 240/400 (60%) done  Workers: 6 running, 0 finished  ETA: 21m
+  [1934s] 240/400 (60%) done  Workers: 6 running, 0 finished  ETA: 21m
+  [1953s] 240/400 (60%) done  Workers: 6 running, 0 finished  ETA: 22m
+  [1968s] 246/400 (62%) done  Workers: 6 running, 0 finished  ETA: 21m
+  [1987s] 246/400 (62%) done  Workers: 6 running, 0 finished  ETA: 21m
+  [2002s] 247/400 (62%) done  Workers: 6 running, 0 finished  ETA: 21m
+  [2020s] 253/400 (63%) done  Workers: 6 running, 0 finished  ETA: 20m
+  [2035s] 253/400 (63%) done  Workers: 6 running, 0 finished  ETA: 20m
+  [2054s] 254/400 (64%) done  Workers: 6 running, 0 finished  ETA: 20m
+  [2069s] 259/400 (65%) done  Workers: 6 running, 0 finished  ETA: 19m
+  [2087s] 259/400 (65%) done  Workers: 6 running, 0 finished  ETA: 19m
+  [2102s] 260/400 (65%) done  Workers: 6 running, 0 finished  ETA: 19m
+  [2121s] 265/400 (66%) done  Workers: 6 running, 0 finished  ETA: 18m
+  [2136s] 265/400 (66%) done  Workers: 6 running, 0 finished  ETA: 18m
+  [2155s] 269/400 (67%) done  Workers: 6 running, 0 finished  ETA: 17m
+  [2170s] 271/400 (68%) done  Workers: 6 running, 0 finished  ETA: 17m
+  [2185s] 271/400 (68%) done  Workers: 6 running, 0 finished  ETA: 17m
+  [2203s] 274/400 (68%) done  Workers: 6 running, 0 finished  ETA: 17m
+  [2218s] 278/400 (70%) done  Workers: 6 running, 0 finished  ETA: 16m
+  [2237s] 278/400 (70%) done  Workers: 6 running, 0 finished  ETA: 16m
+  [2252s] 279/400 (70%) done  Workers: 6 running, 0 finished  ETA: 16m
+  [2270s] 285/400 (71%) done  Workers: 6 running, 0 finished  ETA: 15m
+  [2285s] 285/400 (71%) done  Workers: 6 running, 0 finished  ETA: 15m
+  [2304s] 287/400 (72%) done  Workers: 6 running, 0 finished  ETA: 15m
+  [2319s] 291/400 (73%) done  Workers: 6 running, 0 finished  ETA: 14m
+  [2338s] 291/400 (73%) done  Workers: 6 running, 0 finished  ETA: 15m
+  [2353s] 292/400 (73%) done  Workers: 6 running, 0 finished  ETA: 15m
+  [2371s] 297/400 (74%) done  Workers: 6 running, 0 finished  ETA: 14m
+  [2386s] 297/400 (74%) done  Workers: 6 running, 0 finished  ETA: 14m
+  [2401s] 300/400 (75%) done  Workers: 6 running, 0 finished  ETA: 13m
+  [2420s] 306/400 (76%) done  Workers: 6 running, 0 finished  ETA: 12m
+  [2435s] 306/400 (76%) done  Workers: 6 running, 0 finished  ETA: 12m
+  [2454s] 309/400 (77%) done  Workers: 6 running, 0 finished  ETA: 12m
+  [2469s] 314/400 (78%) done  Workers: 6 running, 0 finished  ETA: 11m
+  [2487s] 314/400 (78%) done  Workers: 6 running, 0 finished  ETA: 11m
+  [2502s] 318/400 (80%) done  Workers: 6 running, 0 finished  ETA: 11m
+  [2521s] 320/400 (80%) done  Workers: 6 running, 0 finished  ETA: 11m
+  [2536s] 321/400 (80%) done  Workers: 6 running, 0 finished  ETA: 10m
+  [2554s] 327/400 (82%) done  Workers: 6 running, 0 finished  ETA: 10m
+  [2569s] 327/400 (82%) done  Workers: 6 running, 0 finished  ETA: 10m
+  [2588s] 327/400 (82%) done  Workers: 6 running, 0 finished  ETA: 10m
+  [2603s] 331/400 (83%) done  Workers: 6 running, 0 finished  ETA: 9m
+  [2622s] 334/400 (84%) done  Workers: 6 running, 0 finished  ETA: 9m
+  [2637s] 334/400 (84%) done  Workers: 6 running, 0 finished  ETA: 9m
+  [2652s] 339/400 (85%) done  Workers: 6 running, 0 finished  ETA: 8m
+  [2670s] 339/400 (85%) done  Workers: 6 running, 0 finished  ETA: 8m
+  [2685s] 340/400 (85%) done  Workers: 6 running, 0 finished  ETA: 8m
+  [2704s] 344/400 (86%) done  Workers: 6 running, 0 finished  ETA: 7m
+  [2719s] 345/400 (86%) done  Workers: 6 running, 0 finished  ETA: 7m
+  [2737s] 345/400 (86%) done  Workers: 6 running, 0 finished  ETA: 7m
+  [2752s] 349/400 (87%) done  Workers: 6 running, 0 finished  ETA: 7m
+  [2771s] 352/400 (88%) done  Workers: 6 running, 0 finished  ETA: 6m
+  [2786s] 352/400 (88%) done  Workers: 6 running, 0 finished  ETA: 6m
+  [2805s] 356/400 (89%) done  Workers: 6 running, 0 finished  ETA: 6m
+  [2820s] 358/400 (90%) done  Workers: 6 running, 0 finished  ETA: 6m
+  [2838s] 358/400 (90%) done  Workers: 6 running, 0 finished  ETA: 6m
+  [2853s] 363/400 (91%) done  Workers: 6 running, 0 finished  ETA: 5m
+  [2872s] 364/400 (91%) done  Workers: 6 running, 0 finished  ETA: 5m
+  [2887s] 364/400 (91%) done  Workers: 6 running, 0 finished  ETA: 5m
+  [2902s] 369/400 (92%) done  Workers: 5 running, 1 finished  ETA: 4m
+  [2921s] 369/400 (92%) done  Workers: 5 running, 1 finished  ETA: 4m
+  [2936s] 369/400 (92%) done  Workers: 5 running, 1 finished  ETA: 4m
+  [2954s] 374/400 (94%) done  Workers: 5 running, 1 finished  ETA: 3m
+  [2969s] 374/400 (94%) done  Workers: 5 running, 1 finished  ETA: 3m
+  [2988s] 374/400 (94%) done  Workers: 5 running, 1 finished  ETA: 3m
+  [3003s] 379/400 (95%) done  Workers: 4 running, 2 finished  ETA: 3m
+  [3021s] 379/400 (95%) done  Workers: 4 running, 2 finished  ETA: 3m
+  [3036s] 382/400 (96%) done  Workers: 3 running, 3 finished  ETA: 2m
+  [3055s] 383/400 (96%) done  Workers: 2 running, 4 finished  ETA: 2m
+  [3070s] 383/400 (96%) done  Workers: 2 running, 4 finished  ETA: 2m
+  [3089s] 385/400 (96%) done  Workers: 2 running, 4 finished  ETA: 2m
+  [3104s] 385/400 (96%) done  Workers: 2 running, 4 finished  ETA: 2m
+  [3122s] 385/400 (96%) done  Workers: 2 running, 4 finished  ETA: 2m
+  [3137s] 387/400 (97%) done  Workers: 2 running, 4 finished  ETA: 2m
+  [3152s] 388/400 (97%) done  Workers: 2 running, 4 finished  ETA: 2m
+  [3171s] 388/400 (97%) done  Workers: 2 running, 4 finished  ETA: 2m
+  [3186s] 391/400 (98%) done  Workers: 2 running, 4 finished  ETA: 1m
+  [3205s] 391/400 (98%) done  Workers: 2 running, 4 finished  ETA: 1m
+  [3220s] 393/400 (98%) done  Workers: 1 running, 5 finished  ETA: 1m
+  [3238s] 394/400 (98%) done  Workers: 1 running, 5 finished  ETA: 1m
+  [3253s] 395/400 (99%) done  Workers: 1 running, 5 finished  ETA: 1m
+  [3272s] 396/400 (99%) done  Workers: 1 running, 5 finished  ETA: 1m
+  [3287s] 397/400 (99%) done  Workers: 1 running, 5 finished  ETA: 0m
+  [3305s] 397/400 (99%) done  Workers: 1 running, 5 finished  ETA: 0m
+  [3320s] 398/400 (100%) done  Workers: 1 running, 5 finished  ETA: 0m
+  [3339s] 399/400 (100%) done  Workers: 1 running, 5 finished  ETA: 0m
+  [3354s] 399/400 (100%) done  Workers: 1 running, 5 finished  ETA: 0m
+  [3369s] 400/400 (100%) done  Workers: 0 running, 6 finished  ETA: 0m
+
+Merging 6 chunk files → results/v18c_hard3.json
+
+============================================================
+RESULTS (hard3)
+============================================================
+  Accuracy: 216/400 = 58.1%
+  TP=117 FP=94 FN=62 TN=99  Unparsed=28
+  Precision: 55.5%  Recall: 65.4%
+  F1: 0.600
+  Total time: 56.2 min

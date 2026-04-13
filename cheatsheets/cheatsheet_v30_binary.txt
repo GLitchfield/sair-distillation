@@ -1,0 +1,16 @@
+Determine if EQ1 implies EQ2 over all magmas. Output exactly one line: \boxed{TRUE} or \boxed{FALSE}.
+
+Test these 3 magmas. If any satisfies EQ1 but fails EQ2, output \boxed{FALSE}.
+
+R: x*y = y. Any expression → rightmost leaf.
+L: x*y = x. Any expression → leftmost leaf.
+Z: x*y = 0 on {0}. All expressions → 0. EQ holds iff both sides identical OR both contain *.
+
+If all 3 magmas satisfy both equations, output \boxed{TRUE}.
+
+If you cannot determine after testing all 3, output \boxed{FALSE}.
+
+EQ1: {{equation1}}
+EQ2: {{equation2}}
+
+Output: \boxed{TRUE} or \boxed{FALSE}

@@ -1,0 +1,34 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} with the following operation table:
+
+  * | 0  1  2
+  ---------
+  0 | 0  0  0
+  1 | 2  1  1
+  2 | 1  2  2
+
+To compute a*b, find row a, column b.
+
+Equation 1: x = (x * (x * y)) * x
+Equation 2: x * x = x * ((y * y) * x)
+
+EQ1 holds universally (pre-verified).
+
+For EQ2, compute both sides for x=1, y=0:
+
+LHS of EQ2: x * x = 1 * 1 = table[1][1] = ?
+
+RHS of EQ2: x * ((y * y) * x)
+  Inner: y * y = 0 * 0 = table[0][0] = ?
+  Middle: (result) * x = table[?][1] = ?
+  Outer: x * (result) = 1 * ? = table[1][?] = ?
+
+Does LHS = RHS for this assignment?
+
+Then check x=2, y=0 the same way.
+Then check x=1, y=1 and x=2, y=2 to compare.
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

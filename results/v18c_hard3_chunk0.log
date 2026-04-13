@@ -1,0 +1,83 @@
+Cheat sheet: cheatsheets/v18c.txt (7277 bytes)
+Provider: anthropic  Model: claude-haiku-4-5-20251001  Subset: chunk_0_hard3
+
+--- 67 chunk_0_hard3 problems ---
+  19:49:34 [hard3_0001] ✓ got=TRUE exp=TRUE  (1/67)
+  19:49:57 [hard3_0002] ✓ got=TRUE exp=TRUE  (2/67) ETA=29m
+  19:50:27 [hard3_0003] ✗ got=FALSE exp=TRUE  (3/67) ETA=38m
+  19:51:21 [hard3_0004] ✓ got=TRUE exp=TRUE  (4/67) ETA=36m
+  19:51:51 [hard3_0005] ✓ got=TRUE exp=TRUE  (5/67) ETA=34m
+  19:52:17 [hard3_0006] ✓ got=TRUE exp=TRUE  (6/67) ETA=33m
+  19:52:49 [hard3_0007] ✗ got=None exp=FALSE  (7/67) ETA=34m
+  19:53:30 [hard3_0008] ✓ got=TRUE exp=TRUE  (8/67) ETA=32m
+  19:53:57 [hard3_0009] ✓ got=FALSE exp=FALSE  (9/67) ETA=31m
+  19:54:26 [hard3_0010] ✗ got=TRUE exp=FALSE  (10/67) ETA=31m
+    19:55:08 [retry 1/3 in 30s]: Error code: 429 - {'type': 'error', 'error': {'type': 'rate_limit_error', 'message': "This request would exceed your organization's rate limit of 90,000 output tokens per minute (org: 063ead8a-a036-45f1-9eb9-d7bc414ca38d, model: claude-haiku-4-5-20251001). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."}, 'request_id': 'req_011CZjdinEs5Qdk8o4ZqXxUo'}
+  19:54:56 [hard3_0011] ✗ got=TRUE exp=FALSE  (11/67) ETA=33m
+  19:56:06 [hard3_0012] ✗ got=TRUE exp=FALSE  (12/67) ETA=33m
+  19:56:42 [hard3_0013] ✓ got=FALSE exp=FALSE  (13/67) ETA=32m
+  19:57:11 [hard3_0014] ✗ got=FALSE exp=TRUE  (14/67) ETA=32m
+  19:58:06 [hard3_0015] ✓ got=TRUE exp=TRUE  (15/67) ETA=32m
+  19:58:45 [hard3_0016] ✓ got=FALSE exp=FALSE  (16/67) ETA=32m
+  19:59:34 [hard3_0017] ✗ got=TRUE exp=FALSE  (17/67) ETA=32m
+  20:00:31 [hard3_0018] ✓ got=FALSE exp=FALSE  (18/67) ETA=32m
+  20:01:14 [hard3_0019] ✓ got=FALSE exp=FALSE  (19/67) ETA=32m
+  20:02:14 [hard3_0020] ✗ got=FALSE exp=TRUE  (20/67) ETA=32m
+  20:03:09 [hard3_0021] ✗ got=TRUE exp=FALSE  (21/67) ETA=32m
+  20:04:01 [hard3_0022] ✗ got=TRUE exp=FALSE  (22/67) ETA=31m
+  20:04:50 [hard3_0023] ✗ got=FALSE exp=TRUE  (23/67) ETA=31m
+  20:05:39 [hard3_0024] ✗ got=FALSE exp=TRUE  (24/67) ETA=30m
+  20:06:22 [hard3_0025] ✗ got=TRUE exp=FALSE  (25/67) ETA=29m
+  20:06:33 [hard3_0026] ✓ got=FALSE exp=FALSE  (26/67) ETA=28m
+  20:07:15 [hard3_0027] ✓ got=TRUE exp=TRUE  (27/67) ETA=28m
+  20:08:14 [hard3_0028] ✗ got=FALSE exp=TRUE  (28/67) ETA=27m
+  20:09:02 [hard3_0029] ✗ got=TRUE exp=FALSE  (29/67) ETA=27m
+  20:09:59 [hard3_0030] ✓ got=TRUE exp=TRUE  (30/67) ETA=26m
+  20:10:45 [hard3_0031] ✓ got=FALSE exp=FALSE  (31/67) ETA=26m
+  20:11:37 [hard3_0032] ✗ got=TRUE exp=FALSE  (32/67) ETA=25m
+  20:12:26 [hard3_0033] ✓ got=TRUE exp=TRUE  (33/67) ETA=24m
+  20:13:12 [hard3_0034] ✗ got=FALSE exp=TRUE  (34/67) ETA=24m
+  20:14:08 [hard3_0035] ✗ got=TRUE exp=FALSE  (35/67) ETA=23m
+  20:14:50 [hard3_0036] ✓ got=TRUE exp=TRUE  (36/67) ETA=22m
+  20:15:37 [hard3_0037] ✗ got=TRUE exp=FALSE  (37/67) ETA=22m
+  20:16:33 [hard3_0038] ✗ got=None exp=TRUE  (38/67) ETA=21m
+  20:17:24 [hard3_0039] ✓ got=FALSE exp=FALSE  (39/67) ETA=21m
+  20:18:12 [hard3_0040] ✗ got=None exp=FALSE  (40/67) ETA=20m
+  20:19:06 [hard3_0041] ✗ got=None exp=FALSE  (41/67) ETA=19m
+  20:19:51 [hard3_0042] ✗ got=TRUE exp=FALSE  (42/67) ETA=18m
+  20:20:26 [hard3_0043] ✓ got=TRUE exp=TRUE  (43/67) ETA=18m
+  20:21:26 [hard3_0044] ✓ got=FALSE exp=FALSE  (44/67) ETA=17m
+  20:22:17 [hard3_0045] ✗ got=TRUE exp=FALSE  (45/67) ETA=16m
+  20:23:08 [hard3_0046] ✓ got=TRUE exp=TRUE  (46/67) ETA=16m
+  20:23:55 [hard3_0047] ✗ got=FALSE exp=TRUE  (47/67) ETA=15m
+  20:24:39 [hard3_0048] ✗ got=FALSE exp=TRUE  (48/67) ETA=14m
+  20:25:29 [hard3_0049] ✗ got=FALSE exp=TRUE  (49/67) ETA=13m
+  20:26:11 [hard3_0050] ✓ got=FALSE exp=FALSE  (50/67) ETA=13m
+  20:26:25 [hard3_0051] ✓ got=TRUE exp=TRUE  (51/67) ETA=12m
+  20:27:18 [hard3_0052] ✓ got=TRUE exp=TRUE  (52/67) ETA=11m
+  20:28:00 [hard3_0053] ✓ got=TRUE exp=TRUE  (53/67) ETA=10m
+  20:28:51 [hard3_0054] ✓ got=TRUE exp=TRUE  (54/67) ETA=10m
+  20:29:24 [hard3_0055] ✗ got=None exp=FALSE  (55/67) ETA=9m
+  20:29:50 [hard3_0056] ✗ got=TRUE exp=FALSE  (56/67) ETA=8m
+  20:30:31 [hard3_0057] ✗ got=TRUE exp=FALSE  (57/67) ETA=7m
+  20:31:04 [hard3_0058] ✓ got=TRUE exp=TRUE  (58/67) ETA=6m
+  20:31:09 [hard3_0059] ✗ got=TRUE exp=FALSE  (59/67) ETA=6m
+  20:31:58 [hard3_0060] ✓ got=TRUE exp=TRUE  (60/67) ETA=5m
+  20:32:52 [hard3_0061] ✓ got=TRUE exp=TRUE  (61/67) ETA=4m
+  20:33:39 [hard3_0062] ✓ got=FALSE exp=FALSE  (62/67) ETA=4m
+  20:34:33 [hard3_0063] ✗ got=TRUE exp=FALSE  (63/67) ETA=3m
+  20:35:14 [hard3_0064] ✓ got=FALSE exp=FALSE  (64/67) ETA=2m
+  20:35:31 [hard3_0065] ✓ got=FALSE exp=FALSE  (65/67) ETA=1m
+  20:36:16 [hard3_0066] ✗ got=FALSE exp=TRUE  (66/67) ETA=1m
+  20:37:02 [hard3_0067] ✓ got=TRUE exp=TRUE  (67/67) ETA=0m
+
+Saved to results/v18c_hard3_chunk0.json
+
+============================================================
+RESULTS (chunk_0_hard3)
+============================================================
+  Accuracy: 34/67 = 50.7%
+  TP=21 FP=17 FN=11 TN=13  Unparsed=5
+  Precision: 55.3%  Recall: 65.6%
+  F1: 0.600
+

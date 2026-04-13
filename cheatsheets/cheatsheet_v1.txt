@@ -1,0 +1,89 @@
+
+STRATEGY: To determine if Equation 1 implies Equation 2, follow these steps in order. Stop as soon as you reach a definitive answer.
+
+STEP 1: QUICK STRUCTURAL CHECKS
+
+Check 1a - Singleton Detection:
+If Equation 1 has the form "x = f(y, z, ...)" where x does NOT appear anywhere in the right-hand side, then Equation 1 forces the magma to be a singleton (one element). A singleton satisfies ALL equations. Answer: TRUE.
+
+Check 1b - LHS Complexity:
+Count the number of * operations on the left-hand side of each equation (before the = sign).
+If Equation 2's LHS has FEWER * operations than Equation 1's LHS, the implication is almost certainly FALSE. For example, if Equation 1 has LHS "x * y" (1 op) and Equation 2 has LHS "x" (0 ops), lean strongly toward FALSE. Proceed to Step 2 to confirm with a counterexample.
+
+STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS
+
+A magma on the set {0, 1} is defined by a 2x2 operation table specifying 0*0, 0*1, 1*0, 1*1. To refute the implication, find a magma that SATISFIES Equation 1 but VIOLATES Equation 2. Test the following magmas in order. For each one, evaluate both equations by substituting all combinations of 0 and 1 for the variables.
+
+Magma A - "Zero" (constant magma): x*y = 0 for all x,y.
+  Table: 0*0=0, 0*1=0, 1*0=0, 1*1=0
+  Evaluation shortcut: Every expression involving * evaluates to 0. So both sides of any equation reduce to either 0 (if they contain any * operation) or the value of a bare variable. An equation like "x = (y * z) * w" becomes "x = 0" which fails when x=1. An equation like "x * y = (z * w) * x" becomes "0 = 0" which always holds.
+  Rule: An equation holds under Magma A if and only if: when you replace every sub-expression containing * with 0, both sides are always equal. If both sides contain *, both become 0 and the equation holds. If one side is a bare variable and the other contains *, it fails (when the variable is 1).
+
+Magma B - "Right Projection": x*y = y for all x,y.
+  Table: 0*0=0, 0*1=1, 1*0=0, 1*1=1
+  Evaluation shortcut: x*y always returns y. So (x*y)*z = z, x*(y*z) = y*z = z. Any nested expression evaluates to its rightmost leaf variable. For example:
+  - x * (y * z) = z (rightmost leaf)
+  - (x * y) * z = z (rightmost leaf)
+  - x * ((y * z) * w) = w (rightmost leaf)
+  - ((x * y) * z) * w = w (rightmost leaf)
+  Rule: Under right projection, any compound expression (containing *) evaluates to its rightmost variable. An equation holds iff: (1) both sides are bare variables and they're the same, (2) both sides have * and their rightmost variables match, or (3) one side is a bare variable equal to the rightmost variable of the other side.
+
+Magma C - "Left Projection": x*y = x for all x,y.
+  Table: 0*0=0, 0*1=0, 1*0=1, 1*1=1
+  Evaluation shortcut: x*y always returns x. So x*(y*z) = x, (x*y)*z = x*y = x. Any nested expression evaluates to its leftmost leaf variable. This is the mirror image of Magma B.
+  Rule: Under left projection, any compound expression evaluates to its leftmost variable. An equation holds iff both sides reduce to the same leftmost variable.
+
+Magma D - "XOR" (addition mod 2): x*y = x+y mod 2.
+  Table: 0*0=0, 0*1=1, 1*0=1, 1*1=0
+  Evaluation shortcut: This is the same as XOR. To evaluate an expression, count how many times each variable appears in the expression. The result is the XOR (sum mod 2) of all variable occurrences. For example:
+  - x * (y * z) = x XOR y XOR z
+  - (x * y) * (z * w) = x XOR y XOR z XOR w
+  - x * (x * y) = x XOR x XOR y = y (since x XOR x = 0)
+  Rule: Under XOR, an equation holds iff for every variable, the count of occurrences on the LHS and RHS have the same parity (both even or both odd). If any variable has odd count on one side and even count on the other, the equation fails.
+
+Magma E - "Constant 1": x*y = 1 for all x,y.
+  Table: 0*0=1, 0*1=1, 1*0=1, 1*1=1
+  Same evaluation logic as Magma A but with 1 instead of 0. Every * expression evaluates to 1. An equation fails if one side is a bare variable and the other contains *, and the variable takes value 0.
+
+Magma F - "Negation of right": x*y = 1-y.
+  Table: 0*0=1, 0*1=0, 1*0=1, 1*1=0
+  Evaluation shortcut: x*y flips y. So x*(y*z) = x*(1-z) = z. And (x*y)*z = (1-y)*z = 1-z. Nested applications alternate between the variable and its complement.
+
+If ANY of these magmas satisfies Equation 1 but violates Equation 2: the implication is FALSE. Report that magma as the counterexample.
+
+STEP 3: TEST WITH LINEAR MAGMAS OVER Z/3Z
+
+If no 2-element counterexample works, try x*y = 2x + y in Z/3Z (integers mod 3, so values are {0,1,2}). This non-commutative magma often catches cases that 2-element magmas miss. Evaluate by computing 2x + y mod 3 for all variable assignments.
+
+STEP 4: ATTEMPT ALGEBRAIC PROOF
+
+If no counterexample was found, try to prove the implication is TRUE.
+
+Method 4a - Variable Specialization:
+Take Equation 1 and substitute specific values for variables. Setting x=y, y=z, x=x*x, etc. can often derive useful intermediate identities. Then check if you can derive Equation 2.
+
+Method 4b - Direct Rewriting:
+Use Equation 1 as a rewrite rule. Apply it to transform one side of Equation 2 into the other. Remember that the law holds for ALL values of its variables, so you can substitute any expressions for the variables in Equation 1.
+
+For example, if Equation 1 is "x * (y * z) = (z * w) * w" and you need to prove "x * (y * x) = (x * y) * z":
+- In Equation 1, substitute specific expressions for x, y, z, w to match parts of Equation 2.
+
+Method 4c - Consequence Analysis:
+Some useful consequences to look for:
+- If Equation 1 forces x*x = x (idempotent), that constrains many things.
+- If Equation 1 forces x*y = y*x (commutative), look for commutativity violations in Equation 2.
+- If Equation 1 forces L_y (left multiplication by y) to be injective or surjective, that gives additional power, especially over finite domains.
+
+STEP 5: DEFAULT JUDGMENT
+
+If you could not find a counterexample in Steps 2-3, and could not construct a proof in Step 4, make your best judgment:
+- If Equation 2 introduces new variables not present in Equation 1, lean toward FALSE.
+- If Equation 2 uses fewer variables than Equation 1 (especially 2+ fewer), lean toward TRUE.
+- If Equation 2 has deeper nesting than Equation 1, lean toward FALSE.
+- If both equations have the same structure but with variables shuffled, lean toward FALSE.
+
+IMPORTANT REMINDERS:
+- A magma is just a set with a binary operation. No associativity, commutativity, or identity element is assumed unless forced by the equations.
+- An implication is TRUE if EVERY possible magma satisfying Eq1 also satisfies Eq2. Even one counterexample makes it FALSE.
+- When testing counterexamples, you must check ALL variable assignments, not just some.
+- The constant magma (Magma A) satisfies any equation where both sides contain at least one * operation, since both sides evaluate to 0.

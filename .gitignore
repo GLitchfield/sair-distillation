@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Windows artifacts
+*:Zone.Identifier
+
+# Environment
+.env
+*.env
+
+# Trash
+trash/
+
+# Large result files (keep key ones, ignore bulk)
+# Uncomment below to exclude all results from git:
+# results/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary test files
+/tmp/
+
+# Official judge repo (separate git repo, reference only)
+equational-theories-stage1-judge/

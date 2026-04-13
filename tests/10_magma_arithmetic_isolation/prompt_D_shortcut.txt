@@ -1,0 +1,27 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} where x*y = (y+1) mod 3.
+
+KEY INSIGHT: In this magma, the left argument is ALWAYS ignored. Only the right argument matters, and the result is (right + 1) mod 3. This means:
+- To evaluate any expression, work from the INNERMOST subexpression outward.
+- At each step, ONLY look at the RIGHT child, add 1 mod 3.
+- The left child does not affect the result at all.
+
+Shortcut: count how many * operations are on the path from the root to the RIGHTMOST leaf variable. The result is (rightmost_variable + count) mod 3.
+
+Example: x * (y * z) has 2 operations on the path root→right→right to z. Result = (z + 2) mod 3.
+Example: (x * y) * z has 1 operation on the path root→right to z. Result = (z + 1) mod 3.
+Example: x * (y * (z * w)) has 3 operations to w. Result = (w + 3) mod 3 = w.
+
+Equation 1: x = (y * z) * (z * (x * x))
+Equation 2: x = y * (((y * z) * x) * z)
+
+Using the shortcut, simplify EQ1's RHS:
+- The rightmost path from root goes: root → right child "z * (x * x)" → right child "(x * x)" → right child "x". That's 3 hops. Result = (x + 3) mod 3 = x.
+- So EQ1 simplifies to x = x. Holds universally.
+
+Now simplify EQ2's RHS the same way and determine: does EQ2 hold universally, or does it fail?
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

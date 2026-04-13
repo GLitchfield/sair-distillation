@@ -1,0 +1,45 @@
+Cheat sheet: cheatsheets/cheatsheet_v13a_balfix.txt (10803 bytes)
+Provider: anthropic  Model: claude-haiku-4-5-20251001  Subset: balfix_test
+
+--- 30 balfix_test problems ---
+  18:58:54 [hard3_0006_rep01] ✓ got=TRUE exp=TRUE  (1/30)
+  18:59:11 [hard3_0006_rep02] ✗ got=FALSE exp=TRUE  (2/30) ETA=8m
+  18:59:28 [hard3_0006_rep03] ✗ got=FALSE exp=TRUE  (3/30) ETA=7m
+  18:59:43 [hard3_0006_rep04] ✗ got=FALSE exp=TRUE  (4/30) ETA=7m
+  18:59:56 [hard3_0006_rep05] ✗ got=FALSE exp=TRUE  (5/30) ETA=6m
+  19:00:07 [hard3_0006_rep06] ✓ got=TRUE exp=TRUE  (6/30) ETA=6m
+  19:00:20 [hard3_0006_rep07] ✗ got=FALSE exp=TRUE  (7/30) ETA=5m
+  19:00:33 [hard3_0006_rep08] ✓ got=TRUE exp=TRUE  (8/30) ETA=5m
+  19:00:48 [hard3_0006_rep09] ✓ got=TRUE exp=TRUE  (9/30) ETA=5m
+  19:01:03 [hard3_0006_rep10] ✗ got=FALSE exp=TRUE  (10/30) ETA=5m
+  19:01:14 [hard3_0007_rep01] ✓ got=FALSE exp=FALSE  (11/30) ETA=4m
+  19:01:25 [hard3_0007_rep02] ✓ got=FALSE exp=FALSE  (12/30) ETA=4m
+  19:01:36 [hard3_0007_rep03] ✓ got=FALSE exp=FALSE  (13/30) ETA=4m
+  19:01:44 [hard3_0007_rep04] ✓ got=FALSE exp=FALSE  (14/30) ETA=3m
+  19:01:54 [hard3_0007_rep05] ✓ got=FALSE exp=FALSE  (15/30) ETA=3m
+  19:02:05 [hard3_0007_rep06] ✓ got=FALSE exp=FALSE  (16/30) ETA=3m
+  19:02:16 [hard3_0007_rep07] ✓ got=FALSE exp=FALSE  (17/30) ETA=3m
+  19:02:28 [hard3_0007_rep08] ✓ got=FALSE exp=FALSE  (18/30) ETA=3m
+  19:02:41 [hard3_0007_rep09] ✓ got=FALSE exp=FALSE  (19/30) ETA=2m
+  19:02:52 [hard3_0007_rep10] ✓ got=FALSE exp=FALSE  (20/30) ETA=2m
+  19:03:05 [hard3_0008_rep01] ✓ got=TRUE exp=TRUE  (21/30) ETA=2m
+  19:03:19 [hard3_0008_rep02] ✓ got=TRUE exp=TRUE  (22/30) ETA=2m
+  19:03:33 [hard3_0008_rep03] ✓ got=TRUE exp=TRUE  (23/30) ETA=1m
+  19:03:47 [hard3_0008_rep04] ✓ got=TRUE exp=TRUE  (24/30) ETA=1m
+  19:04:03 [hard3_0008_rep05] ✓ got=TRUE exp=TRUE  (25/30) ETA=1m
+  19:04:17 [hard3_0008_rep06] ✓ got=TRUE exp=TRUE  (26/30) ETA=1m
+  19:04:31 [hard3_0008_rep07] ✓ got=TRUE exp=TRUE  (27/30) ETA=1m
+  19:04:46 [hard3_0008_rep08] ✓ got=TRUE exp=TRUE  (28/30) ETA=0m
+  19:05:00 [hard3_0008_rep09] ✓ got=TRUE exp=TRUE  (29/30) ETA=0m
+  19:05:16 [hard3_0008_rep10] ✓ got=TRUE exp=TRUE  (30/30) ETA=0m
+
+Saved to results/balfix_fixed.json
+
+============================================================
+RESULTS (balfix_test)
+============================================================
+  Accuracy: 24/30 = 80.0%
+  TP=14 FP=0 FN=6 TN=10  Unparsed=0
+  Precision: 100.0%  Recall: 70.0%
+  F1: 0.824
+

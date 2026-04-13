@@ -1,0 +1,28 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} where x*y = (y+1) mod 3.
+
+Full operation table: 0*0=1, 0*1=2, 0*2=0, 1*0=1, 1*1=2, 1*2=0, 2*0=1, 2*1=2, 2*2=0
+
+Equation 1: x = (y * z) * (z * (x * x))
+Equation 2: x = y * (((y * z) * x) * z)
+
+I have pre-computed that EQ1's right side simplifies to x for all assignments in this magma. Please verify by checking these 9 assignments:
+
+(x=0,y=0,z=0): RHS should equal 0. Compute step by step to check.
+(x=0,y=1,z=2): RHS should equal 0. Compute step by step to check.
+(x=0,y=2,z=1): RHS should equal 0. Compute step by step to check.
+(x=1,y=0,z=0): RHS should equal 1. Compute step by step to check.
+(x=1,y=1,z=1): RHS should equal 1. Compute step by step to check.
+(x=1,y=2,z=0): RHS should equal 1. Compute step by step to check.
+(x=2,y=0,z=1): RHS should equal 2. Compute step by step to check.
+(x=2,y=1,z=2): RHS should equal 2. Compute step by step to check.
+(x=2,y=2,z=2): RHS should equal 2. Compute step by step to check.
+
+Do all 9 checks confirm EQ1 holds?
+
+If EQ1 is confirmed, test EQ2 on the same 9 assignments. Does EQ2 fail for any of them?
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

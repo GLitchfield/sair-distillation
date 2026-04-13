@@ -1,0 +1,84 @@
+Cheat sheet: cheatsheets/cheatsheet_v16.txt (7062 bytes)
+Provider: anthropic  Model: claude-haiku-4-5-20251001  Subset: chunk_2_hard3
+
+--- 67 chunk_2_hard3 problems ---
+  18:23:20 [hard3_0135] ✗ got=FALSE exp=TRUE  (1/67)
+  18:23:40 [hard3_0136] ✓ got=TRUE exp=TRUE  (2/67) ETA=20m
+  18:23:56 [hard3_0137] ✓ got=TRUE exp=TRUE  (3/67) ETA=20m
+  18:24:15 [hard3_0138] ✓ got=TRUE exp=TRUE  (4/67) ETA=17m
+  18:24:26 [hard3_0139] ✓ got=TRUE exp=TRUE  (5/67) ETA=17m
+  18:24:44 [hard3_0140] ✓ got=TRUE exp=TRUE  (6/67) ETA=17m
+  18:24:59 [hard3_0141] ✗ got=TRUE exp=FALSE  (7/67) ETA=18m
+  18:25:22 [hard3_0142] ✓ got=TRUE exp=TRUE  (8/67) ETA=17m
+  18:25:39 [hard3_0143] ✗ got=TRUE exp=FALSE  (9/67) ETA=17m
+  18:25:57 [hard3_0144] ✗ got=FALSE exp=TRUE  (10/67) ETA=16m
+  18:26:11 [hard3_0145] ✓ got=TRUE exp=TRUE  (11/67) ETA=16m
+  18:26:31 [hard3_0146] ✗ got=TRUE exp=FALSE  (12/67) ETA=16m
+  18:26:46 [hard3_0147] ✓ got=TRUE exp=TRUE  (13/67) ETA=16m
+  18:27:11 [hard3_0148] ✓ got=TRUE exp=TRUE  (14/67) ETA=16m
+  18:27:27 [hard3_0149] ✗ got=TRUE exp=FALSE  (15/67) ETA=15m
+  18:27:43 [hard3_0150] ✗ got=TRUE exp=FALSE  (16/67) ETA=15m
+  18:27:56 [hard3_0151] ✗ got=TRUE exp=FALSE  (17/67) ETA=14m
+  18:28:07 [hard3_0152] ✗ got=TRUE exp=FALSE  (18/67) ETA=14m
+  18:28:22 [hard3_0153] ✓ got=FALSE exp=FALSE  (19/67) ETA=13m
+  18:28:40 [hard3_0154] ✓ got=TRUE exp=TRUE  (20/67) ETA=13m
+  18:29:00 [hard3_0155] ✓ got=TRUE exp=TRUE  (21/67) ETA=13m
+    18:29:28 [retry 1/3 in 30s]: Error code: 429 - {'type': 'error', 'error': {'type': 'rate_limit_error', 'message': "This request would exceed your organization's rate limit of 90,000 output tokens per minute (org: 063ead8a-a036-45f1-9eb9-d7bc414ca38d, model: claude-haiku-4-5-20251001). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."}, 'request_id': 'req_011CZhdNxPFV5skFvMvS1JHj'}
+  18:29:21 [hard3_0156] ✓ got=TRUE exp=TRUE  (22/67) ETA=14m
+  18:30:17 [hard3_0157] ✓ got=TRUE exp=TRUE  (23/67) ETA=14m
+  18:30:32 [hard3_0158] ✓ got=TRUE exp=TRUE  (24/67) ETA=13m
+  18:30:52 [hard3_0159] ✓ got=FALSE exp=FALSE  (25/67) ETA=13m
+  18:31:04 [hard3_0160] ✓ got=TRUE exp=TRUE  (26/67) ETA=13m
+  18:31:22 [hard3_0161] ✗ got=TRUE exp=FALSE  (27/67) ETA=12m
+  18:31:36 [hard3_0162] ✓ got=TRUE exp=TRUE  (28/67) ETA=12m
+  18:31:53 [hard3_0163] ✗ got=TRUE exp=FALSE  (29/67) ETA=11m
+  18:32:06 [hard3_0164] ✗ got=TRUE exp=FALSE  (30/67) ETA=11m
+  18:32:22 [hard3_0165] ✗ got=TRUE exp=FALSE  (31/67) ETA=11m
+  18:32:37 [hard3_0166] ✗ got=TRUE exp=FALSE  (32/67) ETA=10m
+  18:32:51 [hard3_0167] ✗ got=TRUE exp=FALSE  (33/67) ETA=10m
+  18:33:09 [hard3_0168] ✓ got=TRUE exp=TRUE  (34/67) ETA=10m
+  18:33:23 [hard3_0169] ✗ got=TRUE exp=FALSE  (35/67) ETA=9m
+  18:33:39 [hard3_0170] ✓ got=FALSE exp=FALSE  (36/67) ETA=9m
+  18:33:51 [hard3_0171] ✗ got=TRUE exp=FALSE  (37/67) ETA=9m
+  18:34:08 [hard3_0172] ✗ got=TRUE exp=FALSE  (38/67) ETA=8m
+  18:34:25 [hard3_0173] ✗ got=TRUE exp=FALSE  (39/67) ETA=8m
+  18:34:40 [hard3_0174] ✓ got=FALSE exp=FALSE  (40/67) ETA=8m
+  18:34:53 [hard3_0175] ✗ got=TRUE exp=FALSE  (41/67) ETA=8m
+  18:35:15 [hard3_0176] ✓ got=TRUE exp=TRUE  (42/67) ETA=7m
+  18:35:33 [hard3_0177] ✓ got=FALSE exp=FALSE  (43/67) ETA=7m
+  18:35:50 [hard3_0178] ✓ got=FALSE exp=FALSE  (44/67) ETA=7m
+    18:36:09 [retry 1/3 in 30s]: Error code: 429 - {'type': 'error', 'error': {'type': 'rate_limit_error', 'message': "This request would exceed your organization's rate limit of 90,000 output tokens per minute (org: 063ead8a-a036-45f1-9eb9-d7bc414ca38d, model: claude-haiku-4-5-20251001). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."}, 'request_id': 'req_011CZhdtahrYpoDuqwCSsegY'}
+  18:36:06 [hard3_0179] ✓ got=FALSE exp=FALSE  (45/67) ETA=7m
+  18:36:55 [hard3_0180] ✗ got=TRUE exp=FALSE  (46/67) ETA=6m
+  18:37:14 [hard3_0181] ✗ got=TRUE exp=FALSE  (47/67) ETA=6m
+  18:37:26 [hard3_0182] ✓ got=FALSE exp=FALSE  (48/67) ETA=6m
+  18:37:44 [hard3_0183] ✓ got=TRUE exp=TRUE  (49/67) ETA=5m
+  18:37:56 [hard3_0184] ✗ got=TRUE exp=FALSE  (50/67) ETA=5m
+  18:38:10 [hard3_0185] ✗ got=TRUE exp=FALSE  (51/67) ETA=5m
+  18:38:30 [hard3_0186] ✗ got=TRUE exp=FALSE  (52/67) ETA=4m
+  18:38:43 [hard3_0187] ✗ got=FALSE exp=TRUE  (53/67) ETA=4m
+  18:38:59 [hard3_0188] ✗ got=FALSE exp=TRUE  (54/67) ETA=4m
+  18:39:07 [hard3_0189] ✗ got=TRUE exp=FALSE  (55/67) ETA=3m
+  18:39:21 [hard3_0190] ✗ got=TRUE exp=FALSE  (56/67) ETA=3m
+  18:39:40 [hard3_0191] ✗ got=TRUE exp=FALSE  (57/67) ETA=3m
+  18:39:54 [hard3_0192] ✓ got=TRUE exp=TRUE  (58/67) ETA=3m
+  18:40:14 [hard3_0193] ✗ got=FALSE exp=TRUE  (59/67) ETA=2m
+  18:40:28 [hard3_0194] ✓ got=TRUE exp=TRUE  (60/67) ETA=2m
+  18:40:45 [hard3_0195] ✗ got=TRUE exp=FALSE  (61/67) ETA=2m
+  18:40:58 [hard3_0196] ✗ got=FALSE exp=TRUE  (62/67) ETA=1m
+  18:41:12 [hard3_0197] ✗ got=FALSE exp=TRUE  (63/67) ETA=1m
+  18:41:28 [hard3_0198] ✓ got=TRUE exp=TRUE  (64/67) ETA=1m
+  18:41:43 [hard3_0199] ✓ got=TRUE exp=TRUE  (65/67) ETA=1m
+  18:42:01 [hard3_0200] ✗ got=TRUE exp=FALSE  (66/67) ETA=0m
+  18:42:16 [hard3_0201] ✓ got=FALSE exp=FALSE  (67/67) ETA=0m
+
+Saved to results/v16_hard3_chunk2.json
+
+============================================================
+RESULTS (chunk_2_hard3)
+============================================================
+  Accuracy: 32/67 = 47.8%
+  TP=23 FP=28 FN=7 TN=9  Unparsed=0
+  Precision: 45.1%  Recall: 76.7%
+  F1: 0.568
+

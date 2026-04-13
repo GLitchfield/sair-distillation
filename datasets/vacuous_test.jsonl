@@ -1,0 +1,5 @@
+{"id": "hard3_0071", "index": 71, "difficulty": "hard", "eq1_id": 511, "eq2_id": 2132, "equation1": "x = y * (y * (y * (x * y)))", "equation2": "x = ((y * y) * x) * (z * z)", "answer": false}
+{"id": "hard3_0153", "index": 153, "difficulty": "hard", "eq1_id": 1259, "eq2_id": 4318, "equation1": "x = x * (((y * z) * x) * y)", "equation2": "x * (y * x) = x * (z * z)", "answer": false}
+{"id": "hard3_0190", "index": 190, "difficulty": "hard", "eq1_id": 1682, "eq2_id": 4515, "equation1": "x = (y * x) * ((x * x) * y)", "equation2": "x * (y * z) = (x * z) * y", "answer": false}
+{"id": "hard3_0242", "index": 242, "difficulty": "hard", "eq1_id": 2164, "eq2_id": 2044, "equation1": "x = ((y * z) * x) * (x * w)", "equation2": "x = ((x * x) * y) * (y * y)", "answer": false}
+{"id": "hard3_0270", "index": 270, "difficulty": "hard", "eq1_id": 2567, "eq2_id": 2849, "equation1": "x = (y * ((z * x) * x)) * x", "equation2": "x = ((x * (x * x)) * y) * x", "answer": false}

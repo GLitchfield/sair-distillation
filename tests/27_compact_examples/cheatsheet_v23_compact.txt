@@ -1,0 +1,158 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You are always careful when making calculations.
+Your task is to determine whether Equation 1 ({{ equation1 }}) implies Equation 2 ({{ equation2 }}) over all magmas.
+
+WORKED EXAMPLE (FALSE):
+EQ1: x = x * (x * (y * y))   EQ2: x * y = y * z
+Magma D (x*y=x): EQ1 holds. EQ2: x≠y. CE at x=0,y=1.
+VERDICT: FALSE
+REASONING: Left projection violates EQ2.
+COUNTEREXAMPLE: {0,1} with x*y=x.
+
+WORKED EXAMPLE (TRUE):
+EQ1: x = y * x   EQ2: x = x * (x * ((y * z) * x))
+Magma D: EQ1→x=y forces singleton → TRUE.
+From EQ1, a*b=b. So RHS = x*(x*x) = x.
+VERDICT: TRUE
+PROOF: a*b=b, simplify RHS to x.
+
+Follow ALL steps in order. Be concise — one line per magma test.
+
+STEP 1: QUICK STRUCTURAL CHECKS
+
+Check 1a — Singleton Detection:
+If EQ1 has the EXACT form "x = f(y, z, ...)" where the LEFT side is a SINGLE BARE VARIABLE and x does NOT appear ANYWHERE on the right side → EQ1 forces singleton → VERDICT: TRUE. STOP.
+  "x = y * (z * w)" → bare x not on RHS → singleton → TRUE
+  "x = (y * y) * ((y * z) * w)" → bare x not on RHS → singleton → TRUE
+  "x * y = z * (w * y)" → NO (LHS is x*y, not bare x)
+  "x = x * (y * z)" → NO (x appears in RHS)
+
+Check 1b — Disjoint Variable Sets (Constant Law):
+If EQ1's LHS and RHS use COMPLETELY DISJOINT variable sets → constant law.
+  If EQ2 has * on BOTH sides → TRUE.
+  If EQ2 has a bare variable on one side → continue to Step 2.
+
+Check 1c — Variable Count Balance:
+Count occurrences of each variable on LHS vs RHS. "Balanced" = every variable equal count both sides.
+THEOREM: If EQ1 is balanced AND EQ2 is unbalanced → FALSE immediately.
+
+STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS
+
+Find a magma that SATISFIES EQ1 for ALL assignments AND VIOLATES EQ2 for some assignment.
+Test ALL magmas A through L before drawing any conclusions.
+
+LAW CHECK: A magma satisfies an equation as a LAW only if it holds for EVERY assignment.
+
+SINGLETON SIGNAL: If testing a magma against EQ1 reveals EQ1 forces "x = y" for all x,y → EQ1 only admits singletons → TRUE immediately.
+
+HOW TO TEST A 3-ELEMENT MAGMA: Break each equation into labeled sub-steps using the operation table. For each sub-step, look up table[row][col] to get the value. Then check if LHS = RHS.
+
+Magma A — Zero: x*y = 0 for all x,y.
+  Holds iff both sides contain * (both→0), or both sides are the same bare variable.
+
+Magma B — Constant-1: x*y = 1 for all x,y.
+  Holds iff both sides contain * (both→1), or both sides are the same bare variable.
+
+Magma C — Right Projection: x*y = y.
+  Any compound expression → its RIGHTMOST leaf variable.
+  Equation holds iff both sides have the same rightmost variable.
+
+Magma D — Left Projection: x*y = x.
+  Any compound expression → its LEFTMOST leaf variable.
+  Equation holds iff both sides have the same leftmost variable.
+
+Magma E — XOR: x*y = x+y mod 2.
+  Check EACH variable independently — same parity count (odd/even) on both sides.
+  WORKED EXAMPLE — checking x = (y*z)*x:
+    x: LHS=1 (odd), RHS=1 (odd) → same ✓
+    y: LHS=0 (even), RHS=1 (odd) → DIFFERENT → XOR FAILS EQ1
+  COMMON MISTAKE: "LHS total=1, RHS total=3, both odd → match" — WRONG. Check each variable separately.
+
+Magma F — Addition: x*y = x+y.
+  Holds iff every variable has SAME COUNT on both sides (stricter than XOR parity).
+
+Magma G — Negate-right: x*y = 1-y.
+  x*(y*z)→z. (x*y)*z→1-z. Right-nested→innermost var. Left-nested→alternates.
+
+Magma H — Right-shift: x*y = (y+1) mod 3, on {0,1,2}.
+  Table: 0*0=1, 0*1=2, 0*2=0, 1*0=1, 1*1=2, 1*2=0, 2*0=1, 2*1=2, 2*2=0
+  Rule: (A * B) → (eval(B) + 1) mod 3. Left child A is ignored entirely.
+  WORKED EXAMPLE — evaluate (x * (x * y)) at x=1, y=2:
+    Step 1: P = x * y = table[1][2] = 0
+    Step 2: Q = x * P = table[1][0] = 1
+    Result = 1 = x ✓
+
+Magma I — Left-shift: x*y = (x+1) mod 3, on {0,1,2}.
+  Table: 0*0=1, 0*1=1, 0*2=1, 1*0=2, 1*1=2, 1*2=2, 2*0=0, 2*1=0, 2*2=0
+  Rule: (A * B) → (eval(A) + 1) mod 3. Right child B is ignored entirely.
+  WORKED EXAMPLE — evaluate ((x * y) * z) at x=2, y=0, z=1:
+    Step 1: P = x * y = table[2][0] = 0
+    Step 2: Q = P * z = table[0][1] = 1
+    Result = 1
+
+Magma J — Null-left {0,1,2}:
+  Table: 0*0=0, 0*1=0, 0*2=0, 1*0=2, 1*1=1, 1*2=1, 2*0=1, 2*1=2, 2*2=2
+  Rules: 0*y=0 always. For x≠0: x*y=x if y≠0, x*y=(3-x) if y=0.
+  WORKED EXAMPLE — evaluate (x * (x * y)) * x at x=1, y=0:
+    Step 1: P = x * y = table[1][0] = 2
+    Step 2: Q = x * P = table[1][2] = 1
+    Step 3: R = Q * x = table[1][1] = 1
+    Result = 1 = x ✓
+  WORKED EXAMPLE — evaluate x * ((y * y) * x) at x=1, y=0:
+    Step 1: P = y * y = table[0][0] = 0
+    Step 2: Q = P * x = table[0][1] = 0
+    Step 3: R = x * Q = table[1][0] = 2
+    Result = 2 ≠ 1 = x ✗
+
+Magma K — Swap-row2 {0,1,2}:
+  Table: 0*0=0, 0*1=1, 0*2=2, 1*0=0, 1*1=1, 1*2=2, 2*0=1, 2*1=0, 2*2=2
+  Rules: x*y=y if x∈{0,1}; 2*0=1, 2*1=0, 2*2=2.
+  WORKED EXAMPLE — evaluate ((x * x) * y) * y at x=2, y=0:
+    Step 1: P = x * x = table[2][2] = 2
+    Step 2: Q = P * y = table[2][0] = 1
+    Step 3: R = Q * y = table[1][0] = 0
+    Result = 0
+
+Magma L — Near-zero {0,1,2}:
+  Table: 0*0=0, 0*1=0, 0*2=1, 1*0=0, 1*1=0, 1*2=0, 2*0=0, 2*1=0, 2*2=0
+  Rule: x*y=0 for everything EXCEPT 0*2=1.
+  WORKED EXAMPLE — evaluate ((z * x) * y) * y at x=0, y=2, z=0:
+    Step 1: P = z * x = table[0][0] = 0
+    Step 2: Q = P * y = table[0][2] = 1
+    Step 3: R = Q * y = table[1][2] = 0
+    Result = 0
+
+COUNTEREXAMPLE VERIFICATION: Before concluding FALSE, confirm:
+  (a) EQ1 holds for EVERY assignment (test at least 4 diverse cases, including cases with 0).
+  (b) EQ2 fails for a SPECIFIC assignment — state the exact values.
+
+STEP 3: LINEAR MAGMAS OVER Z/3Z
+Try x*y = 2x + y mod 3.
+Also try x*y = 2x + 2y mod 3.
+Apply same verification before concluding FALSE.
+
+STEP 4: ATTEMPT ALGEBRAIC PROOF
+If no counterexample found, try to prove TRUE. Limit to 3 attempts — if no progress, go to Step 5.
+  4a: Substitute specific values (x=y, x=x*x) into EQ1 to get intermediate identities.
+  4b: Use EQ1 as a rewrite rule. Apply to innermost subexpressions first.
+  When applying EQ1 as A*B=C: left-slot=A, right-slot=B. Do not swap positions.
+
+STEP 5: FINAL JUDGMENT
+Apply these rules in order:
+  1. Verified counterexample exists → FALSE (overrides everything)
+  2. Complete algebraic proof constructed → TRUE
+  3. Singleton (1a) or constant law (1b) confirmed → TRUE
+  4. TRIVIAL MODELS SIGNAL: All magmas A–L plus linear magma tested, no CE found, AND EQ1 is so restrictive only trivial magmas satisfy it → TRUE. Only apply if full battery complete.
+  5. No proof and no verified counterexample — weigh signals:
+     Lean TRUE: EQ2 uses 2+ fewer variables than EQ1; or EQ1 forces projection/constant behavior.
+     Lean FALSE: EQ2 introduces new variables not in EQ1; or EQ2's LHS has fewer * than EQ1's.
+     When signals conflict or are weak: prefer FALSE.
+     Failing to find a proof does NOT count as evidence for TRUE.
+     Failing to find a counterexample does NOT count as evidence for FALSE.
+
+NOTE: Magmas A and B satisfy any equation where both sides contain *.
+
+Output format (plain text only, no markdown, no bold, use exact headers):
+VERDICT: must be exactly TRUE or FALSE (in the same line).
+REASONING: must be non-empty.
+PROOF: required if VERDICT is TRUE, empty otherwise.
+COUNTEREXAMPLE: required if VERDICT is FALSE, empty otherwise.

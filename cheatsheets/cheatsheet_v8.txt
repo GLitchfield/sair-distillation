@@ -1,0 +1,175 @@
+STRATEGY: Determine if Equation 1 implies Equation 2 by following these steps. Be concise—one line per magma test.
+
+OUTPUT FORMAT: Write exactly "VERDICT: TRUE" or "VERDICT: FALSE" — plain text, no markdown formatting.
+
+BASE RATE: Roughly half of all problems are TRUE and half are FALSE. Do not assume either is more likely before examining the evidence.
+
+STEP 1: QUICK STRUCTURAL CHECKS
+
+Check 1a - Singleton Detection:
+If Equation 1 has the EXACT form "x = f(y, z, ...)" where:
+  - The LEFT side is a SINGLE BARE VARIABLE (just "x" with no operations), AND
+  - x does NOT appear ANYWHERE on the right side
+Then Equation 1 forces the magma to be a singleton. Answer: TRUE.
+
+CRITICAL: This rule requires a BARE variable on LHS — NOT x inside a product.
+  - "x = y * (z * w)" → YES singleton → TRUE
+  - "x = (y * y) * ((y * z) * w)" → YES singleton → TRUE
+  - "x * y = z * (w * y)" → NO (LHS is x*y, not bare x)
+  - "x = x * (y * z)" → NO (x appears in RHS)
+
+Check 1b - Disjoint Variable Sets (Constant Law):
+If EQ1's LHS and RHS use COMPLETELY DISJOINT variable sets (no variable appears on both sides), EQ1 forces all products to be equal (the "constant law").
+  - If EQ2 has * on BOTH sides → TRUE.
+  - If EQ2 has a bare variable on one side → continue to Step 2 to confirm.
+Examples:
+  - EQ1: "x * y = z * w" → {x,y} vs {z,w} → disjoint → constant law
+  - EQ1: "x * y = y * z" → NOT disjoint (y shared)
+
+Check 1c - Variable Count Balance:
+Count occurrences of each variable on LHS vs RHS of each equation.
+An equation is "balanced" if every variable has equal count on both sides.
+
+THEOREM: If EQ1 is balanced AND EQ2 is unbalanced → FALSE immediately.
+(The addition magma x*y=x+y satisfies any balanced equation but fails unbalanced ones.)
+
+Balanced: x*y = y*x (x:1=1, y:1=1). Unbalanced: x*y = x*x (y:1 vs 0). x*x = x (x:2 vs 1).
+
+NOTE: XOR catches parity mismatches. Balance check catches additional cases with same parity but different counts (e.g., x appears 3 times LHS, 1 time RHS — both odd, XOR passes, but balance check catches → FALSE).
+
+Check 1d - LHS Complexity:
+If Equation 2's LHS has FEWER * operations than Equation 1's LHS, lean FALSE. Proceed to Step 2.
+
+STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS
+
+Find a magma that SATISFIES EQ1 for ALL variable assignments AND VIOLATES EQ2 for some assignment.
+
+LAW CHECK: A magma satisfies an equation as a LAW only if it holds for EVERY assignment. If testing shows the equation holds only when "x=z" or forces constants, the magma does NOT universally satisfy it — skip to next magma.
+
+SINGLETON SIGNAL: If testing a magma against EQ1 reveals EQ1 forces "x = y" for all x,y → EQ1 only admits singletons → TRUE immediately. Example: right-projection on EQ1 x=y*(z*w) gives x=w for all x,w → singleton → TRUE.
+
+TRIVIAL MODELS SIGNAL: After testing all magmas — if MOST/ALL fail to satisfy EQ1 (EQ1 is highly restrictive), and those FEW that do satisfy it (projections, constants, singletons) ALSO satisfy EQ2 → lean strongly TRUE. EQ1 collapses the model space so tightly that any remaining model satisfies EQ2. Proceed to Step 4 to prove it. Do NOT default FALSE in this situation.
+
+Magma A - "Zero": x*y = 0 for all x,y.
+  Rule: holds iff both sides contain * (both→0), or both sides are the same bare variable.
+  Fails if one side is a bare variable (can equal 1) and the other contains * (equals 0).
+
+Magma B - "Right Projection": x*y = y.
+  Rule: any compound expression → its RIGHTMOST leaf variable.
+  Equation holds iff both sides have the same rightmost variable.
+
+Magma C - "Left Projection": x*y = x.
+  Rule: any compound expression → its LEFTMOST leaf variable.
+  Equation holds iff both sides have the same leftmost variable.
+
+Magma D - "XOR": x*y = x+y mod 2.
+  Rule: check EACH variable independently — it must have the same parity count (odd/even) on both sides.
+  Do NOT sum all variable counts together. Check every variable one at a time.
+
+  WORKED EXAMPLE — checking equation x = (y*z)*x:
+    x: LHS count=1 (odd),  RHS count=1 (odd)  → same ✓
+    y: LHS count=0 (even), RHS count=1 (odd)  → DIFFERENT → XOR FAILS EQ1
+    z: LHS count=0 (even), RHS count=1 (odd)  → DIFFERENT → XOR FAILS EQ1
+  Result: XOR does not satisfy this equation. It is NOT a valid counterexample for anything.
+
+  COMMON MISTAKE: "LHS total = 1 variable, RHS total = 3 variables, both odd → match ✓" — WRONG.
+  Each variable must be checked individually, not totaled.
+
+Magma E - "Constant 1": x*y = 1 for all x,y.
+  Rule: holds iff both sides contain * (both→1), or both sides are the same bare variable.
+  Fails if one side is a bare variable (can equal 0) and the other contains * (equals 1).
+
+Magma F - "Negate-right": x*y = 1-y.
+  Shortcut: x*y=1-y. So x*(y*z)=z. And (x*y)*z=1-z.
+  Left-nested depth-n: result alternates 1-z / z. Right-nested: result is innermost variable.
+
+Magma G - "Addition": x*y = x+y (integer addition).
+  Rule: expression evaluates to SUM of all variable occurrences (each counted with multiplicity).
+  Equation holds iff every variable appears the SAME NUMBER OF TIMES on both sides.
+  Catches cases XOR misses: x appears 3 times LHS, 1 time RHS (both odd → XOR passes, Addition fails).
+
+Magma H - "Right-shift": x*y = (y+1) mod 3, on {0,1,2}.
+  Key: left argument is ALWAYS IGNORED. Result depends only on the right argument.
+  Evaluation rule: walk the RIGHT SPINE of the expression tree (keep taking the right child at each *
+  until you reach a leaf). Count how many * nodes you passed. Add that count to the leaf value mod 3.
+
+  Examples (variables take values in {0,1,2}):
+    x * y         → 1 right-spine *  → (y+1) mod 3
+    (x*y) * z     → 1 right-spine *  → (z+1) mod 3   [root goes right directly to z]
+    x * (y*z)     → 2 right-spine *s → (z+2) mod 3   [root→right node→z]
+    x * (y*(z*w)) → 3 right-spine *s → (w+3) mod 3 = w
+    (x*y)*(z*w)   → 2 right-spine *s → (w+2) mod 3   [root→(z*w)→w]
+
+  Equation holds iff both sides produce the same value for ALL variable assignments in {0,1,2}.
+
+Magma I - "Left-shift": x*y = (x+1) mod 3, on {0,1,2}.
+  Key: right argument is ALWAYS IGNORED. Symmetric to Magma H but walks the LEFT SPINE.
+  Evaluation rule: walk the LEFT SPINE (keep taking the left child at each * until you reach a leaf).
+  Count how many * nodes you passed. Add that count to the leaf value mod 3.
+
+  Examples:
+    x * y         → 1 left-spine *  → (x+1) mod 3   [root left = x directly]
+    x * (y*z)     → 1 left-spine *  → (x+1) mod 3   [root left = x directly]
+    (x*y) * z     → 2 left-spine *s → (x+2) mod 3   [root→(x*y)→x]
+    (x*y) * (z*w) → 2 left-spine *s → (x+2) mod 3   [root→(x*y)→x]
+    ((x*y)*z)*w   → 3 left-spine *s → (x+3) mod 3 = x
+
+  Equation holds iff both sides produce the same value for ALL variable assignments in {0,1,2}.
+
+COUNTEREXAMPLE VERIFICATION: Before concluding FALSE based on any magma, confirm both conditions:
+  (a) EQ1 holds for EVERY assignment — explicitly test at least 4 cases (e.g., all {0,1} pairs for 2-element magmas, or spot-check several triples for 3-element). If EQ1 fails for any assignment, this magma is NOT a valid counterexample — continue searching.
+  (b) EQ2 fails for a SPECIFIC assignment — state the exact values (e.g., x=1, y=0) that witness the failure.
+Only if both (a) and (b) are confirmed: conclude FALSE.
+
+STEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z
+
+Try x*y = 2x + y mod 3 (values {0,1,2}). Evaluate by computing 2x+y mod 3.
+Apply the same COUNTEREXAMPLE VERIFICATION before concluding FALSE from this magma.
+
+STEP 4: ATTEMPT ALGEBRAIC PROOF
+
+If no counterexample was found (especially when Trivial Models Signal applies), try to prove TRUE.
+
+ARGUMENT POSITION: When applying EQ1 (A*B=C) as a rewrite rule: left-slot=A, right-slot=B. Do not swap.
+
+WORKED PROOF EXAMPLE:
+  EQ1: x = y*x  → pattern: [anything]*[term] = [term].
+  Goal: x = x*(x*((y*z)*x))
+  Step 1: (y*z)*x = x  [right slot is x, apply EQ1]
+  Step 2: x*x = x      [right slot is x, apply EQ1]
+  Step 3: x*(x*((y*z)*x)) = x*(x*x) = x*x = x  ✓
+
+  Substitute innermost first. Confirm left vs right slot before each application.
+
+Method 4a: Substitute x=y or x=x*x into EQ1 to derive intermediate identities, then chain to EQ2.
+Method 4b: Use EQ1 as a rewrite rule to transform one side of EQ2 into the other (as above).
+
+STEP 5: FINAL JUDGMENT
+
+Before deciding, state explicitly:
+  - Best evidence for TRUE: (e.g., "all tested magmas satisfy both equations" or "proof sketch: ...")
+  - Best evidence for FALSE: (e.g., "Magma X with assignment y=1,z=0 violates EQ2 after verifying EQ1 holds")
+
+Then apply these rules in order:
+  1. Verified counterexample exists → FALSE (this overrides everything)
+  2. Complete algebraic proof constructed → TRUE
+  3. Trivial Models Signal (Step 2) applies → TRUE
+  4. No proof and no verified counterexample — weigh signals:
+
+     Lean TRUE when:
+       - EQ2 uses 2+ fewer distinct variables than EQ1
+       - EQ1 is very strong (forces right/left projection or constant behavior)
+
+     Lean FALSE when:
+       - EQ2 introduces new variables not in EQ1 and EQ1 is not highly restrictive
+       - Check 1d applies (EQ2's LHS has fewer * than EQ1's)
+       - EQ1 has form "x*x = f(...)" and standard magmas all fail EQ1
+
+     When signals conflict or are weak: prefer FALSE.
+     Failing to find a proof does NOT count as evidence for TRUE.
+     Failing to find a counterexample does NOT count as evidence for FALSE.
+
+IMPORTANT REMINDERS:
+- A magma is just a set with a binary operation. No associativity, commutativity, or identity assumed unless forced.
+- TRUE means EVERY magma satisfying EQ1 also satisfies EQ2. One valid counterexample makes it FALSE.
+- Constant magmas (A and E) satisfy any equation where both sides contain *.

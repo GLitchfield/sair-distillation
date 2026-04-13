@@ -1,0 +1,1588 @@
+{
+  "input": "results/phase1_all_false.json",
+  "total_problems": 532,
+  "with_ce": 179,
+  "without_ce": 353,
+  "without_ce_ids": [
+    "hard3_0025",
+    "hard3_0032",
+    "hard3_0035",
+    "hard3_0040",
+    "hard3_0078",
+    "hard3_0086",
+    "hard3_0152",
+    "hard3_0159",
+    "hard3_0161",
+    "hard3_0163",
+    "hard3_0165",
+    "hard3_0166",
+    "hard3_0167",
+    "hard3_0206",
+    "hard3_0234",
+    "hard3_0235",
+    "hard3_0236",
+    "hard3_0237",
+    "hard3_0241",
+    "hard3_0242",
+    "hard3_0309",
+    "hard3_0322",
+    "hard3_0344",
+    "hard3_0345",
+    "hard3_0346",
+    "hard3_0392",
+    "order5_hard_0002",
+    "order5_hard_0004",
+    "order5_hard_0006",
+    "order5_hard_0008",
+    "order5_hard_0010",
+    "order5_hard_0012",
+    "order5_hard_0014",
+    "order5_hard_0016",
+    "order5_hard_0018",
+    "order5_hard_0020",
+    "order5_hard_0022",
+    "order5_hard_0024",
+    "order5_hard_0026",
+    "order5_hard_0028",
+    "order5_hard_0030",
+    "order5_hard_0032",
+    "order5_hard_0034",
+    "order5_hard_0036",
+    "order5_hard_0038",
+    "order5_hard_0040",
+    "order5_hard_0042",
+    "order5_hard_0044",
+    "order5_hard_0046",
+    "order5_hard_0048",
+    "order5_hard_0050",
+    "order5_hard_0052",
+    "order5_hard_0054",
+    "order5_hard_0056",
+    "order5_hard_0058",
+    "order5_hard_0060",
+    "order5_hard_0062",
+    "order5_hard_0064",
+    "order5_hard_0066",
+    "order5_hard_0068",
+    "order5_hard_0070",
+    "order5_hard_0072",
+    "order5_hard_0074",
+    "order5_hard_0076",
+    "order5_hard_0078",
+    "order5_hard_0080",
+    "order5_hard_0082",
+    "order5_hard_0084",
+    "order5_hard_0086",
+    "order5_hard_0088",
+    "order5_hard_0090",
+    "order5_hard_0092",
+    "order5_hard_0094",
+    "order5_hard_0096",
+    "order5_hard_0098",
+    "order5_hard_0100",
+    "order5_hard_0102",
+    "order5_hard_0104",
+    "order5_hard_0106",
+    "order5_hard_0108",
+    "order5_hard_0110",
+    "order5_hard_0112",
+    "order5_hard_0114",
+    "order5_hard_0116",
+    "order5_hard_0118",
+    "order5_hard_0120",
+    "order5_hard_0122",
+    "order5_hard_0124",
+    "order5_hard_0126",
+    "order5_hard_0128",
+    "order5_hard_0130",
+    "order5_hard_0132",
+    "order5_hard_0134",
+    "order5_hard_0136",
+    "order5_hard_0138",
+    "order5_hard_0140",
+    "order5_hard_0142",
+    "order5_hard_0144",
+    "order5_hard_0146",
+    "order5_hard_0148",
+    "order5_hard_0150",
+    "order5_hard_0152",
+    "order5_hard_0154",
+    "order5_hard_0156",
+    "order5_hard_0158",
+    "order5_hard_0160",
+    "order5_hard_0162",
+    "order5_hard_0164",
+    "order5_hard_0166",
+    "order5_hard_0168",
+    "order5_hard_0170",
+    "order5_hard_0172",
+    "order5_hard_0174",
+    "order5_hard_0176",
+    "order5_hard_0178",
+    "order5_hard_0180",
+    "order5_hard_0182",
+    "order5_hard_0184",
+    "order5_hard_0186",
+    "order5_hard_0188",
+    "order5_hard_0190",
+    "order5_hard_0192",
+    "order5_hard_0194",
+    "order5_hard_0196",
+    "order5_hard_0198",
+    "order5_hard_0200",
+    "order5_hard_0202",
+    "order5_hard_0204",
+    "order5_hard_0206",
+    "order5_hard_0208",
+    "order5_hard_0210",
+    "order5_hard_0212",
+    "order5_hard_0214",
+    "order5_hard_0216",
+    "order5_hard_0218",
+    "order5_hard_0220",
+    "order5_hard_0222",
+    "order5_hard_0224",
+    "order5_hard_0226",
+    "order5_hard_0228",
+    "order5_hard_0230",
+    "order5_hard_0232",
+    "order5_hard_0234",
+    "order5_hard_0236",
+    "order5_hard_0238",
+    "order5_hard_0240",
+    "order5_hard_0242",
+    "order5_hard_0244",
+    "order5_hard_0246",
+    "order5_hard_0248",
+    "order5_hard_0250",
+    "order5_hard_0252",
+    "order5_hard_0254",
+    "order5_hard_0256",
+    "order5_hard_0258",
+    "order5_hard_0260",
+    "order5_hard_0262",
+    "order5_hard_0264",
+    "order5_hard_0266",
+    "order5_hard_0268",
+    "order5_hard_0270",
+    "order5_hard_0272",
+    "order5_hard_0274",
+    "order5_hard_0276",
+    "order5_hard_0278",
+    "order5_hard_0280",
+    "order5_hard_0282",
+    "order5_hard_0284",
+    "order5_hard_0286",
+    "order5_hard_0288",
+    "order5_hard_0290",
+    "order5_hard_0292",
+    "order5_hard_0294",
+    "order5_hard_0296",
+    "order5_hard_0298",
+    "order5_hard_0300",
+    "order5_hard_0302",
+    "order5_hard_0304",
+    "order5_hard_0306",
+    "order5_hard_0308",
+    "order5_hard_0310",
+    "order5_hard_0312",
+    "order5_hard_0314",
+    "order5_hard_0316",
+    "order5_hard_0318",
+    "order5_hard_0320",
+    "order5_hard_0322",
+    "order5_hard_0324",
+    "order5_hard_0326",
+    "order5_hard_0328",
+    "order5_hard_0330",
+    "order5_hard_0332",
+    "order5_hard_0334",
+    "order5_hard_0336",
+    "order5_hard_0338",
+    "order5_hard_0340",
+    "order5_hard_0342",
+    "order5_hard_0344",
+    "order5_hard_0346",
+    "order5_hard_0348",
+    "order5_hard_0350",
+    "order5_hard_0352",
+    "order5_hard_0354",
+    "order5_hard_0356",
+    "order5_hard_0358",
+    "order5_hard_0360",
+    "order5_hard_0362",
+    "order5_hard_0364",
+    "order5_hard_0366",
+    "order5_hard_0368",
+    "order5_hard_0370",
+    "order5_hard_0372",
+    "order5_hard_0374",
+    "order5_hard_0376",
+    "order5_hard_0378",
+    "order5_hard_0380",
+    "order5_hard_0382",
+    "order5_hard_0384",
+    "order5_hard_0386",
+    "order5_hard_0388",
+    "order5_hard_0390",
+    "order5_hard_0392",
+    "order5_hard_0394",
+    "order5_hard_0396",
+    "order5_hard_0398",
+    "order5_hard_0400",
+    "order5_hard_0402",
+    "order5_hard_0404",
+    "order5_hard_0406",
+    "order5_hard_0408",
+    "order5_hard_0410",
+    "order5_hard_0412",
+    "order5_hard_0414",
+    "order5_hard_0416",
+    "order5_hard_0418",
+    "order5_hard_0420",
+    "order5_hard_0422",
+    "order5_hard_0424",
+    "order5_hard_0426",
+    "order5_hard_0428",
+    "order5_hard_0430",
+    "order5_hard_0432",
+    "order5_hard_0434",
+    "order5_hard_0436",
+    "order5_hard_0438",
+    "order5_hard_0440",
+    "order5_hard_0442",
+    "order5_hard_0444",
+    "order5_hard_0446",
+    "order5_hard_0448",
+    "order5_hard_0450",
+    "order5_hard_0452",
+    "order5_hard_0454",
+    "order5_hard_0456",
+    "order5_hard_0458",
+    "order5_hard_0460",
+    "order5_hard_0462",
+    "order5_hard_0464",
+    "order5_hard_0466",
+    "order5_hard_0468",
+    "order5_hard_0470",
+    "order5_hard_0472",
+    "order5_hard_0474",
+    "order5_hard_0476",
+    "order5_hard_0478",
+    "order5_hard_0480",
+    "order5_hard_0482",
+    "order5_hard_0484",
+    "order5_hard_0486",
+    "order5_hard_0488",
+    "order5_hard_0490",
+    "order5_hard_0492",
+    "order5_hard_0494",
+    "order5_hard_0496",
+    "order5_hard_0498",
+    "order5_hard_0500",
+    "order5_hard_0502",
+    "order5_hard_0504",
+    "order5_hard_0506",
+    "order5_hard_0508",
+    "order5_hard_0510",
+    "order5_hard_0512",
+    "order5_hard_0514",
+    "order5_hard_0516",
+    "order5_hard_0518",
+    "order5_hard_0520",
+    "order5_hard_0522",
+    "order5_hard_0524",
+    "order5_hard_0526",
+    "order5_hard_0528",
+    "order5_hard_0530",
+    "order5_hard_0532",
+    "order5_hard_0534",
+    "order5_hard_0536",
+    "order5_hard_0538",
+    "order5_hard_0540",
+    "order5_hard_0542",
+    "order5_hard_0544",
+    "order5_hard_0546",
+    "order5_hard_0548",
+    "order5_hard_0550",
+    "order5_hard_0552",
+    "order5_hard_0554",
+    "order5_hard_0556",
+    "order5_hard_0558",
+    "order5_hard_0560",
+    "order5_hard_0562",
+    "order5_hard_0564",
+    "order5_hard_0566",
+    "order5_hard_0568",
+    "order5_hard_0570",
+    "order5_hard_0572",
+    "order5_hard_0574",
+    "order5_hard_0576",
+    "order5_hard_0578",
+    "order5_hard_0580",
+    "order5_hard_0582",
+    "order5_hard_0584",
+    "order5_hard_0586",
+    "order5_hard_0588",
+    "order5_hard_0590",
+    "order5_hard_0592",
+    "order5_hard_0594",
+    "order5_hard_0596",
+    "order5_hard_0598",
+    "order5_hard_0600",
+    "order5_hard_0602",
+    "order5_hard_0604",
+    "order5_hard_0606",
+    "order5_hard_0608",
+    "order5_hard_0610",
+    "order5_hard_0612",
+    "order5_hard_0614",
+    "order5_hard_0616",
+    "order5_hard_0618",
+    "order5_hard_0620",
+    "order5_hard_0622",
+    "order5_hard_0624",
+    "order5_hard_0626",
+    "order5_hard_0628",
+    "order5_hard_0630",
+    "order5_hard_0632",
+    "order5_hard_0634",
+    "order5_hard_0636",
+    "order5_hard_0638",
+    "order5_hard_0640",
+    "order5_hard_0642",
+    "order5_hard_0644",
+    "order5_hard_0646",
+    "order5_hard_0648",
+    "order5_hard_0650",
+    "order5_hard_0652",
+    "order5_hard_0654"
+  ],
+  "unique_magmas": 1259,
+  "top_magmas": [
+    {
+      "rank": 1,
+      "N": 3,
+      "table": [
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[1, 2, 0]",
+      "coverage": 42
+    },
+    {
+      "rank": 2,
+      "N": 3,
+      "table": [
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[2, 0, 1]",
+      "coverage": 42
+    },
+    {
+      "rank": 3,
+      "N": 4,
+      "table": [
+        [
+          0,
+          2,
+          3,
+          1
+        ],
+        [
+          0,
+          2,
+          3,
+          1
+        ],
+        [
+          0,
+          2,
+          3,
+          1
+        ],
+        [
+          0,
+          2,
+          3,
+          1
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[0, 2, 3, 1]",
+      "coverage": 42
+    },
+    {
+      "rank": 4,
+      "N": 4,
+      "table": [
+        [
+          0,
+          3,
+          1,
+          2
+        ],
+        [
+          0,
+          3,
+          1,
+          2
+        ],
+        [
+          0,
+          3,
+          1,
+          2
+        ],
+        [
+          0,
+          3,
+          1,
+          2
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[0, 3, 1, 2]",
+      "coverage": 42
+    },
+    {
+      "rank": 5,
+      "N": 4,
+      "table": [
+        [
+          1,
+          2,
+          0,
+          3
+        ],
+        [
+          1,
+          2,
+          0,
+          3
+        ],
+        [
+          1,
+          2,
+          0,
+          3
+        ],
+        [
+          1,
+          2,
+          0,
+          3
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[1, 2, 0, 3]",
+      "coverage": 42
+    },
+    {
+      "rank": 6,
+      "N": 4,
+      "table": [
+        [
+          1,
+          3,
+          2,
+          0
+        ],
+        [
+          1,
+          3,
+          2,
+          0
+        ],
+        [
+          1,
+          3,
+          2,
+          0
+        ],
+        [
+          1,
+          3,
+          2,
+          0
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[1, 3, 2, 0]",
+      "coverage": 42
+    },
+    {
+      "rank": 7,
+      "N": 4,
+      "table": [
+        [
+          2,
+          0,
+          1,
+          3
+        ],
+        [
+          2,
+          0,
+          1,
+          3
+        ],
+        [
+          2,
+          0,
+          1,
+          3
+        ],
+        [
+          2,
+          0,
+          1,
+          3
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[2, 0, 1, 3]",
+      "coverage": 42
+    },
+    {
+      "rank": 8,
+      "N": 4,
+      "table": [
+        [
+          2,
+          1,
+          3,
+          0
+        ],
+        [
+          2,
+          1,
+          3,
+          0
+        ],
+        [
+          2,
+          1,
+          3,
+          0
+        ],
+        [
+          2,
+          1,
+          3,
+          0
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[2, 1, 3, 0]",
+      "coverage": 42
+    },
+    {
+      "rank": 9,
+      "N": 4,
+      "table": [
+        [
+          3,
+          0,
+          2,
+          1
+        ],
+        [
+          3,
+          0,
+          2,
+          1
+        ],
+        [
+          3,
+          0,
+          2,
+          1
+        ],
+        [
+          3,
+          0,
+          2,
+          1
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[3, 0, 2, 1]",
+      "coverage": 42
+    },
+    {
+      "rank": 10,
+      "N": 4,
+      "table": [
+        [
+          3,
+          1,
+          0,
+          2
+        ],
+        [
+          3,
+          1,
+          0,
+          2
+        ],
+        [
+          3,
+          1,
+          0,
+          2
+        ],
+        [
+          3,
+          1,
+          0,
+          2
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[3, 1, 0, 2]",
+      "coverage": 42
+    },
+    {
+      "rank": 11,
+      "N": 3,
+      "table": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "pattern": "LEFT_F: x\u2192[1, 2, 0]",
+      "coverage": 34
+    },
+    {
+      "rank": 12,
+      "N": 3,
+      "table": [
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "pattern": "LEFT_F: x\u2192[2, 0, 1]",
+      "coverage": 34
+    },
+    {
+      "rank": 13,
+      "N": 4,
+      "table": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          2,
+          2
+        ],
+        [
+          3,
+          3,
+          3,
+          3
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "pattern": "LEFT_F: x\u2192[0, 2, 3, 1]",
+      "coverage": 34
+    },
+    {
+      "rank": 14,
+      "N": 4,
+      "table": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          3,
+          3,
+          3
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          2,
+          2
+        ]
+      ],
+      "pattern": "LEFT_F: x\u2192[0, 3, 1, 2]",
+      "coverage": 34
+    },
+    {
+      "rank": 15,
+      "N": 4,
+      "table": [
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "pattern": "LEFT_F: x\u2192[1, 2, 0, 3]",
+      "coverage": 34
+    }
+  ],
+  "greedy_cover": [
+    {
+      "rank": 1,
+      "N": 3,
+      "table": [
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[1, 2, 0]",
+      "family": "3elem",
+      "new_coverage": 42,
+      "problems": [
+        "hard3_0012",
+        "hard3_0013",
+        "hard3_0016",
+        "hard3_0017",
+        "hard3_0018",
+        "hard3_0019",
+        "hard3_0082",
+        "hard3_0094",
+        "hard3_0095",
+        "hard3_0096",
+        "hard3_0097",
+        "hard3_0098",
+        "hard3_0099",
+        "hard3_0100",
+        "hard3_0101",
+        "hard3_0102",
+        "hard3_0110",
+        "hard3_0111",
+        "hard3_0112",
+        "hard3_0113",
+        "hard3_0116",
+        "hard3_0118",
+        "hard3_0119",
+        "hard3_0120",
+        "hard3_0121",
+        "hard3_0122",
+        "hard3_0123",
+        "hard3_0125",
+        "hard3_0126",
+        "hard3_0164",
+        "hard3_0169",
+        "hard3_0170",
+        "hard3_0171",
+        "hard3_0172",
+        "hard3_0173",
+        "hard3_0174",
+        "hard3_0177",
+        "hard3_0178",
+        "hard3_0179",
+        "hard3_0180",
+        "hard3_0181",
+        "hard3_0182"
+      ]
+    },
+    {
+      "rank": 2,
+      "N": 3,
+      "table": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "pattern": "LEFT_F: x\u2192[1, 2, 0]",
+      "family": "3elem",
+      "new_coverage": 34,
+      "problems": [
+        "hard3_0007",
+        "hard3_0041",
+        "hard3_0042",
+        "hard3_0044",
+        "hard3_0215",
+        "hard3_0216",
+        "hard3_0217",
+        "hard3_0218",
+        "hard3_0219",
+        "hard3_0220",
+        "hard3_0222",
+        "hard3_0223",
+        "hard3_0224",
+        "hard3_0225",
+        "hard3_0226",
+        "hard3_0227",
+        "hard3_0228",
+        "hard3_0274",
+        "hard3_0275",
+        "hard3_0276",
+        "hard3_0281",
+        "hard3_0282",
+        "hard3_0286",
+        "hard3_0287",
+        "hard3_0289",
+        "hard3_0300",
+        "hard3_0301",
+        "hard3_0303",
+        "hard3_0304",
+        "hard3_0305",
+        "hard3_0306",
+        "hard3_0310",
+        "hard3_0311",
+        "hard3_0312"
+      ]
+    },
+    {
+      "rank": 3,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 28,
+      "problems": [
+        "hard3_0009",
+        "hard3_0010",
+        "hard3_0011",
+        "hard3_0021",
+        "hard3_0037",
+        "hard3_0062",
+        "hard3_0063",
+        "hard3_0064",
+        "hard3_0080",
+        "hard3_0081",
+        "hard3_0083",
+        "hard3_0084",
+        "hard3_0103",
+        "hard3_0104",
+        "hard3_0105",
+        "hard3_0128",
+        "hard3_0129",
+        "hard3_0149",
+        "hard3_0184",
+        "hard3_0185",
+        "hard3_0186",
+        "hard3_0201",
+        "hard3_0248",
+        "hard3_0253",
+        "hard3_0277",
+        "hard3_0280",
+        "hard3_0351",
+        "hard3_0368"
+      ]
+    },
+    {
+      "rank": 4,
+      "N": 3,
+      "table": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 17,
+      "problems": [
+        "hard3_0026",
+        "hard3_0029",
+        "hard3_0050",
+        "hard3_0108",
+        "hard3_0141",
+        "hard3_0143",
+        "hard3_0175",
+        "hard3_0195",
+        "hard3_0211",
+        "hard3_0254",
+        "hard3_0263",
+        "hard3_0264",
+        "hard3_0270",
+        "hard3_0302",
+        "hard3_0320",
+        "hard3_0339",
+        "hard3_0383"
+      ]
+    },
+    {
+      "rank": 5,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 12,
+      "problems": [
+        "hard3_0342",
+        "hard3_0343",
+        "hard3_0347",
+        "hard3_0348",
+        "hard3_0350",
+        "hard3_0358",
+        "hard3_0359",
+        "hard3_0360",
+        "hard3_0362",
+        "hard3_0363",
+        "hard3_0369",
+        "hard3_0370"
+      ]
+    },
+    {
+      "rank": 6,
+      "N": 4,
+      "table": [
+        [
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          1,
+          2,
+          3,
+          0
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[1, 2, 3, 0]",
+      "family": "4rightf",
+      "new_coverage": 7,
+      "problems": [
+        "hard3_0069",
+        "hard3_0070",
+        "hard3_0073",
+        "hard3_0074",
+        "hard3_0075",
+        "hard3_0076",
+        "hard3_0079"
+      ]
+    },
+    {
+      "rank": 7,
+      "N": 3,
+      "table": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "pattern": "LINEAR(2x+2y mod 3)",
+      "family": "3elem",
+      "new_coverage": 6,
+      "problems": [
+        "hard3_0045",
+        "hard3_0071",
+        "hard3_0091",
+        "hard3_0092",
+        "hard3_0146",
+        "hard3_0357"
+      ]
+    },
+    {
+      "rank": 8,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 5,
+      "problems": [
+        "hard3_0022",
+        "hard3_0065",
+        "hard3_0130",
+        "hard3_0151",
+        "hard3_0153"
+      ]
+    },
+    {
+      "rank": 9,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 5,
+      "problems": [
+        "hard3_0055",
+        "hard3_0056",
+        "hard3_0057",
+        "hard3_0059",
+        "hard3_0371"
+      ]
+    },
+    {
+      "rank": 10,
+      "N": 4,
+      "table": [
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          2,
+          2
+        ],
+        [
+          3,
+          3,
+          3,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "pattern": "LEFT_F: x\u2192[1, 2, 3, 0]",
+      "family": "4leftf",
+      "new_coverage": 4,
+      "problems": [
+        "hard3_0327",
+        "hard3_0328",
+        "hard3_0330",
+        "hard3_0332"
+      ]
+    },
+    {
+      "rank": 11,
+      "N": 3,
+      "table": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 4,
+      "problems": [
+        "hard3_0031",
+        "hard3_0189",
+        "hard3_0191",
+        "hard3_0293"
+      ]
+    },
+    {
+      "rank": 12,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 2,
+      "problems": [
+        "hard3_0391",
+        "hard3_0394"
+      ]
+    },
+    {
+      "rank": 13,
+      "N": 4,
+      "table": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1,
+          2
+        ]
+      ],
+      "pattern": "LINEAR(1x+1y mod 4)",
+      "family": "4linear",
+      "new_coverage": 2,
+      "problems": [
+        "hard3_0072",
+        "hard3_0093"
+      ]
+    },
+    {
+      "rank": 14,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 2,
+      "problems": [
+        "hard3_0132",
+        "hard3_0150"
+      ]
+    },
+    {
+      "rank": 15,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 2,
+      "problems": [
+        "hard3_0372",
+        "hard3_0373"
+      ]
+    },
+    {
+      "rank": 16,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0200"
+      ]
+    },
+    {
+      "rank": 17,
+      "N": 3,
+      "table": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0039"
+      ]
+    },
+    {
+      "rank": 18,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          2,
+          0
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0349"
+      ]
+    },
+    {
+      "rank": 19,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0190"
+      ]
+    },
+    {
+      "rank": 20,
+      "N": 3,
+      "table": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          0,
+          0
+        ]
+      ],
+      "pattern": "TRANS(f=[1, 0, 1] mod 3)",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0229"
+      ]
+    },
+    {
+      "rank": 21,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0356"
+      ]
+    },
+    {
+      "rank": 22,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0377"
+      ]
+    }
+  ]
+}

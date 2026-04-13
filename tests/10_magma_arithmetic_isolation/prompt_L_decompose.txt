@@ -1,0 +1,38 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} with the following operation table:
+
+  * | 0  1  2
+  ---------
+  0 | 0  0  1
+  1 | 0  0  0
+  2 | 0  0  0
+
+To compute a*b, find row a, column b. Note: almost everything is 0, except 0*2 = 1.
+
+Equation 1: x * x = y * (y * x)
+Equation 2: x * y = ((z * x) * y) * y
+
+EQ1 holds universally (pre-verified).
+
+To check EQ2, break it into subexpressions. For EACH of the 27 assignments (x,y,z) in {0,1,2}^3, compute:
+
+  Step 1: P = z * x = table[z][x] = ?
+  Step 2: Q = P * y = table[P][y] = ?
+  Step 3: R = Q * y = table[Q][y] = ?   (this is the RHS)
+  Step 4: S = x * y = table[x][y] = ?   (this is the LHS)
+  Step 5: Does S = R?
+
+WORKED EXAMPLE — (x=0, y=0, z=0):
+  P = 0*0 = table[0][0] = 0
+  Q = 0*0 = table[0][0] = 0
+  R = 0*0 = table[0][0] = 0
+  S = 0*0 = table[0][0] = 0
+  S=0, R=0 → match ✓
+
+Now compute all 27 assignments. Write each as:
+  (x,y,z): P=_ Q=_ R=_ S=_ match?
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

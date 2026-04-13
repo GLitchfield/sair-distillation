@@ -1,0 +1,67 @@
+Cheat sheet: cheatsheets/cheatsheet_v13a.txt (10657 bytes)
+Provider: anthropic  Model: claude-haiku-4-5-20251001  Subset: chunk_5_order5_half
+
+--- 52 chunk_5_order5_half problems ---
+  11:33:01 [order5_hard_0283] ✓ got=TRUE exp=TRUE  (1/52)
+  11:33:16 [order5_hard_0351] ✓ got=TRUE exp=TRUE  (2/52) ETA=13m
+  11:33:31 [order5_hard_0297] ✓ got=TRUE exp=TRUE  (3/52) ETA=11m
+  11:33:43 [order5_hard_0591] ✓ got=TRUE exp=TRUE  (4/52) ETA=11m
+  11:33:57 [order5_hard_0358] ✗ got=TRUE exp=FALSE  (5/52) ETA=11m
+  11:34:14 [order5_hard_0175] ✓ got=TRUE exp=TRUE  (6/52) ETA=11m
+  11:34:25 [order5_hard_0233] ✓ got=TRUE exp=TRUE  (7/52) ETA=11m
+  11:34:43 [order5_hard_0592] ✗ got=TRUE exp=FALSE  (8/52) ETA=10m
+  11:34:55 [order5_hard_0152] ✗ got=TRUE exp=FALSE  (9/52) ETA=10m
+  11:35:08 [order5_hard_0282] ✓ got=FALSE exp=FALSE  (10/52) ETA=10m
+  11:35:22 [order5_hard_0001] ✓ got=TRUE exp=TRUE  (11/52) ETA=10m
+  11:35:35 [order5_hard_0386] ✗ got=TRUE exp=FALSE  (12/52) ETA=9m
+  11:35:46 [order5_hard_0612] ✗ got=TRUE exp=FALSE  (13/52) ETA=9m
+  11:36:03 [order5_hard_0513] ✓ got=TRUE exp=TRUE  (14/52) ETA=9m
+  11:36:24 [order5_hard_0595] ✓ got=TRUE exp=TRUE  (15/52) ETA=9m
+  11:36:43 [order5_hard_0132] ✗ got=TRUE exp=FALSE  (16/52) ETA=9m
+  11:36:55 [order5_hard_0057] ✓ got=TRUE exp=TRUE  (17/52) ETA=9m
+  11:37:09 [order5_hard_0641] ✓ got=TRUE exp=TRUE  (18/52) ETA=8m
+  11:37:22 [order5_hard_0316] ✗ got=TRUE exp=FALSE  (19/52) ETA=8m
+  11:37:35 [order5_hard_0482] ✗ got=TRUE exp=FALSE  (20/52) ETA=8m
+  11:37:52 [order5_hard_0628] ✗ got=TRUE exp=FALSE  (21/52) ETA=7m
+  11:38:04 [order5_hard_0510] ✗ got=TRUE exp=FALSE  (22/52) ETA=7m
+  11:38:19 [order5_hard_0287] ✓ got=TRUE exp=TRUE  (23/52) ETA=7m
+  11:38:35 [order5_hard_0430] ✗ got=TRUE exp=FALSE  (24/52) ETA=7m
+  11:38:53 [order5_hard_0426] ✗ got=TRUE exp=FALSE  (25/52) ETA=7m
+  11:39:05 [order5_hard_0071] ✓ got=TRUE exp=TRUE  (26/52) ETA=6m
+  11:39:17 [order5_hard_0520] ✗ got=TRUE exp=FALSE  (27/52) ETA=6m
+  11:39:33 [order5_hard_0298] ✗ got=TRUE exp=FALSE  (28/52) ETA=6m
+  11:39:46 [order5_hard_0229] ✗ got=FALSE exp=TRUE  (29/52) ETA=6m
+  11:40:00 [order5_hard_0389] ✓ got=TRUE exp=TRUE  (30/52) ETA=5m
+  11:40:15 [order5_hard_0596] ✗ got=TRUE exp=FALSE  (31/52) ETA=5m
+  11:40:26 [order5_hard_0442] ✗ got=TRUE exp=FALSE  (32/52) ETA=5m
+  11:40:43 [order5_hard_0547] ✗ got=FALSE exp=TRUE  (33/52) ETA=5m
+  11:40:55 [order5_hard_0073] ✓ got=TRUE exp=TRUE  (34/52) ETA=4m
+  11:41:08 [order5_hard_0450] ✗ got=TRUE exp=FALSE  (35/52) ETA=4m
+  11:41:27 [order5_hard_0391] ✓ got=TRUE exp=TRUE  (36/52) ETA=4m
+  11:41:39 [order5_hard_0565] ✓ got=TRUE exp=TRUE  (37/52) ETA=4m
+  11:41:54 [order5_hard_0399] ✓ got=TRUE exp=TRUE  (38/52) ETA=3m
+  11:42:08 [order5_hard_0519] ✓ got=TRUE exp=TRUE  (39/52) ETA=3m
+  11:42:19 [order5_hard_0553] ✓ got=TRUE exp=TRUE  (40/52) ETA=3m
+  11:42:34 [order5_hard_0153] ✓ got=TRUE exp=TRUE  (41/52) ETA=3m
+  11:42:47 [order5_hard_0414] ✓ got=FALSE exp=FALSE  (42/52) ETA=2m
+  11:42:57 [order5_hard_0640] ✗ got=TRUE exp=FALSE  (43/52) ETA=2m
+  11:43:12 [order5_hard_0642] ✗ got=TRUE exp=FALSE  (44/52) ETA=2m
+  11:43:22 [order5_hard_0074] ✓ got=FALSE exp=FALSE  (45/52) ETA=2m
+  11:43:42 [order5_hard_0271] ✗ got=FALSE exp=TRUE  (46/52) ETA=1m
+  11:43:53 [order5_hard_0362] ✗ got=TRUE exp=FALSE  (47/52) ETA=1m
+  11:44:05 [order5_hard_0203] ✓ got=TRUE exp=TRUE  (48/52) ETA=1m
+  11:44:23 [order5_hard_0112] ✗ got=TRUE exp=FALSE  (49/52) ETA=1m
+  11:44:37 [order5_hard_0376] ✓ got=FALSE exp=FALSE  (50/52) ETA=0m
+  11:44:54 [order5_hard_0079] ✓ got=TRUE exp=TRUE  (51/52) ETA=0m
+  11:45:05 [order5_hard_0576] ✓ got=FALSE exp=FALSE  (52/52) ETA=0m
+
+Saved to results/v13a_order5_half_chunk5.json
+
+============================================================
+RESULTS (chunk_5_order5_half)
+============================================================
+  Accuracy: 28/52 = 53.8%
+  TP=23 FP=21 FN=3 TN=5  Unparsed=0
+  Precision: 52.3%  Recall: 88.5%
+  F1: 0.657
+

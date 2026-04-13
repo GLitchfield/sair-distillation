@@ -1,0 +1,110 @@
+
+==================================================
+Magma H — generating 40 problems...
+Generated 40 problems
+
+  Strategy: H_bottomup
+  [H_bottomup] 10/40  acc so far: 100%
+  [H_bottomup] 20/40  acc so far: 100%
+  [H_bottomup] 30/40  acc so far: 100%
+  [H_bottomup] 40/40  acc so far: 100%
+  RESULT: 40/40 = 100.0%  (unparsed: 0)
+
+  Strategy: H_spine
+  [H_spine] 10/40  acc so far: 80%
+  [H_spine] 20/40  acc so far: 80%
+  [H_spine] 30/40  acc so far: 77%
+  [H_spine] 40/40  acc so far: 80%
+  RESULT: 32/40 = 80.0%  (unparsed: 0)
+
+  Strategy: H_table
+  [H_table] 10/40  acc so far: 80%
+  [H_table] 20/40  acc so far: 70%
+  [H_table] 30/40  acc so far: 70%
+  [H_table] 40/40  acc so far: 70%
+  RESULT: 28/40 = 70.0%  (unparsed: 0)
+
+  Strategy: H_trace
+  [H_trace] 10/40  acc so far: 100%
+  [H_trace] 20/40  acc so far: 100%
+  [H_trace] 30/40  acc so far: 100%
+  [H_trace] 40/40  acc so far: 100%
+  RESULT: 40/40 = 100.0%  (unparsed: 0)
+
+==================================================
+Magma I — generating 40 problems...
+Generated 40 problems
+
+  Strategy: I_bottomup
+  [I_bottomup] 10/40  acc so far: 100%
+  [I_bottomup] 20/40  acc so far: 95%
+  [I_bottomup] 30/40  acc so far: 97%
+  [I_bottomup] 40/40  acc so far: 98%
+  RESULT: 39/40 = 97.5%  (unparsed: 0)
+
+  Strategy: I_spine
+  [I_spine] 10/40  acc so far: 80%
+  [I_spine] 20/40  acc so far: 70%
+  [I_spine] 30/40  acc so far: 70%
+  [I_spine] 40/40  acc so far: 68%
+  RESULT: 27/40 = 67.5%  (unparsed: 0)
+
+  Strategy: I_table
+  [I_table] 10/40  acc so far: 80%
+  [I_table] 20/40  acc so far: 80%
+  [I_table] 30/40  acc so far: 80%
+  [I_table] 40/40  acc so far: 78%
+  RESULT: 31/40 = 77.5%  (unparsed: 0)
+
+  Strategy: I_trace
+  [I_trace] 10/40  acc so far: 100%
+  [I_trace] 20/40  acc so far: 100%
+  [I_trace] 30/40  acc so far: 100%
+  [I_trace] 40/40  acc so far: 100%
+  RESULT: 40/40 = 100.0%  (unparsed: 0)
+
+==================================================
+Magma J — generating 40 problems...
+Generated 40 problems
+
+  Strategy: J_shortcut
+  [J_shortcut] 10/40  acc so far: 90%
+  [J_shortcut] 20/40  acc so far: 85%
+  [J_shortcut] 30/40  acc so far: 80%
+  [J_shortcut] 40/40  acc so far: 80%
+  RESULT: 32/40 = 80.0%  (unparsed: 0)
+
+  Strategy: J_table
+  [J_table] 10/40  acc so far: 100%
+  [J_table] 20/40  acc so far: 90%
+  [J_table] 30/40  acc so far: 90%
+  [J_table] 40/40  acc so far: 92%
+  RESULT: 37/40 = 92.5%  (unparsed: 0)
+
+  Strategy: J_trace
+  [J_trace] 10/40  acc so far: 90%
+  [J_trace] 20/40  acc so far: 95%
+  [J_trace] 30/40  acc so far: 97%
+  [J_trace] 40/40  acc so far: 98%
+  RESULT: 39/40 = 97.5%  (unparsed: 0)
+
+==================================================
+SUMMARY
+==================================================
+
+Magma H:
+  H_bottomup            40/40  100.0%
+  H_spine               32/40   80.0%
+  H_table               28/40   70.0%
+  H_trace               40/40  100.0%
+
+Magma I:
+  I_bottomup            39/40   97.5%
+  I_spine               27/40   67.5%
+  I_table               31/40   77.5%
+  I_trace               40/40  100.0%
+
+Magma J:
+  J_shortcut            32/40   80.0%
+  J_table               37/40   92.5%
+  J_trace               39/40   97.5%

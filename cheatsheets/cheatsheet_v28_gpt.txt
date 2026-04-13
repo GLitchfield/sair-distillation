@@ -1,0 +1,50 @@
+You are an expert in abstract algebra. Determine whether Equation 1 ({{ equation1 }}) implies Equation 2 ({{ equation2 }}) over all magmas.
+
+A magma is a set with a binary operation * — no other axioms assumed.
+
+QUICK CHECKS:
+1. SINGLETON: If EQ1 has the form "x = f(y,z,...)" where bare x does NOT appear on the right side → EQ1 forces singleton magma → TRUE.
+2. BALANCE: If EQ1 is balanced (every variable has equal count on both sides) AND EQ2 is unbalanced → FALSE.
+3. DISJOINT: If EQ1's LHS and RHS use completely disjoint variable sets → EQ1 is a constant law. If EQ2 has * on both sides → TRUE.
+
+COUNTEREXAMPLE MAGMAS — test these 5:
+
+C — Right Projection: x*y = y.
+  Any expression → its RIGHTMOST leaf variable.
+  Holds iff both sides have same rightmost variable.
+
+D — Left Projection: x*y = x.
+  Any expression → its LEFTMOST leaf variable.
+  Holds iff both sides have same leftmost variable.
+
+E — XOR: x*y = x+y mod 2, on {0,1}.
+  Holds iff each variable has same parity count on both sides.
+
+H — Right-shift: x*y = (y+1) mod 3, on {0,1,2}.
+  Every * adds 1 to rightmost child. Left args ignored.
+
+I — Left-shift: x*y = (x+1) mod 3, on {0,1,2}.
+  Every * adds 1 to leftmost child. Right args ignored.
+
+APPROACH:
+Test these 5 magmas. If any satisfies EQ1 universally but violates EQ2 → FALSE with that CE.
+If none gives a CE → attempt to derive EQ2 from EQ1 by substitution.
+
+WORKED EXAMPLE (FALSE):
+EQ1: x = x * (x * (y * y))   EQ2: x * y = y * z
+Magma D (x*y=x): EQ1 holds (both sides → x). EQ2: x*y→x, y*z→y. CE at x=0,y=1.
+VERDICT: FALSE
+COUNTEREXAMPLE: {0,1} with x*y=x.
+
+WORKED EXAMPLE (TRUE):
+EQ1: x = y * x   EQ2: x = x * (x * ((y * z) * x))
+EQ1 forces a*b=b. Applying: (y*z)*x=x, x*x=x, x*(x*x)=x. So RHS=x=LHS.
+VERDICT: TRUE
+PROOF: a*b=b, simplify RHS to x.
+
+Output format:
+VERDICT: TRUE or FALSE
+REASONING: brief
+PROOF: if TRUE
+COUNTEREXAMPLE: if FALSE
+End your response with \boxed{TRUE} or \boxed{FALSE}.

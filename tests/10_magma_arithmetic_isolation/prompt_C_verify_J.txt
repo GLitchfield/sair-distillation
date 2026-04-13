@@ -1,0 +1,34 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} with the following operation table:
+
+  * | 0  1  2
+  ---------
+  0 | 0  0  0
+  1 | 2  1  1
+  2 | 1  2  2
+
+To compute a*b, find row a, column b.
+
+Equation 1: x = (x * (x * y)) * x
+Equation 2: x * x = x * ((y * y) * x)
+
+I have pre-computed that EQ1 holds for all assignments in this magma. Please verify by computing RHS step by step for these assignments:
+
+(x=0,y=0): RHS should equal 0. Compute (x*(x*y))*x step by step.
+(x=0,y=1): RHS should equal 0. Compute step by step.
+(x=0,y=2): RHS should equal 0. Compute step by step.
+(x=1,y=0): RHS should equal 1. Compute step by step.
+(x=1,y=1): RHS should equal 1. Compute step by step.
+(x=1,y=2): RHS should equal 1. Compute step by step.
+(x=2,y=0): RHS should equal 2. Compute step by step.
+(x=2,y=1): RHS should equal 2. Compute step by step.
+(x=2,y=2): RHS should equal 2. Compute step by step.
+
+Do all 9 checks confirm EQ1 holds?
+
+If EQ1 is confirmed, test EQ2 on the same 9 assignments. Does EQ2 fail for any of them?
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

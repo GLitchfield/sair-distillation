@@ -1,0 +1,38 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} with the following operation table:
+
+  * | 0  1  2
+  ---------
+  0 | 0  0  0
+  1 | 2  1  1
+  2 | 1  2  2
+
+To compute a*b, find row a, column b.
+
+KEY PROPERTIES of this magma:
+- 0 * anything = 0 (row 0 is all zeros)
+- For nonzero x: x * 0 = (3-x), x * 1 = x, x * 2 = x
+- So for nonzero x: x * y = x if y is nonzero, x * y = (3-x) if y = 0
+
+SHORTCUT for evaluating expressions:
+- If the leftmost variable in an expression is 0, the whole expression evaluates to 0.
+- If all variables are nonzero, any expression evaluates to its leftmost variable (since x*y=x for nonzero x,y).
+- The tricky cases are when 0 appears in non-leftmost positions.
+
+Equation 1: x = (x * (x * y)) * x
+Equation 2: x * x = x * ((y * y) * x)
+
+For EQ1, let me work through the key cases:
+- If x=0: (0*(0*y))*0 = (0*0)*0 = 0*0 = 0 = x ✓
+- If x≠0, y≠0: x*y=x, so x*(x*y)=x*x=x, then (x*(x*y))*x = x*x = x ✓
+- If x≠0, y=0: x*0=(3-x), x*(3-x)=? Since (3-x)≠0, x*(3-x)=x. Then x*x=x ✓
+
+So EQ1 holds universally.
+
+Now apply the same case analysis to EQ2: x * x = x * ((y * y) * x)
+Work through: x=0; x≠0,y≠0; x≠0,y=0. Does EQ2 hold in all cases?
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

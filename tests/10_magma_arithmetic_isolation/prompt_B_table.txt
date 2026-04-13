@@ -1,0 +1,47 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} where x*y = (y+1) mod 3.
+
+Full operation table: 0*0=1, 0*1=2, 0*2=0, 1*0=1, 1*1=2, 1*2=0, 2*0=1, 2*1=2, 2*2=0
+
+Equation 1: x = (y * z) * (z * (x * x))
+Equation 2: x = y * (((y * z) * x) * z)
+
+Fill in this table for every assignment. Use the operation table to compute each cell.
+
+| x | y | z | x*x | z*(x*x) | y*z | (y*z)*(z*(x*x)) | = x? |
+|---|---|---|-----|---------|-----|------------------|------|
+| 0 | 0 | 0 |     |         |     |                  |      |
+| 0 | 0 | 1 |     |         |     |                  |      |
+| 0 | 0 | 2 |     |         |     |                  |      |
+| 0 | 1 | 0 |     |         |     |                  |      |
+| 0 | 1 | 1 |     |         |     |                  |      |
+| 0 | 1 | 2 |     |         |     |                  |      |
+| 0 | 2 | 0 |     |         |     |                  |      |
+| 0 | 2 | 1 |     |         |     |                  |      |
+| 0 | 2 | 2 |     |         |     |                  |      |
+| 1 | 0 | 0 |     |         |     |                  |      |
+| 1 | 0 | 1 |     |         |     |                  |      |
+| 1 | 0 | 2 |     |         |     |                  |      |
+| 1 | 1 | 0 |     |         |     |                  |      |
+| 1 | 1 | 1 |     |         |     |                  |      |
+| 1 | 1 | 2 |     |         |     |                  |      |
+| 1 | 2 | 0 |     |         |     |                  |      |
+| 1 | 2 | 1 |     |         |     |                  |      |
+| 1 | 2 | 2 |     |         |     |                  |      |
+| 2 | 0 | 0 |     |         |     |                  |      |
+| 2 | 0 | 1 |     |         |     |                  |      |
+| 2 | 0 | 2 |     |         |     |                  |      |
+| 2 | 1 | 0 |     |         |     |                  |      |
+| 2 | 1 | 1 |     |         |     |                  |      |
+| 2 | 1 | 2 |     |         |     |                  |      |
+| 2 | 2 | 0 |     |         |     |                  |      |
+| 2 | 2 | 1 |     |         |     |                  |      |
+| 2 | 2 | 2 |     |         |     |                  |      |
+
+After filling in: does EQ1 hold for all 27 rows?
+If yes: repeat for EQ2. Does EQ2 fail for any row?
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

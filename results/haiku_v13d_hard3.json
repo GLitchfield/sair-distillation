@@ -1,0 +1,1724 @@
+{
+  "summary": {
+    "total": 100,
+    "correct": 69,
+    "accuracy": 0.69,
+    "tp": 16,
+    "fp": 7,
+    "fn": 24,
+    "tn": 53,
+    "unparsed": 0,
+    "precision": 0.6956521739130435,
+    "recall": 0.4,
+    "f1": 0.5079365079365079
+  },
+  "results": [
+    {
+      "id": "hard3_0001",
+      "equation1": "x = y * x",
+      "equation2": "x = x * (x * ((y * z) * x))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0002",
+      "equation1": "x = x * (x * y)",
+      "equation2": "x = (x * ((x * x) * x)) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0003",
+      "equation1": "x = y * (x * x)",
+      "equation2": "x = y * (z * (z * (w * x)))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0004",
+      "equation1": "x = y * (z * w)",
+      "equation2": "x * (y * y) = y * (z * w)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0005",
+      "equation1": "x = (y * z) * x",
+      "equation2": "x * y = y * ((y * x) * y)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0006",
+      "equation1": "x * x = x * y",
+      "equation2": "x * (x * x) = x * (y * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "FALSE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 4,
+      "false_count": 1
+    },
+    {
+      "id": "hard3_0007",
+      "equation1": "x * x = x * y",
+      "equation2": "x * (y * z) = (x * z) * w",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 0,
+      "false_count": 5
+    },
+    {
+      "id": "hard3_0008",
+      "equation1": "x * x = y * z",
+      "equation2": "x * (x * y) = (y * x) * z",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "FALSE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 4,
+      "false_count": 1
+    },
+    {
+      "id": "hard3_0009",
+      "equation1": "x = x * (x * (x * y))",
+      "equation2": "x = (x * (y * (x * x))) * z",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "FALSE",
+        "TRUE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 2,
+      "false_count": 3
+    },
+    {
+      "id": "hard3_0010",
+      "equation1": "x = x * (x * (y * x))",
+      "equation2": "x * x = (x * (y * x)) * x",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "votes": [
+        "TRUE",
+        "FALSE",
+        "FALSE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 3,
+      "false_count": 2
+    },
+    {
+      "id": "hard3_0011",
+      "equation1": "x = x * (x * (y * z))",
+      "equation2": "x = ((x * (y * x)) * x) * x",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "FALSE",
+        "TRUE"
+      ],
+      "true_count": 4,
+      "false_count": 1
+    },
+    {
+      "id": "hard3_0012",
+      "equation1": "x = x * (y * (x * x))",
+      "equation2": "x * x = (x * y) * (x * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 0,
+      "false_count": 5
+    },
+    {
+      "id": "hard3_0013",
+      "equation1": "x = x * (y * (z * x))",
+      "equation2": "x = (((x * x) * x) * x) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "TRUE",
+        "FALSE"
+      ],
+      "true_count": 1,
+      "false_count": 4
+    },
+    {
+      "id": "hard3_0014",
+      "equation1": "x = x * (y * (z * y))",
+      "equation2": "x = (((x * y) * z) * x) * y",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0015",
+      "equation1": "x = x * (y * (z * z))",
+      "equation2": "x * y = x * (z * (y * w))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0016",
+      "equation1": "x = y * (x * (x * x))",
+      "equation2": "x * y = (y * y) * (y * y)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 0,
+      "false_count": 5
+    },
+    {
+      "id": "hard3_0017",
+      "equation1": "x = y * (y * (x * x))",
+      "equation2": "x = (x * (y * z)) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "TRUE"
+      ],
+      "true_count": 2,
+      "false_count": 3
+    },
+    {
+      "id": "hard3_0018",
+      "equation1": "x = y * (y * (x * x))",
+      "equation2": "x = y * (z * (y * (x * x)))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 0,
+      "false_count": 5
+    },
+    {
+      "id": "hard3_0019",
+      "equation1": "x = y * (y * (z * x))",
+      "equation2": "x = y * (((z * w) * y) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 1,
+      "false_count": 4
+    },
+    {
+      "id": "hard3_0020",
+      "equation1": "x = y * (z * (z * x))",
+      "equation2": "x = (x * x) * (x * (y * x))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0021",
+      "equation1": "x = x * ((x * x) * y)",
+      "equation2": "x = x * ((y * y) * (y * x))",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0022",
+      "equation1": "x = x * ((x * y) * z)",
+      "equation2": "x * y = x * ((y * x) * y)",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "FALSE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 4,
+      "false_count": 1
+    },
+    {
+      "id": "hard3_0023",
+      "equation1": "x = x * ((y * z) * x)",
+      "equation2": "x = x * (y * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0024",
+      "equation1": "x = x * ((y * z) * z)",
+      "equation2": "x = (x * (y * (z * y))) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0025",
+      "equation1": "x = y * ((y * x) * x)",
+      "equation2": "x = (y * z) * ((y * y) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 0,
+      "false_count": 5
+    },
+    {
+      "id": "hard3_0026",
+      "equation1": "x = y * ((y * y) * x)",
+      "equation2": "x = ((y * y) * z) * (y * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 0,
+      "false_count": 5
+    },
+    {
+      "id": "hard3_0027",
+      "equation1": "x = y * ((z * x) * x)",
+      "equation2": "x = (y * y) * (x * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0028",
+      "equation1": "x = y * ((z * x) * x)",
+      "equation2": "x = ((y * z) * w) * (z * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "FALSE",
+        "TRUE",
+        "TRUE",
+        "FALSE"
+      ],
+      "true_count": 3,
+      "false_count": 2
+    },
+    {
+      "id": "hard3_0029",
+      "equation1": "x = y * ((z * y) * x)",
+      "equation2": "x * y = ((y * z) * z) * y",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0030",
+      "equation1": "x = (x * x) * (y * z)",
+      "equation2": "x * y = x * ((x * x) * y)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "FALSE",
+        "TRUE"
+      ],
+      "true_count": 4,
+      "false_count": 1
+    },
+    {
+      "id": "hard3_0031",
+      "equation1": "x = (x * y) * (x * x)",
+      "equation2": "x * y = x * (z * (z * y))",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "FALSE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 4,
+      "false_count": 1
+    },
+    {
+      "id": "hard3_0032",
+      "equation1": "x = (y * x) * (x * z)",
+      "equation2": "x * y = (x * (z * x)) * y",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0033",
+      "equation1": "x = (y * x) * (z * x)",
+      "equation2": "x * x = ((y * x) * x) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE",
+        "TRUE"
+      ],
+      "true_count": 5,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0034",
+      "equation1": "x = (y * y) * (x * x)",
+      "equation2": "x = y * ((x * (z * y)) * x)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 2
+    },
+    {
+      "id": "hard3_0035",
+      "equation1": "x = (y * z) * (z * x)",
+      "equation2": "x = y * ((x * (x * y)) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0036",
+      "equation1": "x = (x * (x * x)) * y",
+      "equation2": "x = (x * x) * (x * (x * x))",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0037",
+      "equation1": "x = (x * (x * y)) * x",
+      "equation2": "x * x = x * ((y * y) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0038",
+      "equation1": "x = (x * (x * y)) * z",
+      "equation2": "x * x = x * (x * (y * y))",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0039",
+      "equation1": "x = (x * (y * x)) * y",
+      "equation2": "x = (x * x) * (x * (y * z))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0040",
+      "equation1": "x = (x * (y * z)) * y",
+      "equation2": "x = (((x * x) * x) * x) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0041",
+      "equation1": "x = ((x * x) * x) * y",
+      "equation2": "x = (x * ((y * z) * x)) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0042",
+      "equation1": "x = ((x * x) * y) * y",
+      "equation2": "x = x * ((y * y) * (z * w))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0043",
+      "equation1": "x = ((x * x) * y) * z",
+      "equation2": "x = ((x * y) * (z * y)) * y",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0044",
+      "equation1": "x = ((x * y) * z) * w",
+      "equation2": "x * y = (x * (z * w)) * w",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0045",
+      "equation1": "x = ((y * x) * y) * x",
+      "equation2": "x * (y * z) = y * (x * z)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0046",
+      "equation1": "x = ((y * z) * y) * x",
+      "equation2": "x = (y * (x * (z * z))) * x",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0047",
+      "equation1": "x = ((y * z) * y) * x",
+      "equation2": "x * y = ((y * x) * x) * y",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0048",
+      "equation1": "x = ((y * z) * z) * x",
+      "equation2": "x * (y * z) = (w * y) * z",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0049",
+      "equation1": "x = ((y * z) * w) * x",
+      "equation2": "x = y * (z * (x * (w * x)))",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0050",
+      "equation1": "x * x = y * (y * x)",
+      "equation2": "x * y = ((z * x) * y) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0051",
+      "equation1": "x * y = z * (x * z)",
+      "equation2": "x * y = (y * (y * y)) * y",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0052",
+      "equation1": "x * y = z * (y * z)",
+      "equation2": "x * y = (x * z) * (x * w)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0053",
+      "equation1": "x * y = z * (y * z)",
+      "equation2": "x * (y * z) = y * (w * z)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0054",
+      "equation1": "x * y = z * (z * w)",
+      "equation2": "x * y = (x * (z * w)) * u",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0055",
+      "equation1": "x * x = (x * y) * z",
+      "equation2": "x * y = ((x * x) * x) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0056",
+      "equation1": "x * x = (y * x) * z",
+      "equation2": "x * (x * y) = x * (z * z)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0057",
+      "equation1": "x * x = (y * z) * z",
+      "equation2": "x * x = y * (y * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0058",
+      "equation1": "x * x = (y * z) * w",
+      "equation2": "x * x = (x * x) * x",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0059",
+      "equation1": "x * x = (y * z) * w",
+      "equation2": "x * (x * y) = (z * x) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0060",
+      "equation1": "x * y = (z * z) * x",
+      "equation2": "x * y = (z * w) * (w * u)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0061",
+      "equation1": "x * y = (z * z) * z",
+      "equation2": "x * y = x * (z * (w * z))",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0062",
+      "equation1": "x = x * (x * (y * (y * x)))",
+      "equation2": "x = x * ((y * y) * (x * x))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0063",
+      "equation1": "x = x * (x * (y * (z * y)))",
+      "equation2": "x = x * ((y * (z * w)) * w)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0064",
+      "equation1": "x = x * (x * (y * (z * z)))",
+      "equation2": "x = (x * ((y * y) * x)) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0065",
+      "equation1": "x = x * (y * (x * (x * z)))",
+      "equation2": "x * x = (x * x) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0066",
+      "equation1": "x = x * (y * (x * (z * w)))",
+      "equation2": "x = (x * y) * ((z * w) * z)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0067",
+      "equation1": "x = x * (y * (z * (y * w)))",
+      "equation2": "x = x * (x * ((x * x) * y))",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0068",
+      "equation1": "x = x * (y * (z * (z * z)))",
+      "equation2": "x = x * ((y * (y * z)) * x)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0069",
+      "equation1": "x = y * (x * (z * (x * x)))",
+      "equation2": "x = ((y * x) * x) * (x * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0070",
+      "equation1": "x = y * (x * (z * (y * x)))",
+      "equation2": "x = y * ((x * x) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0071",
+      "equation1": "x = y * (y * (y * (x * y)))",
+      "equation2": "x = ((y * y) * x) * (z * z)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0072",
+      "equation1": "x = y * (y * (y * (x * y)))",
+      "equation2": "x = (((y * z) * z) * x) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0073",
+      "equation1": "x = y * (z * (x * (y * x)))",
+      "equation2": "x = y * (((z * y) * x) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0074",
+      "equation1": "x = y * (z * (x * (z * x)))",
+      "equation2": "x = (x * (x * x)) * (x * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0075",
+      "equation1": "x = y * (z * (x * (z * x)))",
+      "equation2": "x = ((x * x) * y) * (y * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0076",
+      "equation1": "x = y * (z * (x * (w * x)))",
+      "equation2": "x = (y * (z * x)) * (z * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0077",
+      "equation1": "x = y * (z * (y * (x * x)))",
+      "equation2": "x * y = (x * (z * x)) * y",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0078",
+      "equation1": "x = y * (z * (y * (x * z)))",
+      "equation2": "x * (x * y) = (x * x) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0079",
+      "equation1": "x = y * (z * (z * (z * x)))",
+      "equation2": "x = ((y * y) * z) * (x * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0080",
+      "equation1": "x = x * (x * ((x * y) * z))",
+      "equation2": "x * y = x * (x * (y * z))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0081",
+      "equation1": "x = x * (x * ((y * y) * y))",
+      "equation2": "x = x * ((y * (x * x)) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0082",
+      "equation1": "x = x * (x * ((y * z) * x))",
+      "equation2": "x = ((x * x) * (x * y)) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0083",
+      "equation1": "x = x * (x * ((y * z) * y))",
+      "equation2": "x * y = (x * z) * (w * y)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0084",
+      "equation1": "x = x * (x * ((y * z) * z))",
+      "equation2": "x * x = (x * (y * x)) * z",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0085",
+      "equation1": "x = x * (y * ((y * y) * z))",
+      "equation2": "x = (x * ((y * x) * z)) * x",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0086",
+      "equation1": "x = x * (y * ((y * z) * y))",
+      "equation2": "x * y = ((x * z) * y) * w",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0087",
+      "equation1": "x = x * (y * ((y * z) * w))",
+      "equation2": "x = (((x * y) * x) * x) * z",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0088",
+      "equation1": "x = x * (y * ((y * z) * w))",
+      "equation2": "x * x = (x * (y * x)) * z",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0089",
+      "equation1": "x = x * (y * ((z * x) * w))",
+      "equation2": "x * x = x * (y * (z * z))",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0090",
+      "equation1": "x = x * (y * ((z * z) * w))",
+      "equation2": "x = (x * (y * x)) * (x * y)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0091",
+      "equation1": "x = y * (y * ((x * y) * y))",
+      "equation2": "x = (y * (z * z)) * (y * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0092",
+      "equation1": "x = y * (y * ((x * y) * y))",
+      "equation2": "x * x = ((y * y) * x) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0093",
+      "equation1": "x = y * (y * ((y * x) * y))",
+      "equation2": "x = y * ((x * (x * y)) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0094",
+      "equation1": "x = y * (y * ((z * x) * x))",
+      "equation2": "x = (((x * y) * z) * y) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "true_count": 0,
+      "false_count": 0
+    },
+    {
+      "id": "hard3_0095",
+      "equation1": "x = y * (y * ((z * w) * x))",
+      "equation2": "x = ((y * z) * (z * z)) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        null,
+        null,
+        "FALSE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 0,
+      "false_count": 3
+    },
+    {
+      "id": "hard3_0096",
+      "equation1": "x = y * (z * ((x * w) * x))",
+      "equation2": "x = (x * (x * x)) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        "TRUE",
+        "FALSE",
+        "TRUE"
+      ],
+      "true_count": 2,
+      "false_count": 3
+    },
+    {
+      "id": "hard3_0097",
+      "equation1": "x = y * (z * ((x * w) * x))",
+      "equation2": "x = (y * ((y * z) * y)) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 0,
+      "false_count": 5
+    },
+    {
+      "id": "hard3_0098",
+      "equation1": "x = y * (z * ((y * y) * x))",
+      "equation2": "x = ((x * x) * x) * (y * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "TRUE",
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 1,
+      "false_count": 4
+    },
+    {
+      "id": "hard3_0099",
+      "equation1": "x = y * (z * ((y * y) * x))",
+      "equation2": "x = ((x * (y * x)) * x) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "TRUE",
+        "FALSE"
+      ],
+      "true_count": 1,
+      "false_count": 4
+    },
+    {
+      "id": "hard3_0100",
+      "equation1": "x = y * (z * ((w * y) * x))",
+      "equation2": "x = y * ((y * (x * z)) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "votes": [
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE",
+        "FALSE"
+      ],
+      "true_count": 0,
+      "false_count": 5
+    }
+  ],
+  "metadata": {
+    "model": "claude-haiku-4-5-20251001",
+    "provider": "anthropic",
+    "cheatsheet_hash": "d77602a7a3e2",
+    "timestamp": "2026-03-28T18:19:32.451771",
+    "n_votes": 5
+  }
+}

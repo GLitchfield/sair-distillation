@@ -1,0 +1,12 @@
+{"id": "hard3_0012", "equation1": "x = x * (y * (x * x))", "equation2": "x * x = (x * y) * (x * x)", "answer": false}
+{"id": "hard3_0082", "equation1": "x = x * (x * ((y * z) * x))", "equation2": "x = ((x * x) * (x * y)) * x", "answer": false}
+{"id": "hard3_0095", "equation1": "x = y * (y * ((z * w) * x))", "equation2": "x = ((y * z) * (z * z)) * x", "answer": false}
+{"id": "hard3_0096", "equation1": "x = y * (z * ((x * w) * x))", "equation2": "x = (x * (x * x)) * x", "answer": false}
+{"id": "hard3_0216", "equation1": "x = ((x * x) * y) * (z * z)", "equation2": "x * (y * z) = (x * y) * z", "answer": false}
+{"id": "hard3_0217", "equation1": "x = ((x * x) * y) * (z * w)", "equation2": "x = (x * (y * z)) * y", "answer": false}
+{"id": "hard3_0225", "equation1": "x = ((x * y) * z) * (w * y)", "equation2": "x = (x * (x * (y * x))) * x", "answer": false}
+{"id": "hard3_0226", "equation1": "x = ((x * y) * z) * (w * z)", "equation2": "x = (x * x) * (x * (y * z))", "answer": false}
+{"id": "hard3_0001", "equation1": "x = y * x", "equation2": "x = x * (x * ((y * z) * x))", "answer": true}
+{"id": "hard3_0002", "equation1": "x = x * (x * y)", "equation2": "x = (x * ((x * x) * x)) * x", "answer": true}
+{"id": "hard3_0004", "equation1": "x = y * (z * w)", "equation2": "x * (y * y) = y * (z * w)", "answer": true}
+{"id": "hard3_0006", "equation1": "x * x = x * y", "equation2": "x * (x * x) = x * (y * z)", "answer": true}

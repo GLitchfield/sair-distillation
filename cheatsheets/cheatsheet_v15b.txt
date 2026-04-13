@@ -1,0 +1,113 @@
+You are a mathematician specializing in equational theories of magmas.
+Your task is to determine whether Equation 1 ({equation1}) implies Equation 2 ({equation2}) over all magmas.
+
+COMPLETE WORKED EXAMPLE (FALSE):
+EQ1: x = x * (x * (y * y))   EQ2: x * y = y * z
+Step 1: Singleton? LHS is bare x, but x appears on RHS → NOT singleton. Balance? EQ1: x:1 vs 2, unbalanced. EQ2: also unbalanced. No quick verdict.
+Step 2 — Magma C (x*y=x): EQ1: x*(x*(y*y))→x. LHS=x=RHS. ✓ Holds universally.
+  EQ2: x*y→x, y*z→y. At x=0,y=1: LHS=0≠1=RHS. ✗ EQ2 fails.
+  CE confirmed: {{0,1}}, x*y=x. EQ1 holds (both sides reduce to x). EQ2 fails at x=0,y=1.
+VERDICT: FALSE
+REASONING: Left projection satisfies EQ1 universally but violates EQ2.
+PROOF:
+COUNTEREXAMPLE: {{0,1}} with x*y=x. EQ1: both sides=x ✓. EQ2: 0*1=0≠1=1*anything fails.
+
+COMPLETE WORKED EXAMPLE (TRUE):
+EQ1: x = y * x   EQ2: x = x * (x * ((y * z) * x))
+Step 1: Singleton? EQ1 LHS is bare x, but x appears on RHS → not singleton. Balance? EQ1: x:1vs1, y:0vs1 → unbalanced. No quick verdict.
+Step 2: Magma B (x*y=y): EQ1→x=x ✓. EQ2→rightmost=x, LHS=x ✓. Both hold.
+  Magma C (x*y=x): EQ1→x=y. Forces x=y for all x,y → singleton signal → TRUE.
+  But let me verify with a proof in Step 4.
+Step 4 — Proof: From EQ1 (x=y*x), any a*b=b. So (y*z)*x=x, x*x=x, x*(x*x)=x, x*(x*(x))=x.
+  Therefore x*(x*((y*z)*x)) = x*(x*x) = x*x = x = LHS. ✓
+VERDICT: TRUE
+REASONING: EQ1 says y*x=x for all y, so every product equals its right argument. Applying this repeatedly simplifies EQ2's RHS to x.
+PROOF: EQ1 gives a*b=b for all a,b. Then (y*z)*x=x, x*((y*z)*x)=x, x*(x*((y*z)*x))=x. So RHS of EQ2 = x = LHS.
+COUNTEREXAMPLE:
+
+Follow ALL steps below in order. Be concise — one line per magma test.
+
+STEP 1: QUICK STRUCTURAL CHECKS
+
+Check 1a — Singleton Detection:
+ONLY applies when Equation 1 has EXACTLY this form: one side is a bare variable that does NOT appear anywhere on the other side.
+  "x = y * (z * w)" → bare x not on RHS → singleton → TRUE
+  "x = (y * y) * ((y * z) * w)" → bare x not on RHS → singleton → TRUE
+  "x * y = z * (w * y)" → LHS is x*y NOT a bare variable → NOT singleton
+  "x = x * (y * z)" → x IS on RHS → NOT singleton
+  "x = y * (x * z)" → x IS on RHS → NOT singleton
+WARNING: If EQ1 is "x = [expr containing x]", this is NOT singleton. Do not claim singleton here.
+
+Check 1b — Disjoint Variables (Constant Law):
+If EQ1's LHS and RHS share NO variables → constant law. If EQ2 has * on both sides → TRUE.
+
+Check 1c — Balance:
+Count each variable on LHS vs RHS. "Balanced" = every variable has equal count on both sides.
+If EQ1 is balanced AND EQ2 is unbalanced → FALSE.
+
+STEP 2: TEST COUNTEREXAMPLE MAGMAS
+
+Test each magma: does EQ1 hold universally? If yes, does EQ2 fail for some assignment?
+If EQ1 fails → skip that magma. If EQ1 holds and EQ2 fails → FALSE.
+Test ALL magmas before concluding anything about EQ1 being "restrictive."
+
+Magma A — Zero: x*y=0 always.
+  Holds iff both sides contain * (both→0), or both sides are same bare variable.
+
+Magma E — Constant-1: x*y=1 always. Same rule as A but with 1.
+
+Magma B — Right Projection: x*y=y.
+  Any expression → its rightmost leaf. Holds iff same rightmost leaf on both sides.
+
+Magma C — Left Projection: x*y=x.
+  Any expression → its leftmost leaf. Holds iff same leftmost leaf on both sides.
+
+Magma D — XOR: x*y=x+y mod 2.
+  Check EACH variable independently: same parity (odd/even count) on both sides?
+  Example: x=(y*z)*x → x:1vs1(✓), y:0vs1(✗) → fails.
+  WRONG way: "total vars: LHS=1, RHS=3, both odd → match" — NO. Check each variable separately.
+
+Magma G — Addition: x*y=x+y.
+  Holds iff every variable has same count on both sides (stricter than XOR parity).
+
+Magma F — Negate-right: x*y=1-y. On {{0,1}}.
+  x*(y*z)→z. (x*y)*z→1-z. Right-nested→innermost var. Left-nested depth-n→alternates.
+
+Magma H — Right-shift: x*y=(y+1)%3 on {{0,1,2}}. Each * node: (right child result + 1) mod 3. Ignore left.
+  Quick ref: x*y→(y+1)%3 | (x*y)*z→(z+1)%3 | x*(y*z)→(z+2)%3 | (x*y)*(z*w)→(w+2)%3
+
+Magma I — Left-shift: x*y=(x+1)%3 on {{0,1,2}}. Each * node: (left child result + 1) mod 3. Ignore right.
+  Quick ref: x*y→(x+1)%3 | (x*y)*z→(x+2)%3 | x*(y*z)→(x+1)%3 | (x*y)*(z*w)→(x+2)%3
+  Careful: x*(anything) where x is bare → (x+1)%3, not (x+2)%3. Only compound left children add extra.
+
+Magma J — Null-left {{0,1,2}}: 0*y=0; x*y=x if x≠0,y≠0; x*y=(3-x) if x≠0,y=0.
+  Spot-check EQ1 with (0,0,0),(1,1,1),(2,2,2),(1,0,0),(2,0,0).
+
+Magma K — Swap-row2 {{0,1,2}}: x*y=y if x∈{{0,1}}; 2*0=1, 2*1=0, 2*2=2.
+
+Magma L — Near-zero: x*y=0 except 0*2=1.
+
+Before concluding FALSE: (a) confirm EQ1 holds for ALL assignments, (b) give exact assignment where EQ2 fails.
+
+STEP 3: LINEAR MAGMA OVER Z/3Z
+Try x*y = 2x+y mod 3. Evaluate by computing 2x+y mod 3 for each *.
+
+STEP 4: ALGEBRAIC PROOF
+If no counterexample found, try to derive EQ2 from EQ1:
+  4a: Substitute specific values (x=y, x=x*x) into EQ1 to get intermediate identities.
+  4b: Use EQ1 as rewrite rule on EQ2. Apply to innermost subexpressions first.
+  When applying EQ1 as A*B=C: left-slot=A, right-slot=B. Do not swap positions.
+
+STEP 5: FINAL VERDICT
+Apply the FIRST matching rule:
+  1. Verified counterexample found in Steps 2-3 → FALSE
+  2. Algebraic proof constructed in Step 4 → TRUE
+  3. Singleton (1a) or constant law (1b) confirmed → TRUE
+  4. No counterexample AND no proof → FALSE
+     (Passing all magma tests is not proof. Many implications are false but require magmas larger than what we tested. When in doubt, say FALSE.)
+
+Output format (use exact headers without any additional text or formatting):
+VERDICT: must be exactly TRUE or FALSE (in the same line).
+REASONING: must be non-empty.
+PROOF: required if VERDICT is TRUE, empty otherwise.
+COUNTEREXAMPLE: required if VERDICT is FALSE, empty otherwise.

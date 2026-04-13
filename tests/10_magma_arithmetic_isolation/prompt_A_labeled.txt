@@ -1,0 +1,27 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} where x*y = (y+1) mod 3.
+
+Full operation table: 0*0=1, 0*1=2, 0*2=0, 1*0=1, 1*1=2, 1*2=0, 2*0=1, 2*1=2, 2*2=0
+
+Equation 1: x = (y * z) * (z * (x * x))
+Equation 2: x = y * (((y * z) * x) * z)
+
+To evaluate EQ1's right side, label each subexpression before computing:
+  Let A = x * x
+  Let B = z * A
+  Let C = y * z
+  Let D = C * B
+EQ1 holds when D = x.
+
+For each assignment, compute A, B, C, D using the operation table. Remember: a*b means look up row a, column b in the table, which gives (b+1) mod 3.
+
+Test ALL 27 assignments (x,y,z each from {0,1,2}). For each one, write:
+  (x,y,z): A=_ B=_ C=_ D=_ x=_ match?
+
+After testing all 27: does EQ1 hold universally?
+If yes: test EQ2 the same way. Does EQ2 fail for any assignment?
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

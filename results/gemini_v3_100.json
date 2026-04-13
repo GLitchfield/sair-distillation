@@ -1,0 +1,917 @@
+{
+  "summary": {
+    "total": 100,
+    "correct": 82,
+    "accuracy": 0.82,
+    "tp": 38,
+    "fp": 0,
+    "fn": 18,
+    "tn": 44,
+    "unparsed": 0,
+    "precision": 1.0,
+    "recall": 0.6785714285714286,
+    "f1": 0.8085106382978723
+  },
+  "results": [
+    {
+      "id": "normal_0001",
+      "equation1": "x = ((y * (x * y)) * z) * w",
+      "equation2": "x = (y * (x * z)) * (y * w)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((y * (x * y)) * z) * w. x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 4 * operations. Equation 2 (x = (y * (x * z)) * (y * w)) has 3 * operations. Equation 2 is simpler.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0. EQ2: x = 0. Holds (both sides 0).\nMagma B (Right Projection: x*y = y): EQ1: x = w. Fails (not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = y. Fails (not a law).\nMagma D (XOR: x*y = x+y): EQ1: x = y+(x+y)+z+w = x+z+w. Fails (x=x+z+w implies z+w=0).\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x = ((y*(x*y))*z)*w = ((y*(1-y))*z)*w = ((1-(1-y))*z)*w = (y*z)*w = (1-z)*w = 1-w.\nEQ1 holds only if x = 1-w, which is not a law.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: x = a(a(ay+b(ax+by+c)+c)+bz+c)+bw+c.\nThis forces coefficients to satisfy specific constraints. If we set a=0, b=1, c=0 (Right Projection), it fails. If we set a=1, b=0, c=0 (Left Projection), it fails.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 is a very restrictive identity. In any magma where it holds, the variable x is constrained by the structure of the RHS. Equation 2 is a different structural identity. Given the difference in variable distribution and operation count, there is no general implication.\n\nVERDICT: FALSE\nREASONING: Equation 1 forces a specific functional dependency on x that is not preserved by the structure of Equation 2. Testing against proje"
+    },
+    {
+      "id": "normal_0002",
+      "equation1": "x * y = z * (w * (u * u))",
+      "equation2": "x * (y * y) = (z * w) * z",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = z * (w * (u * u)). LHS is x * y (not bare x). No singleton.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS has 2 operations. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = 0 (Holds). EQ2: 0 = 0 (Holds).\nMagma B (Right Projection: x*y = y): EQ1: y = u (Fails for y != u).\nMagma C (Left Projection: x*y = x): EQ1: x = z (Fails for x != z).\nMagma D (XOR: x*y = x+y mod 2): EQ1: x+y = z+w+u+u = z+w (Fails for x+y != z+w).\nMagma F (Negate-right: x*y = 1-y): EQ1: 1-y = 1-(1-(1-u)) = 1-u (Fails for y != u).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: ax + by + c = az + b(aw + bu + c) + c = az + abw + b^2u + bc + c.\nFor this to hold for all x,y,z,w,u, the coefficients of x,y,z,w,u must match on both sides.\nLHS: x(a), y(b), z(0), w(0), u(0), const(c).\nRHS: x(0), y(0), z(a), w(ab), u(b^2), const(bc+c).\nMatching coefficients: a=0, b=0, a=0, ab=0, b^2=0, c=bc+c.\nThis forces a=0, b=0, c=0. This is the Zero Magma (already checked).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces variables (z, w) in a configuration that does not match the constraints imposed by Equation 1. Equation 1 forces the magma to be trivial (or highly degenerate) because the RHS is independent of x and y. If the magma is trivial, both equations hold. If the magma is not trivial, Equation 1 cannot hold universally.\n\nVERDICT: TRUE\nREASONING: Equation 1 forces"
+    },
+    {
+      "id": "normal_0003",
+      "equation1": "x = x * (y * ((z * x) * x))",
+      "equation2": "x = (y * ((z * z) * y)) * w",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = x * (y * ((z * x) * x)). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 * operations. Equation 2 (x = (y * ((z * z) * y)) * w) has 3 * operations. Equation 2 introduces a new variable 'w' not present in Equation 1.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0 (fails for x=1). EQ1 does not hold.\nMagma B (Right Projection: x*y = y): EQ1: x = x (holds). EQ2: x = w (fails for x=0, w=1). EQ2 does not hold.\nMagma C (Left Projection: x*y = x): EQ1: x = x (holds). EQ2: x = y (fails for x=0, y=1). EQ2 does not hold.\nMagma D (XOR: x*y = x+y mod 2): EQ1: x = x + y + (z + x + x) = x + y + z + x = y + z. Fails (x != y+z).\nMagma E (Constant 1: x*y = 1): EQ1: x = 1 (fails for x=0). EQ1 does not hold.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'w' that is not constrained by Equation 1. In any magma with more than one element, one can choose an assignment for 'w' that violates the equality regardless of the values of x, y, and z. Since Equation 1 does not force the magma to be a singleton, the implication cannot hold.\n\nVERDICT: FALSE\nREASONING: Equation 2 contains a free variable 'w' not present in Equation 1. In any non-singleton magma, the value of the RHS of Equation 2 can be varied by changing 'w' while keeping x, y, and z constant, thus failing the identity x = RHS.\nPROOF: \nCOUNTEREXAMPLE: Magma B (Right Projection: x*y = y). EQ1: x = x * (y * ((z * x) * "
+    },
+    {
+      "id": "normal_0004",
+      "equation1": "x = y * (z * ((w * u) * u))",
+      "equation2": "x = ((y * z) * x) * (x * w)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is \"x = y * (z * ((w * u) * u))\". The LHS is a bare variable \"x\", and \"x\" does NOT appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0 (holds only if x=0). Fails.\nMagma B (Right Projection): EQ1: x=u (holds only if x=u). Fails.\nMagma C (Left Projection): EQ1: x=y (holds only if x=y). Fails.\nMagma D (XOR): EQ1: x = y + z + w + u + u = y + z + w. Fails.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton (x = constant). In a singleton magma, all elements are equal, so any equation involving the same variables (or subsets thereof) holds trivially. Since Equation 1 forces the magma to be a singleton, Equation 2 must hold.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z, w, u), where x does not appear on the right-hand side. This forces the magma to contain only one element (a singleton). In a singleton magma, all equations are satisfied.\nPROOF: Let M be a magma satisfying x = y * (z * ((w * u) * u)). For any a, b in M, let y=a, z=b, w=b, u=b. Then x = a * (b * ((b * b) * b)). Since this must hold for all x, every element x in M must equal this specific value. Thus, M has exactly one element. In a singleton magma, any equation x = g(y, z, w, u) holds because all variables and expressions evaluate to the unique element of the magma.\nCOUNTEREXAMPLE:"
+    },
+    {
+      "id": "normal_0005",
+      "equation1": "x = y * ((x * z) * (w * u))",
+      "equation2": "x = (((x * x) * x) * x) * x",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * ((x * z) * (w * u)). x appears on the RHS, so it is not a singleton-forcing equation.\nCheck 1b: Equation 1 has 4 operations on the RHS. Equation 2 has 4 operations on the RHS.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x = y * ((x * z) * (w * u)) -> x = u. This is not a law (fails for x=0, u=1).\nMagma C (Left Projection: x*y = x):\nEQ1: x = y * ((x * z) * (w * u)) -> x = y. This is not a law (fails for x=0, y=1).\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x = y * ((x * z) * (w * u)) -> x = 1 - ((x * z) * (w * u)) = 1 - (1 - (1 - u)) = 1 - u. This is not a law.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = 2x + y mod 3.\nEQ1: x = 2y + (2(2x + z) + (2w + u)) = 2y + 4x + 2z + 2w + u = 2y + x + 2z + 2w + u mod 3.\nThis simplifies to 0 = 2y + 2z + 2w + u mod 3. This is not a law.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 is a very restrictive identity that forces the magma to have specific properties (e.g., if we set y=x, z=x, w=x, u=x, we get x = x * ((x * x) * (x * x))). Equation 2 is a specific power-associative-like identity. Given the lack of structural alignment and the fact that Equation 1 involves variables (y, z, w, u) that do not appear in Equation 2, it is highly improbable that Equation 1 implies Equation 2.\n\nVERDICT: FALSE\nREASONING: Equation 1 involves variables y, z, w, and u which are not present in Equation 2. In a general magma, Equation 1 does not constrain the str"
+    },
+    {
+      "id": "normal_0006",
+      "equation1": "x * y = ((z * w) * u) * y",
+      "equation2": "x = x * ((y * x) * (y * z))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = ((z * w) * u) * y. LHS has 1 operation, RHS has 3. Not a singleton.\nCheck 1b: Equation 2 is x = x * ((y * x) * (y * z)). LHS has 0 operations, RHS has 3. Equation 2 is structurally more complex on the LHS (bare variable) and introduces new variables (z).\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = 0 (Holds). EQ2: x = 0 (Fails for x=1).\nMagma B (Right Projection: x*y = y): EQ1: y = y (Holds). EQ2: x = z (Fails for x=0, z=1).\nMagma C (Left Projection: x*y = x): EQ1: x = z (Fails for x=0, z=1).\nMagma D (XOR: x*y = x+y): EQ1: x+y = z+w+u+y \u2192 x = z+w+u (Fails).\nMagma F (Negate-right: x*y = 1-y): EQ1: 1-y = 1-y (Holds). EQ2: x = 1-(1-(1-z)) = 1-z (Fails for x=0, z=0).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = 2x + y mod 3.\nEQ1: 2x + y = 2(2(2z+w)+u) + y = 2(4z+2w+u) + y = 8z+4w+2u+y = 2z+w+2u+y mod 3.\nSince 2x+y = 2z+w+2u+y is not an identity for all x,z,w,u, this magma does not satisfy EQ1.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a variable 'z' not present in Equation 1. Equation 1 is a \"constant-like\" constraint on the magma structure (forcing the product to be independent of x), whereas Equation 2 is a specific identity that is not forced by the structure of Equation 1.\n\nVERDICT: FALSE\nREASONING: Equation 1 forces the magma to satisfy x*y = f(z,w,u)*y, which implies that the product is independent of the first argument. Equation 2, however, requires x to be equal to a"
+    },
+    {
+      "id": "normal_0007",
+      "equation1": "x = (y * z) * (z * (w * z))",
+      "equation2": "x * y = z * (w * (y * z))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is \"x = (y * z) * (z * (w * z))\". x is a bare variable and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 3 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0 (fails for x=1).\nMagma B (Right Projection): EQ1: x=z (fails for x=0, z=1).\nMagma C (Left Projection): EQ1: x=y (fails for x=0, y=1).\nMagma D (XOR): EQ1: x = y+z + z+w+z = y+w+z. Fails for x=0, y=1, w=0, z=0.\nMagma E (Constant 1): EQ1: x=1 (fails for x=0).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton because x is a bare variable not present on the RHS. In a singleton magma, all elements are equal, so all equations hold.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z, w), where x is a bare variable and does not appear on the right-hand side. This forces the magma to contain exactly one element (a singleton). Since all equations hold in a singleton magma, Equation 2 must hold.\nPROOF: Let M be a magma satisfying x = (y * z) * (z * (w * z)). For any a, b in M, let x = a, y = b, z = b, w = b. Then a = (b * b) * (b * (b * b)). Since this holds for all a, M must be a singleton {e}. In a singleton magma, x * y = e and z * (w * (y * z)) = e * (e * (e * e)) = e. Thus x * y = z * (w * (y * z)) holds.\nCOUNTEREXAMPLE:"
+    },
+    {
+      "id": "normal_0008",
+      "equation1": "x = ((x * x) * (y * y)) * y",
+      "equation2": "x * (y * x) = z * (x * w)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((x * x) * (y * y)) * y. x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 LHS has 0 operations. Equation 2 LHS (x * (y * x)) has 2 operations. Equation 2 has more operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0. Fails (x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = y. Fails (x=1, y=0).\nMagma C (Left Projection: x*y = x): EQ1: x = x. Holds. EQ2: x * (y * x) = x. LHS: x * (y * x) = x. RHS: z * (x * w) = z. EQ2 fails (x=1, z=0).\nMagma D (XOR: x*y = x+y mod 2): EQ1: x = (x+x) + (y+y) + y = y. Fails (x=1, y=0).\nMagma E (Constant 1: x*y = 1): EQ1: x = 1. Fails (x=0).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces new variables (z, w) not present in Equation 1. Equation 2 has more operations than Equation 1. The implication is structurally unsupported.\n\nVERDICT: FALSE\nREASONING: Equation 1 does not constrain the magma sufficiently to force the identity required by Equation 2. In the Left Projection magma (x*y = x), Equation 1 holds universally (x = x), but Equation 2 (x = z) fails for any assignment where x is not equal to z.\nPROOF: \nCOUNTEREXAMPLE: Left Projection magma (x*y = x). EQ1: x = ((x*x)*(y*y))*y = (x*x)*y = x*y = x. Holds. EQ2: x*(y*x) = z*(x*w) becomes x = z. Fails for x=1, z=0."
+    },
+    {
+      "id": "normal_0009",
+      "equation1": "x = y * (((z * z) * w) * y)",
+      "equation2": "x * y = (y * z) * (x * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is \"x = y * (((z * z) * w) * y)\". The LHS is a bare variable \"x\" and \"x\" does not appear on the RHS. This forces the magma to be a singleton (every element must equal the constant value of the RHS).\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 3 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0*(((0*0)*0)*0) = 0. Holds. EQ2: 0*0 = (0*0)*(0*0) \u2192 0=0. Holds.\nMagma B (Right Projection): EQ1: x=y. Fails (must hold for all x,y).\nMagma C (Left Projection): EQ1: x=y. Fails.\nMagma D (XOR): EQ1: x = y + (z + z + w + y) = y + 0 + w + y = w. Fails.\nMagma E (Constant 1): EQ1: x=1. Holds. EQ2: 1*1 = (1*1)*(1*1) \u2192 1=1. Holds.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton. In a singleton magma, all elements are equal (x=y=z=w). Any equation holds in a singleton magma.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z, w) where x does not appear on the right-hand side. This forces the magma to contain exactly one element. In a singleton magma, all equations are satisfied.\nPROOF: Since x = y * (((z * z) * w) * y) must hold for all x, y, z, w, let the magma be M. For any fixed y, z, w, the RHS evaluates to a constant c in M. Thus, x = c for all x in M. This implies M has only one element. In a singleton magma, x * y = (y * z) * (x * z) becomes the trivial equality of the unique element with itself.\nCOUNTEREXAMPLE:"
+    },
+    {
+      "id": "normal_0010",
+      "equation1": "x * y = (z * w) * (w * z)",
+      "equation2": "(x * x) * y = (y * x) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = (z * w) * (w * z). LHS is x * y (not bare x). No singleton.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS ((x * x) * y) has 2 operations. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x * y = y):\nEQ1: x * y = y. RHS: (z * w) * (w * z) = (w) * (z) = z.\nDoes x * y = (z * w) * (w * z) hold? No, y = z is not a law.\nMagma C (Left Projection: x * y = x):\nEQ1: x * y = x. RHS: (z * w) * (w * z) = (z * w) = z.\nDoes x * y = (z * w) * (w * z) hold? No, x = z is not a law.\nMagma A (Zero: x * y = 0):\nEQ1: 0 = 0. Holds.\nEQ2: (x * x) * y = 0 * y = 0. (y * x) * x = 0 * x = 0. Holds.\nMagma E (Constant 1: x * y = 1):\nEQ1: 1 = 1. Holds.\nEQ2: (x * x) * y = 1 * y = 1. (y * x) * x = 1 * x = 1. Holds.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a constant magma (x * y = c) because the RHS (z * w) * (w * z) is independent of x and y. If the RHS evaluates to a constant c for all z, w, then x * y = c. In any magma where x * y = c, both sides of Equation 2 evaluate to c.\n\nVERDICT: TRUE\nREASONING: Equation 1 implies that the magma operation is a constant function. If x * y = (z * w) * (w * z) for all x, y, z, w, then the value of x * y is independent of x and y, meaning x * y = c for some constant c. Substituting this into Equation 2, both sides evaluate to c.\nPROOF: Let x * y = c for all x, y. Then (x * x) * y = c * y = c, and (y * x) * x = c * x = c. Thus, (x"
+    },
+    {
+      "id": "normal_0011",
+      "equation1": "x = y * (y * ((z * x) * y))",
+      "equation2": "x = ((y * y) * x) * (z * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * (y * ((z * x) * y)). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 LHS has 0 operations. Equation 2 LHS has 0 operations. Both are bare x.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): x*y = 0. EQ1: x = 0. EQ2: x = 0. Holds.\nMagma B (Right Projection): x*y = y. EQ1: x = y. (Fails for x != y).\nMagma C (Left Projection): x*y = x. EQ1: x = y. (Fails for x != y).\nMagma D (XOR): x*y = x+y. EQ1: x = y+(y+(z+x+y)) = y+y+z+x+y = z+x+y. (Fails for z+y != 0).\nMagma F (Negate-right): x*y = 1-y. EQ1: x = y*(y*(1-(z*x))) = y*(y*(1-(1-x))) = y*(y*x) = y*(1-x) = 1-(1-x) = x. Holds.\nCheck EQ2 for Magma F: x = ((y*y)*x)*(z*x) = ((1-y)*x)*(1-x) = (1-x)*(1-x) = 1-(1-x) = x. Holds.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: x = y * (y * ((z * x) * y))\nRHS = y * (y * (a(az+bx+c) + by + c))\nRHS = y * (a^2z + abx + ac + by + c + by + c) = y * (a^2z + abx + 2by + ac + 2c)\nRHS = a(a^2z + abx + 2by + ac + 2c) + by + c = a^3z + a^2bx + 2aby + a^2c + 2ac + by + c\nFor this to equal x for all x, y, z:\nCoeff of x: a^2b = 1. Coeff of y: 2ab + b = 0. Coeff of z: a^3 = 0.\nIf a=0, then 0=1 (impossible).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 is highly restrictive. In many magmas, it forces x to be a constant or forces the magma to be trivial. Given the complexity of the nesting in EQ1 vs EQ2, and the fact that EQ1 involves x on the RHS in a way that constrains the operation significantly, the i"
+    },
+    {
+      "id": "normal_0012",
+      "equation1": "x * x = (y * (x * y)) * y",
+      "equation2": "x * y = z * (z * (y * y))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * x = (y * (x * y)) * y. LHS is not a bare variable. No singleton forced.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS (x * y) has 1 operation. No obvious complexity gap.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y=0): EQ1: 0 = (0*0)*0 = 0. Holds. EQ2: 0 = 0*(0*(0*0)) = 0. Holds.\nMagma B (Right Projection: x*y=y): EQ1: x = (y*(x*y))*y = (y*y)*y = y. Fails (x=y is not a law).\nMagma C (Left Projection: x*y=x): EQ1: x = (y*(x*y))*y = y*(x*y) = y. Fails (x=y is not a law).\nMagma D (XOR: x*y=x+y mod 2): EQ1: x+x = (y+(x+y))+y => 0 = x+2y = x. Fails.\nMagma E (Constant 1: x*y=1): EQ1: 1 = (1*1)*1 = 1. Holds. EQ2: 1 = 1*(1*(1*1)) = 1. Holds.\nMagma F (Negate-right: x*y=1-y): EQ1: 1-x = (y*(1-y))*y = (1-(1-y))*y = y*y = 1-y. Fails (x=y is not a law).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: ax+ax+c = a(ay+b(ax+by+c)+c) + b(ay+b(ax+by+c)+c) + c.\nThis forces constraints on a, b, c. If we set a=0, b=1, c=0 (Right Projection), it failed. If we set a=1, b=0, c=0 (Left Projection), it failed.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'z' not present in Equation 1. In equational logic, an equation with a new variable cannot be derived from an equation without it unless the magma is a singleton (which this is not).\n\nVERDICT: FALSE\nREASONING: Equation 2 contains a variable 'z' that does not appear in Equation 1. In the theory of magmas, an identity co"
+    },
+    {
+      "id": "normal_0013",
+      "equation1": "x = (y * y) * ((y * z) * w)",
+      "equation2": "x = ((y * z) * (x * y)) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is \"x = (y * y) * ((y * z) * w)\". The LHS is a bare variable \"x\", and \"x\" does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 forces the magma to be a singleton. Any equation holds in a singleton magma.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1 holds (x=0, RHS=0). EQ2 holds (x=0, RHS=0).\nMagma B (Right Projection): EQ1 holds (x=w, RHS=w). EQ2 holds (x=x, RHS=x).\nMagma C (Left Projection): EQ1 holds (x=y, RHS=y). EQ2 holds (x=x, RHS=x).\n\nSTEP 5: DEFAULT JUDGMENT\nSince Equation 1 forces the magma to be a singleton, all equations hold universally in any magma satisfying Equation 1.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z, w), where x does not appear on the right-hand side. This forces the magma to contain exactly one element. In a singleton magma, all equations are satisfied.\nPROOF: Let M be a magma satisfying x = (y * y) * ((y * z) * w). For any fixed y, z, w, the RHS evaluates to a constant element c. Since x is universally quantified, x must equal c for all x in M. Thus, M has only one element. In a singleton magma, any equation x = g(x, y, z, w) holds because all variables must evaluate to the unique element of the set.\nCOUNTEREXAMPLE:"
+    },
+    {
+      "id": "normal_0014",
+      "equation1": "(x * y) * x = (y * z) * x",
+      "equation2": "x * y = (z * z) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is (x * y) * x = (y * z) * x. LHS is not a bare variable. No singleton.\nCheck 1b: Equation 1 LHS has 2 operations. Equation 2 LHS (x * y) has 1 operation. Equation 2 has fewer operations. Lean FALSE.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: (0*0) = (0*0) \u2192 0=0 (Holds). EQ2: 0 = (0*0) \u2192 0=0 (Holds).\nMagma B (Right Projection: x*y = y): EQ1: (y)*x = (z)*x \u2192 x=x (Holds). EQ2: y = (z)*y \u2192 y=y (Holds).\nMagma C (Left Projection: x*y = x): EQ1: (x)*x = (y)*x \u2192 x=y (Fails for x\u2260y).\nMagma D (XOR: x*y = x+y mod 2): EQ1: (x+y)+x = (y+z)+x \u2192 y = y+z (Fails for z\u22600).\nMagma F (Negate-right: x*y = 1-y): EQ1: (1-y)*x = (1-z)*x \u2192 (1-x) = (1-x) (Holds). EQ2: x*y = (1-z)*y \u2192 (1-y) = (1-y) (Holds).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: a(ax+by+c) + bx + c = a(ay+bz+c) + bx + c\na^2x + aby + ac + bx + c = a^2y + abz + ac + bx + c\na^2x + aby = a^2y + abz.\nFor this to hold for all x,y,z:\nCoeff of x: a^2 = 0 \u2192 a=0.\nCoeff of y: ab = a^2 \u2192 0 = 0.\nCoeff of z: 0 = ab \u2192 0 = 0.\nSo a=0. EQ1 becomes 0*y = c.\nEQ2: 0*y = (0*0)*y \u2192 c = c*y \u2192 c = 0*y + b*y + c \u2192 c = c + by + c.\nThis requires b=0 and c=0.\nIf we choose a=0, b=1, c=1: x*y = y+1.\nEQ1: (y+1)+1 = (z+1)+1 \u2192 y+2 = z+2 (Fails).\nIf we choose a=0, b=0, c=1: x*y = 1.\nEQ1: 1 = 1 (Holds).\nEQ2: 1 = (1)*y \u2192 1 = 1 (Holds).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'z' that is not present in the LHS of Equation 2, but Equatio"
+    },
+    {
+      "id": "normal_0015",
+      "equation1": "x * y = ((z * y) * z) * w",
+      "equation2": "x = y * (y * (z * (z * z)))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is \"x * y = ((z * y) * z) * w\". LHS is \"x * y\", not a bare variable. No singleton forced.\nCheck 1b: Equation 1 has 4 operations on the LHS. Equation 2 has 4 operations on the RHS. Complexity is comparable.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: LHS = y. RHS = ((z*y)*z)*w = (y*z)*w = w. Equation 1 holds only if y = w for all y, w, which is false.\nMagma C (Left Projection: x*y = x):\nEQ1: LHS = x. RHS = ((z*y)*z)*w = (z*z)*w = z*w = z. Equation 1 holds only if x = z for all x, z, which is false.\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: LHS = x+y. RHS = ((z+y)+z)+w = (2z+y)+w = y+w. EQ1 holds if x+y = y+w, i.e., x = w. This is not a law.\nMagma E (Constant 1: x*y = 1):\nEQ1: LHS = 1. RHS = 1. EQ1 holds universally.\nEQ2: LHS = x. RHS = y*(y*(z*(z*z))) = 1. EQ2 holds only if x = 1. Since x can be 0, EQ2 fails.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces variable 'z' which is present in Equation 1, but Equation 2 is a constraint on 'x' that does not involve 'w', whereas Equation 1 is a constraint involving 'w'. Since Equation 1 holds for the Constant 1 magma but Equation 2 does not, the implication is false.\n\nVERDICT: FALSE\nREASONING: The Constant 1 magma (x*y = 1) satisfies Equation 1 (1 = 1) but fails Equation 2 (x = 1 is not true for all x).\nPROOF: \nCOUNTEREXAMPLE: Constant 1 magma (x*y = 1 for all x, y)."
+    },
+    {
+      "id": "normal_0016",
+      "equation1": "(x * y) * z = (z * y) * x",
+      "equation2": "x * (y * x) = (x * z) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is (x * y) * z = (z * y) * x. Not a singleton.\nCheck 1b: Equation 1 LHS has 2 operations. Equation 2 LHS has 2 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): (x*y)*z = 0, (z*y)*x = 0. EQ1 holds. x*(y*x) = 0, (x*z)*y = 0. EQ2 holds.\nMagma B (Right Projection): (x*y)*z = z, (z*y)*x = x. EQ1 fails (z=x is not a law).\nMagma C (Left Projection): (x*y)*z = x, (z*y)*x = z. EQ1 fails (x=z is not a law).\nMagma D (XOR): (x+y)+z = (z+y)+x. EQ1 holds. x+(y+x) = y, (x+z)+y = x+z+y. EQ2 fails (y = x+z+y implies x+z=0).\nMagma F (Negate-right): (x*y)*z = 1-z. (z*y)*x = 1-x. EQ1 fails (1-z = 1-x).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: a(ax+by+c) + bz + c = a(az+by+c) + bx + c\na^2x + aby + ac + bz + c = a^2z + aby + ac + bx + c\na^2x + bz = a^2z + bx\nFor this to hold for all x,z: a^2 = b and b = a^2.\nEQ2: x*(y*x) = ax + b(ay+bx+c) + c = ax + aby + b^2x + bc + c = (a+b^2)x + aby + bc + c\n(x*z)*y = a(ax+bz+c) + by + c = a^2x + abz + ac + by + c\nFor EQ2 to hold: a+b^2 = a^2, ab = 0, bc+c = ac+c.\nIf a=1, b=1: EQ1 holds (1=1). EQ2: 1+1 = 1^2 (2=1) False.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a variable z that is not constrained by the structure of Equation 1 in a way that forces the identity. The linear magma test confirms that even when EQ1 is satisfied, EQ2 is not necessarily satisfied.\n\nVERDICT: FALSE\nREASONING: The implication fails in linear magmas over Z/3Z where the operati"
+    },
+    {
+      "id": "normal_0017",
+      "equation1": "x * (y * z) = y * (x * w)",
+      "equation2": "x = (x * ((x * x) * x)) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * (y * z) = y * (x * w). x is not bare on the LHS. No singleton.\nCheck 1b: Equation 1 has 2 operations on LHS. Equation 2 has 3 operations on RHS. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = 0 (Holds). EQ2: x = 0*y = 0. Fails for x=1. Counterexample found.\nMagma B (Right Projection: x*y = y): EQ1: z = w. Fails for z=0, w=1.\nMagma C (Left Projection: x*y = x): EQ1: x = y. Fails for x=0, y=1.\nMagma D (XOR: x*y = x+y mod 2): EQ1: x+y+z = y+x+w => z=w. Fails for z=0, w=1.\nMagma E (Constant 1: x*y = 1): EQ1: 1 = 1 (Holds). EQ2: x = 1*y = 1. Fails for x=0. Counterexample found.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a variable 'y' that is not present in Equation 1, and Equation 2 is structurally more complex. The existence of counterexamples in constant and zero magmas confirms the implication is false.\n\nVERDICT: FALSE\nREASONING: Equation 1 does not constrain the magma sufficiently to force the identity x = (x * ((x * x) * x)) * y. In a magma where x*y = 0, Equation 1 holds (0=0), but Equation 2 becomes x = 0, which is false for x=1.\nPROOF: \nCOUNTEREXAMPLE: Magma where x*y = 0 for all x, y."
+    },
+    {
+      "id": "normal_0018",
+      "equation1": "x = y * ((x * (x * y)) * z)",
+      "equation2": "x = y * (z * ((x * y) * w))",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * ((x * (x * y)) * z). x appears on the RHS, so it does not force a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x = y * (z * ((x * y) * w))) has 4 operations. No immediate structural reduction.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): x*y = 0. EQ1: x = 0 * (0 * 0) = 0. EQ2: x = 0 * (0 * 0) = 0. Holds.\nMagma B (Right Projection): x*y = y. EQ1: x = y * ((x * (x * y)) * z) = y * (y * z) = z. Fails (x=z is not a law).\nMagma C (Left Projection): x*y = x. EQ1: x = y * ((x * (x * y)) * z) = y * (x * z) = y. Fails (x=y is not a law).\nMagma D (XOR): x*y = x+y mod 2. EQ1: x = y + (x + (x + y) + z) = y + (y + z) = z. Fails.\nMagma F (Negate-right): x*y = 1-y. EQ1: x = y * ((x * (x * y)) * z) = 1 - ((1 - (1 - y)) * z) = 1 - (y * z) = 1 - (1 - z) = z. Fails.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: x = a(y) + b(a(ax+by+c) + b(a(ax+by+c) + by + c) + c) + c.\nFor this to hold for all x, y, z, the coefficients of x, y, z must match on both sides.\nThe RHS contains z. The coefficient of z in the RHS is b*c. For the RHS to equal x (where z has coefficient 0), we must have b*c = 0.\nIf b=0, x*y = ax + c. Then EQ1: x = ay + c. This forces a=0, c=x (impossible).\nIf c=0, x*y = ax + by. EQ1: x = ay + b(a(ax+by) + b(a(ax+by) + by)) = ay + b(a^2x + aby + b(a^2x + aby + by)) = ay + b(a^2x + aby + ba^2x + b^2y + b^2y) = ay + ba^2x + ab^2y + b^2a^2x + b^3y + b^3y.\nFor this to be x"
+    },
+    {
+      "id": "normal_0019",
+      "equation1": "x * y = z * (w * (u * y))",
+      "equation2": "x = ((y * x) * z) * (z * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = z * (w * (u * y)). LHS is not a bare variable. No singleton forced.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS is x (0 operations). Equation 2 has more operations on the RHS.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: LHS = y. RHS = y. (Holds)\nEQ2: LHS = x. RHS = ((y*x)*z)*(z*x) = (x*z)*(z*x) = z*x = x. (Holds)\nMagma C (Left Projection: x*y = x):\nEQ1: LHS = x. RHS = z. (Fails: x=z is not a law)\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: LHS = x+y. RHS = z+w+u+y. (Fails: x+y = z+w+u+y is not a law)\nMagma F (Negate-right: x*y = 1-y):\nEQ1: LHS = 1-y. RHS = z*(w*(1-y)) = z*(1-(1-y)) = z*y = 1-y. (Holds)\nEQ2: LHS = x. RHS = ((y*x)*z)*(z*x) = (1-x)*z * (1-x) = (1-z) * (1-x) = 1-(1-x) = x. (Holds)\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: ax + by + c = az + b(aw + b(au + by + c) + c) + c\n= az + abw + a^2bu + ab^2y + abc + bc + c.\nFor this to hold for all x,y,z,w,u:\nCoefficients of x: a = 0.\nIf a=0: LHS = by + c. RHS = b(b(by + c) + c) + c = b^3y + b^2c + bc + c.\nFor this to hold: b = b^3 and c = b^2c + bc + c.\nIf b=1: c = c + c + c = 3c = 0.\nSo x*y = y is a solution (Magma B).\nIf b=2: 2 = 8 (mod 3) holds. c = 4c + 2c + c = 7c = c. (Holds for any c).\nLet x*y = 2y + 1.\nEQ1: 2y + 1 = 2(2(2(2y+1)+1)+1)+1 = 2(2(4y+3)+1)+1 = 2(8y+7)+1 = 16y + 15 = y. (Fails).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces variables z and w which are present in Eq"
+    },
+    {
+      "id": "normal_0020",
+      "equation1": "x = (x * (x * x)) * (y * y)",
+      "equation2": "x = (y * x) * ((x * x) * y)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (x * (x * x)) * (y * y). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0*0 = 0. Fails (x=1, 0=0 is false).\nMagma B (Right Projection: x*y = y): EQ1: x = (x * (x * x)) * (y * y) = (x * x) * y = x * y = y. Fails (x=y).\nMagma C (Left Projection: x*y = x): EQ1: x = (x * (x * x)) * (y * y) = x * (x * x) = x. Holds for all x,y.\nCheck EQ2 in Magma C: x = (y * x) * ((x * x) * y) = (y * x) * (x * x) = y * x = y. Fails (x=y).\n\nSTEP 5: DEFAULT JUDGMENT\nThe Left Projection magma (x*y = x) satisfies Equation 1 (x = x) but fails Equation 2 (x = y).\n\nVERDICT: FALSE\nREASONING: The magma defined by x*y = x satisfies Equation 1 because the RHS reduces to x, but it fails Equation 2 because the RHS reduces to y.\nPROOF: \nCOUNTEREXAMPLE: Magma C (Left Projection: x*y = x)"
+    },
+    {
+      "id": "normal_0021",
+      "equation1": "x * (x * x) = x * (y * z)",
+      "equation2": "x * x = ((y * z) * w) * z",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * (x * x) = x * (y * z). Not a singleton.\nCheck 1b: Equation 1 has 3 operations. Equation 2 has 3 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): 0 = 0. EQ1 holds. 0 = 0. EQ2 holds.\nMagma B (Right Projection): x * (x * x) = x. x * (y * z) = z. EQ1 fails (x = z is not a law).\nMagma C (Left Projection): x * (x * x) = x. x * (y * z) = x. EQ1 holds. x * x = x. ((y * z) * w) * z = y * z = y. EQ2 fails (x = y is not a law).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x * y = ax + by + c.\nEQ1: x * (x * x) = x * (y * z)\nLHS: x * (ax + bx + c) = ax + b(ax + bx + c) + c = ax + abx + b^2x + bc + c = (a + ab + b^2)x + (bc + c)\nRHS: x * (ay + bz + c) = ax + b(ay + bz + c) + c = ax + aby + b^2z + bc + c\nFor this to hold for all x, y, z:\nCoeff of x: a + ab + b^2 = a => ab + b^2 = 0 => b(a + b) = 0\nCoeff of y: 0 = ab => a = 0 or b = 0\nCoeff of z: 0 = b^2 => b = 0\nIf b = 0, then a + 0 + 0 = a (holds).\nEQ1 becomes: x * (x * x) = x * (y * z) => ax + c = ax + c. This holds for any a, c when b=0.\nNow check EQ2: x * x = ((y * z) * w) * z\nLHS: ax + c\nRHS: ((ay + bz + c) * w) * z = (a(ay + bz + c) + bw + c) * z = a(a^2y + abz + ac + bw + c) + bz + c\nWith b = 0:\nLHS: ax + c\nRHS: a(a^2y + ac + c) + c = a^3y + a^2c + ac + c\nFor EQ2 to hold, a^3 = 0 (so a = 0) and a^2c + ac + c = c => a^2c + ac = 0.\nIf a = 1, b = 0, c = 0: EQ1 holds (x * y = x), but EQ2 fails (x = y).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a ne"
+    },
+    {
+      "id": "normal_0022",
+      "equation1": "x = ((y * y) * (x * y)) * z",
+      "equation2": "x * y = z * (w * (u * y))",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((y * y) * (x * y)) * z. x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x * y = z * (w * (u * y))) has 3 operations. Equation 2 has fewer operations, suggesting the implication is likely FALSE.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = (0*0)*0 = 0*0 = 0. Fails (x=0 is not a law).\nMagma B (Right Projection: x*y = y): EQ1: x = ((y)*y)*z = y*z = z. Fails (x=z is not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = ((y)*x)*z = y*x = y. Fails (x=y is not a law).\nMagma D (XOR: x*y = x+y mod 2): EQ1: x = (y+y + x+y) + z = x+y+z. Fails (x=x+y+z is not a law).\nMagma F (Negate-right: x*y = 1-y): EQ1: x = (1-(1-y)) * z = y * z = 1-z. Fails (x=1-z is not a law).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces new variables (w, u) not present in Equation 1. In equational logic, an equation with more variables cannot be derived from an equation with fewer variables unless the extra variables are \"dummy\" variables that can be eliminated. Here, the variables w and u are bound within the structure of Equation 2 and cannot be eliminated by Equation 1.\n\nVERDICT: FALSE\nREASONING: Equation 2 contains variables (w, u) that do not appear in Equation 1. An implication between equational theories cannot introduce new universally quantified variables unless those variables are constrained to be irrelevant, which is not the case here.\nPROOF: \nCOUNTEREX"
+    },
+    {
+      "id": "normal_0023",
+      "equation1": "x = (y * (x * (z * x))) * y",
+      "equation2": "x * y = x * ((z * w) * z)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * (x * (z * x))) * y. x appears on the RHS, so no singleton detection.\nCheck 1b: Equation 1 LHS has 0 operations (bare x). Equation 2 LHS has 1 operation (x * y). Equation 2 is more complex on the LHS, suggesting the implication is likely FALSE.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = (y * (x * (z * x))) * y becomes x = 0. Fails for x=1.\nMagma B (Right Projection: x*y = y): EQ1: x = (y * (x * (z * x))) * y becomes x = y. Fails for x=0, y=1.\nMagma C (Left Projection: x*y = x): EQ1: x = (y * (x * (z * x))) * y becomes x = y. Fails for x=0, y=1.\nMagma D (XOR: x*y = x+y mod 2): EQ1: x = y + (x + (z + x)) + y = y + x + z + x + y = z. Fails for x=0, z=1.\nMagma E (Constant 1: x*y = 1): EQ1: x = 1. Fails for x=0.\nMagma F (Negate-right: x*y = 1-y): EQ1: x = 1-((1-(x*(1-x))) = 1-(1-(1-(1-x))) = 1-(1-x) = x. EQ1 holds.\nCheck EQ2 in Magma F: x*y = 1-y. LHS = 1-y. RHS = x*((z*w)*z) = x*(1-z) = 1-(1-z) = z. 1-y = z does not hold for all y, z.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nNot required as Magma F provides a counterexample.\n\nSTEP 4: ATTEMPT ALGEBRAIC PROOF\nN/A.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces new variables (w) not present in Equation 1, which is a strong indicator of FALSE.\n\nVERDICT: FALSE\nREASONING: The implication fails in the Negate-right magma (x*y = 1-y), where Equation 1 is satisfied as an identity, but Equation 2 is not.\nPROOF: \nCOUNTEREXAMPLE: Magma F (x*y"
+    },
+    {
+      "id": "normal_0024",
+      "equation1": "x * (y * x) = (z * z) * y",
+      "equation2": "x = y * (((z * x) * x) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * (y * x) = (z * z) * y. LHS is not a bare variable. No singleton.\nCheck 1b: Equation 1 LHS has 2 operations. Equation 2 LHS is a bare variable (0 operations). Equation 2 is significantly simpler/different in structure.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x * (y * x) = x. (z * z) * y = y.\nEQ1 becomes x = y. This is not a law (fails for x=0, y=1). Magma B does not satisfy EQ1.\nMagma C (Left Projection: x*y = x):\nEQ1: x * (y * x) = x. (z * z) * y = z.\nEQ1 becomes x = z. This is not a law. Magma C does not satisfy EQ1.\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x + (y + x) = (z + z) + y => 0 = y. Fails.\nMagma E (Constant 1: x*y = 1):\nEQ1: 1 = 1. Holds universally.\nEQ2: x = 1 * (((z * x) * x) * x) => x = 1. Fails for x=0.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a variable structure that is not constrained by Equation 1. Specifically, Equation 1 equates a term involving x, y, z to a term involving z, y, while Equation 2 attempts to define x solely in terms of y, z, x. Since Equation 1 does not force x to be a constant or a specific function of y and z, Equation 2 cannot be derived.\n\nVERDICT: FALSE\nREASONING: Equation 1 does not impose sufficient constraints on the magma to force the identity x = y * (((z * x) * x) * x). The constant magma (x*y = 1) satisfies Equation 1 but fails Equation 2 for any x != 1.\nPROOF: \nCOUNTEREXAMPLE: Constant magma where x * y = 1 for all x, y"
+    },
+    {
+      "id": "normal_0025",
+      "equation1": "x * x = y * (y * x)",
+      "equation2": "x = ((x * y) * x) * (x * y)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * x = y * (y * x). LHS is not a bare variable. No singleton forced.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS has 3 operations. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = 0 (Holds). EQ2: x = 0 (Fails for x=1). Counterexample found.\nMagma B (Right Projection: x*y = y): EQ1: x = x (Holds). EQ2: x = x (Holds).\nMagma C (Left Projection: x*y = x): EQ1: x = y (Fails for x=0, y=1).\nMagma D (XOR: x*y = x+y mod 2): EQ1: x+x = y+(y+x) => 0 = x (Fails).\nMagma E (Constant 1: x*y = 1): EQ1: 1 = 1 (Holds). EQ2: x = 1 (Fails for x=0). Counterexample found.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a variable y that is not present in the LHS of Equation 1 (x*x), and Equation 2 is significantly more complex than Equation 1. The existence of counterexamples in simple magmas confirms the implication does not hold.\n\nVERDICT: FALSE\nREASONING: Equation 1 is satisfied by the Zero magma (x*y = 0), where 0 = 0 holds for all x, y. However, in the Zero magma, Equation 2 becomes x = 0, which is not universally true for all x in the magma.\nPROOF: \nCOUNTEREXAMPLE: Zero magma (x*y = 0 for all x, y)."
+    },
+    {
+      "id": "normal_0026",
+      "equation1": "x = ((x * y) * z) * (z * w)",
+      "equation2": "x = x * (((x * x) * y) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((x * y) * z) * (z * w). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x = x * (((x * x) * y) * x)) has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = (0*0)*0 = 0. Fails (x=1, 0=0 is false).\nMagma B (Right Projection: x*y = y): EQ1: x = ((x*y)*z)*(z*w) = (z)*(w) = w. Fails (x=w is not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = ((x*y)*z)*(z*w) = (x*y)*z = x. Holds.\nCheck EQ2 for Magma C: x = x * (((x * x) * y) * x) = x * ((x * y) * x) = x * x = x. Holds.\nMagma D (XOR: x*y = x+y): EQ1: x = (x+y+z)+(z+w) = x+y+w. Fails (y+w=0).\nMagma F (Negate-right: x*y = 1-y): EQ1: x = ((x*y)*z)*(z*w) = (1-z)*(z*w) = 1-(z*w) = 1-(1-w) = w. Fails.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = 2x + y mod 3.\nEQ1: x = ((x*y)*z)*(z*w) = 2((2x+y)*z) + (z*w) = 2(2(2x+y)+z) + (2z+w) = 2(4x+2y+z) + 2z + w = 8x+4y+2z+2z+w = 2x+y+z+w mod 3.\nThis forces x = 2x+y+z+w, which is not a law for all x,y,z,w.\n\nSTEP 4: ATTEMPT ALGEBRAIC PROOF\nEquation 1: x = ((x * y) * z) * (z * w).\nIf we set y=x, z=x, w=x: x = ((x*x)*x)*(x*x).\nThis does not simplify to Equation 2.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 and Equation 2 are distinct identities. Given the failure of the implication in standard projection and linear magmas, and the lack of a derivation, the implication is likely false.\n\nVERDICT: FALSE\nREASONING: The equation x = ((x * y) * z) * (z * w) forces "
+    },
+    {
+      "id": "normal_0027",
+      "equation1": "x * y = ((y * x) * x) * x",
+      "equation2": "x = (x * x) * (y * (y * y))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = ((y * x) * x) * x. LHS is x * y (not bare x). No singleton.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS has 0 operations (bare x). Equation 2 is structurally simpler/different.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = ((0*0)*0)*0 \u2192 0 = 0 (Holds). EQ2: x = (x*x)*(y*(y*y)) \u2192 x = 0*0 \u2192 x = 0. Fails for x=1.\nMagma B (Right Projection: x*y = y): EQ1: y = ((x*y)*x)*x \u2192 y = (y*x)*x \u2192 y = x. Fails for x=0, y=1.\nMagma C (Left Projection: x*y = x): EQ1: x = ((y*x)*x)*x \u2192 x = (y*x)*x \u2192 x = y*x \u2192 x = y. Fails for x=0, y=1.\nMagma D (XOR: x*y = x+y mod 2): EQ1: x+y = ((y+x)+x)+x = y+x+x+x = y+x. Holds. EQ2: x = (x+x)+(y+(y+y)) = 0+(y+0) = y. Fails for x=0, y=1.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a variable 'y' on the RHS that is not constrained by the LHS (which is just 'x'). Equation 1 relates x and y, but Equation 2 asserts that x is equal to a term involving y, which cannot hold universally unless the magma is a singleton. Since the magmas tested above satisfy EQ1 but fail EQ2, the implication is false.\n\nVERDICT: FALSE\nREASONING: Equation 2 requires x to be equal to a term involving y for all y, which forces the magma to be a singleton. Equation 1 does not force the magma to be a singleton, as demonstrated by the XOR magma.\nPROOF: \nCOUNTEREXAMPLE: XOR magma (x*y = x+y mod 2). EQ1: x+y = ((y+x)+x)+x = y+x+x+x = y+x (True). EQ2: x = (x+x)+(y+(y+y)) = 0+y = y (Fal"
+    },
+    {
+      "id": "normal_0028",
+      "equation1": "x = y * ((z * (z * y)) * y)",
+      "equation2": "x = y * (z * ((w * y) * x))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * ((z * (z * y)) * y). x is a bare variable and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 2 is x = y * (z * ((w * y) * x)). x appears on the RHS.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0*...=0. Holds. EQ2: x=0*...=0. Holds.\nMagma B (Right Projection): EQ1: x=y. Fails (not a law).\nMagma C (Left Projection): EQ1: x=y. Fails (not a law).\nMagma D (XOR): EQ1: x = y + (z + (z + y)) + y = y + 0 + y = 0. Fails (x=0 is not a law).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton because x is a bare variable on the LHS and absent from the RHS. In a singleton magma, every element is equal to every other element, so any equation involving the same variables (or subsets thereof) holds universally. Since Equation 1 forces the magma to be a singleton, Equation 2 must also hold in that singleton magma.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z), where x is a bare variable not appearing on the right-hand side. This forces the magma to contain exactly one element. In a singleton magma, all equations are satisfied.\nPROOF: Let M be a magma satisfying x = y * ((z * (z * y)) * y). For any a, b in M, let x=a, y=b, z=c. Then a = b * ((c * (c * b)) * b). Since this holds for all a, b, c, let b=b' and c=c'. Then a = b * ((c * (c * b)) * b) and a' = b * ((c * (c * b)) * b). Thus a = a', meaning the magma has only one element"
+    },
+    {
+      "id": "normal_0029",
+      "equation1": "x = x * (x * ((y * z) * z))",
+      "equation2": "x = (x * x) * (y * (z * y))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = x * (x * ((y * z) * z)). x appears on the RHS, so no singleton forcing.\nCheck 1b: Equation 1 LHS has 0 operations. Equation 2 LHS has 0 operations. Both are bare variables.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = x*(x*((y*z)*z)) -> x = 0*(0*0) -> x = 0. Fails (x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = x*(x*(z)) -> x = z. Fails (x=0, z=1).\nMagma C (Left Projection: x*y = x): EQ1: x = x*(x*(y)) -> x = x. Holds. EQ2: x = (x*x)*(y*(z*y)) -> x = x*y -> x = x. Holds.\nMagma D (XOR: x*y = x+y mod 2): EQ1: x = x+(x+(y+z+z)) -> x = x+x+y -> x = y. Fails.\nMagma E (Constant 1: x*y = 1): EQ1: x = 1*(1*1) -> x = 1. Fails (x=0).\nMagma F (Negate-right: x*y = 1-y): EQ1: x = x*(x*(1-z)) -> x = x*(1-(1-z)) -> x = x*z -> x = 1-z. Fails.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: x = a(ax+by+c) + b(a(ay+bz+c) + b(a(az+bz+c) + b(az+bz+c) + c) + c) + c.\nFor this to hold for all x, y, z, the coefficients of y and z must be 0.\nThis forces a=0, b=0. If a=0, b=0, then x*y = c.\nEQ1: x = c. Fails.\n\nSTEP 4: ATTEMPT ALGEBRAIC PROOF\nEquation 1: x = x * (x * ((y * z) * z)).\nIf we assume the magma is a projection magma (x*y = y), EQ1 fails. If we assume x*y = x, both hold.\nConsider a magma where x*y = f(y). EQ1: x = f(f(f(z))). This forces x to be constant.\nIf the magma is not a constant magma, EQ1 is very restrictive.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces var"
+    },
+    {
+      "id": "normal_0030",
+      "equation1": "x = x * (y * ((z * x) * x))",
+      "equation2": "x * y = ((y * z) * x) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = x * (y * ((z * x) * x)). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x * y = ((y * z) * x) * y) has 3 operations. Equation 2 has fewer operations. Lean FALSE.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0 (fails for x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = x (holds). EQ2: x*y = y; RHS: ((y*z)*x)*y = (z*x)*y = x*y = y. (holds).\nMagma C (Left Projection: x*y = x): EQ1: x = x (holds). EQ2: x*y = x; RHS: ((y*z)*x)*y = (y*z)*x = y*x = y. (fails for x=1, y=0).\n\nSTEP 3: VERIFY COUNTEREXAMPLE\nMagma C (Left Projection: x*y = x):\nEQ1: x = x * (y * ((z * x) * x)) = x * (y * (z * x)) = x * (y * z) = x. (Holds for all x, y, z).\nEQ2: x * y = x. RHS: ((y * z) * x) * y = (y * z) * y = y * y = y.\nFor x=1, y=0: LHS = 1, RHS = 0. 1 != 0.\nEQ2 fails.\n\nVERDICT: FALSE\nREASONING: The Left Projection magma (x*y = x) satisfies Equation 1 universally, but fails Equation 2 because the left side evaluates to x while the right side evaluates to y.\nPROOF: \nCOUNTEREXAMPLE: Left Projection magma (x*y = x)"
+    },
+    {
+      "id": "normal_0031",
+      "equation1": "x = y * ((z * (z * w)) * z)",
+      "equation2": "x = (y * z) * (y * (w * z))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * ((z * (z * w)) * z). x is a bare variable and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 2 is x = (y * z) * (y * (w * z)). x is a bare variable and does not appear on the RHS. This also forces the magma to be a singleton.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0 (holds only if x=0). EQ2: x=0 (holds only if x=0).\nMagma B (Right Projection): EQ1: x=z. EQ2: x=z. (Fails universally).\nMagma C (Left Projection): EQ1: x=y. EQ2: x=y. (Fails universally).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nNot applicable, as the singleton constraint is already established.\n\nSTEP 4: ATTEMPT ALGEBRAIC PROOF\nSince Equation 1 forces the magma to be a singleton, the set contains only one element {e}. In a singleton magma, x=e, y=e, z=e, w=e. Both equations reduce to e=e, which is always true. Thus, any magma satisfying Equation 1 must be a singleton, and every singleton magma satisfies Equation 2.\n\nSTEP 5: DEFAULT JUDGMENT\nThe singleton constraint derived from Equation 1 is sufficient to satisfy Equation 2.\n\nVERDICT: TRUE\nREASONING: Equation 1 has the form x = f(y, z, w), where x is a bare variable not appearing on the right-hand side. This forces the magma to contain exactly one element (a singleton). Any equation where x is a bare variable not appearing on the right-hand side is satisfied by all singleton magmas. Since Equation 1 forces the magma to be a singlet"
+    },
+    {
+      "id": "normal_0032",
+      "equation1": "x * y = y * (z * (y * z))",
+      "equation2": "x * y = y * ((y * z) * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = y * (z * (y * z)). LHS is x * y (not bare x). No singleton.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS has 1 operation. Complexity is equal.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: 0 = 0 (Holds). EQ2: 0 = 0 (Holds).\nMagma B (Right Projection): EQ1: y = z (Fails, not a law).\nMagma C (Left Projection): EQ1: x = y (Fails, not a law).\nMagma D (XOR): EQ1: x+y = y+z+y+z = y (Fails, x+y=y implies x=0).\nMagma F (Negate-right): x*y = 1-y.\nEQ1: LHS = 1-y. RHS = y*(z*(1-z)) = y*(1-(1-z)) = y*z = 1-z. 1-y = 1-z implies y=z (Fails).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: ax + by + c = a(y) + b(a(z) + b(y) + c) + c = ay + abz + b^2y + bc + c = (a+b^2)y + abz + (bc+c).\nFor this to hold for all x,y,z:\nCoefficient of x: a = 0.\nCoefficient of y: b = a + b^2 = b^2. Since a=0, b=b^2. b=0 or b=1.\nCoefficient of z: 0 = ab = 0.\nConstant: c = bc + c => bc = 0.\nIf b=0: x*y = c. EQ1: c = c. EQ2: c = c. (Holds).\nIf b=1: x*y = y + c. EQ1: y+c = y+c. EQ2: y+c = y+c. (Holds).\n\nSTEP 5: DEFAULT JUDGMENT\nThe equations are satisfied by the class of magmas where x*y = y + c. In these magmas, both equations reduce to the identity y+c = y+c. Since the equations are satisfied by the same structural class of magmas and no counterexample was found in standard test magmas, the implication holds.\n\nVERDICT: TRUE\nREASONING: Both equations are satisfied by the family of magmas defi"
+    },
+    {
+      "id": "normal_0033",
+      "equation1": "x = (x * (y * y)) * (x * x)",
+      "equation2": "x = ((y * z) * z) * (y * w)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (x * (y * y)) * (x * x). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 LHS has 0 operations. Equation 2 LHS has 0 operations. Both are bare variables.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero, x*y=0): EQ1: x = (x*0)*0 = 0*0 = 0. Fails (x=0 is not a law).\nMagma B (Right Projection, x*y=y): EQ1: x = (x*y)*x = y*x = x. Holds. EQ2: x = ((y*z)*z)*(y*w) = z*(y*w) = y*w. Fails (x=y*w is not a law).\nMagma C (Left Projection, x*y=x): EQ1: x = (x*x)*x = x*x = x. Holds. EQ2: x = ((y*z)*z)*(y*w) = (y*z)*(y*w) = y*z. Fails (x=y*z is not a law).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces new variables (z, w) not present in Equation 1. Equation 1 is a constraint on x and y, while Equation 2 attempts to force a relationship involving arbitrary variables z and w that are not constrained by the structure of Equation 1.\n\nVERDICT: FALSE\nREASONING: Equation 1 is satisfied by the Left Projection magma (x*y=x), but Equation 2 fails in this magma because it reduces to x = y*z, which is not an identity.\nPROOF: \nCOUNTEREXAMPLE: Left Projection magma (x*y = x). EQ1: x = (x*x)*x = x*x = x (Holds). EQ2: x = ((y*z)*z)*(y*w) = (y*z)*(y*w) = y*z (Fails for x != y*z)."
+    },
+    {
+      "id": "normal_0034",
+      "equation1": "x = ((y * (z * y)) * y) * z",
+      "equation2": "x = y * ((z * (w * x)) * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((y * (z * y)) * y) * z. x is a bare variable on the LHS, but it appears on the RHS of Equation 2 (x = y * ((z * (w * x)) * z)). Singleton detection does not apply.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0. EQ2: x = 0. Holds.\nMagma B (Right Projection: x*y = y): EQ1: x = z. Fails (not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = y. Fails (not a law).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = y + (z + y) + y + z = y + z + y + y + z = y. Fails (x=y is not a law).\nMagma E (Constant 1: x*y = 1): EQ1: x = 1. Fails (not a law).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: x = a(a(ay+b(az+by)+c)+by+c)+bz+c.\nFor this to be an identity, the coefficients of y and z must vanish. This forces a=0, b=0. If a=0, b=0, then x = c. This forces the magma to be a singleton.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton because x is a bare variable on the LHS and the RHS is a constant expression (independent of x). In any magma where Equation 1 holds, x must equal the value of the RHS for all x, which forces the magma to have only one element. Any equation holds in a singleton magma.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z), where x does not appear on the right side. This forces the magma to be a singleton (x must equal the constant value f(y, z) for a"
+    },
+    {
+      "id": "normal_0035",
+      "equation1": "x = (y * z) * ((y * x) * w)",
+      "equation2": "x = (y * (z * x)) * (x * w)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * z) * ((y * x) * w). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 3 * operations. Equation 2 (x = (y * (z * x)) * (x * w)) has 3 * operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0*0 = 0. Fails (x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = z*w = w. Fails (x=1, w=0).\nMagma C (Left Projection: x*y = x): EQ1: x = (y*z) = y. Fails (x=1, y=0).\nMagma D (XOR: x*y = x+y): EQ1: x = y+z + (y+x+w) = x+w+z. Fails (w+z != 0).\nMagma F (Negate-right: x*y = 1-y): EQ1: x = 1-((1-z)*(1-w)) = 1-(1-(1-w)) = 1-w. Fails (x=1, w=0).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: x = a(ay+bz+c) + b(a(ay+bz+c) + bx + c) + c = a^2y + abz + ac + abay + ab^2z + abc + b^2x + bc + c.\nFor this to hold for all x, the coefficient of x on the RHS must be 1, and the coefficients of y, z, w must be 0.\nCoefficient of x: b^2 = 1 mod 3. Thus b = 1 or b = 2.\nCoefficient of w: b*c = 0 mod 3. If b=1 or 2, then c=0.\nCoefficient of y: a^2 + aba = 0 => a^2(1+b) = 0.\nIf b=1: a^2(2) = 0 => a=0.\nIf b=2: a^2(3) = 0 => a is anything.\nTest b=1, a=0, c=0: x*y = y. (Already tested in Magma B, fails).\nTest b=2, a=1, c=0: x*y = x + 2y.\nEQ1: x = (y+2z) + 2((y+2x)+2w) = y+2z + 2y + 4x + 4w = 4x + 3y + 2z + 4w = x + 2z + w. Fails.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces no new variables, but the structural arrangement of variables (specifically the placement of x) d"
+    },
+    {
+      "id": "normal_0036",
+      "equation1": "x * x = ((x * y) * y) * y",
+      "equation2": "x * x = y * (x * (y * y))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is (x * x) = (((x * y) * y) * y). LHS is (x * x), not a bare variable. No singleton forced.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS has 1 operation. Complexity is equal.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = 0 (True). EQ2: 0 = 0 (True).\nMagma B (Right Projection: x*y = y): EQ1: x = y. Fails (not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = x. (True). EQ2: x = y. Fails (not a law).\nMagma D (XOR: x*y = x+y mod 2): EQ1: x+x = (x+y+y+y) mod 2 => 0 = x+y mod 2. Fails.\nMagma F (Negate-right: x*y = 1-y): EQ1: 1-x = 1-(1-(1-y)) = 1-y. Fails.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: x*x = ax + bx + c = (a+b)x + c.\nRHS: ((x*y)*y)*y.\n(x*y)*y = a(ax+by+c) + by + c = a^2x + (ab+b)y + ac+c.\n((x*y)*y)*y = a(a^2x + (ab+b)y + ac+c) + by + c = a^3x + (a^2b+ab+b)y + a^2c+ac+c.\nFor EQ1 to hold for all x,y:\nCoeff of x: a+b = a^3.\nCoeff of y: 0 = a^2b+ab+b = b(a^2+a+1).\nConstant: c = a^2c+ac+c => c(a^2+a) = 0.\nIf b=0, then a^3=a => a=0, 1, or 2.\nIf a=1, b=0: x*y = x+c. EQ1: x+c = x+c (True).\nCheck EQ2 with x*y = x+c:\nLHS: x*x = x+c.\nRHS: y*(x*(y*y)) = y*(x*(y+c)) = y*(x+c+c) = y+(x+2c)+c = x+y+3c = x+y.\nx+c = x+y fails for all y.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a variable y in a position (y * (x * (y * y))) that does not match the structure of Equation 1. The failure in the linear magma confirms the implication does not hold.\n\nVER"
+    },
+    {
+      "id": "normal_0037",
+      "equation1": "x = (y * (z * w)) * (z * y)",
+      "equation2": "x = ((y * (z * z)) * w) * z",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * (z * w)) * (z * y). x is a bare variable and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 3 operations. Equation 2 has 3 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0 (holds only if x=0). Fails.\nMagma B (Right Projection): EQ1: x=y. Fails.\nMagma C (Left Projection): EQ1: x=y. Fails.\nMagma D (XOR): EQ1: x = y+z+w+z+y = w. Fails.\nMagma E (Constant 1): EQ1: x=1 (holds only if x=1). Fails.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton because it is of the form x = f(y, z, w) where x is a bare variable not appearing on the RHS. In a singleton magma, all equations hold. Therefore, Equation 1 implies Equation 2.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z, w) where x is a bare variable not present on the right-hand side. This structure forces the magma to contain exactly one element (a singleton). Since all equations hold in a singleton magma, Equation 2 must also hold.\nPROOF: Let M be a magma satisfying x = (y * (z * w)) * (z * y) for all x, y, z, w in M. For any fixed y, z, w, the RHS evaluates to a constant c. Thus, x = c for all x in M. This implies that for any a, b in M, a = c and b = c, so a = b. Thus, M has only one element. In a singleton magma, any equation involving the same variables holds trivially."
+    },
+    {
+      "id": "normal_0038",
+      "equation1": "x = (y * y) * (z * (z * z))",
+      "equation2": "x = x * (x * (y * (y * x)))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * y) * (z * (z * z)). x is a bare variable on the LHS and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x = 0. Since x is a variable, this forces the magma to be {0}. EQ2: 0 = 0 * (0 * (0 * (0 * 0))) = 0. Holds.\nMagma B (Right Projection): EQ1: x = z. This forces the magma to be a singleton. EQ2: x = x * (x * (y * (y * x))) = x. Holds.\nMagma C (Left Projection): EQ1: x = y. This forces the magma to be a singleton. EQ2: x = x * (x * (y * (y * x))) = x. Holds.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton (a set with exactly one element). In a singleton magma, all equations involving the same variables are satisfied because there is only one possible value for every variable. Since Equation 1 forces the magma to be a singleton, and a singleton magma satisfies all equations, the implication holds.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z), where x is a bare variable not present on the right-hand side. This forces the magma to contain exactly one element. Any equation holds in a singleton magma.\nPROOF: In a singleton magma {e}, x = e, y = e, and z = e. Equation 1 becomes e = (e * e) * (e * (e * e)), which is e = e * e, which is e = e. Equation 2 becomes e = e * (e * (e * (e * e))), which is e = e * e, which is e = e."
+    },
+    {
+      "id": "normal_0039",
+      "equation1": "x = y * (((y * z) * w) * w)",
+      "equation2": "x = (y * (y * x)) * (y * y)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is \"x = y * (((y * z) * w) * w)\". The LHS is a bare variable \"x\" and \"x\" does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 2 is \"x = (y * (y * x)) * (y * y)\". The LHS is a bare variable \"x\".\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0*(((0*0)*0)*0) = 0. Holds. EQ2: x=(0*(0*x))*(0*0) = 0*0 = 0. Holds.\nMagma B (Right Projection): EQ1: x=w. Fails (x must be w for all x,w).\nMagma C (Left Projection): EQ1: x=y. Fails (x must be y for all x,y).\nMagma D (XOR): EQ1: x = y + (y + z + w + w) = y + y + z = z. Fails.\nMagma E (Constant 1): EQ1: x=1. Holds. EQ2: x=1. Holds.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton (x = constant). In a singleton magma, all elements are equal, so any equation of the form x = f(y, z, ...) where the RHS evaluates to the unique element of the magma is satisfied. Since Equation 1 forces the magma to be a singleton, Equation 2 must also hold in that singleton magma.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z, w), where x does not appear on the right-hand side. This forces the magma to contain exactly one element (a singleton). In a singleton magma, all equations of the form x = g(y, z, ...) are satisfied because there is only one possible value for every variable.\nPROOF: Since Equation 1 forces the magma to be a singleton, every element x, y, z, w must be equal to the unique element of the magma. S"
+    },
+    {
+      "id": "normal_0040",
+      "equation1": "x = y * (y * ((y * z) * y))",
+      "equation2": "x = (((y * z) * x) * x) * y",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * (y * ((y * z) * y)). x is a bare variable and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0*0=0. Holds. EQ2: x=0*0=0. Holds.\nMagma B (Right Projection): EQ1: x=y*(y*(z*y)) = y. Fails (x=y is not a law).\nMagma C (Left Projection): EQ1: x=y*(y*(y*y)) = y. Fails.\nMagma D (XOR): EQ1: x = y+y+y+z+y = z. Fails.\n\nSTEP 5: DEFAULT JUDGMENT\nSince Equation 1 forces the magma to be a singleton (x = f(y,z)), any equation involving x, y, and z will hold in that singleton magma because there is only one element (e.g., 0=0).\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z), where x does not appear on the right-hand side. This forces the magma to contain exactly one element. In a singleton magma, all equations of the form LHS = RHS hold universally.\nPROOF: Let the magma be M. Since x = y * (y * ((y * z) * y)) for all x, y, z in M, fix y and z. Then x must equal the constant value c = y * (y * ((y * z) * y)). Since this must hold for all x, M must contain only one element. In a singleton magma, any equation holds.\nCOUNTEREXAMPLE: \n"
+    },
+    {
+      "id": "normal_0041",
+      "equation1": "(x * x) * x = (x * y) * x",
+      "equation2": "x = (y * (x * (z * z))) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is (x * x) * x = (x * y) * x. Not a singleton.\nCheck 1b: Equation 1 LHS has 2 operations. Equation 2 LHS is x (0 operations). Equation 2 is much simpler than Equation 1.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: (x*x)*x = x*x = x. (x*y)*x = y*x = x. Holds (x=x).\nEQ2: x = (y*(x*(z*z)))*y. RHS reduces to y. Equation becomes x = y. Fails for x != y.\nCounterexample found.\n\nVERDICT: FALSE\nREASONING: The Right Projection magma (x*y = y) satisfies Equation 1 because both sides reduce to x, but it fails Equation 2 because the RHS reduces to y, which is not equal to x for all x, y.\nPROOF: \nCOUNTEREXAMPLE: Right Projection magma (x*y = y)"
+    },
+    {
+      "id": "normal_0042",
+      "equation1": "x = (y * (z * x)) * (w * y)",
+      "equation2": "x * x = y * (z * (w * y))",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * (z * x)) * (w * y). x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 3 operations. Equation 2 (x * x = y * (z * (w * y))) has 3 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0*0 = 0. Fails (x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = y. Fails (x=0, y=1).\nMagma C (Left Projection: x*y = x): EQ1: x = y*z = y. Fails (x=0, y=1).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = y + (z + x) + (w + y) = x + z + w mod 2. Holds only if z+w=0. Fails universally.\nMagma E (Constant 1: x*y = 1): EQ1: x = 1. Fails (x=0).\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x = (y*(z*x))*(w*y) = (1-(1-x))*(1-y) = x*(1-y) = 1-(1-y) = y. Fails (x=0, y=1).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = 2x + y mod 3.\nEQ1: x = 2(2y + (2z + x)) + (2w + y) = 4y + 4z + 2x + 2w + y = 2x + 5y + 4z + 2w = 2x + 2y + z + 2w mod 3.\nThis does not hold for all x, y, z, w.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 is a very restrictive identity that forces specific structural properties on the magma. However, Equation 2 introduces a square (x*x) which is not constrained by the structure of Equation 1. Given the lack of a universal implication and the structural mismatch, the implication is likely false.\n\nVERDICT: FALSE\nREASONING: Equation 1 imposes a rigid structure on the magma that does not force the identity x*x = y*(z*(w*y)). Testing against standard small magmas shows that Equation 1 is "
+    },
+    {
+      "id": "normal_0043",
+      "equation1": "x = x * ((x * (y * x)) * z)",
+      "equation2": "x * y = (y * (x * y)) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = x * ((x * (y * x)) * z). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations on the RHS. Equation 2 has 3 operations on the RHS. Equation 2 has 1 operation on the LHS, Equation 1 has 0.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0 (fails, x is bare).\nMagma B (Right Projection): EQ1: x = z (fails, x=z is not a law).\nMagma C (Left Projection): EQ1: x = x (holds). EQ2: x = y (fails, x=y is not a law).\nMagma D (XOR): EQ1: x = x + (x + (y + x) + z) = x + x + x + y + x + z = y + z (fails, x=y+z is not a law).\nMagma F (Negate-right): EQ1: x = x * ((x * (y * x)) * z) = x * ((1-x) * z) = x * (1-z) = 1-z (fails, x=1-z is not a law).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = ax + by + c.\nEQ1: x = ax + b(a(ax+by+c) + b(ay+bx+c) + c) + c.\nThis forces constraints on a, b, c. For x*y = 2x + y (mod 3):\nEQ1: x = 2x + (2(2x+y) + (2(2y+x) + z)) = 2x + 4x + 2y + 4y + 2x + z = 8x + 6y + z = 2x + z (mod 3). Fails.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 (x * y = (y * (x * y)) * y) is a form of the \"Right Alternative\" or \"Right Distributive\" type identity often found in specific algebraic structures (like Steiner quasigroups or specific loops). Equation 1 is a highly restrictive identity that forces the magma to be a specific type of quasigroup or trivial structure. Given the structural complexity of Equation 1 compared to the standard identity in Equation 2, they are not logically equiv"
+    },
+    {
+      "id": "normal_0044",
+      "equation1": "x * (x * y) = (y * x) * y",
+      "equation2": "x = x * (y * ((x * z) * w))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * (x * y) = (y * x) * y. Equation 2 is x = x * (y * ((x * z) * w)). Neither is a singleton.\nCheck 1b: Equation 1 has 3 operations. Equation 2 has 4 operations. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: 0 = 0 (Holds). EQ2: x = 0 (Fails for x=1). Counterexample found.\nMagma B (Right Projection): EQ1: y = y (Holds). EQ2: x = w (Fails for x=1, w=0). Counterexample found.\nMagma C (Left Projection): EQ1: x = y (Fails for x=1, y=0).\nMagma D (XOR): EQ1: x+(x+y) = (y+x)+y \u2192 y = x (Fails).\nMagma E (Constant 1): EQ1: 1 = 1 (Holds). EQ2: x = 1 (Fails for x=0). Counterexample found.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces new variables (z, w) not present in Equation 1 and has higher nesting complexity, which strongly suggests the implication does not hold.\n\nVERDICT: FALSE\nREASONING: Equation 1 is satisfied by the \"Zero\" magma (x*y=0), where the equation becomes 0=0. However, in this same magma, Equation 2 becomes x=0, which is not a universal law as it fails for any x != 0.\nPROOF: \nCOUNTEREXAMPLE: Magma where x*y = 0 for all x, y."
+    },
+    {
+      "id": "normal_0045",
+      "equation1": "x * y = x * (x * x)",
+      "equation2": "x * y = (x * x) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = x * (x * x). LHS is x * y (not bare x). No singleton forced.\nCheck 1b: Equation 1 has 2 operations. Equation 2 has 2 operations. No obvious complexity reduction.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = 0 (Holds). EQ2: 0 = 0 (Holds).\nMagma B (Right Projection: x*y = y): EQ1: y = x (Fails for x != y).\nMagma C (Left Projection: x*y = x): EQ1: x = x (Holds). EQ2: x = x (Holds).\nMagma F (Negate-right: x*y = 1-y): EQ1: 1-y = 1-(1-(1-x)) = 1-x (Fails for x != y).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x * y = 2x + y mod 3.\nEQ1: 2x + y = 2x + (2x + x) = 2x + 3x = 2x mod 3. This holds only if y = 0. Not a law.\n\nSTEP 4: ATTEMPT ALGEBRAIC PROOF\nEquation 1: x * y = x * (x * x).\nThis implies that for any fixed x, the value of x * y is independent of y. Let x * x = k_x. Then x * y = x * k_x for all y.\nEquation 2: x * y = (x * x) * y.\nSubstitute x * y = x * k_x into Equation 2:\nLHS = x * k_x.\nRHS = (x * x) * y = k_x * y.\nSince x * k_x is a constant for a fixed x, and k_x * y must equal that constant for all y, the magma must satisfy k_x * y = k_x * k_{k_x} for all y. This is not generally true for all magmas satisfying EQ1.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a \"right-constant\" magma where x * y depends only on x. Equation 2 requires that the result of x * y is also independent of y in a specific way involving the square of x. Since Equation 1 does not force "
+    },
+    {
+      "id": "normal_0046",
+      "equation1": "x = (y * (x * z)) * (y * x)",
+      "equation2": "x = (y * y) * ((y * z) * x)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 has x on the RHS, so it does not force a singleton.\nCheck 1b: Equation 1 has 3 operations on the RHS. Equation 2 has 3 operations on the RHS. No immediate structural bias.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0*0 = 0. EQ2: x = 0*0 = 0. Both hold (x=0).\nMagma B (Right Projection: x*y = y): EQ1: x = (y*(x*z))*(y*x) = (x*z)*(x) = x. EQ2: x = (y*y)*((y*z)*x) = y*(z*x) = x. Both hold.\nMagma C (Left Projection: x*y = x): EQ1: x = (y*(x*z))*(y*x) = y*y = y. Fails (x=y).\nMagma D (XOR: x*y = x+y): EQ1: x = (y+(x+z))+(y+x) = 2y+2x+z = z. Fails (x=z).\nMagma F (Negate-right: x*y = 1-y): EQ1: x = (y*(x*z))*(y*x) = (1-(1-z))*(1-x) = z*(1-x) = 1-(1-x) = x. Holds.\nEQ2: x = (y*y)*((y*z)*x) = (1-y)*(1-(1-x)) = (1-y)*x = 1-x. Fails (x=1-x).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nNot required as counterexample found.\n\nSTEP 4: ATTEMPT ALGEBRAIC PROOF\nNot applicable.\n\nSTEP 5: DEFAULT JUDGMENT\nThe magma \"Negate-right\" (x*y = 1-y) satisfies Equation 1 but violates Equation 2.\n\nVERDICT: FALSE\nREASONING: The magma defined by x*y = 1-y satisfies Equation 1 (x = x) for all x, but fails Equation 2 (x = 1-x) for all x except x=0.5 (which does not exist in this domain).\nPROOF: \nCOUNTEREXAMPLE: Magma where x*y = 1-y. EQ1: x = (y*(x*z))*(y*x) = (1-(1-z))*(1-x) = z*(1-x) = 1-(1-x) = x. EQ2: x = (y*y)*((y*z)*x) = (1-y)*(1-(1-x)) = (1-y)*x = 1-x. Since x != 1-x for general x, EQ2 fails."
+    },
+    {
+      "id": "normal_0047",
+      "equation1": "x * x = y * (y * y)",
+      "equation2": "x = (x * y) * ((x * z) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x*x = y*(y*y). Neither side is a bare variable. No singleton forced.\nCheck 1b: Equation 1 LHS has 1 operation (*). Equation 2 LHS has 0 operations (bare x). Equation 2 is significantly more complex in structure and introduces a new variable 'z'.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = 0 (Holds). EQ2: x = (x*y)*((x*z)*x) \u2192 x = 0*0 \u2192 x = 0. Fails for x=1.\nMagma B (Right Projection: x*y = y): EQ1: x = y. Fails for x=0, y=1.\nMagma C (Left Projection: x*y = x): EQ1: x = y. Fails for x=0, y=1.\nMagma E (Constant 1: x*y = 1): EQ1: 1 = 1 (Holds). EQ2: x = 1*1 \u2192 x = 1. Fails for x=0.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'z' not present in Equation 1. Equation 2 is a bare variable equality while Equation 1 is a product equality. The structural disparity and the introduction of an unconstrained variable 'z' strongly indicate that Equation 1 cannot force the identity required by Equation 2.\n\nVERDICT: FALSE\nREASONING: Equation 1 is satisfied by constant magmas (e.g., x*y = 0), but these magmas do not satisfy Equation 2, which requires x to be a constant (0) for all x, which is a contradiction.\nPROOF: \nCOUNTEREXAMPLE: Magma where x*y = 0 for all x, y. EQ1: 0 = 0 (True). EQ2: x = (x*y)*((x*z)*x) becomes x = 0*0, which simplifies to x = 0. This fails for any x != 0."
+    },
+    {
+      "id": "normal_0048",
+      "equation1": "x = (y * z) * (w * (y * y))",
+      "equation2": "x = x * (((x * y) * x) * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * z) * (w * (y * y)). x is a bare variable on the LHS and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x = 0. Since x is a variable, this forces x=0. Singleton.\nMagma B (Right Projection): EQ1: x = y. This forces x=y for all x,y. Singleton.\nMagma C (Left Projection): EQ1: x = y. This forces x=y for all x,y. Singleton.\nMagma D (XOR): EQ1: x = y+z+w+y+y = y+z+w. This forces x=y+z+w. Singleton.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton (a set with exactly one element). In a singleton magma, all equations involving the same variables are satisfied because there is only one possible value for every variable. Since Equation 1 forces the magma to be a singleton, Equation 2 must also hold in that magma.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z, w), where x does not appear on the right-hand side. This forces the magma to contain exactly one element. In a singleton magma, all equations are satisfied.\nPROOF: Since the magma is a singleton, let the unique element be 0. Then x=0, y=0, z=0, w=0. Equation 1 becomes 0 = (0*0)*(0*(0*0)) = 0*0 = 0, which holds. Equation 2 becomes 0 = 0*(((0*0)*0)*0) = 0*(0*0) = 0*0 = 0, which also holds.\nCOUNTEREXAMPLE:"
+    },
+    {
+      "id": "normal_0049",
+      "equation1": "x = y * (x * ((z * z) * w))",
+      "equation2": "x = ((x * (y * y)) * x) * y",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * (x * ((z * z) * w)). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x = ((x * (y * y)) * x) * y) has 4 operations. Complexity is equal.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x=0 (fails for x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = y * (x * w) = w. Fails (x=w).\nMagma C (Left Projection: x*y = x): EQ1: x = y. Fails (x=y).\nMagma D (XOR: x*y = x+y): EQ1: x = y + (x + (z + z + w)) = y + x + w. Fails (y+w=0).\nMagma F (Negate-right: x*y = 1-y): EQ1: x = 1-(x*(1-w)) = 1-(1-(1-w)) = 1-w. Fails (x=1-w).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: x = ay + b(ax + by + c) + c = abx + (a + b^2)y + bc + c.\nFor this to hold for all x, y, z, w:\nCoeff of x: ab = 1.\nCoeff of y: a + b^2 = 0.\nCoeff of z: 0 = 0.\nCoeff of w: 0 = 0.\nConstant: bc + c = 0.\nFrom ab=1, b = 1/a. Substitute into a + b^2 = 0: a + 1/a^2 = 0 => a^3 = -1 = 2.\nIn Z/3Z, a^3 = a. So a = 2. Then b = 1/2 = 2.\nCheck constant: bc + c = 2c + c = 3c = 0. This holds for any c.\nSo x*y = 2x + 2y + c satisfies EQ1.\nNow check EQ2: x = ((x * (y * y)) * x) * y.\nRHS = (2(2x + 2y + c) + 2x + c) * y = (6x + 4y + 3c) * y = (0x + y + 0) * y = 2(y) + 2y + c = 4y + c = y + c.\nEQ2 becomes x = y + c. This fails for x != y + c.\n\nSTEP 5: DEFAULT JUDGMENT\nThe linear magma x*y = 2x + 2y + c satisfies EQ1 but violates EQ2.\n\nVERDICT: FALSE\nREASONING: The linear magma x*y ="
+    },
+    {
+      "id": "normal_0050",
+      "equation1": "x = (y * x) * (y * (z * y))",
+      "equation2": "x = ((y * z) * w) * (y * w)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * x) * (y * (z * y)). x appears on the RHS, so it is not a singleton-forcing equation.\nCheck 1b: Equation 1 has 3 * operations. Equation 2 (x = ((y * z) * w) * (y * w)) has 4 * operations. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x = (y * x) * (y * (z * y)) \u2192 x = x * (z * y) \u2192 x = z * y \u2192 x = y. This is not a law (fails for x=0, y=1).\nMagma C (Left Projection: x*y = x):\nEQ1: x = (y * x) * (y * (z * y)) \u2192 x = (y * x) * y \u2192 x = y * x \u2192 x = y. This is not a law.\nMagma A (Zero: x*y = 0):\nEQ1: x = 0 * 0 \u2192 x = 0. This is not a law (fails for x=1).\nMagma E (Constant 1: x*y = 1):\nEQ1: x = 1 * 1 \u2192 x = 1. This is not a law.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = 2x + y mod 3.\nEQ1: x = 2(2y + x) + (2y + (2z + y)) = 4y + 2x + 3y + 2z = 2x + 2z + y mod 3.\nThis requires x = 2x + 2z + y for all x, y, z, which is false.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'w' not present in Equation 1. In equational logic, an equation with a new variable cannot be derived from an equation with fewer variables unless the original equation forces the magma to be a singleton or satisfies a specific collapse. Since Equation 1 does not force a singleton, it cannot imply an equation containing an arbitrary new variable 'w'.\n\nVERDICT: FALSE\nREASONING: Equation 2 contains a variable 'w' that does not appear in Equation 1. In the theory of magmas,"
+    },
+    {
+      "id": "normal_0051",
+      "equation1": "x = y * ((z * y) * x)",
+      "equation2": "x = (y * (x * y)) * (x * z)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * ((z * y) * x). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 3 operations. Equation 2 (x = (y * (x * y)) * (x * z)) has 4 operations. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0. Fails (x=1, 0=0 is true, but x=1 is not 0).\nMagma B (Right Projection: x*y = y): EQ1: x = x. Holds. EQ2: x = (y * (x * y)) * (x * z) -> x = (x * y) * z -> x = z. Fails (x=1, z=0).\nMagma C (Left Projection: x*y = x): EQ1: x = y. Fails.\nMagma D (XOR: x*y = x+y): EQ1: x = y+(z+y+x) = z. Fails.\nMagma E (Constant 1: x*y = 1): EQ1: x = 1. Fails.\nMagma F (Negate-right: x*y = 1-y): EQ1: x = 1-((1-y)*x) = 1-(1-x) = x. Holds. EQ2: x = (y*(x*y))*(x*z) = (1-(1-y))*(1-z) = y*(1-z) = 1-(1-z) = z. Fails (x=1, z=0).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nNot required, counterexample found.\n\nSTEP 5: DEFAULT JUDGMENT\nThe Right Projection magma (x*y = y) satisfies Equation 1 (x = y * ((z * y) * x) becomes x = (z * y) * x = x) but fails Equation 2 (x = (y * (x * y)) * (x * z) becomes x = (x * y) * z = z).\n\nVERDICT: FALSE\nREASONING: The Right Projection magma (x*y = y) satisfies Equation 1 but does not satisfy Equation 2.\nPROOF: \nCOUNTEREXAMPLE: Right Projection magma (x*y = y). EQ1: x = y * ((z * y) * x) -> x = (z * y) * x -> x = x. EQ2: x = (y * (x * y)) * (x * z) -> x = (x * y) * z -> x = z. Since x=z is not a law, the implication is false."
+    },
+    {
+      "id": "normal_0052",
+      "equation1": "x * y = z * (z * (w * u))",
+      "equation2": "x = (((y * y) * x) * z) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = z * (z * (w * u)). LHS has 1 operation, RHS has 3. x is not bare. No singleton.\nCheck 1b: Equation 2 is x = (((y * y) * x) * z) * y. LHS has 0 operations, RHS has 4. Equation 2 is much more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x*y = y. RHS: z*(z*(w*u)) = u. Equation 1 becomes y = u. This is not a law (fails for y=0, u=1).\nMagma C (Left Projection: x*y = x):\nEQ1: x*y = x. RHS: z*(z*(w*u)) = z. Equation 1 becomes x = z. This is not a law (fails for x=0, z=1).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x+y = z+(z+(w+u)) = w+u. This is not a law (fails for x=0, y=0, w=1, u=0).\nMagma E (Constant 1: x*y = 1):\nEQ1: 1 = 1. Holds universally.\nEQ2: x = (((1*1)*x)*1)*1 = ((1*x)*1)*1 = (1*1)*1 = 1.\nEQ2 fails for x=0 (0 = 1 is false).\nSince Magma E satisfies EQ1 but violates EQ2, the implication is FALSE.\n\nVERDICT: FALSE\nREASONING: The constant magma (x*y = 1) satisfies Equation 1 because both sides evaluate to 1 for all assignments. However, it violates Equation 2 because the left side is the variable x, which can take values other than 1, while the right side evaluates to 1.\nPROOF: \nCOUNTEREXAMPLE: Magma E (x*y = 1 for all x, y)."
+    },
+    {
+      "id": "normal_0053",
+      "equation1": "x = (y * x) * (x * (z * x))",
+      "equation2": "x = (((y * z) * w) * w) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * x) * (x * (z * x)). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 3 operations. Equation 2 has 4 operations. Equation 2 introduces a new variable 'w'.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x = (y * x) * (x * (z * x)) -> x = x * (x * x) -> x = x * x -> x = x. (Holds)\nEQ2: x = (((y * z) * w) * w) * x -> x = ((z * w) * w) * x -> x = w * x -> x = x. (Holds)\nMagma C (Left Projection: x*y = x):\nEQ1: x = (y * x) * (x * (z * x)) -> x = (y * x) * x -> x = y * x -> x = y. (Fails, only holds if x=y)\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = (y+x) + (x+(z+x)) = y+x+x+z+x = y+z+x. (Fails, only holds if y+z=0)\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: x = a(ay+bx+c) + b(ax+b(az+bx+c)+c) + c\nExpanding this forces constraints on a, b, c. If we set a=0, b=1, c=0 (Right Projection), it holds. If we set a=1, b=0, c=0 (Left Projection), it fails.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'w' not present in Equation 1. In the theory of magmas, an equation containing a variable 'w' that does not appear in the premise cannot be derived unless the premise forces the magma to be a singleton or forces the operation to ignore 'w' entirely. Since Equation 1 does not force a singleton, and there is no identity forcing the absorption of 'w', the implication is false.\n\nVERDICT: FALSE\nREASONING: Equation 2 introduces a new variabl"
+    },
+    {
+      "id": "normal_0054",
+      "equation1": "x = (y * y) * y",
+      "equation2": "x * y = (y * y) * (y * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is \"x = (y * y) * y\". x is a bare variable and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 2 operations on the RHS. Equation 2 has 3 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0. Holds (singleton). EQ2: 0*0 = (0*0)*(0*0) \u2192 0=0. Holds.\nMagma B (Right Projection): EQ1: x=y. Holds only if x=y (not universal).\nMagma C (Left Projection): EQ1: x=y. Holds only if x=y (not universal).\nMagma D (XOR): EQ1: x = y+y+y = y. Holds only if x=y (not universal).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton because x is a bare variable not appearing on the RHS. In a singleton magma, there is only one element (e), and all equations involving that element are satisfied (e.g., e=e, e*e=e, etc.). Since Equation 1 forces the magma to be a singleton, and all singleton magmas satisfy all equations, Equation 2 must hold.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y), where x is a bare variable not appearing on the RHS. This forces the magma to contain exactly one element. Any equation holds in a singleton magma.\nPROOF: Let the magma be M. Equation 1 implies that for all x, y in M, x = (y * y) * y. Fix y = a. Then for all x, x = (a * a) * a. This means every element x in M is equal to the constant element c = (a * a) * a. Thus, M = {c}. In a singleton magma, the operation * is uniquely defined as c * c = c. Substituting thi"
+    },
+    {
+      "id": "normal_0055",
+      "equation1": "x = (x * ((y * z) * w)) * y",
+      "equation2": "x = y * (z * (z * (z * y)))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (x * ((y * z) * w)) * y. x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 4 * operations. Equation 2 (x = y * (z * (z * (z * y)))) has 4 * operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = (x * (0 * 0)) * y = (x * 0) * y = 0 * y = 0. Since x=0 is not a law, EQ1 fails.\nMagma B (Right Projection: x*y = y): EQ1: x = (x * w) * y = w * y = y. Since x=y is not a law, EQ1 fails.\nMagma C (Left Projection: x*y = x): EQ1: x = (x * (y * z)) * y = x * (y * z) = x. EQ1 holds. EQ2: x = y * (z * (z * (z * y))) = y. Since x=y is not a law, EQ2 fails.\nMagma C is a counterexample.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 holds in Left Projection (x*y=x) because x = (x * (y * z)) * y = x * (y * z) = x.\nEquation 2 fails in Left Projection (x*y=x) because x = y * (z * (z * (z * y))) = y.\nSince EQ1 holds universally in Left Projection and EQ2 does not, the implication is FALSE.\n\nVERDICT: FALSE\nREASONING: In a Left Projection magma (x*y = x), Equation 1 simplifies to x = x, which is a law. Equation 2 simplifies to x = y, which is not a law.\nPROOF: \nCOUNTEREXAMPLE: Left Projection magma (x*y = x) satisfies x = (x * ((y * z) * w)) * y because x = (x * (y * z)) * y = x * (y * z) = x, but violates x = y * (z * (z * (z * y))) because x = y."
+    },
+    {
+      "id": "normal_0056",
+      "equation1": "x = ((y * (y * z)) * w) * w",
+      "equation2": "x = x * ((y * z) * (y * w))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is \"x = ((y * (y * z)) * w) * w\". The LHS is a bare variable \"x\", and \"x\" does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 3 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x = 0. Since x is a variable, this forces the magma to be {0}. EQ2: 0 = 0*0 = 0. Holds.\nMagma B (Right Projection): EQ1: x = w. This forces the magma to be a singleton. EQ2: w = w*w = w. Holds.\nMagma C (Left Projection): EQ1: x = y. This forces the magma to be a singleton. EQ2: y = y*y = y. Holds.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton because it is of the form x = f(y, z, w) where x is a bare variable not appearing on the RHS. In a singleton magma, all elements are equal, so all equations hold. Therefore, Equation 1 implies Equation 2.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z, w) where x does not appear on the right-hand side. This forces the magma to contain exactly one element. In a singleton magma, every equation holds universally.\nPROOF: Let M be a magma satisfying x = ((y * (y * z)) * w) * w for all x, y, z, w in M. Fix y, z, w. Since the equation holds for all x, and the RHS is independent of x, let the RHS be the constant c. Then x = c for all x in M. This implies M = {c}. In a singleton magma, any equation x = t(x, y, z, w) holds because all variables evaluate to the unique element c. Thus"
+    },
+    {
+      "id": "normal_0057",
+      "equation1": "x = ((y * (z * z)) * w) * y",
+      "equation2": "x = y * (((z * x) * w) * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((y * (z * z)) * w) * y. x is a bare variable on the LHS, but x appears on the RHS of Equation 2. Singleton detection does not apply.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 4 operations. Complexity is equal.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0. EQ2: x = 0. Holds.\nMagma B (Right Projection: x*y = y): EQ1: x = y. Fails (not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = ((y * z) * w) * y = y. Fails (not a law).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = y + (z + z) + w + y = y + 0 + w + y = w. Fails (x = w is not a law).\nMagma E (Constant 1: x*y = 1): EQ1: x = 1. Fails (not a law).\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x = ((y * (z * z)) * w) * y = ((1-(1-z)) * w) * y = (z * w) * y = 1-y. Fails (x = 1-y is not a law).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: x = ((y * (z * z)) * w) * y\nRHS = ((a(ay+bz+c) + bw + c) * y)\nRHS = a(a(ay+bz+c) + bw + c) + by + c\nRHS = a^3 y + a^2 b z + a^2 c + ab w + ac + by + c\nFor this to equal x for all y, z, w:\nCoefficients of y, z, w must be 0.\nCoefficient of z: a^2 b = 0.\nCoefficient of w: ab = 0.\nIf a=0, then x = c. This forces a singleton (x=c).\nIf b=0, then x = a^3 y + ac + c. For this to be x, a^3 must be 0 (so a=0) and ac+c=0. Again, singleton.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton because the RHS is independent of x, yet x is equated to it. In any"
+    },
+    {
+      "id": "normal_0058",
+      "equation1": "x = (((y * z) * y) * y) * y",
+      "equation2": "x * y = ((x * x) * z) * w",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (((y * z) * y) * y) * y. x is a bare variable and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x * y = ((x * x) * z) * w) has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0 (holds). EQ2: 0=0 (holds).\nMagma B (Right Projection): EQ1: x=y (fails for x != y).\nMagma C (Left Projection): EQ1: x=y (fails for x != y).\nMagma D (XOR): EQ1: x = y+z+y+y+y = y+z (fails for x != y+z).\nMagma E (Constant 1): EQ1: x=1 (fails for x != 1).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton (a set with exactly one element). In a singleton magma, there is only one element (let's call it 0). Thus, x=0, y=0, z=0, w=0. Equation 2 becomes 0*0 = ((0*0)*0)*0, which simplifies to 0=0. Since all equations hold in a singleton magma, the implication is true.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z), where x is a bare variable not appearing on the right-hand side. This forces the magma to contain exactly one element. In a singleton magma, all equations are satisfied.\nPROOF: Since Equation 1 forces the magma to be a singleton, every variable x, y, z, w must equal the unique element of the magma. Substituting this unique element into Equation 2 results in an identity that holds for the singleton magma."
+    },
+    {
+      "id": "normal_0059",
+      "equation1": "x = x * (y * ((z * z) * z))",
+      "equation2": "x = ((y * (z * w)) * w) * z",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = x * (y * ((z * z) * z)). x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x = ((y * (z * w)) * w) * z) has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0 (fails, x is bare). EQ2: x=0 (fails).\nMagma B (Right Projection): EQ1: x = z (fails, x=z is not a law).\nMagma C (Left Projection): EQ1: x = x (holds). EQ2: x = y (fails, x=y is not a law).\nMagma D (XOR): EQ1: x = x + y + z + z + z = x + y + z (fails).\nMagma F (Negate-right): EQ1: x = 1 - (y * (1 - z)) = 1 - (1 - (1 - z)) = 1 - z (fails).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = ax + by + c.\nEQ1: x = ax + b(ay + b(a(az+bz+c)+b(az+bz+c)+c)+c)\nFor this to hold for all x, the coefficient of x on the RHS must be 1, and the coefficients of y and z must be 0.\nRHS coefficient of x: a^4. Thus a^4 = 1 mod 3. Since a is in {0,1,2}, a=1 or a=2.\nIf a=1: x = x + y + z + c(1+b+b^2+b^3). For this to be x, y and z must vanish, so b=0. Then c(1+0+0+0) = c = 0.\nSo x*y = x is the only linear solution.\nCheck EQ2 with x*y = x:\nLHS: x. RHS: ((y*z)*w)*z = (y*w)*z = y.\nSince x = y is not a law, the implication is FALSE.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'w' not present in Equation 1. This is a strong indicator that the implication does not hold.\n\nVERDICT: FALSE\nREASONING: The implication fails in the Left Projection magma (x*y = x), where Equation 1 holds as x=x, but Eq"
+    },
+    {
+      "id": "normal_0060",
+      "equation1": "x = y * (((z * y) * x) * y)",
+      "equation2": "x * y = y * (z * w)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * (((z * y) * x) * y). x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 4 operations on the RHS. Equation 2 (x * y = y * (z * w)) has 1 operation on the LHS and 2 on the RHS.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x = y * (((z * y) * x) * y) -> x = y * ((y * x) * y) -> x = y * (x * y) -> x = y. This only holds if x=y for all x,y (not a universal law).\nMagma C (Left Projection: x*y = x):\nEQ1: x = y * (((z * y) * x) * y) -> x = y * ((z * x) * y) -> x = y * (z * x) -> x = y. This only holds if x=y for all x,y (not a universal law).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = y + (z + y + x + y) = y + z + x + y + y = x + y + z. This holds only if y+z = 0, which is not a universal law.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = 2x + y mod 3.\nEQ1: x = 2y + (2(2(2z+y) + x) + y) = 2y + (2(4z + 2y + x) + y) = 2y + (2(z + 2y + x) + y) = 2y + 2z + 4y + 2x + y = 2x + 7y + 2z = 2x + y + 2z.\nThis requires 2x + y + 2z = x, or x + y + 2z = 0, which is not a universal law.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces new variables (w) not present in Equation 1. Equation 1 is a specific constraint on x, y, and z, while Equation 2 is a general identity involving an additional variable w. There is no logical path to derive the existence of an arbitrary w from Equation 1.\n\nVERDICT: FALSE\nREASONING: Equation 1 constrains the relationship between x, y, and z, bu"
+    },
+    {
+      "id": "normal_0061",
+      "equation1": "x * y = x * (y * (y * z))",
+      "equation2": "x = y * (z * (w * x))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = x * (y * (y * z)). LHS is not a bare variable. No singleton forced.\nCheck 1b: Equation 1 has 3 * operations. Equation 2 has 3 * operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: LHS = y. RHS = y * (y * z) = z. y = z. Fails (not a law).\nMagma C (Left Projection: x*y = x):\nEQ1: LHS = x. RHS = x * (y * y) = x. Holds.\nEQ2: LHS = x. RHS = y * (z * (w * x)) = y. x = y. Fails (not a law).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: ax + by + c = ax + b(ay + bz + c) + c = ax + aby + b^2z + bc + c.\nComparing coefficients:\nx: a = a (always)\ny: b = ab\nz: 0 = b^2\nc: c = bc + c => bc = 0.\nFrom b^2 = 0 mod 3, b = 0.\nIf b = 0, then EQ1 becomes: ax + c = ax + c. This holds for any a, c.\nNow check EQ2 with b = 0:\nLHS = x.\nRHS = y * (z * (w * x)) = ay + b(az + b(aw + bx + c) + c) + c = ay + c.\nFor EQ2 to hold, x = ay + c must be a law. This fails for any a, c (e.g., x=0, y=1).\n\nSTEP 4: ATTEMPT ALGEBRAIC PROOF\nN/A.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'w' not present in Equation 1. This is a strong indicator that the implication is FALSE.\n\nVERDICT: FALSE\nREASONING: The implication fails in the Left Projection magma (x*y = x), where Equation 1 is a law but Equation 2 is not. Additionally, Equation 2 introduces a new variable 'w' not present in Equation 1, which generally prevents the implication from holding across all magmas.\n"
+    },
+    {
+      "id": "normal_0062",
+      "equation1": "x = ((y * x) * (y * z)) * y",
+      "equation2": "x = ((y * z) * (y * w)) * u",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((y * x) * (y * z)) * y. x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 is x = ((y * z) * (y * w)) * u. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0. Fails (x is bare).\nMagma B (Right Projection: x*y = y): EQ1: x = y. Fails (x=y is not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = ((y*x)*(y*z))*y = (y*x)*y = y*x = y. Fails (x=y is not a law).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = (y+x) + (y+z) + y = x + z mod 2. Fails (x = x+z implies z=0).\nMagma E (Constant 1: x*y = 1): EQ1: x = 1. Fails (x is bare).\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x = ((y*x)*(y*z))*y = (1-(1-z))*y = z*y = 1-y. Fails (x = 1-y is not a law).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = 2x + y mod 3.\nEQ1: x = 2((2y+x) + (2y+z)) + y = 2(4y+x+z) + y = 8y + 2x + 2z + y = 2y + 2x + 2z + y = 3y + 2x + 2z = 2x + 2z mod 3.\nThis forces x = 2x + 2z, which is not a law for all x,z.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces new variables (w, u) not present in Equation 1. Equation 1 constrains x in terms of y and z. Equation 2 requires x to be equal to an expression involving y, z, w, and u. Since Equation 1 does not constrain the magma to be a singleton, there exist magmas where x is not uniquely determined by y, z, w, and u in the form of Equation 2.\n\nVERDICT: FALSE\nREASONING: Equation 1 does not force the magma to be a "
+    },
+    {
+      "id": "normal_0063",
+      "equation1": "x = ((y * (x * y)) * y) * z",
+      "equation2": "x = ((y * z) * x) * (z * z)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((y * (x * y)) * y) * z. x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 3 operations. Equation 2 has fewer operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0. EQ2: x = 0. Holds.\nMagma B (Right Projection: x*y = y): EQ1: x = z. Fails (not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = x. Holds. EQ2: x = x. Holds.\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = (y + (x + y)) + y + z = x + z. Fails (x = x+z only if z=0).\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x = ((y * (x * y)) * y) * z = (1 - (1 - (1 - y))) * z = (1 - (1 - y)) * z = y * z = 1 - z. Fails (x = 1-z only if x=1-z).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: x = ((y * (x * y)) * y) * z\nRHS = ((y * (ax + by + c)) * y) * z\n= ((a(y) + b(ax + by + c) + c) * y) * z\n= ((ay + abx + b^2y + bc + c) * y) * z\n= (a(ay + abx + b^2y + bc + c) + by + c) * z\n= (a^2y + a^2bx + ab^2y + abc + ac + by + c) * z\n= a(a^2y + a^2bx + ab^2y + abc + ac + by + c) + bz + c\n= a^3y + a^2bx + a^2b^2y + a^2bc + a^2c + aby + ac + bz + c\nFor this to equal x for all x, y, z:\nCoefficient of x: a^2b = 1\nCoefficient of z: b = 0\nIf b = 0, then a^2(0) = 0, which cannot be 1. No linear magma satisfies EQ1.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 and Equation 2 involve the same variables {x, y, z}. However, Equation 1 is a very restrictive constraint on the structure of the magma. In most "
+    },
+    {
+      "id": "normal_0064",
+      "equation1": "x = x * ((y * y) * (z * z))",
+      "equation2": "x = y * (z * (w * z))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = x * ((y * y) * (z * z)). x is a bare variable on the LHS, but x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 3 * operations. Equation 2 (x = y * (z * (w * z))) has 3 * operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0 (Fails for x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = z (Fails for x=0, z=1).\nMagma C (Left Projection: x*y = x): EQ1: x = x (Holds). EQ2: x = y (Fails for x=0, y=1).\nMagma D (XOR: x*y = x+y mod 2): EQ1: x = x + (y+y) + (z+z) = x + 0 + 0 = x (Holds). EQ2: x = y + (z + (w + z)) = y + w (Fails for x=0, y=1, w=0).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'w' not present in Equation 1. In the context of universal algebra, an equation containing a variable not present in the premise cannot be derived from that premise unless the magma is trivial.\n\nVERDICT: FALSE\nREASONING: Equation 2 introduces a new variable 'w' that is not constrained by Equation 1. In the XOR magma (x*y = x+y mod 2), Equation 1 is satisfied as a law (x = x), but Equation 2 reduces to x = y + w, which is not a law.\nPROOF: \nCOUNTEREXAMPLE: XOR magma (x*y = x+y mod 2) satisfies x = x * ((y * y) * (z * z)) but fails x = y * (z * (w * z))."
+    },
+    {
+      "id": "normal_0065",
+      "equation1": "x = ((y * z) * w) * (x * y)",
+      "equation2": "x * y = y * (y * (z * z))",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((y * z) * w) * (x * y). x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 LHS has 0 operations. Equation 2 LHS has 1 operation. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0*0 = 0. Fails (x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = (y*z)*w * (x*y) = w * y = y. Fails (x=1, y=0).\nMagma C (Left Projection: x*y = x): EQ1: x = (y*z)*w * (x*y) = (y*z) * x = y*z = y. Fails (x=1, y=0).\nMagma D (XOR: x*y = x+y mod 2): EQ1: x = (y+z+w) + (x+y) = x + z + w. Fails (z+w != 0).\nMagma E (Constant 1: x*y = 1): EQ1: x = 1*1 = 1. Fails (x=0).\nMagma F (Negate-right: x*y = 1-y): EQ1: x = (1-(1-z))*w * (1-y) = z*w * (1-y) = 1-(1-y) = y. Fails (x=1, y=0).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: x = a(a(ay+bz+c) + bw + c) + b(ax+by+c) + c\nx = a^3y + a^2bz + a^2c + abw + ac + abx + b^2y + bc + c\nx = (ab)x + (a^3+b^2)y + (a^2b)z + (ab)w + (a^2c+ac+bc+c)\nFor this to hold for all x,y,z,w:\nCoeff of x: ab = 1.\nCoeff of y: a^3+b^2 = 0.\nCoeff of z: a^2b = 0.\nCoeff of w: ab = 0.\nSince ab=1 and ab=0, this is impossible. No such linear magma exists.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a variable 'z' in a specific nested structure (y*(y*(z*z))) that is not constrained by the structure of Equation 1. The structural complexity of Equation 2 is higher, and Equation 1 does not force the identity required for Equation 2"
+    },
+    {
+      "id": "normal_0066",
+      "equation1": "x * y = (z * z) * (w * x)",
+      "equation2": "x * x = (x * (y * x)) * z",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = (z * z) * (w * x). LHS is x * y (not bare x). No singleton.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS has 1 operation.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: 0 = 0 (Holds). EQ2: 0 = 0 (Holds).\nMagma B (Right Projection): EQ1: y = x (Fails, not a law).\nMagma C (Left Projection): EQ1: x = z (Fails, not a law).\nMagma D (XOR): EQ1: x+y = z+z+w+x = w+x (Fails, not a law).\nMagma E (Constant 1): EQ1: 1 = 1 (Holds). EQ2: 1 = 1 (Holds).\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x*y = 1-y. RHS: (z*z)*(w*x) = (1-z)*(w*x) = 1-(w*x) = 1-(1-x) = x.\nEQ1 becomes 1-y = x. This is not a law (fails for y=0, x=0).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: ax + by + c = a(az + bz + c) + b(aw + bx + c) + c\n= a^2z + abz + ac + abw + b^2x + bc + c\nEquating coefficients:\nx: a = b^2\ny: b = 0\nz: 0 = a^2 + ab\nw: 0 = ab\nConstant: c = ac + bc + c\nSince b=0, then a=0. If a=0 and b=0, then x*y = c.\nEQ1: c = c (Holds).\nEQ2: x*x = (x*(y*x))*z => c = c*z = c (Holds).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a constant magma (x*y = c) because the variables z and w appear on the RHS but not the LHS, and x appears on both sides in a way that forces the operation to collapse. Specifically, x*y = (z*z)*(w*x) implies that the value is independent of y, z, and w. If x*y = c, then x*x = c and (x*(y*x))*z = c*z = c. Thus, Equation 2 holds.\n\nVERDICT: TRUE\nREASONING: Equat"
+    },
+    {
+      "id": "normal_0067",
+      "equation1": "x = y * (((z * y) * y) * w)",
+      "equation2": "x = (((y * x) * y) * y) * y",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * (((z * y) * y) * w). x is a bare variable on the LHS and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 2 is x = (((y * x) * y) * y) * y. Both equations have x as a bare variable on the LHS.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0*(((z*0)*0)*w) = 0*0 = 0. Since x=0 is not true for all x, EQ1 fails.\nMagma B (Right Projection): EQ1: x=w. Since x=w is not true for all x,w, EQ1 fails.\nMagma C (Left Projection): EQ1: x=y. Since x=y is not true for all x,y, EQ1 fails.\nMagma D (XOR): EQ1: x = y + (z + y + y + w) = y + z + y + y + w = z + y + w. Since x = z + y + w is not true for all x,y,z,w, EQ1 fails.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton because x is a bare variable on the LHS and does not appear on the RHS. In a singleton magma, all elements are equal, so any equation of the form x = f(...) where x is a bare variable and the RHS evaluates to the unique element of the magma is satisfied. Since both equations force the magma to be a singleton, they are equivalent in the class of all magmas.\n\nVERDICT: TRUE\nREASONING: Equation 1 forces the magma to be a singleton because x is a bare variable on the LHS and does not appear on the RHS. Any equation of the form x = f(y, z, ...) where x is a bare variable and does not appear on the RHS forces the magma to be a singleton. Since both equations force the magma to be a singl"
+    },
+    {
+      "id": "normal_0068",
+      "equation1": "x * y = (z * w) * (z * x)",
+      "equation2": "x * y = z * (z * (x * x))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = (z * w) * (z * x). LHS is x * y (not bare x). No singleton.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS has 1 operation.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = (0*0) = 0 (Holds). EQ2: 0 = 0*(0*0) = 0 (Holds).\nMagma B (Right Projection: x*y = y): EQ1: y = (z*w)*(z*x) = x. Fails (y=x is not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = (z*w)*(z*x) = z*w. Fails (x=z*w is not a law).\nMagma D (XOR: x*y = x+y): EQ1: x+y = (z+w)+(z+x) = w+x. Fails (y=w is not a law).\nMagma F (Negate-right: x*y = 1-y): EQ1: 1-y = (z*w)*(z*x) = 1-(1-x) = x. Fails (1-y=x is not a law).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: ax + by + c = a(az + bw + c) + b(az + ax + c) + c = (a^2+ab)z + abw + a^2x + ac + bc + c.\nFor this to hold for all x,y,z,w:\nCoeff of y: b = 0.\nCoeff of w: ab = 0. Since b=0, this holds.\nCoeff of x: a = a^2. So a=0 or a=1.\nIf a=0: 0 = 0. EQ1 holds for x*y = c.\nIf a=1: x+c = z + x + 2c. 0 = z + c. Fails.\nThus, only x*y = c (constant magma) satisfies EQ1.\nIn constant magma x*y = c:\nEQ1: c = c (Holds).\nEQ2: c = c*(c*c) = c (Holds).\n\nSTEP 4: ATTEMPT ALGEBRAIC PROOF\nEquation 1: x * y = (z * w) * (z * x).\nFix z, w. Let (z * w) = k. Then x * y = k * (z * x).\nIf we set y = x, x * x = k * (z * x).\nIf we set x = z, z * y = k * (z * z).\nThis structure forces the magma to be a constant magma (x*y = c) because the RHS is independent of y. If x*"
+    },
+    {
+      "id": "normal_0069",
+      "equation1": "x = ((y * (z * z)) * x) * w",
+      "equation2": "(x * y) * z = (y * x) * z",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((y * (z * z)) * x) * w. x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 4 * operations. Equation 2 ((x * y) * z = (y * x) * z) has 2 * operations. Equation 2 has fewer operations, suggesting the implication is likely FALSE.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = ((y * (z * z)) * x) * w becomes x = (0 * x) * w = 0 * w = 0. This holds only if x=0. Fails.\nMagma B (Right Projection: x*y = y): EQ1: x = ((y * (z * z)) * x) * w becomes x = (z * x) * w = x * w = w. This holds only if x=w. Fails.\nMagma C (Left Projection: x*y = x): EQ1: x = ((y * (z * z)) * x) * w becomes x = (y * x) * w = y * x = y. This holds only if x=y. Fails.\nMagma D (XOR: x*y = x+y mod 2): EQ1: x = y+z+z+x+w = y+x+w. This holds only if y+w=0. Fails.\nMagma F (Negate-right: x*y = 1-y): EQ1: x = ((y * (z * z)) * x) * w = ((1-(1-z)) * x) * w = (z * x) * w = 1-w. This holds only if x=1-w. Fails.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: x = a(a(ay+bz+c) + b(az+bz+c) + c) + bw + c.\nFor this to hold for all x, y, z, w, the coefficients of y, z, and w must be 0.\nCoefficient of w: b = 0.\nIf b=0, x*y = ax + c.\nEQ1: x = a(a(ay+c) + c) + c = a^3 y + a^2 c + ac + c.\nFor this to hold for all x, y, the coefficient of y must be 0, so a=0.\nIf a=0, x*y = c.\nEQ1: x = c. This forces x to be a constant, which is not true for all x.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 is a very res"
+    },
+    {
+      "id": "normal_0070",
+      "equation1": "x * y = (y * y) * z",
+      "equation2": "x * (y * z) = (x * x) * y",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = (y * y) * z. LHS is x * y (not bare x). No singleton forced.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS (x * (y * z)) has 2 operations. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = 0 (Holds). EQ2: 0 = 0 (Holds).\nMagma B (Right Projection: x*y = y): EQ1: y = z (Fails for y != z).\nMagma C (Left Projection: x*y = x): EQ1: x = y (Fails for x != y).\nMagma D (XOR: x*y = x+y mod 2): EQ1: x+y = (y+y)+z = z. Fails (x+y != z).\nMagma E (Constant 1: x*y = 1): EQ1: 1 = 1 (Holds). EQ2: 1 = 1 (Holds).\nMagma F (Negate-right: x*y = 1-y): EQ1: 1-y = 1-z. Fails (y != z).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: ax + by + c = a(ay + by + c) + bz + c = a^2y + aby + ac + bz + c.\nFor this to hold for all x, y, z:\nCoefficient of x: a = 0.\nCoefficient of z: 0 = b.\nCoefficient of y: b = a^2 + ab.\nIf a=0 and b=0, then x*y = c.\nEQ1: c = c (Holds).\nEQ2: x*(y*z) = c; (x*x)*y = c.\nThis magma (x*y = c) satisfies both.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 implies x*y = (y*y)*z. If we set y=y, z=y, we get x*y = (y*y)*y. This implies x*y is independent of x. Thus, x*y = f(y).\nSubstituting into EQ1: f(y) = f(y)*z = f(z).\nThis forces f(y) = f(z) for all y, z, meaning the magma is a constant magma (x*y = c).\nIn any constant magma, x*y = c, so x*(y*z) = c and (x*x)*y = c.\nSince EQ1 forces the magma to be a constant magma, and all constant mag"
+    },
+    {
+      "id": "normal_0071",
+      "equation1": "x * y = ((z * w) * z) * w",
+      "equation2": "x = ((y * (y * y)) * x) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = ((z * w) * z) * w. LHS has 1 operation, RHS has 3. Not a singleton.\nCheck 1b: Equation 2 is x = ((y * (y * y)) * x) * x. LHS has 0 operations, RHS has 4. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = ((0*0)*0)*0 = 0. Holds. EQ2: x = ((0*0)*x)*x = (0*x)*x = 0*x = 0. Fails for x=1.\nMagma B (Right Projection: x*y = y): EQ1: y = ((z*w)*z)*w = w. Fails (y=w is not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = ((z*w)*z)*w = z*w = z. Fails (x=z is not a law).\nMagma D (XOR: x*y = x+y): EQ1: x+y = (z+w+z)+w = 2z+2w = 0. Fails.\nMagma E (Constant 1: x*y = 1): EQ1: 1 = ((1*1)*1)*1 = 1. Holds. EQ2: x = ((1*1)*x)*x = (1*x)*x = 1*x = 1. Fails for x=0.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = 2x + y mod 3.\nEQ1: 2x + y = 2(2(2z+w)+z) + w = 2(4z+2w+z) + w = 2(5z+2w) + w = 10z + 4w + w = z + 2w.\nSince 2x+y = z+2w does not hold for all x,y,z,w, this magma does not satisfy EQ1.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 is a law that equates a product to a constant-like structure (if the magma were associative, it would imply x*y = z*w, forcing the magma to be a constant magma). Equation 2 is a complex identity involving x and y. Since Equation 1 does not force the magma to be a singleton or satisfy the specific structure of Equation 2, and Equation 2 introduces a variable y that is not constrained by Equation 1 in a way that satisfies the identity, the implicat"
+    },
+    {
+      "id": "normal_0072",
+      "equation1": "x = ((y * (z * y)) * w) * x",
+      "equation2": "x = (x * (y * (z * z))) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 (x = ((y * (z * y)) * w) * x) has x on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x = (x * (y * (z * z))) * x) has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0. EQ2: x = 0. Holds.\nMagma B (Right Projection: x*y = y): EQ1: x = x. EQ2: x = x. Holds.\nMagma C (Left Projection: x*y = x): EQ1: x = ((y * (z * y)) * w) * x = (y * w) * x = y * x = y. Fails (x=y).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = (y+z+y+w+x) = (z+w+x). Fails (x = z+w+x implies z+w=0).\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x = ((y * (z * y)) * w) * x = ((1-(1-y)) * w) * x = (y * w) * x = (1-w) * x = 1-x. Fails (x = 1-x).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: x = a(a(ay+bz+c) + bw + c) + bx + c = a^3y + a^2bz + a^2c + abw + ac + bx + c.\nFor this to hold for all y, z, w, the coefficients of y, z, w must be 0.\na^3 = 0, a^2b = 0, ab = 0.\nIf a=0, then x = bx + c. For this to hold for all x, b must be 1 and c must be 0.\nSo x*y = y.\nIf x*y = y, then EQ2: x = (x * (y * (z * z))) * x = (y * z) * x = z * x = x. Holds.\n\nSTEP 4: ATTEMPT ALGEBRAIC PROOF\nEquation 1: x = ((y * (z * y)) * w) * x.\nLet w = y. Then x = ((y * (z * y)) * y) * x.\nThis implies that for any fixed x, the operation is right-cancellative or constrained by the structure. In any magma where EQ1 holds, the term ((y * (z * y)) * w) acts as a left-identity for x.\n\nSTEP 5: DEFAULT JUDGMENT\nThe"
+    },
+    {
+      "id": "normal_0073",
+      "equation1": "x * (x * y) = (x * z) * x",
+      "equation2": "x = (y * z) * (z * (w * w))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * (x * y) = (x * z) * x. Equation 2 is x = (y * z) * (z * (w * w)). Neither is a singleton.\nCheck 1b: Equation 1 has 3 operations. Equation 2 has 3 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): x*y = 0. EQ1: 0 = 0 (Holds). EQ2: x = 0 (Fails for x=1). Counterexample found.\nMagma B (Right Projection): x*y = y. EQ1: y = x (Fails for x=1, y=0).\nMagma C (Left Projection): x*y = x. EQ1: x = x (Holds). EQ2: x = y (Fails for x=1, y=0). Counterexample found.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces new variables (w) not present in Equation 1 and asserts a specific value for x regardless of other variables, which is structurally impossible to derive from an identity that does not force a singleton.\n\nVERDICT: FALSE\nREASONING: Equation 1 is satisfied by the Left Projection magma (x*y = x), where the equation becomes x = x. However, in this same magma, Equation 2 becomes x = y, which is not a universal law.\nPROOF: \nCOUNTEREXAMPLE: Left Projection magma (x*y = x). EQ1: x*(x*y) = x*x = x; (x*z)*x = x*x = x. Holds. EQ2: x = (y*z)*(z*(w*w)) = y*z = y. Fails for x=1, y=0."
+    },
+    {
+      "id": "normal_0074",
+      "equation1": "x * y = (z * (w * x)) * z",
+      "equation2": "x = y * (z * (z * (z * x)))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = (z * (w * x)) * z. LHS has 1 operation, RHS has 3. Not a singleton.\nCheck 1b: Equation 2 is x = y * (z * (z * (z * x))). LHS has 0 operations, RHS has 4. Equation 2 is significantly more complex than Equation 1.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x*y = y. RHS: (z*(w*x))*z = z. So y = z. This is not a law (fails for y != z).\nMagma C (Left Projection: x*y = x):\nEQ1: x*y = x. RHS: (z*(w*x))*z = z. So x = z. This is not a law (fails for x != z).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x+y = (z+(w+x))+z = 2z+w+x = w+x. This implies y = w. Not a law.\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x*y = 1-y. RHS: (z*(w*x))*z = (1-(1-x))*z = x*z = 1-z. So 1-y = 1-z, which implies y = z. Not a law.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: ax + by + c = a(a(az + bw + c) + bx + c) + bz + c.\nThis forces coefficients to be zero or specific values. In general, such equations do not hold for all x, y, z, w unless the magma is trivial.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces variables (y, z) that are not constrained by Equation 1 in a way that forces the identity x = y * (z * (z * (z * x))). Since Equation 1 is a specific constraint on the interaction of x, y, z, and w, and Equation 2 is a much stronger identity that does not follow from the structure of Equation 1, the implication is false.\n\nVERDICT: FALSE\nREASONING: Equation 1 does not impose "
+    },
+    {
+      "id": "normal_0075",
+      "equation1": "x = y * ((y * (z * w)) * y)",
+      "equation2": "x * y = y * ((y * y) * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * ((y * (z * w)) * y). x is a bare variable and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 3 operations. Equation 2 has 3 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0*...=0. Holds only if x=0. Not a law.\nMagma B (Right Projection): EQ1: x=y. Holds only if x=y. Not a law.\nMagma C (Left Projection): EQ1: x=y. Holds only if x=y. Not a law.\nMagma D (XOR): EQ1: x = y + (y + (z + w) + y) = y + y + z + w + y = z + w + y. Holds only if x = z + w + y. Not a law.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton (x = f(y,z,w)). In a singleton magma, all elements are equal (x=y=z=w). Thus, any equation involving these variables holds trivially.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z, w), where x does not appear on the right-hand side. This forces the magma to contain exactly one element. In a singleton magma, all equations are satisfied.\nPROOF: Since Equation 1 forces the magma to be a singleton, every element in the magma is equal to every other element. Consequently, for any assignment of variables, both sides of Equation 2 evaluate to the unique element of the magma, satisfying the equation.\nCOUNTEREXAMPLE:"
+    },
+    {
+      "id": "normal_0076",
+      "equation1": "x = ((y * z) * (x * w)) * u",
+      "equation2": "x = y * (x * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((y * z) * (x * w)) * u. x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x = y * (x * x)) has 2 operations. Equation 2 has fewer operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = (0 * 0) * 0 = 0. Fails (x=1, 0=0 is false).\nMagma B (Right Projection: x*y = y): EQ1: x = ((y*z)*(x*w))*u = u. Fails (x=u is not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = (y*z)*x = y*x = y. Fails (x=y is not a law).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = y+z+x+w+u (mod 2). This simplifies to 0 = y+z+w+u (mod 2). Fails (not a law).\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x = ((y*z)*(x*w))*u = (1-(1-w))*u = w*u = 1-u. Fails (x=1-u is not a law).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = 2x + y mod 3.\nEQ1: x = 2((2y+z) + (2x+w)) + u = 4y + 2z + 4x + 2w + u = y + 2z + x + 2w + u (mod 3).\nThis implies 0 = y + 2z + 2w + u (mod 3). This is not a law for all y,z,w,u.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 is a very restrictive identity that forces the magma to collapse into a specific structure (often a singleton or a constant magma). Equation 2 is a standard identity (like those found in idempotent or specific algebraic structures). Since Equation 1 forces the magma to be a singleton (by substituting variables to show x=constant), and a singleton satisfies all equations, the implication holds.\n\nVERDICT: TRUE\nREASONING: Equation 1 is a \"strong\" identi"
+    },
+    {
+      "id": "normal_0077",
+      "equation1": "x * y = (y * y) * (z * w)",
+      "equation2": "x * y = ((z * w) * x) * w",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * y = (y * y) * (z * w). LHS is x * y (not bare x). No singleton.\nCheck 1b: Equation 1 LHS has 1 operation. Equation 2 LHS has 1 operation. Equal complexity.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = 0*0 = 0 (Holds). EQ2: 0 = (0*0)*0 = 0 (Holds).\nMagma B (Right Projection: x*y = y): EQ1: y = (y*y)*w = y*w = w. Fails (y=w is not a law).\nMagma C (Left Projection: x*y = x): EQ1: x = (y*y)*(z*w) = y*y = y. Fails (x=y is not a law).\nMagma D (XOR: x*y = x+y mod 2): EQ1: x+y = (y+y) + (z+w) = 0 + z + w = z+w. Fails (x+y = z+w is not a law).\nMagma E (Constant 1: x*y = 1): EQ1: 1 = 1*1 = 1 (Holds). EQ2: 1 = (1*1)*1 = 1 (Holds).\nMagma F (Negate-right: x*y = 1-y): EQ1: 1-y = (1-y)*(z*w) = 1-(z*w) = 1-(1-w) = w. Fails (1-y = w is not a law).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c.\nEQ1: ax + by + c = a(ay + by + c) + b(az + bw + c) + c = a^2y + aby + ac + abz + b^2w + bc + c.\nFor this to hold for all x,y,z,w, the coefficients of x, y, z, w must match on both sides.\nLHS: x coeff = a, y coeff = b.\nRHS: x coeff = 0.\nThus, a = 0.\nIf a = 0, then LHS = by + c. RHS = b^2w + bc + c.\nFor this to hold for all y, w, we need b = 0.\nIf a=0 and b=0, then x*y = c.\nEQ1: c = c*c = c. (Holds).\nEQ2: c = (c*c)*c = c*c = c. (Holds).\nThis confirms the constant magma is the only linear solution.\n\nSTEP 4: ATTEMPT ALGEBRAIC PROOF\nEquation 1: x * y = (y * y) * (z * w).\nSince the RHS is independen"
+    },
+    {
+      "id": "normal_0078",
+      "equation1": "x = y * (z * (z * (z * x)))",
+      "equation2": "x = y * (x * ((z * w) * y))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * (z * (z * (z * x))). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 * operations. Equation 2 has 4 * operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection, x*y = y):\nEQ1: x = y * (z * (z * (z * x))) reduces to x = x. Holds universally.\nEQ2: x = y * (x * ((z * w) * y)) reduces to x = y. Fails for x != y.\nCOUNTEREXAMPLE FOUND: Right Projection Magma.\n\nSTEP 5: DEFAULT JUDGMENT\nThe implication fails because Equation 2 introduces a new variable 'w' not present in Equation 1, and the structure of the right-hand side of Equation 2 is not forced by the structure of Equation 1.\n\nVERDICT: FALSE\nREASONING: The Right Projection magma (x*y = y) satisfies Equation 1 (x = x) but fails Equation 2 (x = y).\nPROOF: \nCOUNTEREXAMPLE: Right Projection Magma (x*y = y)"
+    },
+    {
+      "id": "normal_0079",
+      "equation1": "x = y * (((x * y) * y) * z)",
+      "equation2": "x * (y * z) = (x * y) * w",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * (((x * y) * y) * z). x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x * (y * z) = (x * y) * w) has 2 operations. Equation 2 introduces a new variable 'w' not present in Equation 1.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x = y * (((x * y) * y) * z) => x = y * ((y * y) * z) => x = y * (y * z) => x = z.\nThis holds only if x=z, which is not a universal law. Magma B does not satisfy EQ1.\nMagma C (Left Projection: x*y = x):\nEQ1: x = y * (((x * y) * y) * z) => x = y.\nThis holds only if x=y, which is not a universal law. Magma C does not satisfy EQ1.\nMagma A (Zero: x*y = 0):\nEQ1: x = 0. Fails for x=1.\nMagma E (Constant 1: x*y = 1):\nEQ1: x = 1. Fails for x=0.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'w' that is not constrained by Equation 1. In any magma where Equation 1 holds, the variable 'w' in Equation 2 remains free and can take any value, meaning the equality (x * (y * z) = (x * y) * w) cannot be forced to hold for all 'w' unless the magma is trivial.\n\nVERDICT: FALSE\nREASONING: Equation 2 contains a free variable 'w' that does not appear in Equation 1. Since Equation 1 does not constrain 'w', Equation 2 cannot be a logical consequence of Equation 1 in any non-trivial magma.\nPROOF: \nCOUNTEREXAMPLE: Consider a magma where x*y = x. Equation 1 requires x=y for all x,y (a singleton). In any magma with"
+    },
+    {
+      "id": "normal_0080",
+      "equation1": "x * x = x * ((y * x) * x)",
+      "equation2": "x = (y * z) * (w * (x * u))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * x = x * ((y * x) * x). x is not a bare variable on the LHS. No singleton.\nCheck 1b: Equation 1 has 3 * operations. Equation 2 (x = (y * z) * (w * (x * u))) has 4 * operations. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x*x = x. RHS: x*((y*x)*x) = x*(x) = x. Holds (x=x).\nEQ2: x = (y*z)*(w*(x*u)). RHS: (y*z)*(w*(x*u)) = (w*(x*u)) = (x*u) = u.\nEQ2 becomes x = u. This fails for x != u.\nSince EQ1 holds universally in Right Projection and EQ2 fails, the implication is FALSE.\n\nVERDICT: FALSE\nREASONING: In a Right Projection magma (x*y = y), Equation 1 simplifies to x = x, which is a tautology. However, Equation 2 simplifies to x = u, which is not a tautology and fails whenever x is not equal to u.\nPROOF: \nCOUNTEREXAMPLE: Right Projection magma (x * y = y)"
+    },
+    {
+      "id": "normal_0081",
+      "equation1": "x = (y * y) * ((y * y) * y)",
+      "equation2": "x * y = (x * y) * (z * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is \"x = (y * y) * ((y * y) * y)\". The LHS is a bare variable \"x\" and \"x\" does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 3 operations. Equation 2 has 3 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x = 0. Since x is a variable, this forces the magma to be {0}. EQ2: 0*0 = (0*0)*(0*0) \u2192 0 = 0. Holds.\nMagma B (Right Projection): EQ1: x = y. This forces the magma to be a singleton. EQ2: y = y. Holds.\nMagma C (Left Projection): EQ1: x = y. This forces the magma to be a singleton. EQ2: x = x. Holds.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton because it defines a bare variable x as a constant expression of y. In a singleton magma, all elements are equal, so all equations hold.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y), where x is a bare variable not appearing on the right side. This forces the magma to contain exactly one element. Any equation holds in a singleton magma.\nPROOF: Let the magma be M. For any y in M, let c = (y * y) * ((y * y) * y). Equation 1 states that for all x, y in M, x = c. If M has two elements a and b, then a = c and b = c, implying a = b. Thus, M is a singleton. In a singleton magma, x * y = (x * y) * (z * z) reduces to the unique element equal to itself, which is always true.\nCOUNTEREXAMPLE: "
+    },
+    {
+      "id": "normal_0082",
+      "equation1": "x = (y * ((x * x) * x)) * x",
+      "equation2": "x = ((y * z) * w) * (w * y)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * ((x * x) * x)) * x. x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 3 operations. Equation 2 has fewer operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x = (y * ((x * x) * x)) * x \u2192 x = (y * (0 * x)) * x \u2192 x = (y * 0) * x \u2192 x = 0 * x \u2192 x = 0. Fails (not a law).\nMagma B (Right Projection): EQ1: x = (y * ((x * x) * x)) * x \u2192 x = (y * x) * x \u2192 x = x * x \u2192 x = x. Holds.\nMagma B (Right Projection): EQ2: x = ((y * z) * w) * (w * y) \u2192 x = (z * w) * y \u2192 x = y. Fails (not a law).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces new variables (z, w) not present in Equation 1. Equation 1 is a constraint on x and y, while Equation 2 is a constraint on x, y, z, and w. The introduction of arbitrary variables z and w in Equation 2 that are not constrained by Equation 1 makes the implication impossible to satisfy universally.\n\nVERDICT: FALSE\nREASONING: Equation 1 constrains the magma structure relative to x and y, but Equation 2 introduces independent variables z and w that are not constrained by the premise. In the Right Projection magma (x*y = y), Equation 1 simplifies to x=x (a law), but Equation 2 simplifies to x=y, which is not a law.\nCOUNTEREXAMPLE: Right Projection magma (x*y = y)."
+    },
+    {
+      "id": "normal_0083",
+      "equation1": "x = (y * ((x * z) * x)) * y",
+      "equation2": "x = (y * z) * ((x * y) * w)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * ((x * z) * x)) * y. x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = (y * ((x * z) * x)) * y \u2192 x = (0 * (0 * 0)) * 0 \u2192 x = 0. Fails (x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = (y * ((x * z) * x)) * y \u2192 x = y. Fails (x=0, y=1).\nMagma C (Left Projection: x*y = x): EQ1: x = (y * ((x * z) * x)) * y \u2192 x = y. Fails (x=0, y=1).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = y + (x + z + x) + y = y + z + y = z. Fails (x=0, z=1).\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x = (y * ((x * z) * x)) * y = (y * (1-x)) * y = (1-(1-x)) * y = x * y = 1-y. Fails (x=0, y=0 \u2192 0=1).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = ax + by + c.\nEQ1: x = y * ((x * z) * x) * y.\nThis forces constraints on a, b, c. If no such magma satisfies EQ1 universally, the implication holds vacuously (TRUE). However, checking the structure, EQ1 is a very restrictive identity.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'w' not present in Equation 1. In equational logic, an identity with a new variable 'w' cannot be derived from an identity that does not contain 'w' unless the magma is a singleton or the variable 'w' is redundant. Since EQ1 does not force the magma to be a singleton, the introduction of 'w' in EQ2 makes the implication FALSE.\n\nVERDICT: FALSE\nREASONING: Equation 2 contains a variab"
+    },
+    {
+      "id": "normal_0084",
+      "equation1": "x = (y * (z * w)) * (w * z)",
+      "equation2": "(x * y) * x = (z * w) * w",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * (z * w)) * (w * z). The LHS is a bare variable x, and x does not appear on the RHS. This forces the magma to be a singleton (every element must equal the constant value of the RHS).\nCheck 1b: Equation 1 has 3 operations. Equation 2 has 2 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x = 0 * (0 * 0) * (0 * 0) = 0 * 0 = 0. Holds. EQ2: (x * y) * x = 0 * 0 = 0; (z * w) * w = 0 * 0 = 0. Holds.\nMagma B (Right Projection): EQ1: x = (y * (z * w)) * (w * z) = (z * w) * z = w. Since x = w must hold for all x, w, this magma is not a singleton and fails EQ1.\nMagma C (Left Projection): EQ1: x = (y * (z * w)) * (w * z) = y * w = y. Since x = y must hold for all x, y, this magma is not a singleton and fails EQ1.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton. In a singleton magma, there is only one element (e). Thus, x = e, y = e, z = e, w = e. Substituting these into Equation 2: (e * e) * e = (e * e) * e, which is e = e. This is always true.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z, w), where x does not appear on the right-hand side. This forces the magma to contain exactly one element. In a singleton magma, all equations involving the same variables are satisfied because all variables evaluate to the unique element of the set.\nPROOF: Let the magma be M. Since x = (y * (z * w)) * (w * z) holds for all x, y, z, w in M, fix y, z, w. Then x must equal"
+    },
+    {
+      "id": "normal_0085",
+      "equation1": "x = (x * (x * y)) * (y * y)",
+      "equation2": "x * x = y * (x * z)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (x * (x * y)) * (y * y). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x * x = y * (x * z)) has 3 operations. Equation 2 has fewer operations and introduces a new variable 'z'.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x = (x * (x * y)) * (y * y) \u2192 x = (x * y) * y \u2192 x = y * y \u2192 x = y. Fails (not a law).\nMagma C (Left Projection: x*y = x):\nEQ1: x = (x * (x * y)) * (y * y) \u2192 x = x * x \u2192 x = x. Holds universally.\nEQ2: x * x = y * (x * z) \u2192 x = y. Fails (not a law).\nSince Magma C satisfies EQ1 but violates EQ2, the implication is false.\n\nVERDICT: FALSE\nREASONING: The Left Projection magma (x*y = x) satisfies Equation 1 because it reduces to x = x, which is a tautology. However, it fails Equation 2 because it reduces to x = y, which is not a universal law in this magma.\nPROOF: \nCOUNTEREXAMPLE: Left Projection magma (x*y = x)"
+    },
+    {
+      "id": "normal_0086",
+      "equation1": "x = (y * y) * (z * (z * z))",
+      "equation2": "x = (((x * y) * y) * y) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * y) * (z * (z * z)). x is a bare variable on the LHS and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x = 0. Since x is a bare variable, this forces the magma to be a singleton {0}. EQ2: 0 = (((0*0)*0)*0)*0 = 0. Holds.\nMagma B (Right Projection): EQ1: x = z. This forces the magma to be a singleton. EQ2: x = x. Holds.\nMagma C (Left Projection): EQ1: x = y. This forces the magma to be a singleton. EQ2: x = x. Holds.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton (x = constant). In any singleton magma, all equations involving the same variables (or subsets thereof) are satisfied because there is only one element. Since Equation 1 forces the magma to be a singleton, Equation 2 must hold.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z), where x does not appear on the right-hand side. This forces the magma to contain exactly one element (a singleton). In a singleton magma, all equations are satisfied.\nPROOF: Let M be a magma satisfying x = (y * y) * (z * (z * z)). For any fixed y, z in M, the right-hand side evaluates to a constant c. Thus, x = c for all x in M, which implies M = {c}. In a singleton magma, any equation x = g(x, y, z) holds because x, y, and z must all equal c, and the operation * is uniquely defined as c * "
+    },
+    {
+      "id": "normal_0087",
+      "equation1": "x = y * ((x * y) * (z * y))",
+      "equation2": "x * y = (z * (w * w)) * w",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * ((x * y) * (z * y)). x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 LHS has 0 operations. Equation 2 LHS (x * y) has 1 operation. Equation 2 introduces a new variable 'w'.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x = y * ((x * y) * (z * y)) -> x = y * (y * y) -> x = y. This is not a law (fails for x=0, y=1).\nMagma C (Left Projection: x*y = x):\nEQ1: x = y * ((x * y) * (z * y)) -> x = y. This is not a law (fails for x=0, y=1).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = y + (x + y + z + y) = y + x + z + y = x + z. This is not a law (fails for z=1).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'w' not present in Equation 1. Equation 1 is a constraint on x, y, z, while Equation 2 is a constraint on x, y, z, w. Since Equation 1 does not constrain 'w' at all, it cannot force the identity required by Equation 2.\n\nVERDICT: FALSE\nREASONING: Equation 1 does not constrain the variable 'w' which appears in Equation 2. Therefore, one can choose a magma where Equation 1 holds but the behavior of the operation on 'w' is arbitrary, allowing Equation 2 to be violated.\nPROOF: \nCOUNTEREXAMPLE: Consider a magma where x*y = x + y (mod 3) is not the case, but rather a structure where Equation 1 holds (e.g., a specific group or quasigroup) but the introduction of an independent variable 'w' in Equation 2 allows for a violation of the equality. Specifical"
+    },
+    {
+      "id": "normal_0088",
+      "equation1": "x = (x * x) * ((y * z) * z)",
+      "equation2": "x = y * (z * (z * (z * z)))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (x * x) * ((y * z) * z). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 3 operations. Equation 2 (x = y * (z * (z * (z * z)))) has 4 operations. Equation 2 is more complex.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0*0 = 0. Fails (x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = (x*x) * ((y*z)*z) = x * z = z. Fails (x=0, z=1).\nMagma C (Left Projection: x*y = x): EQ1: x = (x*x) * ((y*z)*z) = x*x = x. Holds.\nCheck EQ2 in Magma C: x = y * (z * (z * (z * z))) = y. Fails (x=0, y=1).\nMagma D (XOR: x*y = x+y mod 2): EQ1: x = (x+x) + ((y+z)+z) = 0 + y + 0 = y. Fails (x=0, y=1).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a variable 'y' that is not constrained by the structure of Equation 1 in a way that forces the identity x=y. Since Equation 1 forces the magma to behave like a projection or constant in specific ways, and Equation 2 requires a specific variable dependency that is not implied, the implication is false.\n\nVERDICT: FALSE\nREASONING: Equation 1 holds in the Left Projection magma (x*y = x), but Equation 2 fails in that same magma because it requires x = y, which is not true for all x, y.\nPROOF: \nCOUNTEREXAMPLE: Left Projection magma (x*y = x). EQ1: x = (x*x) * ((y*z)*z) = x*x = x (Holds). EQ2: x = y * (z * (z * (z * z))) = y (Fails for x=0, y=1)."
+    },
+    {
+      "id": "normal_0089",
+      "equation1": "x = (y * (z * w)) * (w * u)",
+      "equation2": "x = ((y * (x * z)) * y) * w",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * (z * w)) * (w * u). x is a bare variable on the LHS and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x = 0. Since x is a bare variable, this forces the magma to be a singleton {0}. EQ2: 0 = ((0 * (0 * 0)) * 0) * 0 \u2192 0 = 0. Holds.\nMagma B (Right Projection): EQ1: x = u. This forces the magma to be a singleton.\nMagma C (Left Projection): EQ1: x = y. This forces the magma to be a singleton.\n\nSTEP 5: DEFAULT JUDGMENT\nSince Equation 1 forces the magma to be a singleton, and all equations hold in a singleton magma, the implication is vacuously true.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z, w, u), where x is a bare variable and does not appear on the right-hand side. This forces the magma to contain exactly one element. In a singleton magma, all equations are satisfied.\nPROOF: Let M be a magma satisfying x = (y * (z * w)) * (w * u). For any elements a, b, c, d, e in M, the equation implies that any element x must equal the constant value c = (b * (c * d)) * (d * e). Since this holds for all x, M must have only one element. In a singleton magma, any equation x = f(...) holds because there is only one possible value for all variables.\nCOUNTEREXAMPLE:"
+    },
+    {
+      "id": "normal_0090",
+      "equation1": "x = (y * (z * (z * x))) * x",
+      "equation2": "x = (x * ((y * x) * x)) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 has x on both sides. No singleton.\nCheck 1b: EQ1 LHS has 0 operations (bare x). EQ2 LHS has 0 operations (bare x). No immediate lean.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x = (y * (z * (z * x))) * x \u2192 x = 0 * 0 = 0. Fails (x=1).\nMagma B (Right Projection): EQ1: x = (y * (z * (z * x))) * x \u2192 x = x. Holds.\nMagma B (Right Projection): EQ2: x = (x * ((y * x) * x)) * x \u2192 x = x. Holds.\nMagma C (Left Projection): EQ1: x = (y * (z * (z * x))) * x \u2192 x = y. Fails (x=1, y=0).\nMagma D (XOR): EQ1: x = y + z + z + x + x = y + x. Fails (x=1, y=0).\nMagma F (Negate-right): EQ1: x = (y * (z * (z * x))) * x = 1 - (1 - (1 - (1 - x))) = x. Holds.\nMagma F (Negate-right): EQ2: x = (x * ((y * x) * x)) * x = 1 - (1 - (1 - (1 - x))) = x. Holds.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = 2x + y mod 3.\nEQ1: x = 2(2(2(2z+y)+z)+x)+x = 2(2(4z+2y+z)+x)+x = 2(2(5z+2y)+x)+x = 2(10z+4y+x)+x = 20z+8y+3x = 2z+2y mod 3.\nSince x = 2z+2y does not hold for all x,y,z, this magma does not satisfy EQ1.\n\nSTEP 4: ATTEMPT ALGEBRAIC PROOF\nBoth equations are of the form x = (something) * x.\nIn Magma B, both reduce to x. In Magma F, both reduce to x.\nThe structure of both equations is x = f(y,z) * x.\nIf x = f(y,z) * x holds, then x = f(x,y) * x is a specific instance of the functional form.\n\nSTEP 5: DEFAULT JUDGMENT\nNo counterexample found. Both equations are structurally similar, defining x as a right-multiplication by x of some term depe"
+    },
+    {
+      "id": "normal_0091",
+      "equation1": "x = (y * ((y * x) * z)) * w",
+      "equation2": "x * y = z * ((y * x) * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * ((y * x) * z)) * w. x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x * y = z * ((y * x) * x)) has 3 operations. Equation 2 has fewer operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0. Fails (x is bare).\nMagma B (Right Projection: x*y = y): EQ1: x = w. Fails (x != w).\nMagma C (Left Projection: x*y = x): EQ1: x = y. Fails (x != y).\nMagma D (XOR: x*y = x+y): EQ1: x = y+(y+x+z)+w = x+w+z. Fails (x != x+w+z).\nMagma F (Negate-right: x*y = 1-y): EQ1: x = 1-w. Fails (x != 1-w).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nLet x*y = ax + by + c mod 3.\nEQ1: x = a(a(ay+b(ay+bx+c)+c)+bz+c)+bw+c.\nFor this to hold for all x, y, z, w, the coefficients of x, y, z, w must match on both sides.\nCoefficient of w on RHS is b. On LHS is 0. Thus b=0.\nIf b=0, then x*y = ax + c.\nEQ1 becomes: x = a(a(ay+c)+c)+c = a^3y + a^2c + ac + c.\nFor this to hold for all x, y, the coefficient of y must be 0, so a^3 = 0 mod 3, implying a=0.\nIf a=0, then x*y = c.\nEQ1 becomes: x = c. This forces the magma to be a singleton (c=x for all x).\nSince the only linear magma satisfying EQ1 is a singleton, and singletons satisfy all equations, we look for non-linear counterexamples.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 is highly restrictive (forces x to be a function of w, y, z). In a free magma, Equation 1 is not an identity. If we assume a magma where EQ1 holds, the structure i"
+    },
+    {
+      "id": "normal_0092",
+      "equation1": "x = (y * ((z * x) * w)) * z",
+      "equation2": "x = x * (y * (y * (z * z)))",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (y * ((z * x) * w)) * z. x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 * operations. Equation 2 (x = x * (y * (y * (z * z)))) has 4 * operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = (y * ((z * x) * w)) * z \u2192 x = 0. Fails (x=1, 0=0 is false).\nMagma B (Right Projection: x*y = y): EQ1: x = z. Fails (x=0, z=1).\nMagma C (Left Projection: x*y = x): EQ1: x = y * ((z * x) * w) \u2192 x = y. Fails (x=0, y=1).\nMagma D (XOR: x*y = x+y mod 2):\nEQ1: x = y + (z + x + w) + z = y + w + x. For this to hold for all y, w, we need y=0 and w=0. Fails.\nMagma F (Negate-right: x*y = 1-y):\nEQ1: x = (y * ((z * x) * w)) * z = (y * (1-w)) * z = (1-(1-w)) * z = w * z = 1-z. Fails.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nx*y = ax + by + c mod 3.\nEQ1: x = a(a(ay+b(az+bx+c)+c)+b(az+bx+c)+c)+b(az+bx+c)+c.\nThis forces constraints on a, b, c. If a=0, b=1, c=0 (x*y = y), we already saw it fails. If a=1, b=0, c=0 (x*y = x), we saw it fails.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 and Equation 2 share the same number of operations and variables. However, Equation 1 is a highly restrictive identity that forces the magma to collapse or satisfy specific algebraic properties. In the absence of a general proof or a counterexample, the structural complexity of Equation 1 (which involves x on the RHS) suggests it does not imply the specific structure of Equation 2.\n\nVERDICT: FALSE\nREASONING: Equation 1 is"
+    },
+    {
+      "id": "normal_0093",
+      "equation1": "x = y * ((z * z) * (z * y))",
+      "equation2": "x = ((y * z) * (z * y)) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is \"x = y * ((z * z) * (z * y))\". x is a bare variable on the LHS and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): EQ1: x=0*0=0. Holds. EQ2: x=0*0=0. Holds.\nMagma B (Right Projection): EQ1: x=y. Fails (x must equal y for all x,y).\nMagma C (Left Projection): EQ1: x=y. Fails.\nMagma D (XOR): EQ1: x=y+(z+z)+(z+y) = y+0+z+y = z. Fails.\nMagma E (Constant 1): EQ1: x=1. Fails.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton because x is a bare variable on the LHS and does not appear on the RHS. In a singleton magma, all elements are equal (x=y=z), so any equation holds. Since Equation 1 forces the magma to be a singleton, Equation 2 must also hold in that singleton magma.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z), where x is a bare variable not present on the right-hand side. This forces the magma to contain exactly one element. In a singleton magma, all equations are satisfied.\nPROOF: Let M be a magma satisfying x = y * ((z * z) * (z * y)). For any fixed y, z in M, the RHS evaluates to a constant c. Thus, x = c for all x in M. This implies M has only one element. In a singleton magma, any equation x = g(x, y, z) is satisfied because all variables must equal the unique element of the set.\nCOUNTEREXAMPLE:"
+    },
+    {
+      "id": "normal_0094",
+      "equation1": "x * (x * y) = z * (x * z)",
+      "equation2": "x * y = (z * w) * w",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x * (x * y) = z * (x * z). LHS has 2 operations, RHS has 2 operations. No singleton.\nCheck 1b: Equation 2 is x * y = (z * w) * w. LHS has 1 operation, RHS has 2 operations. Equation 2 introduces new variables (w) not present in Equation 1.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: 0 = 0 (Holds). EQ2: 0 = 0 (Holds).\nMagma B (Right Projection: x*y = y): EQ1: y = z (Fails for y != z).\nMagma C (Left Projection: x*y = x): EQ1: x = z (Fails for x != z).\nMagma D (XOR: x*y = x+y mod 2): EQ1: x+(x+y) = z+(x+z) => y = x (Fails).\nMagma E (Constant 1: x*y = 1): EQ1: 1 = 1 (Holds). EQ2: 1 = 1 (Holds).\nMagma F (Negate-right: x*y = 1-y): EQ1: x*(1-y) = 1-(1-y) = y; z*(1-(x*z)) = z*(1-(1-z)) = z*z = 1-z. y = 1-z (Fails).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 introduces a new variable 'w' that is not constrained by Equation 1. In any magma where the operation is not constant, one can choose 'w' such that the RHS of Equation 2 varies while the LHS remains fixed, violating the implication.\n\nVERDICT: FALSE\nREASONING: Equation 2 introduces a free variable 'w' not present in Equation 1. Since Equation 1 does not constrain the magma to be a constant magma, one can choose values for 'w' that cause Equation 2 to fail while Equation 1 remains satisfied.\nPROOF: \nCOUNTEREXAMPLE: Consider a magma where x*y = 1 for all x,y (Constant 1). While this satisfies both, consider a magma where x*y = x+y mod 3. EQ1: x+(x+y) = z"
+    },
+    {
+      "id": "normal_0095",
+      "equation1": "x = ((x * y) * x) * (y * y)",
+      "equation2": "x = ((y * (y * y)) * z) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = ((x * y) * x) * (y * y). x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 is x = ((y * (y * y)) * z) * x. Equation 2 has 4 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0 (fails for x=1). EQ2: x = 0 (fails for x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = y (fails for x=0, y=1).\nMagma C (Left Projection: x*y = x): EQ1: x = ((x*y)*x) = x. EQ1 holds. EQ2: x = ((y*(y*y))*z)*x = (y*z)*x = y*x = y. EQ2 fails for x=0, y=1.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nNot required as a counterexample was found.\n\nSTEP 5: DEFAULT JUDGMENT\nThe Left Projection magma (x*y = x) satisfies Equation 1 (x = x) but fails Equation 2 (x = y).\n\nVERDICT: FALSE\nREASONING: The Left Projection magma (x*y = x) satisfies Equation 1 because x = ((x*y)*x)*(y*y) simplifies to x = (x*x)*(y) = x*y = x. However, it fails Equation 2 because x = ((y*(y*y))*z)*x simplifies to x = (y*z)*x = y*x = y, which is not an identity.\nPROOF: \nCOUNTEREXAMPLE: Left Projection magma (x*y = x)"
+    },
+    {
+      "id": "normal_0096",
+      "equation1": "x = (((x * y) * z) * x) * z",
+      "equation2": "x = ((y * (y * z)) * z) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (((x * y) * z) * x) * z. x appears on the RHS. No singleton.\nCheck 1b: Equation 1 LHS has 0 operations. Equation 2 LHS has 0 operations. Both are bare variables.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0. Fails (x=1, 0=0 is false).\nMagma B (Right Projection: x*y = y): EQ1: x = z. Fails (x=0, z=1).\nMagma C (Left Projection: x*y = x): EQ1: x = ((x*y)*z)*x = (x*z)*x = x*x = x. Holds.\nCheck EQ2 for Magma C: x = ((y*(y*z))*z)*y = (y*z)*y = y*y = y. Fails (x=0, y=1).\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nNot required, counterexample found.\n\nSTEP 5: DEFAULT JUDGMENT\nMagma C (Left Projection) satisfies Equation 1 (x = x) but fails Equation 2 (x = y).\n\nVERDICT: FALSE\nREASONING: The magma defined by x*y = x (Left Projection) satisfies Equation 1 because the RHS reduces to x, but it fails Equation 2 because the RHS reduces to y.\nPROOF: \nCOUNTEREXAMPLE: Left Projection Magma (x*y = x)"
+    },
+    {
+      "id": "normal_0097",
+      "equation1": "x = (x * (x * y)) * (z * z)",
+      "equation2": "x * y = (z * z) * (z * y)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = (x * (x * y)) * (z * z). x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x * y = (z * z) * (z * y)) has 3 operations. Equation 2 has fewer operations, leaning toward FALSE.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma B (Right Projection: x*y = y):\nEQ1: x = (x * (x * y)) * (z * z) \u2192 x = (x * y) * (z * z) \u2192 x = y * z \u2192 x = z. This is not a law (fails for x=0, z=1).\nMagma C (Left Projection: x*y = x):\nEQ1: x = (x * (x * y)) * (z * z) \u2192 x = (x * x) * z \u2192 x = x * x \u2192 x = x. This is a law.\nEQ2: x * y = (z * z) * (z * y) \u2192 x = z * z \u2192 x = z. This is not a law (fails for x=0, z=1).\nSince Magma C satisfies EQ1 but fails EQ2, the implication is FALSE.\n\nVERDICT: FALSE\nREASONING: In a Left Projection magma (x*y = x), Equation 1 simplifies to x = x, which is a universal law. However, Equation 2 simplifies to x = z, which is not a universal law.\nPROOF: \nCOUNTEREXAMPLE: Left Projection Magma (x*y = x)"
+    },
+    {
+      "id": "normal_0098",
+      "equation1": "x = y * (y * z)",
+      "equation2": "x = (y * x) * (x * (y * x))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * (y * z). x is a bare variable on the LHS and does not appear on the RHS. This forces the magma to be a singleton.\nCheck 1b: Equation 1 has 2 operations, Equation 2 has 3 operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero): x*y = 0. EQ1: x = 0*0 = 0. Holds. EQ2: x = (y*x)*(x*(y*x)) = 0*(0*0) = 0. Holds.\nMagma B (Right Projection): x*y = y. EQ1: x = y*(y*z) = z. Fails (x=z is not a law).\nMagma C (Left Projection): x*y = x. EQ1: x = y*(y*z) = y. Fails (x=y is not a law).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton (x = y * (y * z) implies for any fixed y, z, x must be the same value, and since x is universally quantified, the set must contain only one element). In a singleton magma, all equations are satisfied.\n\nVERDICT: TRUE\nREASONING: Equation 1 is of the form x = f(y, z), where x is a bare variable not appearing on the right-hand side. This forces the magma to contain exactly one element. Any equation holds in a singleton magma.\nPROOF: In a magma where x = y * (y * z) holds for all x, y, z, let the magma be M. For any y, z in M, the expression y * (y * z) evaluates to a constant element c in M. Since x = c for all x in M, M must be a singleton set {c}. In a singleton magma, all equations are vacuously true.\nCOUNTEREXAMPLE:"
+    },
+    {
+      "id": "normal_0099",
+      "equation1": "x = y * ((x * x) * (z * w))",
+      "equation2": "x * y = (y * z) * (w * u)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * ((x * x) * (z * w)). x appears on the RHS, so it is not a singleton.\nCheck 1b: Equation 1 has 3 * operations. Equation 2 (x * y = (y * z) * (w * u)) has 3 * operations.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0 * (0 * 0) = 0. Fails (x=1, 0=1 is false).\nMagma B (Right Projection: x*y = y): EQ1: x = y * (x * w) = w. Fails (x=w is false).\nMagma C (Left Projection: x*y = x): EQ1: x = y * (x * z) = y. Fails (x=y is false).\nMagma D (XOR: x*y = x+y): EQ1: x = y + (x + x + z + w) = y + z + w. Fails (x=y+z+w is false).\nMagma E (Constant 1: x*y = 1): EQ1: x = 1 * (1 * 1) = 1. Fails (x=0, 1=0 is false).\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 1 forces the magma to be a singleton. If x = y * ((x * x) * (z * w)) holds for all x, y, z, w, then for any fixed y, z, w, x must be equal to the constant value y * ((x * x) * (z * w)). Since x is universally quantified, this forces the magma to have only one element. In a singleton magma, all equations are satisfied.\n\nVERDICT: TRUE\nREASONING: Equation 1 forces the magma to be a singleton because the variable x appears on the LHS as a bare variable and is constrained by a RHS that is independent of x's value (as x must equal the result of the RHS for all x). In a singleton magma, all equations hold.\nPROOF: Let the magma be M. For any y, z, w in M, the map f(x) = y * ((x * x) * (z * w)) is a constant map because x = f(x) for all x. If x1 = f(x1) and x2 "
+    },
+    {
+      "id": "normal_0100",
+      "equation1": "x = y * ((z * (x * y)) * x)",
+      "equation2": "x = ((y * x) * (z * x)) * z",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "STEP 1: QUICK STRUCTURAL CHECKS\nCheck 1a: Equation 1 is x = y * ((z * (x * y)) * x). x appears on the RHS. Not a singleton.\nCheck 1b: Equation 1 has 4 operations. Equation 2 (x = ((y * x) * (z * x)) * z) has 4 operations. Complexity is equal.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\nMagma A (Zero: x*y = 0): EQ1: x = 0 (fails for x=1).\nMagma B (Right Projection: x*y = y): EQ1: x = y * ((z * (x * y)) * x) = y * ((z * y) * x) = x. Holds.\nEQ2: x = ((y * x) * (z * x)) * z = (x * x) * z = x * z = z. Fails for x=0, z=1.\nMagma C (Left Projection: x*y = x): EQ1: x = y * ((z * (x * y)) * x) = y * ((z * x) * x) = y. Fails for x=0, y=1.\nMagma D (XOR: x*y = x+y): EQ1: x = y + (z + (x + y)) + x = y + z + x + y + x = z. Fails for x=0, z=1.\n\nSTEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z\nMagma: x*y = 2x + y mod 3.\nEQ1: x = 2y + (2(2z + (2x + y)) + (2x + y)) = 2y + (2(4z + 2x + 2y + 2x + y)) = 2y + (2(4z + 4x + 3y)) = 2y + 8z + 8x + 6y = 2y + 2z + 2x.\nFor x=0, y=0, z=1: 0 = 2(1) = 2. Fails.\n\nSTEP 5: DEFAULT JUDGMENT\nEquation 2 uses the same variables as Equation 1, but the structural arrangement of variables (the \"shape\" of the term) is significantly different. In the Right Projection magma, Equation 1 is an identity, but Equation 2 is not.\n\nVERDICT: FALSE\nREASONING: The Right Projection magma (x*y = y) satisfies Equation 1 (x = x) but fails Equation 2 (x = z).\nPROOF: \nCOUNTEREXAMPLE: Right Projection magma (x*y = y). EQ1: x = y * ((z * (x * y)) * x) = y * ((z * y) * x) = y * x = x. EQ2: x = (("
+    }
+  ]
+}

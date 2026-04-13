@@ -1,0 +1,59 @@
+FP cases to cover: 131
+Enumerating 19683 magmas...
+  0/19683  best coverage so far: 0
+  2000/19683  best coverage so far: 25
+  4000/19683  best coverage so far: 25
+  6000/19683  best coverage so far: 25
+  8000/19683  best coverage so far: 25
+  10000/19683  best coverage so far: 25
+  12000/19683  best coverage so far: 25
+  14000/19683  best coverage so far: 25
+  16000/19683  best coverage so far: 25
+  18000/19683  best coverage so far: 25
+
+Found 1081 magmas that cover at least 1 FP case
+
+Top 20 by coverage:
+   25 cases  table=[[0, 0, 0], [2, 1, 1], [1, 2, 2]]
+   25 cases  table=[[0, 0, 1], [1, 1, 0], [2, 2, 2]]
+   25 cases  table=[[0, 2, 0], [1, 1, 1], [2, 0, 2]]
+   18 cases  table=[[0, 0, 0], [1, 1, 0], [2, 0, 2]]
+   18 cases  table=[[0, 0, 0], [1, 1, 0], [2, 2, 2]]
+   18 cases  table=[[0, 0, 0], [1, 1, 1], [1, 2, 2]]
+   18 cases  table=[[0, 0, 0], [1, 1, 1], [2, 0, 2]]
+   18 cases  table=[[0, 0, 0], [2, 1, 1], [2, 2, 2]]
+   18 cases  table=[[0, 0, 1], [1, 1, 1], [1, 2, 2]]
+   18 cases  table=[[0, 0, 1], [1, 1, 1], [2, 2, 2]]
+   18 cases  table=[[0, 2, 0], [1, 1, 1], [2, 2, 2]]
+   18 cases  table=[[0, 2, 0], [2, 1, 1], [2, 2, 2]]
+   15 cases  table=[[0, 0, 0], [1, 1, 0], [1, 2, 2]]
+   15 cases  table=[[0, 0, 0], [2, 1, 1], [2, 0, 2]]
+   15 cases  table=[[0, 0, 1], [1, 1, 0], [1, 2, 2]]
+   15 cases  table=[[0, 0, 1], [1, 1, 0], [2, 0, 2]]
+   15 cases  table=[[0, 0, 1], [1, 1, 1], [2, 0, 2]]
+   15 cases  table=[[0, 0, 1], [2, 1, 1], [1, 2, 2]]
+   15 cases  table=[[0, 0, 1], [2, 1, 1], [2, 2, 2]]
+   15 cases  table=[[0, 2, 0], [1, 1, 0], [2, 0, 2]]
+
+Greedy set cover (how many magmas needed to cover all FP cases):
+  Magma 1: covers 25 new cases  table=[[0, 0, 0], [2, 1, 1], [1, 2, 2]]
+  Magma 2: covers 12 new cases  table=[[0, 0, 1], [0, 0, 0], [0, 0, 0]]
+  Magma 3: covers 12 new cases  table=[[0, 1, 2], [0, 1, 2], [1, 0, 2]]
+  Magma 4: covers 12 new cases  table=[[1, 1, 1], [2, 2, 2], [0, 0, 0]]
+  Magma 5: covers 6 new cases  table=[[1, 2, 0], [1, 2, 0], [1, 2, 0]]
+  Magma 6: covers 5 new cases  table=[[0, 0, 0], [1, 1, 0], [2, 0, 2]]
+  Magma 7: covers 5 new cases  table=[[0, 2, 1], [2, 1, 0], [1, 0, 2]]
+  Magma 8: covers 5 new cases  table=[[0, 0, 0], [0, 0, 0], [1, 0, 0]]
+  Magma 9: covers 3 new cases  table=[[0, 1, 1], [0, 1, 2], [1, 1, 2]]
+  Magma 10: covers 2 new cases  table=[[0, 0, 0], [0, 0, 1], [0, 2, 0]]
+  Magma 11: covers 2 new cases  table=[[0, 0, 0], [1, 2, 0], [2, 0, 1]]
+  Magma 12: covers 2 new cases  table=[[0, 0, 0], [0, 0, 2], [2, 0, 2]]
+  Magma 13: covers 1 new cases  table=[[0, 0, 2], [0, 0, 2], [1, 1, 2]]
+  Magma 14: covers 1 new cases  table=[[0, 0, 1], [2, 1, 2], [0, 2, 1]]
+  Magma 15: covers 1 new cases  table=[[0, 0, 2], [0, 0, 2], [0, 2, 2]]
+  Magma 16: covers 1 new cases  table=[[0, 1, 2], [2, 2, 0], [1, 0, 1]]
+  Magma 17: covers 1 new cases  table=[[1, 0, 1], [2, 2, 1], [2, 0, 0]]
+
+After greedy cover: 96/131 FP cases covered
+Uncoverable by any 3-element magma: 35 cases
+Uncovered IDs: ['hard3_0032', 'hard3_0035', 'hard3_0040', 'hard3_0069', 'hard3_0070', 'hard3_0072', 'hard3_0073', 'hard3_0074', 'hard3_0075', 'hard3_0076', 'hard3_0078', 'hard3_0086', 'hard3_0093', 'hard3_0152', 'hard3_0159', 'hard3_0161', 'hard3_0163', 'hard3_0165', 'hard3_0167', 'hard3_0206', 'hard3_0234', 'hard3_0235', 'hard3_0236', 'hard3_0237', 'hard3_0241', 'hard3_0242', 'hard3_0309', 'hard3_0322', 'hard3_0327', 'hard3_0328', 'hard3_0332', 'hard3_0344', 'hard3_0345', 'hard3_0346', 'hard3_0392']

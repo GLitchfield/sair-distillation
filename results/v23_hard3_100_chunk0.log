@@ -1,0 +1,32 @@
+Cheat sheet: cheatsheets/cheatsheet_v23.txt (8116 bytes)
+Provider: anthropic  Model: claude-haiku-4-5-20251001  Subset: chunk_0_hard3_100
+
+--- 17 chunk_0_hard3_100 problems ---
+  11:09:26 [hard3_0005] ✓ got=TRUE exp=TRUE  (1/17)
+  11:09:49 [hard3_0007] ✗ got=TRUE exp=FALSE  (2/17) ETA=6m
+  11:10:13 [hard3_0016] ✓ got=FALSE exp=FALSE  (3/17) ETA=5m
+  11:10:28 [hard3_0019] ✓ got=FALSE exp=FALSE  (4/17) ETA=4m
+  11:10:43 [hard3_0020] ✓ got=TRUE exp=TRUE  (5/17) ETA=4m
+  11:10:56 [hard3_0027] ✓ got=TRUE exp=TRUE  (6/17) ETA=4m
+  11:11:21 [hard3_0030] ✓ got=TRUE exp=TRUE  (7/17) ETA=3m
+  11:11:48 [hard3_0033] ✓ got=TRUE exp=TRUE  (8/17) ETA=3m
+  11:12:13 [hard3_0034] ✗ got=FALSE exp=TRUE  (9/17) ETA=3m
+  11:12:48 [hard3_0044] ✓ got=FALSE exp=FALSE  (10/17) ETA=3m
+  11:13:09 [hard3_0047] ✓ got=TRUE exp=TRUE  (11/17) ETA=2m
+  11:13:29 [hard3_0049] ✓ got=TRUE exp=TRUE  (12/17) ETA=2m
+  11:13:57 [hard3_0053] ✗ got=FALSE exp=TRUE  (13/17) ETA=1m
+  11:14:16 [hard3_0056] ✓ got=FALSE exp=FALSE  (14/17) ETA=1m
+  11:14:32 [hard3_0061] ✓ got=TRUE exp=TRUE  (15/17) ETA=1m
+  11:14:57 [hard3_0066] ✗ got=FALSE exp=TRUE  (16/17) ETA=0m
+  11:15:21 [hard3_0070] ✗ got=TRUE exp=FALSE  (17/17) ETA=0m
+
+Saved to results/v23_hard3_100_chunk0.json
+
+============================================================
+RESULTS (chunk_0_hard3_100)
+============================================================
+  Accuracy: 12/17 = 70.6%
+  TP=8 FP=2 FN=3 TN=4  Unparsed=0
+  Precision: 80.0%  Recall: 72.7%
+  F1: 0.762
+

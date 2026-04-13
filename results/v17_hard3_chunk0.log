@@ -1,0 +1,82 @@
+Cheat sheet: cheatsheets/cheatsheet_v17.txt (6716 bytes)
+Provider: anthropic  Model: claude-haiku-4-5-20251001  Subset: chunk_0_hard3
+
+--- 67 chunk_0_hard3 problems ---
+  21:48:36 [hard3_0001] ✓ got=TRUE exp=TRUE  (1/67)
+  21:48:56 [hard3_0002] ✓ got=TRUE exp=TRUE  (2/67) ETA=18m
+  21:49:11 [hard3_0003] ✓ got=TRUE exp=TRUE  (3/67) ETA=16m
+  21:49:20 [hard3_0004] ✓ got=TRUE exp=TRUE  (4/67) ETA=14m
+  21:49:29 [hard3_0005] ✓ got=TRUE exp=TRUE  (5/67) ETA=16m
+  21:49:53 [hard3_0006] ✓ got=TRUE exp=TRUE  (6/67) ETA=16m
+  21:50:12 [hard3_0007] ✓ got=FALSE exp=FALSE  (7/67) ETA=17m
+  21:50:32 [hard3_0008] ✓ got=TRUE exp=TRUE  (8/67) ETA=17m
+  21:50:54 [hard3_0009] ✓ got=FALSE exp=FALSE  (9/67) ETA=16m
+  21:51:05 [hard3_0010] ✓ got=FALSE exp=FALSE  (10/67) ETA=17m
+  21:51:32 [hard3_0011] ✗ got=None exp=FALSE  (11/67) ETA=17m
+  21:52:00 [hard3_0012] ✗ got=TRUE exp=FALSE  (12/67) ETA=17m
+  21:52:19 [hard3_0013] ✓ got=FALSE exp=FALSE  (13/67) ETA=16m
+  21:52:33 [hard3_0014] ✓ got=TRUE exp=TRUE  (14/67) ETA=16m
+  21:52:52 [hard3_0015] ✓ got=TRUE exp=TRUE  (15/67) ETA=16m
+  21:53:15 [hard3_0016] ✓ got=FALSE exp=FALSE  (16/67) ETA=15m
+  21:53:28 [hard3_0017] ✓ got=FALSE exp=FALSE  (17/67) ETA=15m
+  21:53:42 [hard3_0018] ✓ got=FALSE exp=FALSE  (18/67) ETA=14m
+  21:53:52 [hard3_0019] ✓ got=FALSE exp=FALSE  (19/67) ETA=14m
+  21:54:04 [hard3_0020] ✗ got=FALSE exp=TRUE  (20/67) ETA=14m
+  21:54:30 [hard3_0021] ✓ got=FALSE exp=FALSE  (21/67) ETA=13m
+  21:54:44 [hard3_0022] ✗ got=TRUE exp=FALSE  (22/67) ETA=13m
+  21:55:07 [hard3_0023] ✓ got=TRUE exp=TRUE  (23/67) ETA=13m
+  21:55:25 [hard3_0024] ✓ got=TRUE exp=TRUE  (24/67) ETA=13m
+  21:55:45 [hard3_0025] ✓ got=FALSE exp=FALSE  (25/67) ETA=12m
+  21:56:03 [hard3_0026] ✓ got=FALSE exp=FALSE  (26/67) ETA=12m
+  21:56:21 [hard3_0027] ✓ got=TRUE exp=TRUE  (27/67) ETA=12m
+  21:56:43 [hard3_0028] ✗ got=FALSE exp=TRUE  (28/67) ETA=12m
+  21:57:08 [hard3_0029] ✗ got=TRUE exp=FALSE  (29/67) ETA=12m
+  21:57:29 [hard3_0030] ✓ got=TRUE exp=TRUE  (30/67) ETA=11m
+  21:57:46 [hard3_0031] ✓ got=FALSE exp=FALSE  (31/67) ETA=11m
+  21:58:09 [hard3_0032] ✗ got=TRUE exp=FALSE  (32/67) ETA=11m
+  21:58:23 [hard3_0033] ✓ got=TRUE exp=TRUE  (33/67) ETA=10m
+  21:58:32 [hard3_0034] ✓ got=TRUE exp=TRUE  (34/67) ETA=10m
+  21:58:48 [hard3_0035] ✗ got=TRUE exp=FALSE  (35/67) ETA=10m
+  21:59:07 [hard3_0036] ✗ got=FALSE exp=TRUE  (36/67) ETA=9m
+  21:59:33 [hard3_0037] ✓ got=FALSE exp=FALSE  (37/67) ETA=9m
+  21:59:46 [hard3_0038] ✗ got=None exp=TRUE  (38/67) ETA=9m
+  22:00:14 [hard3_0039] ✗ got=None exp=FALSE  (39/67) ETA=9m
+  22:00:38 [hard3_0040] ✗ got=TRUE exp=FALSE  (40/67) ETA=8m
+  22:00:57 [hard3_0041] ✓ got=FALSE exp=FALSE  (41/67) ETA=8m
+  22:01:11 [hard3_0042] ✓ got=FALSE exp=FALSE  (42/67) ETA=8m
+  22:01:22 [hard3_0043] ✗ got=FALSE exp=TRUE  (43/67) ETA=7m
+  22:01:35 [hard3_0044] ✓ got=FALSE exp=FALSE  (44/67) ETA=7m
+  22:01:50 [hard3_0045] ✗ got=TRUE exp=FALSE  (45/67) ETA=7m
+  22:02:07 [hard3_0046] ✓ got=TRUE exp=TRUE  (46/67) ETA=6m
+  22:02:26 [hard3_0047] ✗ got=FALSE exp=TRUE  (47/67) ETA=6m
+  22:02:46 [hard3_0048] ✓ got=TRUE exp=TRUE  (48/67) ETA=6m
+  22:03:07 [hard3_0049] ✓ got=TRUE exp=TRUE  (49/67) ETA=5m
+  22:03:27 [hard3_0050] ✓ got=FALSE exp=FALSE  (50/67) ETA=5m
+  22:03:40 [hard3_0051] ✓ got=TRUE exp=TRUE  (51/67) ETA=5m
+  22:03:55 [hard3_0052] ✓ got=TRUE exp=TRUE  (52/67) ETA=5m
+  22:04:14 [hard3_0053] ✓ got=TRUE exp=TRUE  (53/67) ETA=4m
+  22:04:31 [hard3_0054] ✓ got=TRUE exp=TRUE  (54/67) ETA=4m
+  22:04:49 [hard3_0055] ✓ got=FALSE exp=FALSE  (55/67) ETA=4m
+  22:05:06 [hard3_0056] ✗ got=TRUE exp=FALSE  (56/67) ETA=3m
+  22:05:25 [hard3_0057] ✗ got=TRUE exp=FALSE  (57/67) ETA=3m
+  22:05:45 [hard3_0058] ✓ got=TRUE exp=TRUE  (58/67) ETA=3m
+  22:06:04 [hard3_0059] ✓ got=FALSE exp=FALSE  (59/67) ETA=2m
+  22:06:20 [hard3_0060] ✗ got=FALSE exp=TRUE  (60/67) ETA=2m
+  22:06:42 [hard3_0061] ✓ got=TRUE exp=TRUE  (61/67) ETA=2m
+  22:07:05 [hard3_0062] ✓ got=FALSE exp=FALSE  (62/67) ETA=2m
+  22:07:13 [hard3_0063] ✓ got=FALSE exp=FALSE  (63/67) ETA=1m
+  22:07:31 [hard3_0064] ✓ got=FALSE exp=FALSE  (64/67) ETA=1m
+  22:07:48 [hard3_0065] ✓ got=FALSE exp=FALSE  (65/67) ETA=1m
+  22:08:02 [hard3_0066] ✗ got=FALSE exp=TRUE  (66/67) ETA=0m
+  22:08:20 [hard3_0067] ✓ got=TRUE exp=TRUE  (67/67) ETA=0m
+
+Saved to results/v17_hard3_chunk0.json
+
+============================================================
+RESULTS (chunk_0_hard3)
+============================================================
+  Accuracy: 48/67 = 71.6%
+  TP=25 FP=9 FN=7 TN=23  Unparsed=3
+  Precision: 73.5%  Recall: 78.1%
+  F1: 0.758
+

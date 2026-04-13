@@ -1,0 +1,1094 @@
+{
+  "input": "results/phase1_hard3_fps_v13a.json",
+  "total_problems": 118,
+  "with_ce": 97,
+  "without_ce": 21,
+  "without_ce_ids": [
+    "hard3_0025",
+    "hard3_0032",
+    "hard3_0035",
+    "hard3_0040",
+    "hard3_0078",
+    "hard3_0086",
+    "hard3_0159",
+    "hard3_0161",
+    "hard3_0163",
+    "hard3_0165",
+    "hard3_0166",
+    "hard3_0167",
+    "hard3_0206",
+    "hard3_0234",
+    "hard3_0235",
+    "hard3_0236",
+    "hard3_0241",
+    "hard3_0242",
+    "hard3_0344",
+    "hard3_0345",
+    "hard3_0392"
+  ],
+  "unique_magmas": 442,
+  "top_magmas": [
+    {
+      "rank": 1,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 23
+    },
+    {
+      "rank": 2,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 21
+    },
+    {
+      "rank": 3,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 17
+    },
+    {
+      "rank": 4,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 16
+    },
+    {
+      "rank": 5,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 16
+    },
+    {
+      "rank": 6,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 16
+    },
+    {
+      "rank": 7,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 15
+    },
+    {
+      "rank": 8,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 14
+    },
+    {
+      "rank": 9,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 14
+    },
+    {
+      "rank": 10,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 14
+    },
+    {
+      "rank": 11,
+      "N": 3,
+      "table": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 14
+    },
+    {
+      "rank": 12,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ],
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 13
+    },
+    {
+      "rank": 13,
+      "N": 3,
+      "table": [
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 13
+    },
+    {
+      "rank": 14,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 12
+    },
+    {
+      "rank": 15,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "coverage": 12
+    }
+  ],
+  "greedy_cover": [
+    {
+      "rank": 1,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 23,
+      "problems": [
+        "hard3_0009",
+        "hard3_0011",
+        "hard3_0037",
+        "hard3_0063",
+        "hard3_0064",
+        "hard3_0080",
+        "hard3_0081",
+        "hard3_0083",
+        "hard3_0084",
+        "hard3_0103",
+        "hard3_0105",
+        "hard3_0128",
+        "hard3_0129",
+        "hard3_0149",
+        "hard3_0184",
+        "hard3_0185",
+        "hard3_0186",
+        "hard3_0201",
+        "hard3_0248",
+        "hard3_0253",
+        "hard3_0277",
+        "hard3_0280",
+        "hard3_0368"
+      ]
+    },
+    {
+      "rank": 2,
+      "N": 3,
+      "table": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 14,
+      "problems": [
+        "hard3_0029",
+        "hard3_0050",
+        "hard3_0108",
+        "hard3_0141",
+        "hard3_0143",
+        "hard3_0175",
+        "hard3_0195",
+        "hard3_0211",
+        "hard3_0254",
+        "hard3_0263",
+        "hard3_0270",
+        "hard3_0320",
+        "hard3_0339",
+        "hard3_0383"
+      ]
+    },
+    {
+      "rank": 3,
+      "N": 3,
+      "table": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "pattern": "LEFT_F: x\u2192[1, 2, 0]",
+      "family": "3elem",
+      "new_coverage": 9,
+      "problems": [
+        "hard3_0041",
+        "hard3_0044",
+        "hard3_0219",
+        "hard3_0225",
+        "hard3_0276",
+        "hard3_0301",
+        "hard3_0303",
+        "hard3_0304",
+        "hard3_0305"
+      ]
+    },
+    {
+      "rank": 4,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 9,
+      "problems": [
+        "hard3_0342",
+        "hard3_0347",
+        "hard3_0348",
+        "hard3_0359",
+        "hard3_0360",
+        "hard3_0362",
+        "hard3_0370",
+        "hard3_0391",
+        "hard3_0394"
+      ]
+    },
+    {
+      "rank": 5,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 7,
+      "problems": [
+        "hard3_0021",
+        "hard3_0022",
+        "hard3_0065",
+        "hard3_0130",
+        "hard3_0151",
+        "hard3_0153",
+        "hard3_0302"
+      ]
+    },
+    {
+      "rank": 6,
+      "N": 3,
+      "table": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "pattern": "LINEAR(2x+2y mod 3)",
+      "family": "3elem",
+      "new_coverage": 6,
+      "problems": [
+        "hard3_0045",
+        "hard3_0071",
+        "hard3_0091",
+        "hard3_0092",
+        "hard3_0146",
+        "hard3_0357"
+      ]
+    },
+    {
+      "rank": 7,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 5,
+      "problems": [
+        "hard3_0055",
+        "hard3_0056",
+        "hard3_0057",
+        "hard3_0059",
+        "hard3_0371"
+      ]
+    },
+    {
+      "rank": 8,
+      "N": 4,
+      "table": [
+        [
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          1,
+          2,
+          3,
+          0
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[1, 2, 3, 0]",
+      "family": "4rightf",
+      "new_coverage": 5,
+      "problems": [
+        "hard3_0069",
+        "hard3_0073",
+        "hard3_0074",
+        "hard3_0075",
+        "hard3_0076"
+      ]
+    },
+    {
+      "rank": 9,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 2,
+      "problems": [
+        "hard3_0358",
+        "hard3_0363"
+      ]
+    },
+    {
+      "rank": 10,
+      "N": 3,
+      "table": [
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "pattern": "RIGHT_F: y\u2192[1, 2, 0]",
+      "family": "3elem",
+      "new_coverage": 2,
+      "problems": [
+        "hard3_0110",
+        "hard3_0125"
+      ]
+    },
+    {
+      "rank": 11,
+      "N": 4,
+      "table": [
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          2,
+          2
+        ],
+        [
+          3,
+          3,
+          3,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "pattern": "LEFT_F: x\u2192[1, 2, 3, 0]",
+      "family": "4leftf",
+      "new_coverage": 2,
+      "problems": [
+        "hard3_0330",
+        "hard3_0332"
+      ]
+    },
+    {
+      "rank": 12,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 2,
+      "problems": [
+        "hard3_0372",
+        "hard3_0373"
+      ]
+    },
+    {
+      "rank": 13,
+      "N": 2,
+      "table": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "pattern": "STRUCTURED_2elem",
+      "family": "2elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0031"
+      ]
+    },
+    {
+      "rank": 14,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0200"
+      ]
+    },
+    {
+      "rank": 15,
+      "N": 3,
+      "table": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0039"
+      ]
+    },
+    {
+      "rank": 16,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          2,
+          0
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0349"
+      ]
+    },
+    {
+      "rank": 17,
+      "N": 4,
+      "table": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1,
+          2
+        ]
+      ],
+      "pattern": "LINEAR(1x+1y mod 4)",
+      "family": "4linear",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0093"
+      ]
+    },
+    {
+      "rank": 18,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0150"
+      ]
+    },
+    {
+      "rank": 19,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0190"
+      ]
+    },
+    {
+      "rank": 20,
+      "N": 3,
+      "table": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0191"
+      ]
+    },
+    {
+      "rank": 21,
+      "N": 3,
+      "table": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          0,
+          0
+        ]
+      ],
+      "pattern": "TRANS(f=[1, 0, 1] mod 3)",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0229"
+      ]
+    },
+    {
+      "rank": 22,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          2,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0356"
+      ]
+    },
+    {
+      "rank": 23,
+      "N": 3,
+      "table": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "pattern": "STRUCTURED_3elem",
+      "family": "3elem",
+      "new_coverage": 1,
+      "problems": [
+        "hard3_0377"
+      ]
+    }
+  ]
+}

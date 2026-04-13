@@ -1,0 +1,30 @@
+You are an expert in abstract algebra. Determine whether Equation 1 ({{ equation1 }}) implies Equation 2 ({{ equation2 }}) over all magmas.
+
+A magma is a set with a binary operation * — no other axioms assumed.
+
+QUICK CHECKS:
+1. SINGLETON: If EQ1 has the form "x = f(y,z,...)" where bare x does NOT appear on the right side → EQ1 forces singleton magma → TRUE.
+2. BALANCE: If EQ1 is balanced (every variable has equal count on both sides) AND EQ2 is unbalanced → FALSE.
+3. DISJOINT: If EQ1's LHS and RHS use completely disjoint variable sets → EQ1 is a constant law. If EQ2 has * on both sides → TRUE.
+
+APPROACH:
+If no quick check fires, find a counterexample magma where EQ1 holds universally but EQ2 fails. If you cannot find one after thorough search, attempt to derive EQ2 from EQ1 by substitution and rewriting.
+
+WORKED EXAMPLE (FALSE):
+EQ1: x = x * (x * (y * y))   EQ2: x * y = y * z
+Left projection (x*y=x) satisfies EQ1: both sides equal x. EQ2 fails: x*y=x ≠ y=y*z for x≠y.
+VERDICT: FALSE
+COUNTEREXAMPLE: {0,1} with x*y=x.
+
+WORKED EXAMPLE (TRUE):
+EQ1: x = y * x   EQ2: x = x * (x * ((y * z) * x))
+EQ1 forces a*b=b. Applying this: (y*z)*x=x, x*x=x, x*(x*x)=x. So RHS=x=LHS.
+VERDICT: TRUE
+PROOF: From EQ1, any a*b=b. Simplify RHS of EQ2 to x.
+
+Output format:
+VERDICT: TRUE or FALSE
+REASONING: brief justification
+PROOF: if TRUE
+COUNTEREXAMPLE: if FALSE
+End your response with \boxed{TRUE} or \boxed{FALSE}.

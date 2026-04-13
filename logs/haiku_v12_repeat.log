@@ -1,0 +1,8 @@
+Cheat sheet: cheatsheets/cheatsheet_v12.txt (10050 bytes)
+Provider: anthropic  Model: claude-haiku-4-5-20251001  Subset: hard3
+Limit: 50
+
+--- 50 hard3 problems ---
+  17:27:12 [hard3_0001] ✓ got=TRUE exp=TRUE  (1/50)
+  17:27:25 [hard3_0002] ✓ got=TRUE exp=TRUE  (2/50) ETA=11m
+  17:27:41 [hard3_0003] ✓ got=TRUE exp=TRUE  (3/50) ETA=11m

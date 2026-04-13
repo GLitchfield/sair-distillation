@@ -1,0 +1,70 @@
+Cheat sheet: cheatsheets/cheatsheet_v17.txt (6716 bytes)
+Provider: anthropic  Model: claude-haiku-4-5-20251001  Subset: chunk_1_order5_half
+
+--- 55 chunk_1_order5_half problems ---
+  11:33:02 [order5_hard_0561] ✓ got=TRUE exp=TRUE  (1/55)
+  11:33:17 [order5_hard_0234] ✗ got=TRUE exp=FALSE  (2/55) ETA=14m
+  11:33:35 [order5_hard_0221] ✓ got=TRUE exp=TRUE  (3/55) ETA=14m
+  11:33:52 [order5_hard_0615] ✓ got=TRUE exp=TRUE  (4/55) ETA=15m
+  11:34:15 [order5_hard_0167] ✓ got=TRUE exp=TRUE  (5/55) ETA=14m
+  11:34:29 [order5_hard_0440] ✗ got=TRUE exp=FALSE  (6/55) ETA=14m
+  11:34:45 [order5_hard_0089] ✗ got=FALSE exp=TRUE  (7/55) ETA=14m
+  11:35:04 [order5_hard_0091] ✓ got=TRUE exp=TRUE  (8/55) ETA=14m
+  11:35:28 [order5_hard_0239] ✓ got=TRUE exp=TRUE  (9/55) ETA=14m
+  11:35:45 [order5_hard_0497] ✓ got=TRUE exp=TRUE  (10/55) ETA=13m
+  11:36:02 [order5_hard_0546] ✗ got=TRUE exp=FALSE  (11/55) ETA=13m
+  11:36:20 [order5_hard_0219] ✓ got=TRUE exp=TRUE  (12/55) ETA=13m
+  11:36:44 [order5_hard_0220] ✗ got=TRUE exp=FALSE  (13/55) ETA=13m
+  11:36:59 [order5_hard_0238] ✗ got=TRUE exp=FALSE  (14/55) ETA=12m
+  11:37:14 [order5_hard_0540] ✗ got=TRUE exp=FALSE  (15/55) ETA=12m
+  11:37:30 [order5_hard_0048] ✗ got=None exp=FALSE  (16/55) ETA=12m
+  11:37:59 [order5_hard_0095] ✓ got=TRUE exp=TRUE  (17/55) ETA=12m
+  11:38:18 [order5_hard_0651] ✗ got=FALSE exp=TRUE  (18/55) ETA=11m
+  11:38:35 [order5_hard_0244] ✗ got=TRUE exp=FALSE  (19/55) ETA=11m
+  11:38:57 [order5_hard_0567] ✓ got=TRUE exp=TRUE  (20/55) ETA=11m
+  11:39:17 [order5_hard_0272] ✗ got=None exp=FALSE  (21/55) ETA=11m
+  11:39:45 [order5_hard_0162] ✗ got=TRUE exp=FALSE  (22/55) ETA=11m
+  11:40:06 [order5_hard_0469] ✓ got=TRUE exp=TRUE  (23/55) ETA=10m
+  11:40:21 [order5_hard_0459] ✓ got=TRUE exp=TRUE  (24/55) ETA=10m
+  11:40:41 [order5_hard_0139] ✓ got=TRUE exp=TRUE  (25/55) ETA=10m
+  11:41:02 [order5_hard_0369] ✓ got=TRUE exp=TRUE  (26/55) ETA=9m
+  11:41:26 [order5_hard_0250] ✓ got=FALSE exp=FALSE  (27/55) ETA=9m
+  11:41:44 [order5_hard_0200] ✗ got=TRUE exp=FALSE  (28/55) ETA=9m
+  11:42:05 [order5_hard_0158] ✗ got=TRUE exp=FALSE  (29/55) ETA=8m
+  11:42:17 [order5_hard_0488] ✓ got=FALSE exp=FALSE  (30/55) ETA=8m
+  11:42:39 [order5_hard_0381] ✓ got=TRUE exp=TRUE  (31/55) ETA=8m
+  11:42:54 [order5_hard_0374] ✗ got=TRUE exp=FALSE  (32/55) ETA=7m
+  11:43:13 [order5_hard_0143] ✗ got=FALSE exp=TRUE  (33/55) ETA=7m
+  11:43:33 [order5_hard_0251] ✗ got=FALSE exp=TRUE  (34/55) ETA=7m
+  11:43:47 [order5_hard_0027] ✓ got=TRUE exp=TRUE  (35/55) ETA=6m
+  11:44:08 [order5_hard_0603] ✓ got=TRUE exp=TRUE  (36/55) ETA=6m
+  11:44:26 [order5_hard_0056] ✗ got=TRUE exp=FALSE  (37/55) ETA=6m
+  11:44:46 [order5_hard_0070] ✗ got=TRUE exp=FALSE  (38/55) ETA=5m
+  11:45:05 [order5_hard_0625] ✓ got=TRUE exp=TRUE  (39/55) ETA=5m
+  11:45:30 [order5_hard_0349] ✓ got=TRUE exp=TRUE  (40/55) ETA=5m
+  11:45:46 [order5_hard_0148] ✗ got=TRUE exp=FALSE  (41/55) ETA=4m
+  11:46:09 [order5_hard_0045] ✗ got=FALSE exp=TRUE  (42/55) ETA=4m
+  11:46:28 [order5_hard_0129] ✓ got=TRUE exp=TRUE  (43/55) ETA=4m
+  11:46:45 [order5_hard_0431] ✓ got=TRUE exp=TRUE  (44/55) ETA=4m
+  11:47:03 [order5_hard_0321] ✗ got=FALSE exp=TRUE  (45/55) ETA=3m
+  11:47:27 [order5_hard_0536] ✗ got=TRUE exp=FALSE  (46/55) ETA=3m
+  11:47:45 [order5_hard_0438] ✓ got=FALSE exp=FALSE  (47/55) ETA=3m
+  11:48:03 [order5_hard_0100] ✓ got=FALSE exp=FALSE  (48/55) ETA=2m
+  11:48:21 [order5_hard_0528] ✗ got=TRUE exp=FALSE  (49/55) ETA=2m
+  11:48:42 [order5_hard_0639] ✗ got=FALSE exp=TRUE  (50/55) ETA=2m
+  11:48:53 [order5_hard_0346] ✗ got=TRUE exp=FALSE  (51/55) ETA=1m
+  11:49:18 [order5_hard_0305] ✓ got=TRUE exp=TRUE  (52/55) ETA=1m
+  11:49:41 [order5_hard_0613] ✓ got=TRUE exp=TRUE  (53/55) ETA=1m
+  11:49:58 [order5_hard_0448] ✗ got=None exp=FALSE  (54/55) ETA=0m
+  11:50:23 [order5_hard_0526] ✗ got=TRUE exp=FALSE  (55/55) ETA=0m
+
+Saved to results/v17_order5_half_chunk1.json
+
+============================================================
+RESULTS (chunk_1_order5_half)
+============================================================
+  Accuracy: 27/55 = 49.1%
+  TP=23 FP=18 FN=7 TN=4  Unparsed=3
+  Precision: 56.1%  Recall: 76.7%
+  F1: 0.648
+

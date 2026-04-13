@@ -1,0 +1,247 @@
+Problem: hard3_0098
+EQ1: x = y * (z * ((y * y) * x))
+EQ2: x = ((x * x) * x) * (y * x)
+Answer: False
+Length: 6822 chars
+============================================================
+
+STEP 1: QUICK STRUCTURAL CHECKS
+
+Check 1a — Singleton Detection:
+EQ1: x = y * (z * ((y * y) * x))
+LHS is bare x. RHS contains x in the innermost position. x DOES appear on RHS → no singleton signal.
+
+Check 1b — Disjoint Variable Sets:
+EQ1 uses {x, y, z}. EQ2 uses {x, y}. Not disjoint → no constant law.
+
+Check 1c — Variable Count Balance:
+EQ1 LHS: x appears 1 time. EQ1 RHS: x appears 1 time, y appears 2 times, z appears 1 time.
+EQ1 is UNBALANCED (y: 0 on LHS, 2 on RHS).
+EQ2 LHS: x appears 1 time, y appears 1 time. EQ2 RHS: x appears 3 times, y appears 1 time.
+EQ2 is UNBALANCED (x: 1 on LHS, 3 on RHS).
+No immediate FALSE verdict from imbalance alone.
+
+STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS
+
+Magma A (Zero: x*y=0):
+EQ1: x = y * (z * ((y * y) * x)) → x = 0. Holds iff x=0 for all x → fails at x=1. Does not satisfy EQ1 universally.
+
+Magma B (Constant-1: x*y=1):
+EQ1: x = y * (z * ((y * y) * x)) → x = 1. Holds iff x=1 for all x → fails at x=0. Does not satisfy EQ1 universally.
+
+Magma C (Right Projection: x*y=y):
+EQ1: x = y * (z * ((y * y) * x))
+  Rightmost variable of RHS: innermost is x, then ((y*y)*x)→x, then (z*x)→x, then (y*x)→x.
+  RHS rightmost = x. LHS = x. EQ1 holds universally. ✓
+EQ2: x = ((x * x) * x) * (y * x)
+  Rightmost variable of RHS: (y*x)→x. LHS = x. EQ2 holds universally. ✓
+Magma C satisfies both. Not a counterexample.
+
+Magma D (Left Projection: x*y=x):
+EQ1: x = y * (z * ((y * y) * x))
+  Leftmost variable of RHS: y * (...) → y. LHS = x. EQ1 fails at any x≠y. Does not satisfy EQ1 universally.
+
+Magma E (XOR: x*y=x+y mod 2):
+EQ1: x = y * (z * ((y * y) * x))
+  Count each variable's parity:
+  LHS: x appears 1 time (odd).
+  RHS: x appears 1 time (odd), y appears 2 times (even), z appears 1 time (odd).
+  x: odd vs odd ✓. y: even vs even ✓. z: odd vs odd ✓. EQ1 holds universally. ✓
+EQ2: x = ((x * x) * x) * (y * x)
+  LHS: x appears 1 time (odd), y appears 0 times (even).
+  RHS: x appears 3 times (odd), y appears 1 time (odd).
+  x: odd vs odd ✓. y: even vs odd ✗. EQ2 fails.
+Test EQ2 at x=0, y=1:
+  LHS: 0.
+  RHS: ((0*0)*0)*(1*0) = (0*0)*(1) = 0*1 = 1.
+  LHS=0 ≠ 1=RHS. EQ2 fails. ✓
+Magma E satisfies EQ1 but violates EQ2. COUNTEREXAMPLE FOUND.
+
+STEP 3: VERIFY COUNTEREXAMPLE
+
+Magma E (XOR on {0,1}): x*y = x+y mod 2.
+
+EQ1: x = y * (z * ((y * y) * x)) at x=0, y=1, z=0:
+  (y*y) = 1*1 = 0.
+  ((y*y)*x) = 0*0 = 0.
+  (z*((y*y)*x)) = 0*0 = 0.
+  (y*(z*((y*y)*x))) = 1*0 = 1.
+  LHS = 0. RHS = 1. FAILS.
+
+Retry at x=0, y=0, z=0:
+  (y*y) = 0*0 = 0.
+  ((y*y)*x) = 0*0 = 0.
+  (z*((y*y)*x)) = 0*0 = 0.
+  (y*(z*((y*y)*x))) = 0*0 = 0.
+  LHS = 0. RHS = 0. ✓
+
+Retry at x=1, y=0, z=0:
+  (y*y) = 0*0 = 0.
+  ((y*y)*x) = 0*1 = 1.
+  (z*((y*y)*x)) = 0*1 = 1.
+  (y*(z*((y*y)*x))) = 0*1 = 1.
+  LHS = 1. RHS = 1. ✓
+
+Retry at x=1, y=1, z=0:
+  (y*y) = 1*1 = 0.
+  ((y*y)*x) = 0*1 = 1.
+  (z*((y*y)*x)) = 0*1 = 1.
+  (y*(z*((y*y)*x))) = 1*1 = 0.
+  LHS = 1. RHS = 0. FAILS.
+
+EQ1 does NOT hold universally in Magma E. Magma E is not a valid counterexample.
+
+Magma F (Addition: x*y=x+y):
+EQ1: x = y * (z * ((y * y) * x))
+  Count each variable:
+  LHS: x=1, y=0, z=0.
+  RHS: x=1, y=2, z=1.
+  y: 0 vs 2 → UNBALANCED. EQ1 fails. Does not satisfy EQ1 universally.
+
+Magma G (Negate-right: x*y=1-y):
+EQ1: x = y * (z * ((y * y) * x))
+  (y*y) = 1-y.
+  ((y*y)*x) = 1-x.
+  (z*((y*y)*x)) = 1-(1-x) = x.
+  (y*(z*((y*y)*x))) = 1-x.
+  LHS = x. RHS = 1-x. Holds iff x = 1-x, i.e., x=1/2. Does not hold universally.
+
+Magma H (Right-shift: x*y=(y+1) mod 3):
+EQ1: x = y * (z * ((y * y) * x)) at x=0, y=0, z=0:
+  (y*y) = (0+1) mod 3 = 1.
+  ((y*y)*x) = (0+1) mod 3 = 1.
+  (z*((y*y)*x)) = (1+1) mod 3 = 2.
+  (y*(z*((y*y)*x))) = (2+1) mod 3 = 0.
+  LHS = 0. RHS = 0. ✓
+
+At x=1, y=0, z=0:
+  (y*y) = 1.
+  ((y*y)*x) = 1.
+  (z*((y*y)*x)) = 2.
+  (y*(z*((y*y)*x))) = 0.
+  LHS = 1. RHS = 0. FAILS.
+
+Magma H does not satisfy EQ1 universally.
+
+Magma I (Left-shift: x*y=(x+1) mod 3):
+EQ1: x = y * (z * ((y * y) * x)) at x=0, y=0, z=0:
+  (y*y) = (0+1) mod 3 = 1.
+  ((y*y)*x) = (1+1) mod 3 = 2.
+  (z*((y*y)*x)) = (0+1) mod 3 = 1.
+  (y*(z*((y*y)*x))) = (0+1) mod 3 = 1.
+  LHS = 0. RHS = 1. FAILS.
+
+Magma I does not satisfy EQ1 universally.
+
+Magma J (Null-left {0,1,2}):
+EQ1: x = y * (z * ((y * y) * x)) at x=1, y=0, z=0:
+  (y*y) = table[0][0] = 0.
+  ((y*y)*x) = table[0][1] = 0.
+  (z*((y*y)*x)) = table[0][0] = 0.
+  (y*(z*((y*y)*x))) = table[0][0] = 0.
+  LHS = 1. RHS = 0. FAILS.
+
+Magma J does not satisfy EQ1 universally.
+
+Magma K (Swap-row2 {0,1,2}):
+EQ1: x = y * (z * ((y * y) * x)) at x=0, y=0, z=0:
+  (y*y) = table[0][0] = 0.
+  ((y*y)*x) = table[0][0] = 0.
+  (z*((y*y)*x)) = table[0][0] = 0.
+  (y*(z*((y*y)*x))) = table[0][0] = 0.
+  LHS = 0. RHS = 0. ✓
+
+At x=1, y=0, z=0:
+  (y*y) = 0.
+  ((y*y)*x) = table[0][1] = 1.
+  (z*((y*y)*x)) = table[0][1] = 1.
+  (y*(z*((y*y)*x))) = table[0][1] = 1.
+  LHS = 1. RHS = 1. ✓
+
+At x=2, y=0, z=0:
+  (y*y) = 0.
+  ((y*y)*x) = table[0][2] = 2.
+  (z*((y*y)*x)) = table[0][2] = 2.
+  (y*(z*((y*y)*x))) = table[0][2] = 2.
+  LHS = 2. RHS = 2. ✓
+
+At x=0, y=1, z=0:
+  (y*y) = table[1][1] = 1.
+  ((y*y)*x) = table[1][0] = 0.
+  (z*((y*y)*x)) = table[0][0] = 0.
+  (y*(z*((y*y)*x))) = table[1][0] = 0.
+  LHS = 0. RHS = 0. ✓
+
+At x=1, y=1, z=0:
+  (y*y) = 1.
+  ((y*y)*x) = table[1][1] = 1.
+  (z*((y*y)*x)) = table[0][1] = 1.
+  (y*(z*((y*y)*x))) = table[1][1] = 1.
+  LHS = 1. RHS = 1. ✓
+
+At x=0, y=2, z=0:
+  (y*y) = table[2][2] = 2.
+  ((y*y)*x) = table[2][0] = 1.
+  (z*((y*y)*x)) = table[0][1] = 1.
+  (y*(z*((y*y)*x))) = table[2][1] = 0.
+  LHS = 0. RHS = 0. ✓
+
+At x=1, y=2, z=0:
+  (y*y) = 2.
+  ((y*y)*x) = table[2][1] = 0.
+  (z*((y*y)*x)) = table[0][0] = 0.
+  (y*(z*((y*y)*x))) = table[2][0] = 1.
+  LHS = 1. RHS = 1. ✓
+
+At x=2, y=2, z=0:
+  (y*y) = 2.
+  ((y*y)*x) = table[2][2] = 2.
+  (z*((y*y)*x)) = table[0][2] = 2.
+  (y*(z*((y*y)*x))) = table[2][2] = 2.
+  LHS = 2. RHS = 2. ✓
+
+At x=0, y=0, z=1:
+  (y*y) = 0.
+  ((y*y)*x) = table[0][0] = 0.
+  (z*((y*y)*x)) = table[1][0] = 0.
+  (y*(z*((y*y)*x))) = table[0][0] = 0.
+  LHS = 0. RHS = 0. ✓
+
+At x=0, y=0, z=2:
+  (y*y) = 0.
+  ((y*y)*x) = 0.
+  (z*((y*y)*x)) = table[2][0] = 1.
+  (y*(z*((y*y)*x))) = table[0][1] = 1.
+  LHS = 0. RHS = 1. FAILS.
+
+Magma K does not satisfy EQ1 universally.
+
+Magma L (Near-zero {0,1,2}):
+EQ1: x = y * (z * ((y * y) * x)) at x=0, y=0, z=0:
+  (y*y) = table[0][0] = 0.
+  ((y*y)*x) = table[0][0] = 0.
+  (z*((y*y)*x)) = table[0][0] = 0.
+  (y*(z*((y*y)*x))) = table[0][0] = 0.
+  LHS = 0. RHS = 0. ✓
+
+At x=1, y=0, z=0:
+  (y*y) = 0.
+  ((y*y)*x) = table[0][1] = 0.
+  (z*((y*y)*x)) = table[0][0] = 0.
+  (y*(z*((y*y)*x))) = table[0][0] = 0.
+  LHS = 1. RHS = 0. FAILS.
+
+Magma L does not satisfy EQ1 universally.
+
+STEP 3: LINEAR MAGMA OVER Z/3Z
+
+Try x*y = 2x + y mod 3.
+
+EQ1: x = y * (z * ((y * y) * x)) at x=0, y=0, z=0:
+  (y*y) = 2*0 + 0 = 0.
+  ((y*y)*x) = 2*0 + 0 = 0.
+  (z*((y*y)*x)) = 2*0 + 0 = 0.
+  (y*(z*((y*y)*x))) = 2*0 + 0 = 0.
+  LHS = 0. RHS = 0. ✓
+
+At x=1, y=0, z

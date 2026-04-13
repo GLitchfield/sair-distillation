@@ -1,0 +1,37 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} with the following operation table:
+
+  * | 0  1  2
+  ---------
+  0 | 0  0  0
+  1 | 2  1  1
+  2 | 1  2  2
+
+To compute a*b, find row a, column b.
+
+Equation 1: x = (x * (x * y)) * x
+Equation 2: x * x = x * ((y * y) * x)
+
+EQ1 holds universally (pre-verified).
+
+EQ2 says: x * x = x * ((y * y) * x). This means x * x must equal x * [something]. So EQ2 holds when (y * y) * x equals x (since then both sides are x * x).
+
+Question: For which (x, y) values does (y * y) * x equal x?
+
+Compute (y * y) * x for all 9 assignments using the table:
+  (x=0,y=0): y*y = table[0][0] = 0. Then 0*0 = table[0][0] = 0. Is 0 = x=0?
+  (x=0,y=1): y*y = table[1][1] = 1. Then 1*0 = table[1][0] = 2. Is 2 = x=0?
+  (x=0,y=2): y*y = table[2][2] = 2. Then 2*0 = table[2][0] = 1. Is 1 = x=0?
+  (x=1,y=0): y*y = table[0][0] = 0. Then 0*1 = table[0][1] = 0. Is 0 = x=1?
+  (x=1,y=1): y*y = table[1][1] = 1. Then 1*1 = table[1][1] = 1. Is 1 = x=1?
+  (x=1,y=2): y*y = table[2][2] = 2. Then 2*1 = table[2][1] = 2. Is 2 = x=1?
+  (x=2,y=0): y*y = table[0][0] = 0. Then 0*2 = table[0][2] = 0. Is 0 = x=2?
+  (x=2,y=1): y*y = table[1][1] = 1. Then 1*2 = table[1][2] = 1. Is 1 = x=2?
+  (x=2,y=2): y*y = table[2][2] = 2. Then 2*2 = table[2][2] = 2. Is 2 = x=2?
+
+Check each row. When (y*y)*x ≠ x, then x*((y*y)*x) ≠ x*x, so EQ2 fails at that assignment.
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

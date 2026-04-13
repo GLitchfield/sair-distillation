@@ -1,0 +1,197 @@
+Problem: hard3_0096
+EQ1: x = y * (z * ((x * w) * x))
+EQ2: x = (x * (x * x)) * x
+Answer: False
+Length: 7683 chars
+============================================================
+
+STEP 1: QUICK STRUCTURAL CHECKS
+
+Check 1a — Singleton Detection:
+EQ1: x = y * (z * ((x * w) * x))
+LHS is bare x. RHS contains x in two places: (x*w) and the second x in ((x*w)*x).
+x appears on RHS → NOT singleton detection.
+
+Check 1b — Disjoint Variable Sets:
+EQ1 uses {x, y, z, w}. EQ2 uses {x}. Not disjoint.
+
+Check 1c — Variable Count Balance:
+EQ1 LHS: x appears 1 time.
+EQ1 RHS: x appears 3 times (in x*w, then twice in ((x*w)*x)).
+EQ1 is UNBALANCED (x: 1 vs 3).
+EQ2 LHS: x appears 1 time.
+EQ2 RHS: x appears 4 times (x*x, then x*(x*x), then (x*(x*x))*x).
+EQ2 is UNBALANCED (x: 1 vs 4).
+Both unbalanced. Continue to Step 2.
+
+STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS
+
+Magma A (Zero: x*y=0):
+EQ1: x = y * (z * ((x * w) * x)) → x = y * (z * (0 * x)) → x = y * (z * 0) → x = y * 0 → x = 0.
+For EQ1 to hold universally, x must always equal 0. This fails for x=1. EQ1 does NOT hold universally in A.
+
+Magma B (Constant-1: x*y=1):
+EQ1: x = y * (z * ((x * w) * x)) → x = y * (z * (1 * x)) → x = y * (z * 1) → x = y * 1 → x = 1.
+For EQ1 to hold universally, x must always equal 1. This fails for x=0. EQ1 does NOT hold universally in B.
+
+Magma C (Right Projection: x*y=y):
+EQ1: x = y * (z * ((x * w) * x))
+Rightmost variable in RHS: innermost is (x*w)*x → rightmost is x. Then z*x → rightmost is x. Then y*x → rightmost is x.
+RHS rightmost = x. LHS = x. EQ1 holds universally in C. ✓
+EQ2: x = (x * (x * x)) * x
+Rightmost variable in RHS: (x*x)*x → rightmost is x. Then x*(x*x) → rightmost is x. Then (x*(x*x))*x → rightmost is x.
+RHS rightmost = x. LHS = x. EQ2 holds universally in C. ✓
+
+Magma D (Left Projection: x*y=x):
+EQ1: x = y * (z * ((x * w) * x))
+Leftmost variable in RHS: (x*w)*x → leftmost is x. Then z*((x*w)*x) → leftmost is z. Then y*(z*...) → leftmost is y.
+RHS leftmost = y. LHS = x. EQ1 holds iff x=y for all x,y. This forces singleton. EQ1 does NOT hold universally in D.
+
+Magma E (XOR: x*y = x+y mod 2):
+EQ1: x = y * (z * ((x * w) * x))
+Count parity of each variable:
+LHS: x appears 1 time (odd).
+RHS: y appears 1 time (odd), z appears 1 time (odd), x appears 3 times (odd), w appears 1 time (odd).
+For x: LHS odd, RHS odd ✓. For y: LHS even, RHS odd ✗. EQ1 does NOT hold universally in E.
+
+Magma F (Addition: x*y = x+y):
+EQ1: x = y * (z * ((x * w) * x))
+Count occurrences:
+LHS: x=1, y=0, z=0, w=0.
+RHS: x=3, y=1, z=1, w=1.
+x: 1 vs 3 ✗. EQ1 does NOT hold universally in F.
+
+Magma G (Negate-right: x*y = 1-y):
+EQ1: x = y * (z * ((x * w) * x))
+RHS structure: (x*w)*x → 1-x. z*(1-x) → 1-(1-x) = x. y*x → 1-x.
+RHS = 1-x. LHS = x. EQ1 holds iff x = 1-x, i.e., x=1/2. Not universally true. EQ1 does NOT hold universally in G.
+
+Magma H (Right-shift: x*y = (y+1) mod 3):
+EQ1: x = y * (z * ((x * w) * x))
+Evaluate RHS: (x*w) → (w+1) mod 3. ((x*w)*x) → (x+1) mod 3. (z*((x*w)*x)) → ((x+1)+1) mod 3 = (x+2) mod 3. (y*(z*...)) → ((x+2)+1) mod 3 = (x+3) mod 3 = x mod 3 = x.
+RHS = x. LHS = x. EQ1 holds universally in H. ✓
+EQ2: x = (x * (x * x)) * x
+Evaluate RHS: (x*x) → (x+1) mod 3. (x*(x*x)) → ((x+1)+1) mod 3 = (x+2) mod 3. ((x*(x*x))*x) → ((x+2)+1) mod 3 = (x+3) mod 3 = x.
+RHS = x. LHS = x. EQ2 holds universally in H. ✓
+
+Magma I (Left-shift: x*y = (x+1) mod 3):
+EQ1: x = y * (z * ((x * w) * x))
+Evaluate RHS: (x*w) → (x+1) mod 3. ((x*w)*x) → ((x+1)+1) mod 3 = (x+2) mod 3. (z*((x*w)*x)) → (z+1) mod 3. (y*(z*...)) → (y+1) mod 3.
+RHS = (y+1) mod 3. LHS = x. EQ1 holds iff x = (y+1) mod 3 for all x,y. Not universally true. EQ1 does NOT hold universally in I.
+
+Magma J (Null-left):
+EQ1: x = y * (z * ((x * w) * x))
+Test x=1, y=0, z=0, w=0:
+(x*w) = table[1][0] = 2. ((x*w)*x) = table[2][1] = 2. (z*((x*w)*x)) = table[0][2] = 1. (y*(z*...)) = table[0][1] = 0.
+RHS = 0. LHS = 1. EQ1 fails. EQ1 does NOT hold universally in J.
+
+Magma K (Swap-row2):
+EQ1: x = y * (z * ((x * w) * x))
+Test x=2, y=0, z=0, w=0:
+(x*w) = table[2][0] = 1. ((x*w)*x) = table[1][2] = 2. (z*((x*w)*x)) = table[0][2] = 2. (y*(z*...)) = table[0][2] = 2.
+RHS = 2. LHS = 2. ✓
+Test x=2, y=1, z=1, w=1:
+(x*w) = table[2][1] = 0. ((x*w)*x) = table[0][2] = 2. (z*((x*w)*x)) = table[1][2] = 2. (y*(z*...)) = table[1][2] = 2.
+RHS = 2. LHS = 2. ✓
+Test x=0, y=1, z=1, w=1:
+(x*w) = table[0][1] = 1. ((x*w)*x) = table[1][0] = 0. (z*((x*w)*x)) = table[1][0] = 0. (y*(z*...)) = table[1][0] = 0.
+RHS = 0. LHS = 0. ✓
+Test x=1, y=0, z=0, w=0:
+(x*w) = table[1][0] = 0. ((x*w)*x) = table[0][1] = 1. (z*((x*w)*x)) = table[0][1] = 1. (y*(z*...)) = table[0][1] = 1.
+RHS = 1. LHS = 1. ✓
+EQ1 appears to hold universally in K. Now test EQ2:
+EQ2: x = (x * (x * x)) * x
+Test x=2:
+(x*x) = table[2][2] = 2. (x*(x*x)) = table[2][2] = 2. ((x*(x*x))*x) = table[2][2] = 2.
+RHS = 2. LHS = 2. ✓
+Test x=0:
+(x*x) = table[0][0] = 0. (x*(x*x)) = table[0][0] = 0. ((x*(x*x))*x) = table[0][0] = 0.
+RHS = 0. LHS = 0. ✓
+Test x=1:
+(x*x) = table[1][1] = 1. (x*(x*x)) = table[1][1] = 1. ((x*(x*x))*x) = table[1][1] = 1.
+RHS = 1. LHS = 1. ✓
+EQ2 holds universally in K. ✓
+
+Magma L (Near-zero):
+EQ1: x = y * (z * ((x * w) * x))
+Test x=0, y=0, z=0, w=2:
+(x*w) = table[0][2] = 1. ((x*w)*x) = table[1][0] = 0. (z*((x*w)*x)) = table[0][0] = 0. (y*(z*...)) = table[0][0] = 0.
+RHS = 0. LHS = 0. ✓
+Test x=0, y=2, z=2, w=2:
+(x*w) = table[0][2] = 1. ((x*w)*x) = table[1][0] = 0. (z*((x*w)*x)) = table[2][0] = 0. (y*(z*...)) = table[2][0] = 0.
+RHS = 0. LHS = 0. ✓
+Test x=2, y=0, z=0, w=0:
+(x*w) = table[2][0] = 0. ((x*w)*x) = table[0][2] = 1. (z*((x*w)*x)) = table[0][1] = 0. (y*(z*...)) = table[0][0] = 0.
+RHS = 0. LHS = 2. ✗
+EQ1 does NOT hold universally in L.
+
+STEP 3: LINEAR MAGMA OVER Z/3Z
+
+Try x*y = 2x + y mod 3.
+EQ1: x = y * (z * ((x * w) * x))
+Evaluate RHS:
+(x*w) = 2x + w mod 3.
+((x*w)*x) = 2(2x+w) + x mod 3 = 4x + 2w + x mod 3 = 5x + 2w mod 3 = 2x + 2w mod 3.
+(z*((x*w)*x)) = 2z + (2x+2w) mod 3 = 2z + 2x + 2w mod 3.
+(y*(z*...)) = 2y + (2z+2x+2w) mod 3 = 2y + 2z + 2x + 2w mod 3.
+RHS = 2x + 2y + 2z + 2w mod 3.
+LHS = x.
+EQ1 holds iff x = 2x + 2y + 2z + 2w mod 3, i.e., -x = 2y + 2z + 2w mod 3, i.e., 2x = 2y + 2z + 2w mod 3.
+Test x=0, y=0, z=0, w=0: 0 = 0 ✓. Test x=1, y=0, z=0, w=0: 2 = 0 ✗.
+EQ1 does NOT hold universally in this linear magma.
+
+STEP 4: ATTEMPT ALGEBRAIC PROOF
+
+Attempt 4a: Substitute specific values into EQ1.
+EQ1: x = y * (z * ((x * w) * x))
+
+Set y = x, z = x, w = x:
+x = x * (x * ((x * x) * x))
+This gives us: x = x * (x * ((x * x) * x)) ... (Identity A)
+
+Set w = x in EQ1:
+x = y * (z * ((x * x) * x)) ... (Identity B)
+
+Attempt 4b: Use EQ1 as a rewrite rule.
+EQ1 states: x = y * (z * ((x * w) * x)) for all x, y, z, w.
+This is a universal identity. For any substitution, the RHS equals x.
+
+In particular, setting y = x, z = x, w = x:
+x = x * (x * ((x * x) * x))
+
+Now examine EQ2: x = (x * (x * x)) * x.
+We need to show (x * (x * x)) * x = x.
+
+From Identity A: x = x * (x * ((x * x) * x)).
+Rearranging: x * (x * ((x * x) * x)) = x.
+
+Let P = (x * x) * x. Then:
+x * (x * P) = x.
+
+We need to show P = x, i.e., (x * x) * x = x.
+
+From EQ1 with y=x, z=x, w=x:
+x = x * (x * ((x * x) * x))
+x = x * (x * P) where P = (x*x)*x.
+
+This tells us x * (x * P) = x, but does not directly give us P = x.
+
+Attempt 4c: Try a different substitution.
+Set y = x * (x * x), z = x, w = x in EQ1:
+x = (x * (x * x)) * (x * ((x * x) * x))
+
+This does not directly simplify to EQ2 either.
+
+No clear algebraic path found in 3 attempts.
+
+STEP 5: FINAL JUDGMENT
+
+Summary of findings:
+- Magma C (Right Projection): Both EQ1 and EQ2 hold universally. ✓
+- Magma H (Right-shift): Both EQ1 and EQ2 hold universally. ✓
+- Magma K (Swap-row2): Both EQ1 and EQ2 hold universally. ✓
+- All other magmas tested: EQ1 fails to hold universally.
+
+No counterexample found where EQ1 holds but EQ2 fails.
+
+Observation: EQ1 is highly restrictive. It only holds universally in magmas C, H,

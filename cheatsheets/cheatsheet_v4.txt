@@ -1,0 +1,80 @@
+STRATEGY: Determine if Equation 1 implies Equation 2 by following these steps. Be concise—one line per magma test. Always reach Step 5 before concluding TRUE or FALSE when no proof/counterexample was found.
+
+OUTPUT FORMAT WARNING: Final answer must use plain text headers with NO markdown formatting. Write exactly "VERDICT: TRUE" or "VERDICT: FALSE" — the colon must be immediately followed by a space and then TRUE or FALSE. NOT **VERDICT:** or any bold/italic formatting.
+
+STEP 1: QUICK STRUCTURAL CHECKS
+
+Check 1a - Singleton Detection:
+If Equation 1 has the EXACT form "x = f(y, z, ...)" where:
+  - The LEFT side is a SINGLE BARE VARIABLE (just "x" with no operations), AND
+  - x does NOT appear ANYWHERE on the right side
+Then Equation 1 forces the magma to be a singleton. Answer: TRUE.
+
+WHY: For any fixed y,z,..., the RHS is some element e. Since x is universally quantified, EVERY element must equal e → singleton → satisfies all equations.
+
+CRITICAL: This rule requires a BARE variable on LHS — NOT x inside a product.
+  - "x = y * (z * w)" → YES singleton → TRUE
+  - "x = (y * y) * ((y * z) * w)" → YES singleton → TRUE
+  - "x * y = z * (w * y)" → NO (LHS is x*y, not bare x)
+  - "x = x * (y * z)" → NO (x appears in RHS)
+
+Check 1b - LHS Complexity:
+If Equation 2's LHS has FEWER * operations than Equation 1's LHS, lean FALSE. Proceed to Step 2 to confirm.
+
+STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS
+
+Find a magma that SATISFIES EQ1 for ALL variable assignments AND VIOLATES EQ2 for some assignment.
+
+LAW CHECK: A magma satisfies an equation as a LAW only if it holds for EVERY assignment. If an equation reduces to "x=z" or "x+y=0", the magma does NOT universally satisfy it — skip to next magma. Do NOT cherry-pick one assignment where EQ1 holds and a different one where EQ2 fails.
+
+Magma A - "Zero": x*y = 0 for all x,y.
+  Rule: holds iff both sides contain * (both→0), or both sides are the same bare variable.
+  Fails if one side is a bare variable (can equal 1) and the other contains * (equals 0).
+
+Magma B - "Right Projection": x*y = y.
+  Rule: any compound expression → its RIGHTMOST leaf variable.
+  Equation holds iff both sides have the same rightmost variable.
+
+Magma C - "Left Projection": x*y = x.
+  Rule: any compound expression → its LEFTMOST leaf variable.
+  Equation holds iff both sides have the same leftmost variable.
+
+Magma D - "XOR": x*y = x+y mod 2.
+  Rule: equation holds iff every variable has the same parity of occurrences on both sides (same odd/even count). Any variable with different parity on LHS vs RHS → equation fails.
+
+Magma E - "Constant 1": x*y = 1 for all x,y.
+  Rule: holds iff both sides contain * (both→1), or both sides are the same bare variable.
+  Fails if one side is a bare variable (can equal 0) and the other contains * (equals 1).
+
+Magma F - "Negate-right": x*y = 1-y.
+  Shortcut: x*y=1-y. So x*(y*z)=z. And (x*y)*z=1-z.
+  Left-nested depth-n: result alternates 1-z / z. Right-nested: result is innermost variable.
+
+If any magma universally satisfies EQ1 but violates EQ2 for some assignment: FALSE.
+
+STEP 3: TEST WITH LINEAR MAGMA OVER Z/3Z
+
+Try x*y = 2x + y mod 3 (values {0,1,2}). Evaluate by computing 2x+y mod 3.
+
+STEP 4: ATTEMPT ALGEBRAIC PROOF
+
+If no counterexample was found, try to prove TRUE.
+
+Method 4a: Substitute specific values (x=y, x=x*x, etc.) into EQ1 to derive intermediate identities, then derive EQ2.
+
+Method 4b: Use EQ1 as a rewrite rule to transform one side of EQ2 into the other.
+
+STEP 5: DEFAULT JUDGMENT
+
+If no counterexample and no proof, weigh these heuristics:
+- EQ2 introduces new variables not in EQ1 → lean FALSE
+- EQ2 uses 2+ fewer variables than EQ1 → lean TRUE
+- EQ2 has deeper nesting or more * operations → lean FALSE
+- Step 1b pointed toward FALSE → lean FALSE
+
+Choose the verdict that matches the strongest signal. Do not default to TRUE just because no counterexample was found.
+
+IMPORTANT REMINDERS:
+- A magma is just a set with a binary operation. No associativity, commutativity, or identity assumed unless forced.
+- TRUE means EVERY magma satisfying EQ1 also satisfies EQ2. One valid counterexample makes it FALSE.
+- Constant magmas (A and E) satisfy any equation where both sides contain *.

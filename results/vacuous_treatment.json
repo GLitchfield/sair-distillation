@@ -1,0 +1,57 @@
+{
+  "summary": {
+    "n_runs": 20,
+    "n_problems": 5,
+    "avg_consistency": 0.76,
+    "avg_accuracy": 0.76,
+    "perfect_consistency": 0,
+    "perfect_pct": 0.0
+  },
+  "per_problem": [
+    {
+      "id": "hard3_0071",
+      "true_count": 4,
+      "false_count": 16,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0153",
+      "true_count": 8,
+      "false_count": 12,
+      "none_count": 0,
+      "accuracy": 0.6,
+      "majority": "FALSE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0190",
+      "true_count": 1,
+      "false_count": 19,
+      "none_count": 0,
+      "accuracy": 0.95,
+      "majority": "FALSE",
+      "consistency": 0.95
+    },
+    {
+      "id": "hard3_0242",
+      "true_count": 9,
+      "false_count": 11,
+      "none_count": 0,
+      "accuracy": 0.55,
+      "majority": "FALSE",
+      "consistency": 0.55
+    },
+    {
+      "id": "hard3_0270",
+      "true_count": 2,
+      "false_count": 18,
+      "none_count": 0,
+      "accuracy": 0.9,
+      "majority": "FALSE",
+      "consistency": 0.9
+    }
+  ]
+}

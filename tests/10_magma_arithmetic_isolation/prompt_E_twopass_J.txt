@@ -1,0 +1,36 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} with the following operation table:
+
+  * | 0  1  2
+  ---------
+  0 | 0  0  0
+  1 | 2  1  1
+  2 | 1  2  2
+
+To compute a*b, find row a, column b.
+
+Equation 1: x = (x * (x * y)) * x
+Equation 2: x * x = x * ((y * y) * x)
+
+PASS 1 — Simplify by cases.
+
+This magma has three behaviors depending on the left argument:
+- Row 0: 0*anything = 0
+- Row 1: 1*0=2, 1*1=1, 1*2=1
+- Row 2: 2*0=1, 2*1=2, 2*2=2
+
+To simplify an expression, split into cases: x=0, x=1, x=2. For each case, evaluate the RHS of each equation by substituting and using the table. Check all values of y (0,1,2) within each case.
+
+Show your case analysis step by step for EQ1, then for EQ2.
+
+PASS 2 — Conclude.
+
+For EQ1: does the RHS equal the LHS in every case?
+For EQ2: does the RHS equal the LHS in every case, or does it fail somewhere?
+
+If EQ1 holds universally but EQ2 does not, this magma is a counterexample.
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

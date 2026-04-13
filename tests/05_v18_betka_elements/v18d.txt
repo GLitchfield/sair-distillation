@@ -1,0 +1,146 @@
+You are a mathematician specializing in equational theories of magmas.
+Your task is to determine whether Equation 1 ({{ equation1 }}) implies Equation 2 ({{ equation2 }}) over all magmas.
+
+WORKED EXAMPLE (FALSE — counterexample found):
+EQ1: x = x * (x * (y * y))   EQ2: x * y = y * z
+Step 1: Singleton? x on RHS → no. Balance? Unbalanced. No quick verdict.
+Step 2 — Magma C (x*y=x): EQ1: x*(x*(y*y))→x. LHS=x=RHS. ✓ Holds universally.
+  EQ2: x*y→x, y*z→y. At x=0,y=1: LHS=0≠1=RHS. ✗ EQ2 fails. CE confirmed.
+VERDICT: FALSE
+REASONING: Left projection satisfies EQ1 universally but violates EQ2.
+PROOF:
+COUNTEREXAMPLE: {0,1} with x*y=x. EQ1: both sides=x ✓. EQ2: 0*1=0≠1=1*anything.
+
+WORKED EXAMPLE (TRUE — proof by rewriting):
+EQ1: x = y * x   EQ2: x = x * (x * ((y * z) * x))
+Step 1: Singleton? x on RHS → no. Balance? EQ1: y:0vs1 → unbalanced. No quick verdict.
+Step 2: Magma B (x*y=y): EQ1→x=x ✓. EQ2→rightmost=x ✓. Both hold. No CE.
+  Magma C (x*y=x): EQ1→x=y. Forces x=y for all x,y → singleton signal → TRUE.
+Step 4: From EQ1 (x=y*x), any a*b=b. So (y*z)*x=x, x*x=x, x*(x*x)=x.
+  Therefore x*(x*((y*z)*x)) = x*(x*x) = x*x = x = LHS. ✓
+VERDICT: TRUE
+REASONING: EQ1 gives a*b=b for all a,b. Applying repeatedly simplifies EQ2's RHS to x.
+PROOF: EQ1 gives a*b=b. Then (y*z)*x=x, x*((y*z)*x)=x, x*(x*((y*z)*x))=x. RHS=x=LHS.
+COUNTEREXAMPLE:
+
+Follow ALL steps in order. Be concise — one line per magma test.
+
+STEP 1: QUICK STRUCTURAL CHECKS
+
+Check 1a — Singleton Detection:
+If EQ1 has the EXACT form "x = f(y, z, ...)" where the LEFT side is a SINGLE BARE VARIABLE and x does NOT appear ANYWHERE on the right side → EQ1 forces singleton → VERDICT: TRUE. STOP.
+  "x = y * (z * w)" → bare x not on RHS → singleton → TRUE
+  "x = (y * y) * ((y * z) * w)" → bare x not on RHS → singleton → TRUE
+  "x * y = z * (w * y)" → NO (LHS is x*y, not bare x)
+  "x = x * (y * z)" → NO (x appears in RHS)
+
+Check 1b — Disjoint Variable Sets (Constant Law):
+If EQ1's LHS and RHS use COMPLETELY DISJOINT variable sets → constant law.
+  If EQ2 has * on BOTH sides → TRUE.
+  If EQ2 has a bare variable on one side → continue to Step 2.
+
+Check 1c — Variable Count Balance:
+Count occurrences of each variable on LHS vs RHS. "Balanced" = every variable equal count both sides.
+THEOREM: If EQ1 is balanced AND EQ2 is unbalanced → FALSE immediately.
+
+STEP 1.5: FALSE GUARDS (G1-G4)
+
+First compute these features for both EQ1 and EQ2:
+  bare(E) = one side of E is a single variable (true/false)
+  size(E) = total variable occurrences on both sides
+  vars(E) = number of distinct variables in E
+  imb(E) = sum of |leftCount - rightCount| for each variable
+  XOR(E) = every variable has same parity (odd/even) count on both sides
+
+G1: If ALL hold → FALSE:
+  bare(EQ1)=true, bare(EQ2)=false, size(EQ1)=size(EQ2), vars(EQ2)<vars(EQ1), imb(EQ2)>imb(EQ1), XOR(EQ1)=true
+
+G2: If ALL hold → FALSE:
+  bare(EQ1)=true, vars(EQ1)=2, bare(EQ2)=false, vars(EQ2)>vars(EQ1), size(EQ2)>=size(EQ1)
+
+G3: If ALL hold → FALSE:
+  bare(EQ1)=false, vars(EQ1)>=5, bare(EQ2)=false, vars(EQ2)<vars(EQ1), size(EQ2)=size(EQ1)
+
+G4: If ALL hold → FALSE:
+  bare(EQ1)=false, bare(EQ2)=false, size(EQ2)=size(EQ1), vars(EQ2)<=vars(EQ1)-2
+
+STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS
+
+Find a magma that SATISFIES EQ1 for ALL assignments AND VIOLATES EQ2 for some assignment.
+Test ALL magmas A through L before drawing any conclusions.
+
+LAW CHECK: A magma satisfies an equation as a LAW only if it holds for EVERY assignment.
+
+SINGLETON SIGNAL: If testing a magma against EQ1 reveals EQ1 forces "x = y" for all x,y → EQ1 only admits singletons → TRUE immediately.
+
+Magma A — Zero: x*y = 0 for all x,y.
+  Holds iff both sides contain * (both→0), or both sides are the same bare variable.
+
+Magma E — Constant-1: x*y = 1 for all x,y.
+  Holds iff both sides contain * (both→1), or both sides are the same bare variable.
+
+Magma B — Right Projection: x*y = y.
+  Any compound expression → its RIGHTMOST leaf variable.
+  Equation holds iff both sides have the same rightmost variable.
+
+Magma C — Left Projection: x*y = x.
+  Any compound expression → its LEFTMOST leaf variable.
+  Equation holds iff both sides have the same leftmost variable.
+
+Magma D — XOR: x*y = x+y mod 2.
+  Check EACH variable independently — same parity count (odd/even) on both sides.
+  COMMON MISTAKE: "LHS total=1, RHS total=3, both odd → match" — WRONG. Check each variable separately.
+
+Magma G — Addition: x*y = x+y.
+  Holds iff every variable has SAME COUNT on both sides (stricter than XOR parity).
+
+Magma F — Negate-right: x*y = 1-y.
+  x*(y*z)→z. (x*y)*z→1-z. Right-nested→innermost var. Left-nested→alternates.
+
+Magma H — Right-shift: x*y = (y+1) mod 3, on {0,1,2}.
+  Evaluate bottom-up. (A * B) → (eval(B) + 1) mod 3. Ignore A entirely.
+
+Magma I — Left-shift: x*y = (x+1) mod 3, on {0,1,2}.
+  Evaluate bottom-up. (A * B) → (eval(A) + 1) mod 3. Ignore B entirely.
+  Careful: x*(anything) where x is bare → (x+1)%3, not (x+2)%3.
+
+Magma J — Null-left {0,1,2}:
+  0*y=0; x*y=x if x≠0,y≠0; x*y=(3-x) if x≠0,y=0.
+
+Magma K — Swap-row2 {0,1,2}: x*y=y if x∈{0,1}; 2*0=1, 2*1=0, 2*2=2.
+
+Magma L — Near-zero: x*y=0 except 0*2=1.
+
+COUNTEREXAMPLE VERIFICATION: Before concluding FALSE, confirm:
+  (a) EQ1 holds for EVERY assignment (test at least 4 diverse cases).
+  (b) EQ2 fails for a SPECIFIC assignment — state the exact values.
+
+STEP 3: LINEAR MAGMA OVER Z/3Z
+Try x*y = 2x + y mod 3. Apply same verification before concluding FALSE.
+
+STEP 4: ATTEMPT ALGEBRAIC PROOF
+If no counterexample found, try to prove TRUE.
+  4a: Substitute specific values (x=y, x=x*x) into EQ1 to get intermediate identities.
+  4b: Use EQ1 as a rewrite rule. Apply to innermost subexpressions first.
+  When applying EQ1 as A*B=C: left-slot=A, right-slot=B. Do not swap positions.
+
+STEP 5: FINAL JUDGMENT
+Apply these rules in order:
+  1. Verified counterexample exists → FALSE (overrides everything)
+  2. Complete algebraic proof constructed → TRUE
+  3. Singleton (1a) or constant law (1b) confirmed → TRUE
+  4. TRIVIAL MODELS SIGNAL: All magmas A–L plus Step 3 tested, no CE found, AND EQ1 is so restrictive only trivial magmas satisfy it → TRUE. Only apply if full battery complete.
+  5. No proof and no verified counterexample — weigh signals:
+     Lean TRUE: EQ2 uses 2+ fewer variables than EQ1; or EQ1 forces projection/constant behavior.
+     Lean FALSE: EQ2 introduces new variables not in EQ1; or EQ2's LHS has fewer * than EQ1's.
+     When signals conflict or are weak: prefer FALSE.
+     Failing to find a proof does NOT count as evidence for TRUE.
+     Failing to find a counterexample does NOT count as evidence for FALSE.
+
+NOTE: Magmas A and E satisfy any equation where both sides contain *.
+
+Output format (plain text only, no markdown, no bold, use exact headers):
+VERDICT: must be exactly TRUE or FALSE (in the same line).
+REASONING: must be non-empty.
+PROOF: required if VERDICT is TRUE, empty otherwise.
+COUNTEREXAMPLE: required if VERDICT is FALSE, empty otherwise.

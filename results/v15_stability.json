@@ -1,0 +1,282 @@
+{
+  "summary": {
+    "n_runs": 10,
+    "n_problems": 30,
+    "avg_consistency": 0.84,
+    "avg_accuracy": 0.627,
+    "perfect_consistency": 8,
+    "perfect_pct": 26.7
+  },
+  "per_problem": [
+    {
+      "id": "hard3_0004",
+      "true_count": 3,
+      "false_count": 7,
+      "none_count": 0,
+      "accuracy": 0.3,
+      "majority": "FALSE",
+      "consistency": 0.7
+    },
+    {
+      "id": "hard3_0017",
+      "true_count": 2,
+      "false_count": 8,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0031",
+      "true_count": 0,
+      "false_count": 10,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0032",
+      "true_count": 8,
+      "false_count": 2,
+      "none_count": 0,
+      "accuracy": 0.2,
+      "majority": "TRUE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0035",
+      "true_count": 0,
+      "false_count": 10,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0064",
+      "true_count": 2,
+      "false_count": 8,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0065",
+      "true_count": 2,
+      "false_count": 8,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0072",
+      "true_count": 2,
+      "false_count": 8,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0075",
+      "true_count": 3,
+      "false_count": 7,
+      "none_count": 0,
+      "accuracy": 0.7,
+      "majority": "FALSE",
+      "consistency": 0.7
+    },
+    {
+      "id": "hard3_0079",
+      "true_count": 0,
+      "false_count": 10,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0086",
+      "true_count": 2,
+      "false_count": 8,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0089",
+      "true_count": 0,
+      "false_count": 10,
+      "none_count": 0,
+      "accuracy": 0.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0124",
+      "true_count": 1,
+      "false_count": 9,
+      "none_count": 0,
+      "accuracy": 0.1,
+      "majority": "FALSE",
+      "consistency": 0.9
+    },
+    {
+      "id": "hard3_0126",
+      "true_count": 0,
+      "false_count": 10,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0152",
+      "true_count": 5,
+      "false_count": 5,
+      "none_count": 0,
+      "accuracy": 0.5,
+      "majority": "FALSE",
+      "consistency": 0.5
+    },
+    {
+      "id": "hard3_0159",
+      "true_count": 0,
+      "false_count": 9,
+      "none_count": 1,
+      "accuracy": 0.9,
+      "majority": "FALSE",
+      "consistency": 0.9
+    },
+    {
+      "id": "hard3_0160",
+      "true_count": 1,
+      "false_count": 9,
+      "none_count": 0,
+      "accuracy": 0.1,
+      "majority": "FALSE",
+      "consistency": 0.9
+    },
+    {
+      "id": "hard3_0163",
+      "true_count": 1,
+      "false_count": 9,
+      "none_count": 0,
+      "accuracy": 0.9,
+      "majority": "FALSE",
+      "consistency": 0.9
+    },
+    {
+      "id": "hard3_0167",
+      "true_count": 3,
+      "false_count": 7,
+      "none_count": 0,
+      "accuracy": 0.7,
+      "majority": "FALSE",
+      "consistency": 0.7
+    },
+    {
+      "id": "hard3_0174",
+      "true_count": 0,
+      "false_count": 10,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0177",
+      "true_count": 1,
+      "false_count": 9,
+      "none_count": 0,
+      "accuracy": 0.9,
+      "majority": "FALSE",
+      "consistency": 0.9
+    },
+    {
+      "id": "hard3_0195",
+      "true_count": 0,
+      "false_count": 10,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0223",
+      "true_count": 0,
+      "false_count": 10,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0267",
+      "true_count": 2,
+      "false_count": 8,
+      "none_count": 0,
+      "accuracy": 0.2,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0269",
+      "true_count": 2,
+      "false_count": 8,
+      "none_count": 0,
+      "accuracy": 0.2,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0322",
+      "true_count": 5,
+      "false_count": 5,
+      "none_count": 0,
+      "accuracy": 0.5,
+      "majority": "FALSE",
+      "consistency": 0.5
+    },
+    {
+      "id": "hard3_0324",
+      "true_count": 2,
+      "false_count": 8,
+      "none_count": 0,
+      "accuracy": 0.2,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0326",
+      "true_count": 3,
+      "false_count": 7,
+      "none_count": 0,
+      "accuracy": 0.3,
+      "majority": "FALSE",
+      "consistency": 0.7
+    },
+    {
+      "id": "hard3_0352",
+      "true_count": 2,
+      "false_count": 8,
+      "none_count": 0,
+      "accuracy": 0.2,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0368",
+      "true_count": 1,
+      "false_count": 9,
+      "none_count": 0,
+      "accuracy": 0.9,
+      "majority": "FALSE",
+      "consistency": 0.9
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+Cheat sheet: example sheets/SimonRJ.txt (5190 bytes)
+Provider: anthropic  Model: claude-haiku-4-5-20251001  Subset: chunk_3_hard3
+
+--- 67 chunk_3_hard3 problems ---
+  11:56:08 [hard3_0202] ✗ got=FALSE exp=TRUE  (1/67)
+  11:56:22 [hard3_0203] ✓ got=TRUE exp=TRUE  (2/67) ETA=13m
+  11:56:32 [hard3_0204] ✗ got=FALSE exp=TRUE  (3/67) ETA=12m
+  11:56:42 [hard3_0205] ✗ got=FALSE exp=TRUE  (4/67) ETA=12m
+  11:56:55 [hard3_0206] ✓ got=FALSE exp=FALSE  (5/67) ETA=12m
+  11:57:05 [hard3_0207] ✗ got=FALSE exp=TRUE  (6/67) ETA=11m
+  11:57:15 [hard3_0208] ✗ got=FALSE exp=TRUE  (7/67) ETA=12m
+  11:57:29 [hard3_0209] ✗ got=FALSE exp=TRUE  (8/67) ETA=11m
+  11:57:41 [hard3_0210] ✗ got=FALSE exp=TRUE  (9/67) ETA=11m
+  11:57:50 [hard3_0211] ✓ got=FALSE exp=FALSE  (10/67) ETA=11m
+  11:58:04 [hard3_0212] ✗ got=FALSE exp=TRUE  (11/67) ETA=11m
+  11:58:15 [hard3_0213] ✗ got=FALSE exp=TRUE  (12/67) ETA=10m
+  11:58:25 [hard3_0214] ✗ got=FALSE exp=TRUE  (13/67) ETA=10m
+  11:58:38 [hard3_0215] ✓ got=FALSE exp=FALSE  (14/67) ETA=10m
+  11:58:47 [hard3_0216] ✓ got=FALSE exp=FALSE  (15/67) ETA=10m
+  11:58:57 [hard3_0217] ✓ got=FALSE exp=FALSE  (16/67) ETA=10m
+  11:59:08 [hard3_0218] ✓ got=FALSE exp=FALSE  (17/67) ETA=10m
+  11:59:25 [hard3_0219] ✓ got=FALSE exp=FALSE  (18/67) ETA=9m
+  11:59:35 [hard3_0220] ✓ got=FALSE exp=FALSE  (19/67) ETA=9m
+  11:59:49 [hard3_0221] ✗ got=FALSE exp=TRUE  (20/67) ETA=9m
+  12:00:00 [hard3_0222] ✓ got=FALSE exp=FALSE  (21/67) ETA=9m
+  12:00:09 [hard3_0223] ✓ got=FALSE exp=FALSE  (22/67) ETA=9m
+  12:00:23 [hard3_0224] ✓ got=FALSE exp=FALSE  (23/67) ETA=8m
+  12:00:34 [hard3_0225] ✓ got=FALSE exp=FALSE  (24/67) ETA=8m
+  12:00:44 [hard3_0226] ✓ got=FALSE exp=FALSE  (25/67) ETA=8m
+  12:00:55 [hard3_0227] ✓ got=FALSE exp=FALSE  (26/67) ETA=8m
+  12:01:09 [hard3_0228] ✓ got=FALSE exp=FALSE  (27/67) ETA=8m
+  12:01:18 [hard3_0229] ✓ got=FALSE exp=FALSE  (28/67) ETA=7m
+  12:01:29 [hard3_0230] ✓ got=TRUE exp=TRUE  (29/67) ETA=7m
+  12:01:44 [hard3_0231] ✗ got=FALSE exp=TRUE  (30/67) ETA=7m
+  12:01:54 [hard3_0232] ✗ got=FALSE exp=TRUE  (31/67) ETA=7m
+  12:02:05 [hard3_0233] ✗ got=FALSE exp=TRUE  (32/67) ETA=7m
+  12:02:17 [hard3_0234] ✓ got=FALSE exp=FALSE  (33/67) ETA=7m
+  12:02:28 [hard3_0235] ✓ got=FALSE exp=FALSE  (34/67) ETA=6m
+  12:02:37 [hard3_0236] ✓ got=FALSE exp=FALSE  (35/67) ETA=6m
+  12:02:50 [hard3_0237] ✓ got=FALSE exp=FALSE  (36/67) ETA=6m
+  12:03:00 [hard3_0238] ✗ got=FALSE exp=TRUE  (37/67) ETA=6m
+  12:03:10 [hard3_0239] ✗ got=FALSE exp=TRUE  (38/67) ETA=6m
+  12:03:23 [hard3_0240] ✗ got=FALSE exp=TRUE  (39/67) ETA=5m
+  12:03:33 [hard3_0241] ✓ got=FALSE exp=FALSE  (40/67) ETA=5m
+  12:03:43 [hard3_0242] ✓ got=FALSE exp=FALSE  (41/67) ETA=5m
+  12:03:53 [hard3_0243] ✗ got=FALSE exp=TRUE  (42/67) ETA=5m
+  12:04:06 [hard3_0244] ✗ got=FALSE exp=TRUE  (43/67) ETA=5m
+  12:04:16 [hard3_0245] ✗ got=FALSE exp=TRUE  (44/67) ETA=4m
+  12:04:27 [hard3_0246] ✗ got=FALSE exp=TRUE  (45/67) ETA=4m
+  12:04:42 [hard3_0247] ✗ got=FALSE exp=TRUE  (46/67) ETA=4m
+  12:04:55 [hard3_0248] ✓ got=FALSE exp=FALSE  (47/67) ETA=4m
+  12:05:05 [hard3_0249] ✗ got=FALSE exp=TRUE  (48/67) ETA=4m
+  12:05:18 [hard3_0250] ✗ got=FALSE exp=TRUE  (49/67) ETA=3m
+  12:05:29 [hard3_0251] ✗ got=FALSE exp=TRUE  (50/67) ETA=3m
+  12:05:40 [hard3_0252] ✗ got=FALSE exp=TRUE  (51/67) ETA=3m
+  12:05:53 [hard3_0253] ✓ got=FALSE exp=FALSE  (52/67) ETA=3m
+  12:06:05 [hard3_0254] ✓ got=FALSE exp=FALSE  (53/67) ETA=3m
+  12:06:22 [hard3_0255] ✓ got=TRUE exp=TRUE  (54/67) ETA=2m
+  12:06:31 [hard3_0256] ✓ got=TRUE exp=TRUE  (55/67) ETA=2m
+  12:06:41 [hard3_0257] ✗ got=FALSE exp=TRUE  (56/67) ETA=2m
+  12:06:52 [hard3_0258] ✗ got=FALSE exp=TRUE  (57/67) ETA=2m
+  12:07:07 [hard3_0259] ✗ got=FALSE exp=TRUE  (58/67) ETA=2m
+    12:13:20 [retry 1/3 in 2s]: Connection error.
+    12:19:24 [retry 2/3 in 4s]: Connection error.
+    12:25:30 [retry 3/3 in 8s]: Connection error.
+  12:07:18 [hard3_0260] ERROR (all retries exhausted): Connection error.
+    12:37:42 [retry 1/3 in 2s]: Connection error.

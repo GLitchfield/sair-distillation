@@ -1,0 +1,120 @@
+STRATEGY: Determine if Equation 1 implies Equation 2 by following these steps. Be concise—one line per magma test.
+
+OUTPUT FORMAT: Write exactly "VERDICT: TRUE" or "VERDICT: FALSE" — plain text, no markdown formatting.
+
+BASE RATE: Roughly half of all problems are TRUE and half are FALSE. Do not assume either is more likely before examining the evidence.
+
+WORKED EXAMPLES:
+
+Example 1 (TRUE — Singleton Detection):
+EQ1: x = (y * y) * ((y * z) * w)   EQ2: x = ((y * z) * (x * y)) * x
+Step 1a: LHS is bare variable x. x does NOT appear on RHS. → Singleton. VERDICT: TRUE
+
+Example 2 (FALSE — Magma H counterexample):
+EQ1: x = (x * (x * y)) * z   EQ2: x * x = x * (x * (y * y))
+Step 2 — Magma H (right-shift, x*y=(y+1)%3):
+  EQ1: ((x*(x*y))*z) → right-spine: z is rightmost of outer *, so result=(z+1)%3. Hmm — evaluate bottom-up:
+  (x*y)→(y+1)%3; x*(x*y)→((y+1)+1)%3=(y+2)%3; (x*(x*y))*z→(z+1)%3. EQ1: x=(z+1)%3.
+  At x=0,z=2: 0=(2+1)%3=0 ✓. Check several assignments — EQ1 holds for all.
+  EQ2 at x=1,y=0: LHS=1*1=(1+1)%3=2. RHS=1*(1*(0*0))=1*(1*1)=1*(2)=(2+1)%3=0. 2≠0. CE confirmed.
+VERDICT: FALSE
+
+STEP 1: QUICK STRUCTURAL CHECKS
+
+Check 1a - Singleton Detection:
+If EQ1 has the EXACT form "x = f(y, z, ...)" where LHS is a SINGLE BARE VARIABLE and x does NOT appear on RHS → EQ1 forces singleton → TRUE.
+  - "x = y * (z * w)" → YES → TRUE
+  - "x = x * (y * z)" → NO (x appears in RHS)
+  - "x * y = z * w" → NO (LHS is x*y, not bare x)
+
+SINGLETON SIGNAL: If testing any magma reveals EQ1 forces "x = y" for all x,y → singleton → TRUE.
+
+Check 1b - Disjoint Variable Sets (Constant Law):
+If EQ1's LHS and RHS use COMPLETELY DISJOINT variable sets → EQ1 forces constant law.
+  - If EQ2 has * on BOTH sides → TRUE.
+
+Check 1c - Variable Count Balance:
+Count each variable's occurrences on LHS vs RHS separately.
+THEOREM: If EQ1 is balanced (every variable equal count both sides) AND EQ2 is unbalanced → FALSE.
+Balanced: x*y=y*x (x:1=1, y:1=1). Unbalanced: x*x=x (x:2 vs 1).
+TRICKY: x*x=x*y → x:LHS=2,RHS=1 UNBALANCED; y:LHS=0,RHS=1 UNBALANCED. NOT balanced.
+NOTE: XOR (Magma D) checks parity only. Balance check catches same-parity but different-count mismatches.
+
+STEP 2: TEST COUNTEREXAMPLE MAGMAS
+
+Find a magma satisfying EQ1 for ALL assignments AND violating EQ2 for some assignment.
+LAW CHECK: EQ1 must hold for EVERY assignment — not just some. If EQ1 fails anywhere, skip this magma.
+
+--- PRIMARY BATTERY (test these first — they find most counterexamples) ---
+
+Magma H - "Right-shift": x*y = (y+1) mod 3, on {0,1,2}.
+  Evaluation (bottom-up): each * node → (right_child_result + 1) mod 3. Ignore left child entirely.
+  Quick ref: x*y→(y+1)%3 | (x*y)*z→(z+1)%3 | x*(y*z)→(z+2)%3 | (x*y)*(z*w)→(w+2)%3
+  MISTAKE: x*(x*x) — outer left=x (bare), right=(x*x)=(x+1)%3, result=((x+1)+1)%3=(x+2)%3. NOT x.
+
+Magma I - "Left-shift": x*y = (x+1) mod 3, on {0,1,2}.
+  Evaluation (bottom-up): each * node → (left_child_result + 1) mod 3. Ignore right child entirely.
+  Quick ref: x*y→(x+1)%3 | (x*y)*z→(x+2)%3 | x*(y*z)→(x+1)%3 | (x*y)*(z*w)→(x+2)%3
+  MISTAKE: x*(x*x) — outer left=x (bare, value=x), result=(x+1)%3. NOT (x+2)%3.
+  Contrast: (x*x)*y — outer left=(x*x)=(x+1)%3, so result=(x+2)%3.
+
+Magma J - "Null-left": 3-element {0,1,2}.
+  Table: 0*y=0 always; 1*0=2, 1*1=1, 1*2=1; 2*0=1, 2*1=2, 2*2=2.
+  Shortcut: if x=0→result=0; if x≠0 and y≠0→result=x; if x≠0 and y=0→result=(3-x).
+  REQUIRED: Spot-check EQ1 at (0,0,0),(1,1,1),(2,2,2),(1,0,0),(2,0,0). Write "J-EQ1:holds/fails".
+
+Magma K - "Swap-row2": 3-element {0,1,2}.
+  Table: rows 0,1 are right projection (x*y=y); row 2: 2*0=1, 2*1=0, 2*2=2.
+  Spot-check EQ1 at (0,0),(1,1),(2,0),(2,1),(2,2).
+
+Magma L - "Near-zero": x*y=0 except 0*2=1. Table row 0:[0,0,1], rows 1,2:[0,0,0].
+  Evaluate by table lookup.
+
+--- SECONDARY BATTERY (check after primary; fast rules) ---
+
+Magma B - "Right Projection": x*y = y. Expression→ its RIGHTMOST leaf variable.
+  EQ holds iff both sides have same rightmost variable.
+
+Magma C - "Left Projection": x*y = x. Expression→ its LEFTMOST leaf variable.
+  EQ holds iff both sides have same leftmost variable.
+
+Magma D - "XOR": x*y = x+y mod 2. Each variable must have same ODD/EVEN count on both sides.
+  Check EACH variable independently. Do NOT sum totals.
+
+Magma G - "Addition": x*y = x+y. Expression = sum of all variable occurrences.
+  EQ holds iff every variable appears same number of times on both sides.
+
+COUNTEREXAMPLE VERIFICATION: Before concluding FALSE, confirm:
+  (a) EQ1 holds for EVERY assignment — test at least 4 diverse cases with mixed nonzero values.
+  (b) EQ2 fails for a SPECIFIC assignment — state exact values.
+
+STEP 3: LINEAR MAGMA OVER Z/3Z
+
+Try x*y = 2x+y mod 3. Apply same CE verification.
+
+STEP 4: ATTEMPT ALGEBRAIC PROOF
+
+If no CE found, try to prove TRUE.
+ARGUMENT POSITION: When applying EQ1 (A*B=C) as rewrite: left-slot=A, right-slot=B. Do not swap.
+
+WORKED PROOF EXAMPLE:
+  EQ1: x = y*x → pattern: [anything]*[term] = [term] (right slot gives result).
+  Goal: x = x*(x*((y*z)*x))
+  Step 1: (y*z)*x = x  [right slot=x, apply EQ1]
+  Step 2: x*x = x      [right slot=x, apply EQ1]
+  Step 3: x*(x*((y*z)*x)) = x*(x*x) = x*x = x ✓
+
+STEP 5: FINAL JUDGMENT
+
+State best evidence for TRUE and FALSE, then apply in order:
+  1. Verified counterexample → FALSE (overrides everything)
+  2. Complete algebraic proof → TRUE
+  3. Singleton Signal (1a or Step 2) or Disjoint Check (1b) → TRUE
+  4. TRIVIAL MODELS: Tested ALL magmas H,I,J,K,L,B,C,D,G + Step 3, found no CE, AND EQ1 is so restrictive only projections/constants/singletons satisfy it → TRUE. Only apply after full battery complete.
+  5. No proof and no verified CE — weigh signals:
+     Lean TRUE: EQ1 very strong (forces projection/constant) AND full battery tested.
+     Lean FALSE: EQ2 introduces new variables not in EQ1; signals conflict or are weak.
+     Failing to find a CE does NOT count as evidence for TRUE.
+     Failing to find a proof does NOT count as evidence for FALSE.
+
+NOTE: Magmas A (zero, x*y=0) and E (constant-1, x*y=1) satisfy any equation where both sides contain *. Rarely useful as CEs but helpful for quick sanity checks.

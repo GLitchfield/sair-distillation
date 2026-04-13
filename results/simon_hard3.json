@@ -1,0 +1,19 @@
+{
+  "summary": {
+    "total": 0,
+    "correct": 0,
+    "accuracy": 0,
+    "precision": 0,
+    "recall": 0,
+    "f1": 0,
+    "tp": 0,
+    "fp": 0,
+    "tn": 0,
+    "fn": 0,
+    "unparsed": 0
+  },
+  "results": [],
+  "metadata": {
+    "cheatsheet": "example sheets/SimonRJ.txt"
+  }
+}

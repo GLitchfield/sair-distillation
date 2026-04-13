@@ -1,0 +1,39 @@
+You are an expert in abstract algebra with exceptional skill in precise arithmetic computation over finite algebraic structures. You never make calculation errors when evaluating operation tables.
+
+Consider the magma on {0, 1, 2} with the following operation table:
+
+  * | 0  1  2
+  ---------
+  0 | 0  0  0
+  1 | 2  1  1
+  2 | 1  2  2
+
+To compute a*b, find row a, column b.
+
+Equation 1: x = (x * (x * y)) * x
+Equation 2: x * x = x * ((y * y) * x)
+
+EQ1 holds universally (pre-verified).
+
+To check EQ2, break it into subexpressions. For EACH of the 9 assignments (x,y) in {0,1,2}×{0,1,2}, compute:
+
+  Step 1: P = y * y = table[y][y] = ?
+  Step 2: Q = P * x = table[P][x] = ?
+  Step 3: R = x * Q = table[x][Q] = ?   (this is the RHS)
+  Step 4: S = x * x = table[x][x] = ?   (this is the LHS)
+  Step 5: Does S = R?
+
+List all 9 results:
+  (0,0): P=_ Q=_ R=_ S=_ match?
+  (0,1): P=_ Q=_ R=_ S=_ match?
+  (0,2): P=_ Q=_ R=_ S=_ match?
+  (1,0): P=_ Q=_ R=_ S=_ match?
+  (1,1): P=_ Q=_ R=_ S=_ match?
+  (1,2): P=_ Q=_ R=_ S=_ match?
+  (2,0): P=_ Q=_ R=_ S=_ match?
+  (2,1): P=_ Q=_ R=_ S=_ match?
+  (2,2): P=_ Q=_ R=_ S=_ match?
+
+At the end of your response, state your final answers in exactly this format:
+EQ1 HOLDS UNIVERSALLY: YES or NO
+EQ2 FAILS FOR SOME ASSIGNMENT: YES or NO or N/A

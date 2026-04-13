@@ -1,0 +1,153 @@
+You are deciding whether Equation 1 ({{ equation1 }}) implies Equation 2 ({{ equation2 }}) over all magmas.
+
+A magma has only a set M and a binary operation *.
+Assume NO algebraic laws (no associativity, commutativity, identity, cancellation, etc.).
+
+Your task is to determine whether Equation 1 implies Equation 2 over all magmas.
+
+==================================================
+METHOD
+==================================================
+
+Use this order:
+
+1. Normalize variables mentally.
+2. Check whether Equation 2 is an obvious substitution / specialization / renaming consequence of Equation 1.
+3. Try short local equational rewrites using only exact instances of Equation 1.
+4. Try to find a small counterexample magma (sizes 2, 3, 4).
+5. Prefer the stronger certificate:
+   - if you find a valid derivation, answer TRUE
+   - if you find a valid counterexample, answer FALSE
+
+==================================================
+VALID TRUE REASONS
+==================================================
+
+You may answer TRUE if any of these holds:
+
+1. DIRECT SPECIALIZATION
+Equation 2 is exactly Equation 1 with variables renamed or identified
+
+2. SINGLETON COLLAPSE
+Equation 1 has the form x = t where x does not appear anywhere in t
+
+3. SHORT LOCAL DERIVATION
+Equation 2 follows from Equation 1 by a short chain of exact substitutions / exact contextual replacements.
+
+STRICT:
+- Keep derivations local and explicit
+- Use only the original variables (x, y, z, w, ...)
+- Do NOT introduce new symbols (u, v, A, etc.) and treat them as arbitrary
+- Do NOT invent global structure
+
+==================================================
+VALID FALSE REASON
+==================================================
+
+You may answer FALSE only if you can exhibit ONE explicit magma where:
+- Equation 1 holds for all substitutions, and
+- Equation 2 fails for at least one substitution.
+
+When searching mentally, try:
+- projection operations
+- constant operations
+- unary-on-left or unary-on-right operations
+- permutation-style tables
+- mixed noncommutative tables
+
+CRITICAL:
+- A FALSE answer requires ONE final table only
+- You must verify Equation 1 on ALL assignments for that table
+- If ANY assignment violates Equation 1, discard the table
+- Do NOT present failed or intermediate tables
+
+MANDATORY CHECKS:
+- Test at least one explicit “hard” assignment
+- For small tables, always test the all-1 assignment if it exists
+- Keep all variables independent during testing
+- Never silently identify variables (e.g. do not assume x = y)
+
+CRITICAL VARIABLE RULE:
+- If verification simplifies Equation 1 to an expression involving multiple variables
+  (e.g. x = y, x = y*0, x = y*x, etc.)
+  you MUST test assignments where those variables are different
+- If any such assignment fails, the table is invalid
+
+==================================================
+STRICT PROHIBITIONS
+==================================================
+
+Never:
+
+- assume associativity or commutativity
+- treat a nested occurrence of a variable as if it were absent
+- infer a term is constant just because it evaluates to one output per input
+- assume surjectivity of y ? y*x
+- use cancellation or injectivity
+- rewrite using "same shape"
+- invent structure (like u*v = g(v))
+- skip steps in derivation
+
+CRITICAL:
+
+- Do NOT infer a global operation rule from special cases
+- From e*x = x for all x, do NOT conclude a*b = b
+- From x*e = x for all x, do NOT conclude a*b = a
+- From identities involving terms like u*u, do NOT assume u*u ranges over all elements
+
+- Do NOT assume that values of a constructed expression cover all elements of M
+- From A = (y*z)*(y*x), you may NOT conclude A ranges over all elements of M
+- Properties proven for such A do NOT extend to all elements
+
+MOST IMPORTANT:
+
+If you define a symbol from an expression, it is NOT arbitrary.
+
+If:
+  u := (y*z)*(y*x)
+
+then u only ranges over values of that expression.
+
+You may NEVER replace:
+  "for all values of u := t(...)"
+with:
+  "for all u in M"
+
+unless surjectivity has been explicitly proven.
+
+Therefore:
+
+- from x = ((y*z)*(y*x))*x you may NOT conclude u*x = x for all u in M
+- from x = x*((y*z)*(y*x)) you may NOT conclude x*u = x for all u in M
+
+CONTEXTUAL REWRITE RULE:
+
+- You may replace a term s by a term t ONLY if you have already proved s = t
+- From x = t, you may replace x by t or t by x
+- You may NOT replace a different term (e.g. y*x) by t
+- Never replace a subterm just because it appears inside an equation whose other side equals a different variable
+
+NO HAND-WAVING:
+
+- Do NOT claim:
+  "the only way this can happen is ..."
+  "this forces the operation to ..."
+  "no other operation can satisfy ..."
+unless fully derived step-by-step
+
+==================================================
+DECISION RULE
+==================================================
+
+- If there is a clear short LOCAL derivation ? TRUE
+- Else if there is a fully verified counterexample ? FALSE
+- Else choose the most plausible answer from local evidence
+
+==================================================
+REQUIRED OUTPUT FORMAT
+==================================================
+
+VERDICT: TRUE or FALSE
+REASONING: brief
+PROOF: brief or empty
+COUNTEREXAMPLE: brief or empty

@@ -1,0 +1,372 @@
+{
+  "summary": {
+    "n_runs": 5,
+    "n_problems": 40,
+    "avg_consistency": 0.75,
+    "avg_accuracy": 0.565,
+    "perfect_consistency": 9,
+    "perfect_pct": 22.5
+  },
+  "per_problem": [
+    {
+      "id": "hard3_0007",
+      "true_count": 2,
+      "false_count": 3,
+      "none_count": 0,
+      "accuracy": 0.6,
+      "majority": "FALSE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0014",
+      "true_count": 0,
+      "false_count": 5,
+      "none_count": 0,
+      "accuracy": 0.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0022",
+      "true_count": 0,
+      "false_count": 5,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0027",
+      "true_count": 2,
+      "false_count": 3,
+      "none_count": 0,
+      "accuracy": 0.4,
+      "majority": "FALSE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0032",
+      "true_count": 4,
+      "false_count": 1,
+      "none_count": 0,
+      "accuracy": 0.2,
+      "majority": "TRUE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0033",
+      "true_count": 4,
+      "false_count": 1,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "TRUE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0038",
+      "true_count": 1,
+      "false_count": 4,
+      "none_count": 0,
+      "accuracy": 0.2,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0045",
+      "true_count": 2,
+      "false_count": 3,
+      "none_count": 0,
+      "accuracy": 0.6,
+      "majority": "FALSE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0048",
+      "true_count": 2,
+      "false_count": 3,
+      "none_count": 0,
+      "accuracy": 0.4,
+      "majority": "FALSE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0052",
+      "true_count": 0,
+      "false_count": 5,
+      "none_count": 0,
+      "accuracy": 0.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0055",
+      "true_count": 1,
+      "false_count": 4,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0056",
+      "true_count": 2,
+      "false_count": 3,
+      "none_count": 0,
+      "accuracy": 0.6,
+      "majority": "FALSE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0057",
+      "true_count": 1,
+      "false_count": 4,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0068",
+      "true_count": 2,
+      "false_count": 3,
+      "none_count": 0,
+      "accuracy": 0.4,
+      "majority": "FALSE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0071",
+      "true_count": 0,
+      "false_count": 5,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0072",
+      "true_count": 0,
+      "false_count": 5,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0073",
+      "true_count": 0,
+      "false_count": 5,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0078",
+      "true_count": 0,
+      "false_count": 5,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0085",
+      "true_count": 2,
+      "false_count": 3,
+      "none_count": 0,
+      "accuracy": 0.4,
+      "majority": "FALSE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0087",
+      "true_count": 2,
+      "false_count": 3,
+      "none_count": 0,
+      "accuracy": 0.4,
+      "majority": "FALSE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0092",
+      "true_count": 2,
+      "false_count": 3,
+      "none_count": 0,
+      "accuracy": 0.6,
+      "majority": "FALSE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0100",
+      "true_count": 0,
+      "false_count": 5,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0106",
+      "true_count": 3,
+      "false_count": 2,
+      "none_count": 0,
+      "accuracy": 0.6,
+      "majority": "TRUE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0108",
+      "true_count": 1,
+      "false_count": 4,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0114",
+      "true_count": 3,
+      "false_count": 2,
+      "none_count": 0,
+      "accuracy": 0.6,
+      "majority": "TRUE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0115",
+      "true_count": 3,
+      "false_count": 2,
+      "none_count": 0,
+      "accuracy": 0.6,
+      "majority": "TRUE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0116",
+      "true_count": 0,
+      "false_count": 5,
+      "none_count": 0,
+      "accuracy": 1.0,
+      "majority": "FALSE",
+      "consistency": 1.0
+    },
+    {
+      "id": "hard3_0119",
+      "true_count": 1,
+      "false_count": 4,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0126",
+      "true_count": 3,
+      "false_count": 2,
+      "none_count": 0,
+      "accuracy": 0.4,
+      "majority": "TRUE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0127",
+      "true_count": 1,
+      "false_count": 4,
+      "none_count": 0,
+      "accuracy": 0.2,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0136",
+      "true_count": 1,
+      "false_count": 4,
+      "none_count": 0,
+      "accuracy": 0.2,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0139",
+      "true_count": 2,
+      "false_count": 3,
+      "none_count": 0,
+      "accuracy": 0.4,
+      "majority": "FALSE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0142",
+      "true_count": 3,
+      "false_count": 2,
+      "none_count": 0,
+      "accuracy": 0.6,
+      "majority": "TRUE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0144",
+      "true_count": 1,
+      "false_count": 4,
+      "none_count": 0,
+      "accuracy": 0.2,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0150",
+      "true_count": 3,
+      "false_count": 2,
+      "none_count": 0,
+      "accuracy": 0.4,
+      "majority": "TRUE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0151",
+      "true_count": 3,
+      "false_count": 2,
+      "none_count": 0,
+      "accuracy": 0.4,
+      "majority": "TRUE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0155",
+      "true_count": 1,
+      "false_count": 4,
+      "none_count": 0,
+      "accuracy": 0.2,
+      "majority": "FALSE",
+      "consistency": 0.8
+    },
+    {
+      "id": "hard3_0156",
+      "true_count": 3,
+      "false_count": 2,
+      "none_count": 0,
+      "accuracy": 0.6,
+      "majority": "TRUE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0160",
+      "true_count": 3,
+      "false_count": 2,
+      "none_count": 0,
+      "accuracy": 0.6,
+      "majority": "TRUE",
+      "consistency": 0.6
+    },
+    {
+      "id": "hard3_0163",
+      "true_count": 1,
+      "false_count": 4,
+      "none_count": 0,
+      "accuracy": 0.8,
+      "majority": "FALSE",
+      "consistency": 0.8
+    }
+  ]
+}

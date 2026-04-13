@@ -1,0 +1,282 @@
+[
+  {
+    "id": "hard3_0227",
+    "equation1": "x = ((x * y) * z) * (w * z)",
+    "equation2": "x = (((x * y) * z) * z) * z",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0181",
+    "equation1": "x = (y * z) * (w * (x * x))",
+    "equation2": "x = ((y * y) * (x * x)) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0370",
+    "equation1": "x * x = (y * x) * (z * w)",
+    "equation2": "x * y = z * ((x * z) * w)",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0081",
+    "equation1": "x = x * (x * ((y * y) * y))",
+    "equation2": "x = x * ((y * (x * x)) * x)",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0173",
+    "equation1": "x = (y * y) * (z * (y * x))",
+    "equation2": "x = y * (y * (z * (y * x)))",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0186",
+    "equation1": "x = (x * y) * ((y * z) * w)",
+    "equation2": "x = (x * (y * z)) * x",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0143",
+    "equation1": "x = y * ((x * (z * y)) * x)",
+    "equation2": "x = y * (x * (y * (y * x)))",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0126",
+    "equation1": "x = y * ((z * w) * (u * x))",
+    "equation2": "x = (x * ((y * z) * y)) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0276",
+    "equation1": "x = ((x * x) * (y * x)) * z",
+    "equation2": "x * y = (x * (y * z)) * w",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0009",
+    "equation1": "x = x * (x * (x * y))",
+    "equation2": "x = (x * (y * (x * x))) * z",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0102",
+    "equation1": "x = y * (z * ((w * w) * x))",
+    "equation2": "x = ((x * (y * x)) * z) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0016",
+    "equation1": "x = y * (x * (x * x))",
+    "equation2": "x * y = (y * y) * (y * y)",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0346",
+    "equation1": "x * x = y * (x * (z * w))",
+    "equation2": "x * (y * z) = y * (z * w)",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0169",
+    "equation1": "x = (y * x) * (z * (z * x))",
+    "equation2": "x = ((y * z) * (z * w)) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0110",
+    "equation1": "x = y * ((x * y) * (z * x))",
+    "equation2": "x = ((y * (y * x)) * y) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0064",
+    "equation1": "x = x * (x * (y * (z * z)))",
+    "equation2": "x = (x * ((y * y) * x)) * x",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0012",
+    "equation1": "x = x * (y * (x * x))",
+    "equation2": "x * x = (x * y) * (x * x)",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0182",
+    "equation1": "x = (y * z) * (w * (w * x))",
+    "equation2": "x = (((x * y) * z) * z) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0019",
+    "equation1": "x = y * (y * (z * x))",
+    "equation2": "x = y * (((z * w) * y) * x)",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0170",
+    "equation1": "x = (y * x) * (z * (w * x))",
+    "equation2": "x = y * ((z * (y * x)) * x)",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0111",
+    "equation1": "x = y * ((x * z) * (z * x))",
+    "equation2": "x * x = x * ((y * z) * x)",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0062",
+    "equation1": "x = x * (x * (y * (y * x)))",
+    "equation2": "x = x * ((y * y) * (x * x))",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0083",
+    "equation1": "x = x * (x * ((y * z) * y))",
+    "equation2": "x * y = (x * z) * (w * y)",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0125",
+    "equation1": "x = y * ((z * w) * (u * x))",
+    "equation2": "x = (y * (x * (z * z))) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0237",
+    "equation1": "x = ((y * y) * x) * (x * z)",
+    "equation2": "x * y = (x * z) * (x * w)",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0275",
+    "equation1": "x = ((x * x) * (y * x)) * y",
+    "equation2": "x * y = (x * (z * z)) * y",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0094",
+    "equation1": "x = y * (y * ((z * x) * x))",
+    "equation2": "x = (((x * y) * z) * y) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0224",
+    "equation1": "x = ((x * y) * z) * (w * y)",
+    "equation2": "x = (x * (x * x)) * (x * y)",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0146",
+    "equation1": "x = y * ((z * (z * x)) * y)",
+    "equation2": "x = (x * x) * (x * (y * y))",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0095",
+    "equation1": "x = y * (y * ((z * w) * x))",
+    "equation2": "x = ((y * z) * (z * z)) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0222",
+    "equation1": "x = ((x * y) * z) * (z * w)",
+    "equation2": "x = x * (y * ((z * y) * w))",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0287",
+    "equation1": "x = ((x * y) * (z * y)) * x",
+    "equation2": "x * y = (x * x) * (y * y)",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0179",
+    "equation1": "x = (y * z) * (z * (x * x))",
+    "equation2": "x = (y * ((z * x) * y)) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0101",
+    "equation1": "x = y * (z * ((w * y) * x))",
+    "equation2": "x = ((y * z) * x) * (y * x)",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0362",
+    "equation1": "x * x = y * ((z * z) * x)",
+    "equation2": "x * y = z * (w * (z * y))",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0082",
+    "equation1": "x = x * (x * ((y * z) * x))",
+    "equation2": "x = ((x * x) * (x * y)) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0059",
+    "equation1": "x * x = (y * z) * w",
+    "equation2": "x * (x * y) = (z * x) * y",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0223",
+    "equation1": "x = ((x * y) * z) * (w * y)",
+    "equation2": "x = (x * y) * ((x * y) * x)",
+    "magma": "H",
+    "is_ce": false
+  },
+  {
+    "id": "hard3_0013",
+    "equation1": "x = x * (y * (z * x))",
+    "equation2": "x = (((x * x) * x) * x) * x",
+    "magma": "H",
+    "is_ce": true
+  },
+  {
+    "id": "hard3_0113",
+    "equation1": "x = y * ((y * y) * (x * x))",
+    "equation2": "x = x * (((y * x) * x) * x)",
+    "magma": "H",
+    "is_ce": true
+  }
+]

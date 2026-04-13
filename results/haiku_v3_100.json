@@ -1,0 +1,917 @@
+{
+  "summary": {
+    "total": 100,
+    "correct": 87,
+    "accuracy": 0.87,
+    "tp": 49,
+    "fp": 6,
+    "fn": 7,
+    "tn": 38,
+    "unparsed": 0,
+    "precision": 0.8909090909090909,
+    "recall": 0.875,
+    "f1": 0.8828828828828829
+  },
+  "results": [
+    {
+      "id": "normal_0001",
+      "equation1": "x = ((y * (x * y)) * z) * w",
+      "equation2": "x = (y * (x * z)) * (y * w)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = ((y * (x * y)) * z) * w\n- LHS is bare x\n- RHS contains x (in the subexpression x * y)\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\n- Both have the same complexity on LHS\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = ((y * (x * y)) * z) * w \u2192 x = ((y * 0) * z) * w \u2192 x = (0 * z) * w \u2192 x = 0 * w \u2192 x = 0\n  This fails for x \u2260 0. EQ1 does NOT hold universally.\n\nMagma B - \"Right Projection\": x*y = y for all x,y\n- EQ1: x = ((y * (x * y)) * z) * w \u2192 x = ((y * y) * z) * w \u2192 x = (y * z) * w \u2192 x = w\n  This fails when x \u2260 w. EQ1 does NOT hold universally.\n\nMagma C - \"Left Projection\": x*y = x for all x,y\n- EQ1: x = ((y * (x * y)) * z) * w \u2192 x = ((y * x) * z) * w \u2192 x = (y * z) * w \u2192 x = y\n  This fails when x \u2260 y. EQ1 does NOT hold universally.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = ((y * (x * y)) * z) * w\n  Count parities: LHS has x (1 occurrence). RHS: y appears 2 times, x appears 1 time, z appears 1 time, w appears 1 time.\n  For x: LHS has 1 (odd), RHS has 1 (odd) \u2713\n  For y: LHS has 0 (even), RHS has 2 (even) \u2713\n  For z: LHS has 0 (even), RHS has 1 (odd) \u2717\n  EQ1 does NOT hold universally.\n\nMagma E - \"Constant 1\": x*y = 1 for all x,y\n- EQ1: x = ((y * (x * y)) * z) * w \u2192 x = ((y * 1) * z) * w \u2192 x = (1 * z) * w \u2192 x = 1 * w \u2192 x ="
+    },
+    {
+      "id": "normal_0002",
+      "equation1": "x * y = z * (w * (u * u))",
+      "equation2": "x * (y * y) = (z * w) * z",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x * y = z * (w * (u * u))\n- LHS is \"x * y\" (not a bare variable)\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x * (y * y) (2 operations)\n- Equation 2 has MORE operations on LHS, not fewer. This doesn't immediately suggest FALSE, but note the structural difference.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: 0 = 0 \u2713 (both sides evaluate to 0)\n- EQ2: 0 = 0 \u2713 (both sides evaluate to 0)\nNot a counterexample.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: y = u (rightmost of LHS is y, rightmost of RHS is u)\n- For EQ1 to hold universally: y = u for all assignments. This is FALSE.\n- EQ1 does NOT hold universally in Magma B.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = z (leftmost of LHS is x, leftmost of RHS is z)\n- For EQ1 to hold universally: x = z for all assignments. This is FALSE.\n- EQ1 does NOT hold universally in Magma C.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x + y = z + w + u + u = z + w (mod 2)\n- For all assignments, we need x + y \u2261 z + w (mod 2). This is FALSE (counterexample: x=0,y=0,z=0,w=1).\n- EQ1 does NOT hold universally in Magma D.\n\n**Magma E - Constant 1 (x*y = 1):**\n- EQ1: 1 = 1 \u2713 (both sides evaluate to 1)\n- EQ2: 1 = 1 \u2713 (both sides evaluate to 1)\nNot a counterexample.\n\n**Magma F - Negate-right (x*y = 1-y):**"
+    },
+    {
+      "id": "normal_0003",
+      "equation1": "x = x * (y * ((z * x) * x))",
+      "equation2": "x = (y * ((z * z) * y)) * w",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = x * (y * ((z * x) * x))\n  - LHS is bare x, but x DOES appear on RHS \u2192 NO singleton detection\n- Equation 2: x = (y * ((z * z) * y)) * w\n  - LHS is bare x, and x does NOT appear on RHS \u2192 This would force singleton IF Equation 1 also had this property, but it doesn't.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\nBoth have the same complexity on LHS.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = x * (y * ((z * x) * x)) \u2192 x = 0 (RHS has operations) \u2192 holds only if x=0 for all x \u2192 FAILS universally\n- Not a universal law, skip.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = x * (y * ((z * x) * x))\n  - RHS: x * (y * ((z * x) * x)) \u2192 rightmost is x \u2192 evaluates to x \u2713\n  - EQ1 holds universally\n- EQ2: x = (y * ((z * z) * y)) * w\n  - RHS: (y * ((z * z) * y)) * w \u2192 rightmost is w \u2192 evaluates to w\n  - For EQ2 to hold: x = w for all assignments \u2192 FAILS (e.g., x=0, w=1)\n  - EQ2 does NOT hold universally\n\n**COUNTEREXAMPLE FOUND:** Magma B satisfies EQ1 but violates EQ2.\n\nLet me verify with a specific assignment in Right Projection:\n- Let x=0, y=1, z=2, w=3\n- EQ1: 0 = 0 * (1 * ((2 * 0) * 0)) = 0 * (1 * (0 * 0)) = 0 * (1 * 0) = 0 * 0 = 0 \u2713\n- EQ2: 0 = (1 * ((2 * 2) * 1)) * 3 = (1 * (2 * 1)) * 3 = (1 * 1) * 3 = 1 * 3 = 3 \u2717\n\nEQ1 holds but EQ2 fails.\n\nVERDICT: FALSE\n\nREA"
+    },
+    {
+      "id": "normal_0004",
+      "equation1": "x = y * (z * ((w * u) * u))",
+      "equation2": "x = ((y * z) * x) * (x * w)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * (z * ((w * u) * u))\n- LHS is bare variable x\n- x does NOT appear on RHS\n- This forces a singleton magma \u2192 all equations hold\n- But let me verify this doesn't immediately conclude TRUE; I need to check if EQ2 also has this property.\n\nEquation 2: x = ((y * z) * x) * (x * w)\n- LHS is bare variable x\n- x DOES appear on RHS (twice)\n- This does NOT force singleton\n\nSince EQ1 forces singleton but EQ2 doesn't, in a singleton magma both trivially hold. But the question is whether EQ1 implies EQ2 over ALL magmas, not just singletons.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: 0 operations (bare x)\n- Equation 2 LHS: 0 operations (bare x)\nBoth have bare x on LHS.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A (Zero): x*y = 0**\n- EQ1: x = y * (z * ((w * u) * u)) \u2192 x = 0 (RHS has operations)\n  This means x must equal 0 for all assignments. But x is universally quantified, so x can be any element. This fails unless the magma is {0}. For non-singleton, EQ1 fails.\n  \n**Magma B (Right Projection): x*y = y**\n- EQ1: x = y * (z * ((w * u) * u))\n  RHS: y * (z * ((w * u) * u)) = y * (z * u) = y * u = u\n  So EQ1 becomes: x = u. This must hold for ALL assignments of x, y, z, w, u. But x and u are independent variables, so this fails.\n\n**Magma C (Left Projection): x*y = x**\n- EQ1: x = y * (z * ((w * u) * u))\n  RHS: y * (z * ((w * u) * u)) = y * (z * (w)) = y "
+    },
+    {
+      "id": "normal_0005",
+      "equation1": "x = y * ((x * z) * (w * u))",
+      "equation2": "x = (((x * x) * x) * x) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * ((x * z) * (w * u))\n- LHS is bare x\n- RHS contains y, z, w, u but x appears inside operations on the RHS\n- This does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: (((x * x) * x) * x) * x (4 operations)\n- Equation 2 has MORE operations on LHS, not fewer. This is unusual but doesn't immediately refute.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = y * ((x * z) * (w * u)) becomes x = y * (0 * 0) = y * 0 = 0\n  - This requires x = 0 for all x. Only holds if magma is singleton {0}. \u2713 (trivially)\n- EQ2: x = (((x * x) * x) * x) * x becomes x = (((0 * 0) * 0) * 0) * 0 = 0\n  - This requires x = 0 for all x. \u2713 (trivially)\n- Both hold in singleton. Not a counterexample.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = y * ((x * z) * (w * u))\n  - RHS: y * ((x * z) * (w * u)) = y * (z * u) = u\n  - So x = u for all assignments. This fails when x \u2260 u. \u2717 EQ1 does not hold universally.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = y * ((x * z) * (w * u))\n  - RHS: y * ((x * z) * (w * u)) = y * (x * w) = y\n  - So x = y for all assignments. This fails when x \u2260 y. \u2717 EQ1 does not hold universally.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x = y * ((x * z) * (w * u))\n  - Count occurrences: LHS has x (once). RHS has y, x, z, w, u "
+    },
+    {
+      "id": "normal_0006",
+      "equation1": "x * y = ((z * w) * u) * y",
+      "equation2": "x = x * ((y * x) * (y * z))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * y = ((z * w) * u) * y\n  - LHS: x * y (not a bare variable)\n  - Does NOT trigger singleton detection\n\n- Equation 2: x = x * ((y * x) * (y * z))\n  - LHS: x (bare variable)\n  - RHS: x * ((y * x) * (y * z)) (contains x)\n  - Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x (0 operations)\n- Equation 2 has fewer operations on LHS. This suggests FALSE. Proceed to Step 2.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x * y = ((z * w) * u) * y \u2192 0 = 0 \u2713 (holds for all assignments)\n- EQ2: x = x * ((y * x) * (y * z)) \u2192 x = 0\n  - For x = 0: 0 = 0 \u2713\n  - For x \u2260 0: x \u2260 0 \u2717 (fails)\n- EQ1 holds universally, EQ2 fails for x \u2260 0. **COUNTEREXAMPLE FOUND**\n\nLet me verify this is a valid counterexample:\n- In the Zero magma, every product equals 0\n- EQ1: 0 = 0 for all variable assignments \u2713\n- EQ2: x = 0 for all variable assignments\n  - This only holds if x = 0, but x is universally quantified\n  - For x = 1 (or any non-zero element): 1 \u2260 0 \u2717\n\nThis is a valid counterexample. The Zero magma satisfies EQ1 but not EQ2.\n\n**VERDICT: FALSE**\n\n**REASONING:** The Zero magma (where x*y = 0 for all x,y) satisfies Equation 1 universally (both sides evaluate to 0), but violates Equation 2 for any non-zero value of x (the LHS is x while the RHS is 0).\n\n**CO"
+    },
+    {
+      "id": "normal_0007",
+      "equation1": "x = (y * z) * (z * (w * z))",
+      "equation2": "x * y = z * (w * (y * z))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * z) * (z * (w * z))\n- LHS is bare variable x\n- RHS is (y * z) * (z * (w * z)) \u2014 does NOT contain x\n- This triggers singleton detection \u2192 the magma must be a singleton\n- In a singleton magma, ALL equations hold trivially\n- Answer: TRUE\n\nLet me verify this logic is correct before concluding:\n\nIn a singleton magma {e}, every element equals e. For Equation 1 to hold universally:\n- For any assignment of y, z, w to e, we have: e = (e * e) * (e * (e * e))\n- This evaluates to: e = e * e = e \u2713\n\nSince the magma is forced to be a singleton, Equation 2 must also hold:\n- x * y = z * (w * (y * z))\n- e * e = e * (e * (e * e))\n- e = e \u2713\n\n**STEP 5: DEFAULT JUDGMENT**\n\nThe singleton detection in Step 1a is definitive. Equation 1 has the exact form that forces any magma satisfying it to be a singleton (bare x on LHS, x absent from RHS). A singleton magma satisfies every equation.\n\nVERDICT: TRUE\n\nREASONING: Equation 1 has the form x = f(y,z,w) where x appears only on the left side and nowhere in the right side. This forces any magma satisfying Equation 1 to be a singleton magma (one element). In a singleton magma, every equation holds trivially, including Equation 2.\n\nPROOF: Let M be any magma satisfying Equation 1: x = (y * z) * (z * (w * z)). For any choice of y, z, w \u2208 M, the equation must hold for all x \u2208 M. This means every element of M equals (y * z) * (z * (w * "
+    },
+    {
+      "id": "normal_0008",
+      "equation1": "x = ((x * x) * (y * y)) * y",
+      "equation2": "x * (y * x) = z * (x * w)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = ((x * x) * (y * y)) * y\n- LHS is bare variable x\n- RHS is ((x * x) * (y * y)) * y, which CONTAINS x\n- This does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * (y * x) (2 operations)\n- Equation 2 has MORE operations on LHS than Equation 1. This is a structural mismatch suggesting FALSE.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = ((x * x) * (y * y)) * y \u2192 x = (0 * 0) * y \u2192 x = 0 * y \u2192 x = 0\n  This forces x = 0 for all x. EQ1 does NOT hold universally (fails when we try x = 1).\n  \n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = ((x * x) * (y * y)) * y\n  - RHS: ((x * x) * (y * y)) * y = (x * y) * y = y * y = y\n  - So x = y for all x, y. This does NOT hold universally (fails when x \u2260 y).\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = ((x * x) * (y * y)) * y\n  - RHS: ((x * x) * (y * y)) * y = (x * y) * y = x * y = x\n  - So x = x. This HOLDS universally! \u2713\n- EQ2: x * (y * x) = z * (w * x)\n  - LHS: x * (y * x) = x * y = x\n  - RHS: z * (w * x) = z * w = z\n  - So x = z for all x, z. This does NOT hold universally (fails when x \u2260 z).\n  \n**COUNTEREXAMPLE FOUND:** Magma C (Left Projection) satisfies EQ1 but violates EQ2.\n\nVerification:\n- In Left Projection, EQ1 becomes x = x (always true)\n- In Left Projection, EQ2 become"
+    },
+    {
+      "id": "normal_0009",
+      "equation1": "x = y * (((z * z) * w) * y)",
+      "equation2": "x * y = (y * z) * (x * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * (((z * z) * w) * y)\n- LHS is bare variable x\n- RHS is y * (((z * z) * w) * y), which contains x? No, x does not appear on RHS.\n- This has the form \"x = f(y,z,w)\" where x is bare and absent from RHS.\n- **This forces a singleton magma.**\n\nIn a singleton magma {e}, every element equals e, so ALL equations hold trivially.\n\nTherefore, any magma satisfying Equation 1 is a singleton, and singletons satisfy all equations including Equation 2.\n\n**STEP 5: DEFAULT JUDGMENT**\n\nSince Equation 1 forces the magma to be a singleton (by Check 1a), and singletons satisfy every equation, Equation 1 implies Equation 2.\n\nLet me verify the singleton logic:\n- For Equation 1 to hold for ALL assignments of x, y, z, w:\n  - Fix any y, z, w. The RHS y * (((z * z) * w) * y) evaluates to some element e.\n  - Since x is universally quantified and x = e must hold, every element of the magma must equal e.\n  - Therefore the magma has exactly one element.\n- In a singleton magma, both sides of any equation evaluate to the same element, so all equations hold.\n\nVERDICT: TRUE\n\nREASONING: Equation 1 has the form x = f(y,z,w) where x is a bare variable on the LHS and does not appear on the RHS. This forces any magma satisfying Equation 1 to be a singleton (one-element magma). In a singleton magma, every equation holds trivially, including Equation 2.\n\nPROOF: Suppose M is a magma satisfying "
+    },
+    {
+      "id": "normal_0010",
+      "equation1": "x * y = (z * w) * (w * z)",
+      "equation2": "(x * x) * y = (y * x) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x * y = (z * w) * (w * z)\n- LHS is \"x * y\" (not a bare variable), so singleton detection does NOT apply.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: (x * x) * y (2 operations)\n- Equation 2 has MORE operations on LHS than Equation 1. This doesn't immediately suggest FALSE, but it's worth noting.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: 0 = 0 * 0 = 0 \u2713 (holds)\n- EQ2: 0 * y = y * 0, i.e., 0 = 0 \u2713 (holds)\nBoth hold, not a counterexample.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: y = w * z (rightmost of RHS is z, but LHS is y) \u2014 holds only if y = z for all assignments. FAILS universally.\nNot a counterexample (EQ1 doesn't hold).\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = z (leftmost of RHS is z, LHS is x) \u2014 holds only if x = z for all assignments. FAILS universally.\nNot a counterexample (EQ1 doesn't hold).\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x + y = (z + w) + (w + z) = 2w + 2z = 0 (mod 2)\n  This requires x + y = 0 (mod 2) for all x, y. FAILS universally.\nNot a counterexample (EQ1 doesn't hold).\n\n**Magma E - Constant 1 (x*y = 1):**\n- EQ1: 1 = 1 * 1 = 1 \u2713 (holds)\n- EQ2: 1 * y = y * 1, i.e., 1 = 1 \u2713 (holds)\nBoth hold, not a counterexample.\n\n**Magma F - Negate-right (x*y = 1-y):**\n- EQ1: x * y = (z * w) * (w * z)\n  LHS: x * y = 1 - y\n  RHS: (z * w) * (w * "
+    },
+    {
+      "id": "normal_0011",
+      "equation1": "x = y * (y * ((z * x) * y))",
+      "equation2": "x = ((y * y) * x) * (z * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = y * (y * ((z * x) * y))\n  - LHS is bare x\n  - RHS contains x (inside (z * x))\n  - Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: ((y * y) * x) * (z * x) (3 operations)\n- Equation 2 has MORE operations on LHS \u2192 leans toward FALSE\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = y * (y * ((z * x) * y)) becomes x = 0\n  - This fails for any x \u2260 0. Does NOT universally satisfy EQ1.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = y * (y * ((z * x) * y))\n  - RHS: y * (y * ((z * x) * y)) = y * (y * y) = y * y = y\n  - So EQ1 becomes: x = y\n  - This does NOT hold universally (fails when x \u2260 y).\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = y * (y * ((z * x) * y))\n  - RHS: y * (y * ((z * x) * y)) = y * (y * (z * x)) = y * y = y\n  - So EQ1 becomes: x = y\n  - This does NOT hold universally.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x = y * (y * ((z * x) * y))\n  - Count occurrences: LHS has x once. RHS has y three times, z once, x once.\n  - Parity of x: LHS=1 (odd), RHS=1 (odd) \u2713\n  - Parity of y: LHS=0 (even), RHS=3 (odd) \u2717\n  - EQ1 does NOT hold universally.\n\n**Magma E - Constant 1 (x*y = 1):**\n- EQ1: x = y * (y * ((z * x) * y))\n  - LHS: x (bare variable, can be 0 or 1)\n  - RHS: all * operations \u2192 1\n  - EQ1 becomes: x ="
+    },
+    {
+      "id": "normal_0012",
+      "equation1": "x * x = (y * (x * y)) * y",
+      "equation2": "x * y = z * (z * (y * y))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * x = (y * (x * y)) * y\n  - LHS is \"x * x\" (not a bare variable), so NO singleton detection.\n- Equation 2: x * y = z * (z * (y * y))\n  - LHS is \"x * y\" (not a bare variable), so NO singleton detection.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * x \u2192 1 operation\n- Equation 2 LHS: x * y \u2192 1 operation\n- Same complexity on LHS, so this doesn't immediately suggest FALSE.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A (Zero): x*y = 0 for all x,y**\n- EQ1: x * x = (y * (x * y)) * y \u2192 0 = 0 \u2713 (both sides have *)\n- EQ2: x * y = z * (z * (y * y)) \u2192 0 = 0 \u2713 (both sides have *)\n- Not a counterexample.\n\n**Magma B (Right Projection): x*y = y**\n- EQ1: x * x = (y * (x * y)) * y\n  - LHS: x * x \u2192 x (rightmost)\n  - RHS: (y * (x * y)) * y \u2192 y (rightmost)\n  - For all assignments: LHS = x, RHS = y. This holds only when x = y for all x,y, which is false.\n  - EQ1 FAILS in Magma B.\n\n**Magma C (Left Projection): x*y = x**\n- EQ1: x * x = (y * (x * y)) * y\n  - LHS: x * x \u2192 x (leftmost)\n  - RHS: (y * (x * y)) * y \u2192 y (leftmost)\n  - For all assignments: LHS = x, RHS = y. This holds only when x = y for all x,y, which is false.\n  - EQ1 FAILS in Magma C.\n\n**Magma D (XOR): x*y = x + y mod 2**\n- EQ1: x * x = (y * (x * y)) * y\n  - LHS: x * x \u2192 x + x = 0 (mod 2)\n  - RHS: (y * (x * y)) * y \u2192 (y + (x + y)) + y = x + y + y + y = x + y (mod 2)\n  - For EQ1 to hold: 0 = x + y ("
+    },
+    {
+      "id": "normal_0013",
+      "equation1": "x = (y * y) * ((y * z) * w)",
+      "equation2": "x = ((y * z) * (x * y)) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * y) * ((y * z) * w)\n- LHS: bare variable x\n- RHS: (y * y) * ((y * z) * w) \u2014 contains operations, no x\n- This forces a singleton magma \u2192 TRUE\n\nWait, let me verify this logic carefully. If Equation 1 holds for ALL assignments of x, y, z, w, then:\n- For any fixed y, z, w, the RHS evaluates to some element e\n- Since x is universally quantified, x must equal e for ALL choices of x\n- This means every element equals e, so the magma has one element\n- A singleton magma satisfies every equation trivially\n\nTherefore, Equation 1 forces the magma to be a singleton.\n\nIn a singleton magma {a}, every equation holds because there's only one possible assignment: all variables map to a.\n\nEquation 2: x = ((y * z) * (x * y)) * x\nIn a singleton magma, this also holds trivially.\n\nSo any magma satisfying Equation 1 is a singleton, and singletons satisfy all equations, including Equation 2.\n\nSTEP 5: DEFAULT JUDGMENT\n\nSince Equation 1 forces a singleton magma (by Check 1a), and singletons satisfy all equations, the implication is TRUE.\n\nVERDICT: TRUE\n\nREASONING: Equation 1 has the form \"x = f(y,z,w)\" where x appears bare on the LHS and does not appear on the RHS. This forces the magma to be a singleton: for any fixed y,z,w, the RHS evaluates to some element e, and since x is universally quantified, every element must equal e. Therefore, any magma satisfying Equation 1 has exactl"
+    },
+    {
+      "id": "normal_0014",
+      "equation1": "(x * y) * x = (y * z) * x",
+      "equation2": "x * y = (z * z) * y",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: (x * y) * x = (y * z) * x \u2014 LHS has x as a bare variable? No, x is inside operations. Not a singleton trigger.\n- Equation 2: x * y = (z * z) * y \u2014 LHS has x as a bare variable? No, x is inside x*y. Not a singleton trigger.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: (x * y) * x has 2 * operations\n- Equation 2 LHS: x * y has 1 * operation\n- Equation 2's LHS has FEWER operations. Strong signal to look for a counterexample.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A (Zero): x*y = 0 for all x,y**\n- EQ1: (x*y)*x = (y*z)*x becomes 0*0 = 0*0, i.e., 0 = 0. \u2713 HOLDS\n- EQ2: x*y = (z*z)*y becomes 0 = 0*0, i.e., 0 = 0. \u2713 HOLDS\nNot a counterexample.\n\n**Magma B (Right Projection): x*y = y for all x,y**\n- EQ1: (x*y)*x = (y*z)*x becomes y*x = z*x, i.e., x = x. \u2713 HOLDS for all assignments\n- EQ2: x*y = (z*z)*y becomes y = z*y, i.e., y = y. \u2713 HOLDS for all assignments\nNot a counterexample.\n\n**Magma C (Left Projection): x*y = x for all x,y**\n- EQ1: (x*y)*x = (y*z)*x becomes x*x = y*x, i.e., x = y. This does NOT hold for all assignments (fails when x\u2260y). \u2717 EQ1 FAILS\nThis magma doesn't satisfy EQ1, so it's not useful.\n\n**Magma D (XOR): x*y = x+y mod 2**\n- EQ1: (x*y)*x = (y*z)*x\n  - LHS: (x+y)*x = (x+y)+x = 2x+y \u2261 y (mod 2)\n  - RHS: (y+z)*x = (y+z)+x = x+y+z (mod 2)\n  - For EQ1 to hold: y \u2261 x+y+z (mod 2), i.e., x+z \u2261 0 (mod 2), i.e., x=z.\n  - This does NOT hol"
+    },
+    {
+      "id": "normal_0015",
+      "equation1": "x * y = ((z * y) * z) * w",
+      "equation2": "x = y * (y * (z * (z * z)))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * y = ((z * y) * z) * w\n  - LHS has x inside an operation (x * y), not bare x. Does NOT trigger singleton detection.\n- Equation 2: x = y * (y * (z * (z * z)))\n  - LHS is bare x, RHS contains only y and z (x does NOT appear on RHS). This WOULD force singleton IF it were Equation 1, but it's Equation 2.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x (0 operations)\n- Equation 2 has fewer operations on LHS. This suggests FALSE. Proceed to Step 2.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x * y = ((z * y) * z) * w \u2192 0 = 0 \u2713 (holds for all assignments)\n- EQ2: x = y * (y * (z * (z * z))) \u2192 x = 0 (since all * give 0)\n  - This fails when x \u2260 0. For example, x=0, y=0, z=0: LHS=0, RHS=0 \u2713\n  - But we need to check if EQ2 holds universally. If x is a free variable and RHS=0, then EQ2 requires x=0 always. This fails for x=1 (or any non-zero element if the magma has more than one element).\n  - In the zero magma with one element {0}, EQ2 holds trivially.\n  - In a zero magma with multiple elements, EQ1 holds but EQ2 fails (e.g., x=1, y=0, z=0: LHS=1, RHS=0).\n\nLet me verify with a 2-element zero magma {0,1}:\n- EQ1: 0*0=0, 0*1=0, 1*0=0, 1*1=0. All sides evaluate to 0. \u2713\n- EQ2: x = y * (y * (z * (z * z)))\n  - For x=1, y=0, z=0: LHS=1, RHS=0. \u2717\n\n**COUNTEREXAMPLE FOUND:** The 2-element zero m"
+    },
+    {
+      "id": "normal_0016",
+      "equation1": "(x * y) * z = (z * y) * x",
+      "equation2": "x * (y * x) = (x * z) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: (x * y) * z = (z * y) * x\n- LHS is (x * y) * z (not a bare variable)\n- Does not trigger singleton detection\n\nEquation 2: x * (y * x) = (x * z) * y\n- LHS is x * (y * x) (not a bare variable)\n- Does not trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: (x * y) * z has 2 * operations\n- Equation 2 LHS: x * (y * x) has 2 * operations\n- Same complexity; proceed to testing\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A (Zero): x*y = 0 for all x,y**\n- EQ1: (0) * 0 = (0) * 0 \u2192 0 = 0 \u2713\n- EQ2: 0 * (0) = (0) * 0 \u2192 0 = 0 \u2713\nBoth hold.\n\n**Magma B (Right Projection): x*y = y**\n- EQ1: ((x*y)*z) = ((z*y)*x) \u2192 z = y\n  This only holds when z = y, not universally. EQ1 fails.\n\n**Magma C (Left Projection): x*y = x**\n- EQ1: ((x*y)*z) = ((z*y)*x) \u2192 x = z\n  This only holds when x = z, not universally. EQ1 fails.\n\n**Magma D (XOR): x*y = x+y mod 2**\n- EQ1: (x*y)*z = (z*y)*x\n  - LHS: (x+y) + z mod 2 = x+y+z mod 2\n  - RHS: (z+y) + x mod 2 = z+y+x mod 2 = x+y+z mod 2 \u2713\n- EQ2: x*(y*x) = (x*z)*y\n  - LHS: x + (y+x) mod 2 = x+y+x mod 2 = y mod 2\n  - RHS: (x+z) + y mod 2 = x+z+y mod 2\n  - For EQ2 to hold: y \u2261 x+z+y (mod 2), so 0 \u2261 x+z (mod 2)\n  - This fails when x=0, z=1 (or x=1, z=0). EQ2 does not hold universally.\n\nEQ1 holds universally in Magma D, but EQ2 fails for assignment x=0, y=0, z=1.\n\n**COUNTEREXAMPLE FOUND**\n\nLet me verify with x=0, y=0, z=1 in "
+    },
+    {
+      "id": "normal_0017",
+      "equation1": "x * (y * z) = y * (x * w)",
+      "equation2": "x = (x * ((x * x) * x)) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * (y * z) = y * (x * w)\n  - LHS is NOT a bare variable; it contains operations. Does NOT trigger singleton detection.\n- Equation 2: x = (x * ((x * x) * x)) * y\n  - LHS is a bare variable x, but x DOES appear on the RHS. Does NOT trigger singleton detection.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * (y * z) has 2 * operations\n- Equation 2 LHS: x has 0 * operations\n- Equation 2's LHS has fewer operations. This suggests FALSE; proceed to find a counterexample.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0 for all x,y):**\n- EQ1: 0 = 0 \u2713 (both sides evaluate to 0)\n- EQ2: x = 0 * y = 0. This requires x = 0 for all x. \u2717 (fails when x \u2260 0)\n- Magma A satisfies EQ1 but violates EQ2. **COUNTEREXAMPLE FOUND.**\n\nLet me verify this carefully:\n- In Magma A, every product is 0.\n- EQ1: x * (y * z) = y * (x * w) becomes 0 = 0. \u2713 Holds universally.\n- EQ2: x = (x * ((x * x) * x)) * y becomes x = 0 * y = 0. This says x = 0 for all x, which is false when we assign x = 1 (or any non-zero element if the magma has more than one element). \u2717 Fails.\n\nSince Magma A (with at least 2 elements) satisfies EQ1 but violates EQ2, the implication is FALSE.\n\n**STEP 3-5: Not needed; counterexample found.**\n\nREASONING: Magma A (the zero magma where x*y = 0 for all x,y) satisfies Equation 1 universally (both sides reduce to 0), but violates Equation 2 (whi"
+    },
+    {
+      "id": "normal_0018",
+      "equation1": "x = y * ((x * (x * y)) * z)",
+      "equation2": "x = y * (z * ((x * y) * w))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * ((x * (x * y)) * z)\n- LHS is bare x\n- RHS contains y, x, z with operations\n- x DOES appear on RHS (in subexpressions)\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: 0 operations (bare x)\n- Equation 2 LHS: 0 operations (bare x)\n- Both have same complexity on LHS\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = y * ((x * (x * y)) * z) \u2192 x = y * (0 * 0) \u2192 x = y * 0 \u2192 x = 0\n  This forces x = 0 for all x. Fails universally unless magma is singleton.\n- Not a universal law. Skip.\n\nMagma B - \"Right Projection\": x*y = y\n- EQ1: x = y * ((x * (x * y)) * z)\n  RHS: y * ((x * y) * z) = y * (y * z) = y * z = z\n  So EQ1 becomes: x = z (must hold for all x, y, z)\n  This is false (e.g., x=a, z=b with a\u2260b). Skip.\n\nMagma C - \"Left Projection\": x*y = x\n- EQ1: x = y * ((x * (x * y)) * z)\n  RHS: y * ((x * x) * z) = y * (x * z) = y\n  So EQ1 becomes: x = y (must hold for all x, y)\n  This is false. Skip.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = y * ((x * (x * y)) * z)\n  Count occurrences: LHS has x (1 time). RHS has y (1), x (2), y (1), z (1) = y(2), x(2), z(1)\n  Parity: x appears 1 time on LHS, 2 times on RHS \u2192 different parity\n  EQ1 fails universally. Skip.\n\nMagma E - \"Constant 1\": x*y = 1\n- EQ1: x = y * ((x * (x * y)) * z) \u2192 x = y * 1 \u2192 x = 1\n  Forces x = 1 for all x. Fails universally. Sk"
+    },
+    {
+      "id": "normal_0019",
+      "equation1": "x * y = z * (w * (u * y))",
+      "equation2": "x = ((y * x) * z) * (z * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x * y = z * (w * (u * y))\n- LHS is \"x * y\" (not a bare variable), so singleton detection does NOT apply.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: ((y * x) * z) * (z * x) (4 operations)\n- Equation 2 has MORE operations on LHS. This doesn't immediately suggest FALSE, but let me proceed to test counterexamples.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0 for all x,y):**\n- EQ1: x * y = z * (w * (u * y)) becomes 0 = 0. \u2713 Holds universally.\n- EQ2: ((y * x) * z) * (z * x) = x becomes 0 = x. \u2717 Fails when x \u2260 0.\n- **COUNTEREXAMPLE FOUND**: Magma A satisfies EQ1 but violates EQ2.\n\nLet me verify this carefully:\n- In Magma A, every product is 0.\n- EQ1: LHS = x*y = 0; RHS = z*(w*(u*y)) = 0. Both sides are 0. \u2713\n- EQ2: LHS = ((y*x)*z)*(z*x) = 0; RHS = x. For any x \u2260 0, we have 0 \u2260 x. \u2717\n\nThis is a valid counterexample. The magma A (where all products equal 0) satisfies Equation 1 universally but violates Equation 2 for any assignment where x is not the zero element.\n\n**STEP 3-5: Not needed**\n\nSince a counterexample has been found, the implication is FALSE.\n\nOUTPUT:\n\nVERDICT: FALSE\n\nREASONING: The Zero magma (where x*y = 0 for all x,y) satisfies Equation 1 universally: both sides evaluate to 0. However, it violates Equation 2: the LHS ((y*x)*z)*(z*x) evaluates to 0, while the RHS x can be any element"
+    },
+    {
+      "id": "normal_0020",
+      "equation1": "x = (x * (x * x)) * (y * y)",
+      "equation2": "x = (y * x) * ((x * x) * y)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = (x * (x * x)) * (y * y)\n  - LHS is bare x, but x APPEARS on RHS \u2192 does NOT trigger singleton detection\n- Check 1b - LHS Complexity:\n  - Equation 1 LHS: x (0 operations)\n  - Equation 2 LHS: (y * x) * ((x * x) * y) (3 operations)\n  - Equation 2 has MORE operations on LHS \u2192 leans toward FALSE\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = (x * (x * x)) * (y * y) becomes x = 0 * 0 = 0\n  - Holds only if x = 0 for all x \u2192 fails universally\n- Not a universal law, skip.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = (x * (x * x)) * (y * y)\n  - RHS: (x * (x * x)) * (y * y) \u2192 ((x * x)) * (y * y) \u2192 (x) * (y) \u2192 y\n  - So: x = y for all x, y \u2192 fails universally\n- Not a universal law, skip.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = (x * (x * x)) * (y * y)\n  - RHS: (x * (x * x)) * (y * y) \u2192 (x) * (y * y) \u2192 x\n  - So: x = x \u2713 (holds universally)\n- EQ2: x = (y * x) * ((x * x) * y)\n  - RHS: (y * x) * ((x * x) * y) \u2192 (y) * (x) \u2192 y\n  - So: x = y \u2192 fails for x \u2260 y\n- **COUNTEREXAMPLE FOUND**: Left Projection satisfies EQ1 but violates EQ2.\n\nLet me verify with a concrete assignment in Left Projection:\n- Let x = a, y = b where a \u2260 b\n- EQ1: a = (a * (a * a)) * (b * b) = a * b = a \u2713\n- EQ2: a = (b * a) * ((a * a) * b) = b * a = b \u2717 (fails when a \u2260 b)\n\nThis confirms the counterexample.\n\nVERDICT: FALSE\n\nREASONING: The le"
+    },
+    {
+      "id": "normal_0021",
+      "equation1": "x * (x * x) = x * (y * z)",
+      "equation2": "x * x = ((y * z) * w) * z",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * (x * x) = x * (y * z)\n  - LHS: x * (x * x) \u2014 x is NOT bare, it's inside operations\n  - Does NOT trigger singleton detection\n  \n- Equation 2: x * x = ((y * z) * w) * z\n  - LHS: x * x \u2014 x is NOT bare\n  - Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * (x * x) \u2014 has 2 * operations\n- Equation 2 LHS: x * x \u2014 has 1 * operation\n- Equation 2's LHS has FEWER operations. Strong signal toward FALSE. Proceed to Step 2.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A (Zero): x*y = 0 for all x,y**\n- EQ1: 0 = 0 \u2713 (both sides evaluate to 0)\n- EQ2: 0 = 0 \u2713 (both sides evaluate to 0)\n- Not a counterexample.\n\n**Magma B (Right Projection): x*y = y**\n- EQ1: x * (x * x) = x * (y * z)\n  - LHS: x * x = x (rightmost is x)\n  - RHS: x * z = z (rightmost is z)\n  - EQ1 becomes: x = z. This does NOT hold for all assignments (e.g., x=a, z=b with a\u2260b).\n  - EQ1 fails universally. Not useful.\n\n**Magma C (Left Projection): x*y = x**\n- EQ1: x * (x * x) = x * (y * z)\n  - LHS: x * (x * x) = x (leftmost is x)\n  - RHS: x * (y * z) = x (leftmost is x)\n  - EQ1 holds \u2713\n- EQ2: x * x = ((y * z) * w) * z\n  - LHS: x * x = x (leftmost is x)\n  - RHS: ((y * z) * w) * z = (y * w) * z = y (leftmost is y)\n  - EQ2 becomes: x = y. This does NOT hold for all assignments.\n  - EQ2 fails \u2717\n\n**COUNTEREXAMPLE FOUND: Magma C (Left Projection)**\n- EQ1 holds unive"
+    },
+    {
+      "id": "normal_0022",
+      "equation1": "x = ((y * y) * (x * y)) * z",
+      "equation2": "x * y = z * (w * (u * y))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = ((y * y) * (x * y)) * z\n- LHS is bare variable x\n- RHS contains x (in the subexpression x * y)\n- Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * y (1 operation)\n- Equation 2 has MORE operations on LHS than Equation 1\n- This is unusual but doesn't immediately determine the answer\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = ((y*y)*(x*y))*z becomes x = (0*0)*0 = 0*0 = 0\n  - This means x = 0 for all x, y, z. This forces the magma to be {0}.\n  - In a singleton, EQ2 also holds trivially.\n  - Not a counterexample.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = ((y*y)*(x*y))*z\n  - RHS: ((y*y)*(x*y))*z = (y*y)*z = y*z = z\n  - So x = z for all x, y, z\n  - This forces the magma to be singleton {a} for some a.\n  - Not a counterexample.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = ((y*y)*(x*y))*z\n  - RHS: ((y*y)*(x*y))*z = (y*x)*z = y*z = y\n  - So x = y for all x, y, z\n  - This forces the magma to be singleton.\n  - Not a counterexample.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x = ((y*y)*(x*y))*z\n  - Count occurrences: LHS has x (count 1). RHS has y (count 3), x (count 1), z (count 1).\n  - For x: LHS count = 1 (odd), RHS count = 1 (odd) \u2713\n  - For y: LHS count = 0 (even), RHS count = 3 (odd) \u2717\n  - EQ1 fails in "
+    },
+    {
+      "id": "normal_0023",
+      "equation1": "x = (y * (x * (z * x))) * y",
+      "equation2": "x * y = x * ((z * w) * z)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * (x * (z * x))) * y\n- LHS is bare variable x\n- RHS is (y * (x * (z * x))) * y, which contains x\n- Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * y (1 operation)\n- Equation 2 has MORE operations on LHS than Equation 1. This is unusual but doesn't immediately rule out the implication.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- Equation 1: x = (y * (x * (z * x))) * y becomes x = 0\n  This fails for any assignment where x \u2260 0. Does NOT satisfy EQ1 universally.\n\nMagma B - \"Right Projection\": x*y = y for all x,y\n- Equation 1: x = (y * (x * (z * x))) * y\n  RHS: (y * (x * (z * x))) * y = (y * x) * y = x * y = y\n  So x = y for all x,y. This forces a singleton. Does NOT satisfy EQ1 universally.\n\nMagma C - \"Left Projection\": x*y = x for all x,y\n- Equation 1: x = (y * (x * (z * x))) * y\n  RHS: (y * (x * (z * x))) * y = y (leftmost element)\n  So x = y for all x,y. This forces a singleton. Does NOT satisfy EQ1 universally.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- Equation 1: x = (y * (x * (z * x))) * y\n  LHS: x appears 1 time\n  RHS: y appears 2 times, x appears 2 times, z appears 1 time\n  For parity: x has odd count on LHS (1) but even count on RHS (2). EQ1 FAILS.\n\nMagma E - \"Constant 1\": x*y = 1 for all x,y\n- Equation 1: x = (y * (x * (z"
+    },
+    {
+      "id": "normal_0024",
+      "equation1": "x * (y * x) = (z * z) * y",
+      "equation2": "x = y * (((z * x) * x) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * (y * x) = (z * z) * y\n  - LHS: x * (y * x) \u2014 x is inside an operation, not bare\n  - Does NOT trigger singleton detection\n  \n- Equation 2: x = y * (((z * x) * x) * x)\n  - LHS: x is bare\n  - RHS: y * (((z * x) * x) * x) \u2014 contains x\n  - Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * (y * x) \u2014 2 operations\n- Equation 2 LHS: x \u2014 0 operations\n- Equation 2's LHS has fewer operations. This suggests FALSE. Proceed to find a counterexample.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: 0 * (0 * 0) = (0 * 0) * 0 \u2192 0 = 0 \u2713 (holds)\n- EQ2: x = 0 * (((0 * x) * x) * x) \u2192 x = 0 * (...) \u2192 x = 0\n  - This fails when x \u2260 0. But in the zero magma, all elements are 0, so this is vacuous.\n  - Actually, in zero magma, there's only one element (0), so EQ2 holds trivially.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x * (y * x) = (z * z) * y\n  - LHS: x * (y * x) = (y * x) = x (rightmost of y*x is x)\n  - RHS: (z * z) * y = z * y = y (rightmost is y)\n  - EQ1 becomes: x = y. This does NOT hold for all assignments.\n  - EQ1 fails in this magma.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x * (y * x) = (z * z) * y\n  - LHS: x * (y * x) = x (leftmost is x)\n  - RHS: (z * z) * y = z (leftmost is z)\n  - EQ1 becomes: x = z. This does NOT hold for all assignments.\n  - EQ1 fails in"
+    },
+    {
+      "id": "normal_0025",
+      "equation1": "x * x = y * (y * x)",
+      "equation2": "x = ((x * y) * x) * (x * y)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * x = y * (y * x) \u2014 LHS has bare x inside *, not a bare variable alone. Does NOT trigger singleton detection.\n- Equation 2: x = ((x * y) * x) * (x * y) \u2014 LHS is bare x, but RHS contains x. Does NOT trigger singleton detection.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * x (1 operation)\n- Equation 2 LHS: x (0 operations)\nEquation 2's LHS has fewer operations. This suggests FALSE. Proceed to Step 2.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A (Zero): x*y = 0 for all x,y**\n- EQ1: x * x = y * (y * x) becomes 0 = 0. \u2713 Holds.\n- EQ2: x = ((x * y) * x) * (x * y) becomes x = 0. \u2717 Fails (x can be any element, not just 0).\n- **COUNTEREXAMPLE FOUND** in Magma A.\n\nLet me verify: In the zero magma, every product is 0.\n- EQ1: LHS = 0, RHS = 0. Holds for all x, y.\n- EQ2: LHS = x (a bare variable, can be any element), RHS = 0 (all operations yield 0). For x \u2260 0, EQ2 fails.\n\nThis is a valid counterexample: Magma A satisfies EQ1 universally but violates EQ2.\n\n**VERDICT: FALSE**\n\n**REASONING:** The zero magma (where x*y = 0 for all x,y) satisfies Equation 1 (both sides evaluate to 0) but violates Equation 2 (the LHS is a bare variable x that can be non-zero, while the RHS is always 0). Therefore, Equation 1 does not imply Equation 2.\n\n**COUNTEREXAMPLE:** Zero magma: x*y = 0 for all x,y. Take any assignment with x \u2260 0 (e.g., x=1 in a two-element magma "
+    },
+    {
+      "id": "normal_0026",
+      "equation1": "x = ((x * y) * z) * (z * w)",
+      "equation2": "x = x * (((x * x) * y) * x)",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = ((x * y) * z) * (z * w)\n- LHS is bare x\n- RHS contains x, so this does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\nBoth sides are bare x, so this check doesn't help differentiate.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = ((x*y)*z)*(z*w) becomes x = 0*0 = 0. Holds only if x=0 for all x. FAILS universally.\n\nMagma B - \"Right Projection\": x*y = y for all x,y\n- EQ1: x = ((x*y)*z)*(z*w) becomes x = (y*z)*(z*w) = z*w = w. So x=w for all assignments. FAILS universally.\n\nMagma C - \"Left Projection\": x*y = x for all x,y\n- EQ1: x = ((x*y)*z)*(z*w) becomes x = (x*z)*(z*w) = x*z = x. So x=x. HOLDS universally.\n- EQ2: x = x*(((x*x)*y)*x) becomes x = x*(x*y)*x) = x*(x*x) = x*x = x. HOLDS universally.\nBoth hold, not a counterexample.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = ((x*y)*z)*(z*w)\n  - LHS: x (count: x appears 1 time)\n  - RHS: ((x+y)mod2+z)mod2+(z+w)mod2)mod2 = (x+y+z+z+w)mod2 = (x+y+w)mod2\n  - For this to hold for all assignments: x \u2261 x+y+w (mod 2), so y+w \u2261 0 (mod 2) for all y,w. FAILS universally.\n\nMagma E - \"Constant 1\": x*y = 1 for all x,y\n- EQ1: x = ((x*y)*z)*(z*w) becomes x = 1*1 = 1. Holds only if x=1 for all x. FAILS universally.\n\nMagma F - \"Negate-right\": x*y = 1-y\n- EQ1: x = ((x*y)*z)*(z*w)\n  - (x*y) = 1-y\n  - (("
+    },
+    {
+      "id": "normal_0027",
+      "equation1": "x * y = ((y * x) * x) * x",
+      "equation2": "x = (x * x) * (y * (y * y))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * y = ((y * x) * x) * x\n  - LHS: x * y (not bare x)\n  - Not a singleton-forcing equation\n- Equation 2: x = (x * x) * (y * (y * y))\n  - LHS: bare x\n  - RHS: contains x and y\n  - Not a singleton-forcing equation (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x (0 operations)\n- Equation 2 has fewer operations on LHS \u2192 lean toward FALSE\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: 0 = 0 \u2713 (both sides evaluate to 0)\n- EQ2: x = 0 \u2717 (LHS is bare x, RHS is 0; fails when x \u2260 0)\n- Magma A satisfies EQ1 but violates EQ2 \u2192 COUNTEREXAMPLE FOUND\n\nLet me verify this carefully:\n- In the Zero magma, every product is 0\n- EQ1: x * y = ((y * x) * x) * x becomes 0 = 0 \u2713\n- EQ2: x = (x * x) * (y * (y * y)) becomes x = 0\n  - This fails for any assignment where x \u2260 0\n  - For example, x=0, y=0: 0 = 0 \u2713, but x=1, y=0 (if we had 2 elements): 1 \u2260 0 \u2717\n\nActually, let me reconsider the Zero magma more carefully. If the magma has only one element {0}, then x=0 always, so EQ2 holds trivially. But if the Zero magma has multiple elements, say {0,1}, then:\n- EQ1: For any x,y \u2208 {0,1}, x*y = 0, so 0 = 0 \u2713\n- EQ2: For x=1, y=0: 1 = (1*1)*(0*(0*0)) = 0*0 = 0, which is 1 = 0 \u2717\n\nThis is a valid counterexample in the 2-element Zero magma.\n\n**VERDICT: FALSE**\n\n**REASONING:** The Zero magma (where x*y ="
+    },
+    {
+      "id": "normal_0028",
+      "equation1": "x = y * ((z * (z * y)) * y)",
+      "equation2": "x = y * (z * ((w * y) * x))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = y * ((z * (z * y)) * y)\n  - LHS is bare variable x\n  - x does NOT appear on RHS\n  - This forces a singleton magma \u2192 all equations hold\n  - This would suggest TRUE, but let me verify the structure more carefully.\n\nWait, let me reconsider. The equation x = y * ((z * (z * y)) * y) must hold for ALL assignments of x, y, z. For any fixed y and z, the RHS evaluates to some element e. Since x is universally quantified, every element must equal e. This means the magma has only one element.\n\nIn a singleton magma, every equation trivially holds.\n\nTherefore, Equation 2 is also satisfied.\n\n**STEP 2: VERIFY WITH SPECIFIC MAGMAS**\n\nLet me double-check by testing if Equation 1 actually forces singleton behavior:\n\nMagma B (Right Projection): x*y = y\n- EQ1: x = y * ((z * (z * y)) * y)\n  - RHS: y * ((z * (z * y)) * y) = y * (z * y) = y\n  - So EQ1 becomes: x = y\n  - This does NOT hold for all assignments (e.g., x=0, y=1)\n  - EQ1 fails in this magma\n\nMagma A (Zero): x*y = 0\n- EQ1: x = y * ((z * (z * y)) * y)\n  - RHS: y * ((z * (z * y)) * y) = y * (0 * 0) = y * 0 = 0\n  - So EQ1 becomes: x = 0\n  - This does NOT hold for all assignments\n  - EQ1 fails in this magma\n\nSo Equation 1 does NOT universally hold in these magmas. Let me reconsider whether it forces singleton.\n\nActually, for Equation 1 to be a law of a magma, it must hold for ALL assignments of x, y, z. If we can fin"
+    },
+    {
+      "id": "normal_0029",
+      "equation1": "x = x * (x * ((y * z) * z))",
+      "equation2": "x = (x * x) * (y * (z * y))",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = x * (x * ((y * z) * z))\n- LHS is bare x\n- RHS contains x (appears twice on RHS)\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: (x * x) * (y * (z * y)) (3 operations)\n- Equation 2 has MORE operations on LHS \u2192 leans toward FALSE\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = x * (x * ((y * z) * z)) becomes x = 0. Fails (x can be nonzero). Skip.\n\nMagma B - \"Right Projection\": x*y = y\n- EQ1: x = x * (x * ((y * z) * z))\n  - RHS: x * (x * (z)) = x * z = z\n  - So x = z for all x,z. Fails universally. Skip.\n\nMagma C - \"Left Projection\": x*y = x\n- EQ1: x = x * (x * ((y * z) * z))\n  - RHS: x * (x * ((y * z) * z)) = x * x = x\n  - EQ1 holds universally \u2713\n- EQ2: x = (x * x) * (y * (z * y))\n  - LHS: x\n  - RHS: (x * x) * (y * (z * y)) = x * y = x\n  - EQ2 holds universally \u2713\n- Not a counterexample.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = x * (x * ((y * z) * z))\n  - Count occurrences: LHS has x (1 time). RHS has x (2), y (1), z (2).\n  - Parity: x appears odd times on LHS, even times on RHS. Fails universally. Skip.\n\nMagma E - \"Constant 1\": x*y = 1\n- EQ1: x = x * (x * ((y * z) * z)) becomes x = 1. Fails (x can be 0). Skip.\n\nMagma F - \"Negate-right\": x*y = 1-y\n- EQ1: x = x * (x * ((y * z) * z))\n  - x * ((y * z) * z) = x * (1-z) = 1-(1-z) = z\n  - So x ="
+    },
+    {
+      "id": "normal_0030",
+      "equation1": "x = x * (y * ((z * x) * x))",
+      "equation2": "x * y = ((y * z) * x) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = x * (y * ((z * x) * x))\n- LHS is bare x\n- RHS contains x (appears 3 times)\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * y (1 operation)\n- Equation 2 has MORE operations on LHS, not fewer. This is neutral.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = x * (y * ((z * x) * x)) \u2192 x = 0. This fails for x \u2260 0.\n- EQ1 does NOT hold universally. Skip.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = x * (y * ((z * x) * x))\n  - RHS: x * (y * ((z * x) * x)) = x * (y * x) = x * x = x \u2713\n  - EQ1 holds for all assignments.\n- EQ2: x * y = ((y * z) * x) * y\n  - LHS: x * y = y\n  - RHS: ((y * z) * x) * y = (z * x) * y = x * y = y \u2713\n  - EQ2 holds for all assignments.\n- Not a counterexample.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = x * (y * ((z * x) * x))\n  - RHS: x * (y * ((z * x) * x)) = x (leftmost is x) \u2713\n  - EQ1 holds for all assignments.\n- EQ2: x * y = ((y * z) * x) * y\n  - LHS: x * y = x\n  - RHS: ((y * z) * x) * y = (y * x) * y = y * y = y\n  - For EQ2 to hold: x = y for all x, y. This fails (e.g., x=0, y=1).\n  - EQ2 does NOT hold universally.\n- **COUNTEREXAMPLE FOUND**: Left Projection satisfies EQ1 but violates EQ2.\n\nLet me verify with a concrete assignment in Left Projection:\n- Let x=a, y=b, z=c (all distinct elements)\n- EQ1: "
+    },
+    {
+      "id": "normal_0031",
+      "equation1": "x = y * ((z * (z * w)) * z)",
+      "equation2": "x = (y * z) * (y * (w * z))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = y * ((z * (z * w)) * z)\n- LHS is bare variable x, but x does NOT appear on RHS \u2713\n- This forces a singleton magma \u2192 all equations hold \u2192 TRUE\n\nWait, let me verify this is correct. If Equation 1 holds for ALL assignments of y, z, w, then for any fixed values of y, z, w, the RHS evaluates to some element e. Since x is universally quantified, every element must equal e. This means the magma has exactly one element, so all equations trivially hold.\n\nHowever, let me double-check by also examining the structural complexity before concluding.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: (y * z) * (y * (w * z)) (3 operations)\n\nThe fact that Equation 1 has a bare variable on the left while Equation 2 has operations on the left is consistent with singleton detection.\n\n**STEP 2: VERIFY SINGLETON DETECTION LOGIC**\n\nEquation 1: x = y * ((z * (z * w)) * z)\n\nFor this to hold as a universal law:\n- For ANY choice of y, z, w, the value x must equal the RHS\n- Since x is universally quantified (can be any element), every element must equal the RHS value\n- But the RHS value depends on y, z, w\n- For this to work for ALL y, z, w assignments, we need: for every element a and every choice of y, z, w, we have a = y * ((z * (z * w)) * z)\n- This is only possible if the magma has exactly one element\n\nIn a singleton magma {e}, every equation hold"
+    },
+    {
+      "id": "normal_0032",
+      "equation1": "x * y = y * (z * (y * z))",
+      "equation2": "x * y = y * ((y * z) * z)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * y = y * (z * (y * z))\n  - LHS is \"x * y\" (not bare x), so NOT a singleton-forcing equation.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x * y (1 operation)\n- Same complexity on LHS, so this doesn't immediately suggest FALSE.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: 0 = 0 \u2713 (holds)\n- EQ2: 0 = 0 \u2713 (holds)\nNot a counterexample.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: y = y * (z * (y * z)) \u2192 y = y * z \u2192 y = z\n  This only holds when y = z, NOT universally. EQ1 fails.\nNot useful.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = y * (z * (y * z)) \u2192 x = y\n  This only holds when x = y, NOT universally. EQ1 fails.\nNot useful.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x*y = y*(z*(y*z))\n  - LHS: x + y (mod 2)\n  - RHS: y + (z + (y + z)) = y + z + y + z = 0 (mod 2)\n  - EQ1 requires: x + y \u2261 0 (mod 2) for all x,y. This fails (e.g., x=1, y=1 gives 0, but x=1, y=0 gives 1). EQ1 fails.\nNot useful.\n\n**Magma E - Constant 1 (x*y = 1):**\n- EQ1: 1 = 1 \u2713 (holds)\n- EQ2: 1 = 1 \u2713 (holds)\nNot a counterexample.\n\n**Magma F - Negate-right (x*y = 1-y):**\n- EQ1: x*y = y*(z*(y*z))\n  - LHS: 1 - y\n  - RHS: y * (z * (1-z)) = y * 0 = 1 - 0 = 1\n  - EQ1 requires: 1 - y = 1 for all y, so y = 0 always. EQ1 fails.\nNot useful.\n\n**STEP 3: TEST LINEAR MAGMA OVER Z/3Z**\n\nx*y = 2x + y (mod 3):\n- E"
+    },
+    {
+      "id": "normal_0033",
+      "equation1": "x = (x * (y * y)) * (x * x)",
+      "equation2": "x = ((y * z) * z) * (y * w)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (x * (y * y)) * (x * x)\n- LHS is bare variable x\n- RHS contains x (appears twice)\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: ((y * z) * z) (2 operations)\n- Equation 2 has MORE operations on LHS, not fewer\n- This is a structural mismatch but doesn't immediately rule out the implication\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = (x * (y * y)) * (x * x) becomes x = 0 * 0 = 0\n  - Holds only if x = 0 for all x. This fails universally (e.g., x=1 gives 1=0). EQ1 does NOT hold.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = (x * (y * y)) * (x * x)\n  - RHS: (x * y) * x = y * x = x\n  - So x = x \u2713 (holds universally)\n- EQ2: x = ((y * z) * z) * (y * w)\n  - RHS: (z * z) * w = z * w = w\n  - So x = w\n  - This fails when x \u2260 w (e.g., x=0, w=1). EQ2 does NOT hold universally.\n- **COUNTEREXAMPLE FOUND**: Magma B satisfies EQ1 but violates EQ2.\n\nLet me verify this carefully:\n- In Right Projection, x*y = y for all x, y\n- EQ1: x = (x * (y*y)) * (x*x)\n  - (y*y) = y\n  - x * y = y\n  - (x*x) = x\n  - (x * y) * (x*x) = y * x = x \u2713\n- EQ2: x = ((y*z)*z) * (y*w)\n  - (y*z) = z\n  - (y*z)*z = z*z = z\n  - ((y*z)*z) * (y*w) = z * w = w\n  - So EQ2 says x = w, which is NOT universally true (fails for x\u2260w)\n\nThis is a valid counterexample.\n\nVERDICT: FALSE\n\nREASO"
+    },
+    {
+      "id": "normal_0034",
+      "equation1": "x = ((y * (z * y)) * y) * z",
+      "equation2": "x = y * ((z * (w * x)) * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = ((y * (z * y)) * y) * z\n  - LHS is bare variable x\n  - x does NOT appear on RHS\n  - This forces a singleton magma \u2192 all equations hold\n  - **This alone would suggest TRUE, but I must verify Step 5**\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\n- Both have same complexity on LHS\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\nMagma A (Zero): x*y = 0 for all x,y\n- EQ1: x = ((y * (z * y)) * y) * z \u2192 x = 0 (RHS has operations)\n  - For this to hold universally, x must always equal 0\n  - This means the magma is a singleton {0}\n  - EQ2: x = y * ((z * (w * x)) * z) \u2192 x = 0 (RHS has operations)\n  - Both sides are 0, so EQ2 holds\n  - Not a counterexample\n\nMagma B (Right Projection): x*y = y\n- EQ1: x = ((y * (z * y)) * y) * z\n  - RHS: ((y * z) * y) * z \u2192 (z * y) * z \u2192 z\n  - So x = z must hold universally\n  - This is NOT universally true (x and z are independent variables)\n  - EQ1 does NOT hold in this magma\n  - Skip this magma\n\nMagma C (Left Projection): x*y = x\n- EQ1: x = ((y * (z * y)) * y) * z\n  - RHS: ((y * z) * y) * z \u2192 (y * y) * z \u2192 y * z \u2192 y\n  - So x = y must hold universally\n  - This is NOT universally true\n  - EQ1 does NOT hold in this magma\n  - Skip this magma\n\nMagma D (XOR): x*y = x+y mod 2\n- EQ1: x = ((y * (z * y)) * y) * z\n  - Count parities: LHS has x (count 1, odd)\n  - RHS: y, z, y, y, z \u2192 y a"
+    },
+    {
+      "id": "normal_0035",
+      "equation1": "x = (y * z) * ((y * x) * w)",
+      "equation2": "x = (y * (z * x)) * (x * w)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * z) * ((y * x) * w)\n- LHS is bare x\n- RHS contains x (in (y * x))\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: (y * (z * x)) * (x * w) (3 operations)\n- Equation 2 has MORE operations on LHS\n- This is unusual but doesn't immediately rule out implication\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = 0 * 0 = 0. So x = 0 for all x. \u2713 (holds universally)\n- EQ2: 0 = 0 * 0 = 0. \u2713 (holds universally)\n- Not a counterexample.\n\nMagma B - \"Right Projection\": x*y = y\n- EQ1: x = (y * z) * ((y * x) * w) = z * w\n  For this to hold for all assignments, we need x = z * w = w for all x,z,w.\n  This fails (e.g., x=0, z=1, w=2 gives 0 \u2260 2). \u2717\n- EQ1 does not hold universally in this magma.\n\nMagma C - \"Left Projection\": x*y = x\n- EQ1: x = (y * z) * ((y * x) * w) = (y * z) * (y * x) = y * z = y\n  For this to hold for all assignments, we need x = y for all x,y.\n  This fails. \u2717\n- EQ1 does not hold universally in this magma.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = (y * z) * ((y * x) * w)\n  LHS: x (count: x appears 1 time)\n  RHS: (y+z) + (y+x+w) = y+z+y+x+w = x+z+w (mod 2) (count: x appears 1 time, y appears 2 times, z appears 1 time, w appears 1 time)\n  For EQ1 to hold: x = x+z+w (mod 2), which means z+w = 0 (mod 2), so z=w for all z,w. This fails. \u2717\n- E"
+    },
+    {
+      "id": "normal_0036",
+      "equation1": "x * x = ((x * y) * y) * y",
+      "equation2": "x * x = y * (x * (y * y))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * x = ((x * y) * y) * y\n  - LHS: x * x (not a bare variable)\n  - Does NOT trigger singleton detection\n- Equation 2: x * x = y * (x * (y * y))\n  - LHS: x * x (not a bare variable)\n  - Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * x (1 operation)\n- Equation 2 LHS: x * x (1 operation)\n- Both have the same LHS complexity. Proceed to Step 2.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: 0 = 0 \u2713 (holds)\n- EQ2: 0 = 0 \u2713 (holds)\n- Not a counterexample.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x * x = ((x * y) * y) * y\n  - LHS: x\n  - RHS: ((y) * y) * y = y * y = y\n  - Holds iff x = y for all x,y. This is FALSE universally.\n- EQ1 does not hold in Magma B.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x * x = ((x * y) * y) * y\n  - LHS: x\n  - RHS: ((x) * y) * y = (x) * y = x\n  - Holds universally \u2713\n- EQ2: x * x = y * (x * (y * y))\n  - LHS: x\n  - RHS: y * (x * (y)) = y * (x) = y\n  - Holds iff x = y for all x,y. This is FALSE universally.\n- EQ1 holds but EQ2 fails \u2192 **COUNTEREXAMPLE FOUND**\n\nLet me verify with a concrete assignment in Magma C:\n- Let x = 0, y = 1\n- EQ1: 0 * 0 = ((0 * 1) * 1) * 1 \u2192 0 = (0 * 1) * 1 \u2192 0 = 0 * 1 \u2192 0 = 0 \u2713\n- EQ2: 0 * 0 = 1 * (0 * (1 * 1)) \u2192 0 = 1 * (0 * 1) \u2192 0 = 1 * 0 \u2192 0 = 1 \u2717\n\nThis confirms the counterexample.\n\nVERDICT: FALSE\n\nREASONING: In the L"
+    },
+    {
+      "id": "normal_0037",
+      "equation1": "x = (y * (z * w)) * (z * y)",
+      "equation2": "x = ((y * (z * z)) * w) * z",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * (z * w)) * (z * y)\n- LHS is bare variable x\n- x does NOT appear on RHS\n- This forces a singleton magma \u2192 all equations hold trivially\n\nHowever, let me verify this is truly the form. The RHS contains only y, z, w (not x), so yes, this is singleton-forcing.\n\nWait\u2014I need to reconsider. The equation must hold for ALL assignments of x, y, z, w. For any fixed y, z, w, the RHS evaluates to some element e. Since x is universally quantified and can be ANY element, we need every element to equal e. This means the magma has one element.\n\n**Therefore, Equation 1 forces a singleton magma.**\n\nIn a singleton magma, every equation holds (both sides must be the unique element).\n\n**VERDICT: TRUE**\n\n**REASONING:**\nEquation 1 has the form x = f(y, z, w) where x appears bare on the LHS and does not appear anywhere on the RHS. This is a singleton-forcing equation. For any fixed values of y, z, w, the RHS evaluates to some element e. Since the equation must hold for ALL assignments of x (including x = any element in the magma), every element must equal e. Therefore, the magma contains exactly one element. In a singleton magma, every equation is satisfied because both sides of any equation must evaluate to the unique element.\n\n**PROOF:**\nLet M be any magma satisfying Equation 1: x = (y * (z * w)) * (z * y).\n\nFor any choice of y, z, w \u2208 M, let e = (y * (z * w)) * (z * y). "
+    },
+    {
+      "id": "normal_0038",
+      "equation1": "x = (y * y) * (z * (z * z))",
+      "equation2": "x = x * (x * (y * (y * x)))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * y) * (z * (z * z))\n- LHS is bare variable x\n- RHS contains y and z but NOT x\n- This forces a singleton magma \u2192 all equations hold \u2192 TRUE\n\nWait, let me verify this is correct. If Equation 1 holds for ALL assignments of x, y, z, then:\n- For any choice of y and z, the RHS evaluates to some element e\n- Since x is universally quantified, x must equal e for ALL x\n- This means every element equals e, so |M| = 1\n- In a singleton magma, every equation holds\n\nThis would make the answer TRUE immediately.\n\nHowever, let me double-check the interpretation. The equation \"x = (y * y) * (z * (z * z))\" as a law means: for all x, y, z in the magma, this equation holds. If this is true, then for fixed y, z, the RHS is some value e, and we need x = e for ALL x. This is only possible if the magma has one element.\n\nSo by Check 1a: **the implication is TRUE**.\n\nBut let me verify this reasoning is sound by checking Step 5 requirements.\n\nSTEP 5: DEFAULT JUDGMENT\n\nBefore concluding TRUE, I must verify:\n- Equation 1 structure: bare x on LHS, x absent from RHS \u2192 forces singleton\n- In a singleton magma, Equation 2 trivially holds\n- No counterexample possible in a singleton magma\n\nThe logic is airtight: Equation 1 as a universal law forces the magma to have exactly one element. In such a magma, every equation (including Equation 2) is satisfied.\n\nVERDICT: TRUE\n\nREASONING: Equation 1"
+    },
+    {
+      "id": "normal_0039",
+      "equation1": "x = y * (((y * z) * w) * w)",
+      "equation2": "x = (y * (y * x)) * (y * y)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * (((y * z) * w) * w)\n- LHS is bare variable x\n- RHS contains y, z, w but NOT x\n- This forces a singleton magma \u2192 TRUE\n\nWait, let me verify this logic carefully. The equation x = y * (((y * z) * w) * w) must hold for ALL assignments of x, y, z, w. For any fixed choice of y, z, w, the RHS evaluates to some element e. Since x is universally quantified, every element must equal e. This means the magma has exactly one element.\n\nIn a singleton magma, every equation holds trivially (both sides always equal the unique element).\n\nTherefore, Equation 1 forces the magma to be a singleton.\n\nIn a singleton magma, Equation 2 (x = (y * (y * x)) * (y * y)) also holds trivially.\n\nVERDICT: TRUE\n\nREASONING: Equation 1 has the form x = f(y,z,w) where x appears bare on the LHS and does not appear on the RHS. This forces any magma satisfying Equation 1 to be a singleton (one-element magma). In a singleton magma, every equation holds universally, including Equation 2. Therefore, Equation 1 implies Equation 2.\n\nPROOF: \nFor any magma M satisfying Equation 1 (x = y * (((y * z) * w) * w)):\n- Fix arbitrary y, z, w \u2208 M. The RHS evaluates to some element e \u2208 M.\n- Since the equation holds for all x \u2208 M, we have x = e for all x \u2208 M.\n- Therefore M is a singleton: M = {e}.\n- In a singleton magma, both sides of any equation evaluate to the unique element e.\n- Thus Equation 2 (x = (y * (y "
+    },
+    {
+      "id": "normal_0040",
+      "equation1": "x = y * (y * ((y * z) * y))",
+      "equation2": "x = (((y * z) * x) * x) * y",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * (y * ((y * z) * y))\n- LHS is bare x\n- RHS contains y and z but NOT x\n- This forces a singleton magma \u2192 all equations hold \u2192 TRUE\n\nWait, let me verify this is correct. If Equation 1 holds for ALL assignments of x, y, z, then for any fixed y, z, the RHS evaluates to some element e. Since x is universally quantified, every element must equal e. So yes, singleton magma.\n\nIn a singleton magma, Equation 2 trivially holds.\n\nHowever, let me double-check by also testing if there are non-singleton magmas satisfying Equation 1.\n\nCheck 1b - LHS Complexity:\nEquation 1 LHS: x (0 operations)\nEquation 2 LHS: (((y * z) * x) * x) * y (4 operations)\n\nEquation 2 has MORE operations on LHS, which is unusual but doesn't immediately refute the implication.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nLet me test if non-singleton magmas can satisfy Equation 1.\n\nMagma A (Zero): x*y = 0\n- EQ1: x = y * (y * ((y * z) * y)) becomes x = 0 (RHS all operations \u2192 0)\n- This fails for x \u2260 0. So EQ1 does NOT hold universally in Magma A.\n\nMagma B (Right Projection): x*y = y\n- EQ1: x = y * (y * ((y * z) * y)) becomes x = y (rightmost is y)\n- This fails when x \u2260 y. So EQ1 does NOT hold universally in Magma B.\n\nMagma C (Left Projection): x*y = x\n- EQ1: x = y * (y * ((y * z) * y)) becomes x = y (leftmost is y)\n- This fails when x \u2260 y. So EQ1 does NOT hold universally in Magma C.\n\nMagma D (XOR"
+    },
+    {
+      "id": "normal_0041",
+      "equation1": "(x * x) * x = (x * y) * x",
+      "equation2": "x = (y * (x * (z * z))) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: (x * x) * x = (x * y) * x\n  - LHS is NOT a bare variable; it contains operations.\n  - Does NOT trigger singleton detection.\n\n- Equation 2: x = (y * (x * (z * z))) * y\n  - LHS is a bare variable x.\n  - RHS contains x in the middle: (y * (x * (z * z))) * y\n  - x DOES appear on the RHS, so this does NOT trigger singleton detection.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: (x * x) * x has 2 * operations\n- Equation 2 LHS: x has 0 * operations\n- Equation 2's LHS has fewer operations. This suggests FALSE. Proceed to Step 2.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: (x * x) * x = (x * y) * x \u2192 0 = 0 \u2713 (holds)\n- EQ2: x = (y * (x * (z * z))) * y \u2192 x = 0\n  - This fails when x \u2260 0. So EQ2 does NOT hold universally.\n- **Counterexample found: Magma A satisfies EQ1 but violates EQ2.**\n\nLet me verify this is a valid counterexample:\n- In Magma A, every product is 0.\n- EQ1: (x*x)*x = 0 and (x*y)*x = 0, so 0 = 0 \u2713\n- EQ2: For any assignment, say x=0, y=0, z=0: LHS is 0, RHS is 0 \u2713\n  But for x=1, y=0, z=0 (if we allow multiple elements): LHS is 1, RHS is 0 \u2717\n\nActually, let me reconsider: in the zero magma, there is typically only one element (0). Let me use a 2-element magma instead.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: (x * x) * x = (x * y) * x\n  - LHS: (x*x)*x = x*x = x\n  - RHS: (x*y)*x = y*x = x\n  - Both sides "
+    },
+    {
+      "id": "normal_0042",
+      "equation1": "x = (y * (z * x)) * (w * y)",
+      "equation2": "x * x = y * (z * (w * y))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * (z * x)) * (w * y)\n- LHS is bare x\n- RHS contains x (inside z * x)\n- Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * x (1 operation)\n- Equation 2 has MORE operations on LHS than Equation 1\n- This is unusual but doesn't immediately signal FALSE\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = (y * (z * x)) * (w * y) becomes x = 0 * 0 = 0\n  - This forces x = 0 for all assignments, so EQ1 holds universally\n- EQ2: x * x = y * (z * (w * y)) becomes 0 = 0\n  - EQ2 holds universally\n- Not a counterexample\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = (y * (z * x)) * (w * y)\n  - RHS: (y * (z * x)) * (w * y) = (z * x) * (w * y) = (w * y) = y\n  - So EQ1 becomes: x = y for all assignments\n  - This does NOT hold universally (e.g., x=0, y=1)\n- EQ1 fails, so this magma doesn't satisfy EQ1. Skip.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = (y * (z * x)) * (w * y)\n  - RHS: (y * (z * x)) * (w * y) = y * (w * y) = y\n  - So EQ1 becomes: x = y for all assignments\n  - This does NOT hold universally\n- EQ1 fails. Skip.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x = (y * (z * x)) * (w * y)\n  - Count occurrences: LHS has x once. RHS has x once, y twice, z once, w once.\n  - For x: LHS=1, RHS=1 (same parity) \u2713\n  - For y: LHS"
+    },
+    {
+      "id": "normal_0043",
+      "equation1": "x = x * ((x * (y * x)) * z)",
+      "equation2": "x * y = (y * (x * y)) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = x * ((x * (y * x)) * z)\n- LHS is bare x\n- RHS contains x (appears multiple times)\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * y (1 operation)\n- Equation 2 has MORE operations on LHS than Equation 1\n- This is unusual but doesn't immediately determine the answer\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = x * ((x * (y * x)) * z) becomes x = 0. Fails for x \u2260 0.\n- Not a model of EQ1.\n\nMagma B - \"Right Projection\": x*y = y\n- EQ1: x = x * ((x * (y * x)) * z)\n  - RHS: x * ((x * (y * x)) * z) = x * (x * z) = x * z = z\n  - So x = z for all x, z. This fails universally.\n- Not a model of EQ1.\n\nMagma C - \"Left Projection\": x*y = x\n- EQ1: x = x * ((x * (y * x)) * z)\n  - RHS: x * ((x * (y * x)) * z) = x (since x*anything = x)\n  - So x = x. TRUE for all assignments.\n- EQ2: x * y = (y * (x * y)) * y\n  - LHS: x * y = x\n  - RHS: (y * (x * y)) * y = (y * x) * y = y * y = y\n  - So x = y. This fails when x \u2260 y.\n- Magma C satisfies EQ1 but violates EQ2. COUNTEREXAMPLE FOUND.\n\nSTEP 3: VERIFICATION\n\nIn Left Projection (x*y = x):\n- EQ1 holds universally: both sides equal x\n- EQ2 fails: LHS = x, RHS = y, and these are not equal when x \u2260 y (e.g., x=0, y=1)\n\nSTEP 4: NOT NEEDED (counterexample found)\n\nSTEP 5: NOT NEEDED (counterexample found)\n\nREASONING: Th"
+    },
+    {
+      "id": "normal_0044",
+      "equation1": "x * (x * y) = (y * x) * y",
+      "equation2": "x = x * (y * ((x * z) * w))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x * (x * y) = (y * x) * y\n- LHS: x * (x * y) \u2014 x appears in an operation, not bare\n- Not a singleton-forcing equation\n\nEquation 2: x = x * (y * ((x * z) * w))\n- LHS: x (bare variable)\n- RHS: x * (y * ((x * z) * w)) \u2014 contains x\n- Not a singleton-forcing equation (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * (x * y) \u2014 2 operations\n- Equation 2 LHS: x \u2014 0 operations\nEquation 2's LHS has fewer operations. This suggests FALSE. Proceed to find a counterexample.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma B - Right Projection: x*y = y for all x,y\n\nEquation 1: x * (x * y) = (y * x) * y\n- LHS: x * (x * y) = x * y = y\n- RHS: (y * x) * y = x * y = y\n- Both sides equal y \u2713 EQ1 HOLDS\n\nEquation 2: x = x * (y * ((x * z) * w))\n- LHS: x\n- RHS: x * (y * ((x * z) * w))\n  - (x * z) = z\n  - (x * z) * w = z * w = w\n  - y * ((x * z) * w) = y * w = w\n  - x * (y * ((x * z) * w)) = x * w = w\n- LHS = x, RHS = w\n- For arbitrary assignments where x \u2260 w, EQ2 FAILS\n\nFor example: x=0, y=0, z=0, w=1\n- EQ1: 0 * (0 * 0) = (0 * 0) * 0 \u2192 0 = 0 \u2713\n- EQ2: 0 = 0 * (0 * ((0 * 0) * 1)) \u2192 0 = 0 * (0 * 1) \u2192 0 = 0 * 0 \u2192 0 = 0 \u2713\n\nLet me try x=0, y=1, z=1, w=1:\n- EQ1: 0 * (0 * 1) = (1 * 0) * 1 \u2192 0 * 1 = 0 * 1 \u2192 1 = 1 \u2713\n- EQ2: 0 = 0 * (1 * ((0 * 1) * 1)) \u2192 0 = 0 * (1 * (1 * 1)) \u2192 0 = 0 * (1 * 1) \u2192 0 = 0 * 1 \u2192 0 = 1 \u2717\n\nEQ1 holds universally in Right Projection, but EQ2 fails for"
+    },
+    {
+      "id": "normal_0045",
+      "equation1": "x * y = x * (x * x)",
+      "equation2": "x * y = (x * x) * y",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x * y = x * (x * x)\n- LHS is \"x * y\" (not a bare variable), so singleton detection does NOT apply.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x * y (1 operation)\n- Same complexity on LHS, so no immediate lean toward FALSE from this check.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\nMagma A - \"Zero\": x*y = 0 for all x,y.\n- EQ1: x * y = x * (x * x) becomes 0 = 0. \u2713 HOLDS\n- EQ2: x * y = (x * x) * y becomes 0 = 0. \u2713 HOLDS\nNot a counterexample.\n\nMagma B - \"Right Projection\": x*y = y for all x,y.\n- EQ1: x * y = x * (x * x) becomes y = x. This fails when x \u2260 y. \u2717 DOES NOT HOLD\nNot useful (EQ1 fails).\n\nMagma C - \"Left Projection\": x*y = x for all x,y.\n- EQ1: x * y = x * (x * x) becomes x = x. \u2713 HOLDS\n- EQ2: x * y = (x * x) * y becomes x = x. \u2713 HOLDS\nNot a counterexample.\n\nMagma D - \"XOR\": x*y = x+y mod 2.\n- EQ1: x * y = x * (x * x)\n  - LHS: x + y (mod 2)\n  - RHS: x + (x + x) = x + 0 = x (mod 2)\n  - Equation: x + y \u2261 x (mod 2), so y \u2261 0 (mod 2) for all y. This fails. \u2717 DOES NOT HOLD\nNot useful (EQ1 fails).\n\nMagma E - \"Constant 1\": x*y = 1 for all x,y.\n- EQ1: x * y = x * (x * x) becomes 1 = 1. \u2713 HOLDS\n- EQ2: x * y = (x * x) * y becomes 1 = 1. \u2713 HOLDS\nNot a counterexample.\n\nMagma F - \"Negate-right\": x*y = 1-y.\n- EQ1: x * y = x * (x * x)\n  - LHS: 1 - y\n  - RHS: x * (1 - x) = 1 - (1 - x) = x\n  - Equation: 1 - y = x for all "
+    },
+    {
+      "id": "normal_0046",
+      "equation1": "x = (y * (x * z)) * (y * x)",
+      "equation2": "x = (y * y) * ((y * z) * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * (x * z)) * (y * x)\n- LHS: bare variable x\n- RHS: x appears on the right side (in (x*z) and (y*x))\n- Does NOT trigger singleton detection (x appears in RHS)\n\nEquation 2: x = (y * y) * ((y * z) * x)\n- LHS: bare variable x\n- RHS: x appears on the right side (in ((y*z)*x))\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: 0 operations (bare x)\n- Equation 2 LHS: 0 operations (bare x)\nBoth have the same complexity on LHS.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = (y * (x * z)) * (y * x) \u2192 x = 0 * 0 = 0. Fails for x \u2260 0. Does NOT satisfy EQ1 universally.\n\nMagma B - \"Right Projection\": x*y = y\n- EQ1: x = (y * (x * z)) * (y * x) \u2192 x = ((x*z)) * (x) = z * x = x. Holds iff z = x for all z. Does NOT satisfy EQ1 universally.\n\nMagma C - \"Left Projection\": x*y = x\n- EQ1: x = (y * (x * z)) * (y * x) \u2192 x = (y) * (y) = y. Fails for x \u2260 y. Does NOT satisfy EQ1 universally.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = (y * (x * z)) * (y * x)\n  - LHS: x (count: x appears 1 time)\n  - RHS: y + (x + z) + y + x = 2y + 2x + z \u2261 z (mod 2) (count: x appears 2 times, y appears 2 times, z appears 1 time)\n  - For EQ1 to hold: x \u2261 z (mod 2) for all x,z. Does NOT satisfy EQ1 universally.\n\nMagma E - \"Constant 1\": x*y = 1\n- EQ1: x = (y * (x * z)) * (y * x) \u2192 x = 1 * 1 = 1. Fails for x \u2260 1. Does NOT s"
+    },
+    {
+      "id": "normal_0047",
+      "equation1": "x * x = y * (y * y)",
+      "equation2": "x = (x * y) * ((x * z) * x)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * x = y * (y * y)\n  - LHS: x * x (not a bare variable)\n  - Does NOT trigger singleton detection\n- Equation 2: x = (x * y) * ((x * z) * x)\n  - LHS: x (bare variable)\n  - RHS: (x * y) * ((x * z) * x) (contains x)\n  - Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * x (1 operation)\n- Equation 2 LHS: x (0 operations)\n- Equation 2 has fewer operations on LHS. This suggests we should look for a counterexample.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0 for all x,y):**\n- EQ1: x * x = y * (y * y) \u2192 0 = 0 \u2713 (holds)\n- EQ2: x = (x * y) * ((x * z) * x) \u2192 x = 0 (LHS is bare variable x, RHS contains * so evaluates to 0)\n  - This fails when x \u2260 0. So EQ2 does NOT hold universally. \u2717\n\n**Magma A is a counterexample!** EQ1 holds but EQ2 fails.\n\nLet me verify this carefully:\n- In the Zero magma, every product equals 0.\n- EQ1: x * x = 0 and y * (y * y) = 0, so 0 = 0 \u2713\n- EQ2: For any assignment, say x=0, y=0, z=0: LHS = 0, RHS = (0*0)*((0*0)*0) = 0*0 = 0 \u2713\n- But for x=1, y=0, z=0: LHS = 1, RHS = (1*0)*((1*0)*1) = 0*0 = 0 \u2717\n\nEQ2 fails in the Zero magma while EQ1 holds.\n\nVERDICT: FALSE\n\nREASONING: The Zero magma (where x*y = 0 for all x,y) satisfies Equation 1 universally (both sides evaluate to 0), but violates Equation 2 for any assignment where x is not the absorbing element 0. Specif"
+    },
+    {
+      "id": "normal_0048",
+      "equation1": "x = (y * z) * (w * (y * y))",
+      "equation2": "x = x * (((x * y) * x) * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * z) * (w * (y * y))\n- LHS is bare x\n- RHS contains y, z, w but NOT x\n- This forces a singleton magma!\n\nIn a singleton magma {e}, every element equals e, so ALL equations hold trivially.\n\nTherefore, Equation 1 forces the magma to be a singleton.\n\nIn a singleton magma, Equation 2: x = x * (((x * y) * x) * z) also holds trivially (both sides equal e).\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: 0 operations (bare x)\n- Equation 2 LHS: 0 operations (bare x)\nBoth sides are bare x, so this check doesn't distinguish them.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nSince Equation 1 forces a singleton, I need to verify whether ANY non-singleton magma can satisfy Equation 1.\n\nMagma A (Zero): x*y = 0\n- EQ1: x = (y*z)*(w*(y*y)) becomes x = 0*0 = 0\n- This means x must equal 0 for all assignments. But x is universally quantified, so x can be any element. This fails unless the magma is a singleton.\n- EQ1 does NOT hold universally in a 2-element magma.\n\nMagma B (Right Projection): x*y = y\n- EQ1: x = (y*z)*(w*(y*y)) becomes x = z*y\n- For this to hold for ALL assignments of x, y, z, w: we need x = z*y = y for all x, y, z.\n- But x is universally quantified and can be any element, while the RHS is fixed as y. This fails.\n- EQ1 does NOT hold universally.\n\nMagma C (Left Projection): x*y = x\n- EQ1: x = (y*z)*(w*(y*y)) becomes x = (y*z)*w = y*z = y\n- For all assignments, x"
+    },
+    {
+      "id": "normal_0049",
+      "equation1": "x = y * (x * ((z * z) * w))",
+      "equation2": "x = ((x * (y * y)) * x) * y",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = y * (x * ((z * z) * w))\n  - LHS is bare x\n  - RHS contains x (appears in the second argument of the first *)\n  - Does NOT trigger singleton detection (x appears on RHS)\n\n- Equation 2: x = ((x * (y * y)) * x) * y\n  - LHS is bare x\n  - RHS contains x (appears twice)\n  - Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\nBoth have the same complexity on LHS.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = y * (x * ((z * z) * w)) \u2192 x = 0 (RHS has *)\n  - Fails unless x is always 0. Does NOT universally hold.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = y * (x * ((z * z) * w))\n  - RHS: y * (x * ((z * z) * w)) \u2192 rightmost is w\n  - So x = w for all assignments. Does NOT universally hold.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = y * (x * ((z * z) * w))\n  - RHS: y * (x * ((z * z) * w)) \u2192 leftmost is y\n  - So x = y for all assignments. Does NOT universally hold.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x = y * (x * ((z * z) * w))\n  - LHS: x (count: x appears 1 time)\n  - RHS: y * (x * ((z * z) * w)) \u2192 y XOR x XOR z XOR z XOR w = y XOR x XOR w\n  - For EQ1 to hold: x must equal y XOR x XOR w\n  - This means: 0 = y XOR w (mod 2), so y = w always. Does NOT universally hold.\n\n**Magma E - Constant 1 (x*y = 1):**\n- EQ1: x"
+    },
+    {
+      "id": "normal_0050",
+      "equation1": "x = (y * x) * (y * (z * y))",
+      "equation2": "x = ((y * z) * w) * (y * w)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * x) * (y * (z * y))\n- LHS is bare variable x\n- RHS contains x on the right side: (y * x) * (y * (z * y))\n- Does NOT trigger singleton detection (x appears in RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: ((y * z) * w) * (y * w) (3 operations)\n- Equation 2 has MORE operations on LHS \u2192 leans toward FALSE\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = (y * x) * (y * (z * y)) \u2192 x = 0 * 0 \u2192 x = 0\n  - Fails for x \u2260 0. Does NOT universally satisfy EQ1.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = (y * x) * (y * (z * y))\n  - RHS: (y * x) * (y * (z * y)) \u2192 x * (z * y) \u2192 x * y \u2192 y\n  - So EQ1 becomes: x = y (for all x, y)\n  - Does NOT universally satisfy EQ1.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = (y * x) * (y * (z * y))\n  - RHS: (y * x) * (y * (z * y)) \u2192 y * y \u2192 y\n  - So EQ1 becomes: x = y (for all x, y)\n  - Does NOT universally satisfy EQ1.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x = (y * x) * (y * (z * y))\n  - LHS: x (count: x appears 1 time)\n  - RHS: (y * x) * (y * (z * y)) \u2192 variables: y, x, y, z, y \u2192 y appears 3 times, x appears 1 time, z appears 1 time\n  - Parity check: x appears 1 time on both sides \u2713, y appears 0 times on LHS and 3 times on RHS \u2717\n  - Does NOT universally satisfy EQ1.\n\n**Magma E - Constant 1 (x*y = 1):**\n- EQ1: x = (y * x) * "
+    },
+    {
+      "id": "normal_0051",
+      "equation1": "x = y * ((z * y) * x)",
+      "equation2": "x = (y * (x * y)) * (x * z)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * ((z * y) * x)\n- LHS is bare x\n- RHS contains x on the right side: x appears in ((z * y) * x)\n- Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: (y * (x * y)) * (x * z) (3 operations)\n- Equation 2 has MORE operations on LHS, not fewer. Continue to testing.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = y * ((z * y) * x) \u2192 x = 0 * (0 * x) \u2192 x = 0. Fails for x \u2260 0. Does not satisfy EQ1 universally.\n\nMagma B - \"Right Projection\": x*y = y\n- EQ1: x = y * ((z * y) * x) \u2192 x = y * (y * x) \u2192 x = y * x \u2192 x = x. TRUE for all assignments.\n- EQ2: x = (y * (x * y)) * (x * z) \u2192 x = (y * y) * z \u2192 x = y * z. This requires x = y * z for all x,y,z. FALSE (e.g., x=0, y=1, z=2 gives 0 \u2260 2).\n- COUNTEREXAMPLE FOUND: Magma B satisfies EQ1 but violates EQ2.\n\nLet me verify this carefully:\nIn Right Projection (x*y = y):\n- EQ1: x = y * ((z * y) * x)\n  - RHS: y * ((z * y) * x) = y * (y * x) = y * x = x \u2713\n  - EQ1 holds universally.\n  \n- EQ2: x = (y * (x * y)) * (x * z)\n  - RHS: (y * (x * y)) * (x * z) = (y * y) * z = y * z\n  - For this to hold universally: x = y * z for all x, y, z\n  - But with x=a, y=b, z=c arbitrary: a = b * c = c (by right projection)\n  - This only holds if a = c for all choices, which is false.\n  - EQ2 fails (e.g., x=1, y=2, z=3:"
+    },
+    {
+      "id": "normal_0052",
+      "equation1": "x * y = z * (z * (w * u))",
+      "equation2": "x = (((y * y) * x) * z) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * y = z * (z * (w * u)) \u2014 LHS has x*y (not bare x), so NO singleton detection.\n- Equation 2: x = (((y * y) * x) * z) * y \u2014 LHS is bare x, but x appears on RHS in (y*y)*x, so NO singleton detection.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x (0 operations)\n- Equation 2's LHS has fewer operations. This leans toward FALSE. Proceed to Step 2.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A (Zero): x*y = 0 for all x,y**\n- EQ1: x*y = z*(z*(w*u)) \u2192 0 = 0 \u2713 (holds universally)\n- EQ2: x = (((y*y)*x)*z)*y \u2192 x = 0 (since all * evaluate to 0)\n  - This requires x = 0 for all x, which fails when x \u2260 0. \u2717\n- **Counterexample found!** Magma A satisfies EQ1 but violates EQ2.\n\nLet me verify: In Magma A, for any assignment (e.g., x=0, y=0, z=0, w=0, u=0):\n- EQ1: 0*0 = 0*(0*(0*0)) \u2192 0 = 0 \u2713\n- EQ2: 0 = (((0*0)*0)*0)*0 \u2192 0 = 0 \u2713\n\nBut for x=1 (if the magma has more than one element, say {0,1}):\n- EQ1: 1*0 = 0*(0*(0*0)) \u2192 0 = 0 \u2713 (still holds)\n- EQ2: 1 = (((0*0)*1)*0)*0 \u2192 1 = 0 \u2717 (fails)\n\nThis confirms Magma A is a counterexample.\n\n**VERDICT: FALSE**\n\n**REASONING:** Magma A (the zero magma where x*y = 0 for all x,y) satisfies Equation 1 universally but violates Equation 2. In this magma, Equation 1 holds because both sides evaluate to 0. However, Equation 2 requires x = 0 for all x, which is false when x is any non-zero ele"
+    },
+    {
+      "id": "normal_0053",
+      "equation1": "x = (y * x) * (x * (z * x))",
+      "equation2": "x = (((y * z) * w) * w) * x",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * x) * (x * (z * x))\n- LHS is bare x\n- RHS contains x multiple times\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: (((y * z) * w) * w) * x (4 operations)\n- Equation 2 has MORE operations on LHS\n- This is unusual but doesn't immediately rule out implication\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = (y * x) * (x * (z * x)) becomes x = 0 * 0 = 0\n  - Holds only if x = 0 for all x (singleton) \u2014 fails for multi-element magmas\n- EQ2: x = (((y * z) * w) * w) * x becomes x = 0 * x = 0\n  - Holds only if x = 0 for all x\n- Both fail universally in non-singleton case. Not a counterexample.\n\nMagma B - \"Right Projection\": x*y = y for all x,y\n- EQ1: x = (y * x) * (x * (z * x))\n  - RHS: (y * x) * (x * (z * x)) = x * (z * x) = z * x = x\n  - So x = x \u2713 (holds universally)\n- EQ2: x = (((y * z) * w) * w) * x\n  - RHS: (((y * z) * w) * w) * x = x\n  - So x = x \u2713 (holds universally)\n- Both hold. Not a counterexample.\n\nMagma C - \"Left Projection\": x*y = x for all x,y\n- EQ1: x = (y * x) * (x * (z * x))\n  - RHS: (y * x) * (x * (z * x)) = (y * x) * x = y * x = y\n  - So x = y, which fails when x \u2260 y\n- EQ1 does not hold universally. Skip.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = (y * x) * (x * (z * x))\n  - Count occurrences: LHS has x (1 time). RHS has y ("
+    },
+    {
+      "id": "normal_0054",
+      "equation1": "x = (y * y) * y",
+      "equation2": "x * y = (y * y) * (y * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * y) * y\n- LHS is bare variable x\n- x does NOT appear on RHS\n- This forces a singleton magma\n\nIn a singleton magma {e}, every equation holds trivially. Therefore, any magma satisfying Equation 1 is a singleton, and singletons satisfy ALL equations including Equation 2.\n\nThis immediately suggests TRUE, but I must verify Step 5 before concluding.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\nSince Equation 1 forces singleton, let me verify this reasoning:\n\nFor any magma and any assignment of y to some element, the RHS (y * y) * y evaluates to some fixed element e. Since x is universally quantified and must equal e for ALL choices of x, the magma can have only one element.\n\nTherefore, any magma satisfying Equation 1 is a singleton.\n\nIn a singleton magma {e}:\n- Equation 2: x * y = (y * y) * (y * x)\n- All variables are e, so: e * e = (e * e) * (e * e)\n- This becomes: e = e * e, which holds in any singleton.\n\n**STEP 3: VERIFY SINGLETON LOGIC**\n\nThe key insight: Equation 1 states x = (y * y) * y for ALL x and y.\n\nFor fixed y, let (y * y) * y = c (some constant depending on y).\nThen x = c must hold for ALL x in the magma.\nThis means every element equals c, so the magma has exactly one element.\n\n**STEP 4: ALGEBRAIC PROOF**\n\nIn a singleton magma {e}:\n- Equation 1: e = (e * e) * e \u2713 (always holds)\n- Equation 2: e * e = (e * e) * (e * e) \n  - LHS: e * e = e\n"
+    },
+    {
+      "id": "normal_0055",
+      "equation1": "x = (x * ((y * z) * w)) * y",
+      "equation2": "x = y * (z * (z * (z * y)))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = (x * ((y * z) * w)) * y\n  - LHS is bare x\n  - RHS contains x, so this does NOT trigger singleton detection\n- No singleton forced.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\n- Both have the same complexity on LHS.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = (x * ((y * z) * w)) * y \u2192 x = 0 * y \u2192 x = 0\n  - This forces x = 0 for all assignments. EQ1 holds universally only if the magma is {0}.\n- Not useful for finding a counterexample in a larger magma.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = (x * ((y * z) * w)) * y\n  - RHS: (x * ((y * z) * w)) * y \u2192 ((y * z) * w) * y \u2192 w * y \u2192 y\n  - So EQ1 becomes: x = y\n  - This does NOT hold for all assignments (e.g., x=0, y=1). EQ1 fails.\n- Not a magma satisfying EQ1.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = (x * ((y * z) * w)) * y\n  - RHS: (x * ((y * z) * w)) * y \u2192 x * y \u2192 x\n  - So EQ1 becomes: x = x \u2713 (always true)\n- EQ1 holds universally in this magma.\n\nNow check EQ2 in Left Projection: x = y * (z * (z * (z * y)))\n  - RHS: y * (z * (z * (z * y))) \u2192 y * (z * (z * z)) \u2192 y * (z * z) \u2192 y * z \u2192 y\n  - So EQ2 becomes: x = y\n  - This does NOT hold for all assignments (e.g., x=0, y=1). EQ2 fails.\n\n**COUNTEREXAMPLE FOUND:** Left Projection magma satisfies EQ1 but violates EQ2.\n\nLet me verify with exp"
+    },
+    {
+      "id": "normal_0056",
+      "equation1": "x = ((y * (y * z)) * w) * w",
+      "equation2": "x = x * ((y * z) * (y * w))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = ((y * (y * z)) * w) * w\n  - LHS is bare variable x\n  - x does NOT appear on RHS\n  - This forces a singleton magma \u2192 all equations hold\n  - Answer: TRUE\n\nWait, let me verify this is correct. If Equation 1 has the form \"x = f(y,z,w)\" where x is bare on the left and absent on the right, then for ANY assignment of y, z, w, the RHS evaluates to some element. Since x is universally quantified, every element must equal that value. This means the magma has exactly one element.\n\nIn a singleton magma, every equation trivially holds because there's only one element.\n\nTherefore, Equation 1 implies Equation 2.\n\n**STEP 5: DEFAULT JUDGMENT (VERIFICATION)**\n\nBefore concluding TRUE, I must verify there are no structural issues:\n- Equation 1 forces singleton structure\n- In a singleton magma, Equation 2 automatically holds\n- No counterexample can exist in a non-singleton magma because Equation 1 is never satisfied there\n\nThis is definitive.\n\nVERDICT: TRUE\n\nREASONING: Equation 1 has the form x = f(y,z,w) where x appears bare on the left side and does not appear anywhere on the right side. This forces the magma to be a singleton (one element). In a singleton magma, every equation is satisfied, including Equation 2. Therefore, any magma satisfying Equation 1 must be a singleton, and hence must satisfy Equation 2.\n\nPROOF: By Check 1a, Equation 1 forces the magma to contain "
+    },
+    {
+      "id": "normal_0057",
+      "equation1": "x = ((y * (z * z)) * w) * y",
+      "equation2": "x = y * (((z * x) * w) * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = ((y * (z * z)) * w) * y\n  - LHS is bare x, but x does NOT appear on RHS \u2713\n  - This forces a singleton magma!\n\nSince Equation 1 has the form \"x = f(y,z,w)\" where x is bare on the left and absent on the right, it forces every magma satisfying it to be a singleton (one element).\n\nIn a singleton magma, every equation holds trivially because there is only one element, so all variables must equal that element.\n\nTherefore, any magma satisfying Equation 1 is a singleton, and in a singleton magma, Equation 2 automatically holds.\n\n**STEP 2: VERIFICATION WITH SINGLETON MAGMA**\n\nLet M = {a} with a*a = a.\n\nEquation 1: x = ((y * (z * z)) * w) * y\n- All variables are a, all operations yield a\n- a = ((a * (a * a)) * a) * a = ((a * a) * a) * a = (a * a) * a = a * a = a \u2713\n\nEquation 2: x = y * (((z * x) * w) * x)\n- a = a * (((a * a) * a) * a) = a * ((a * a) * a) = a * (a * a) = a * a = a \u2713\n\n**STEP 5: DEFAULT JUDGMENT**\n\nNo counterexample exists because Equation 1 forces the magma to be a singleton, and all equations hold in singletons.\n\nVERDICT: TRUE\n\nREASONING: Equation 1 has the form x = f(y,z,w) where x appears bare on the left side and does not appear anywhere on the right side. This forces any magma satisfying Equation 1 to be a singleton magma (containing exactly one element). In a singleton magma, every equation is satisfied trivially, including Equation 2.\n\nPROO"
+    },
+    {
+      "id": "normal_0058",
+      "equation1": "x = (((y * z) * y) * y) * y",
+      "equation2": "x * y = ((x * x) * z) * w",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (((y * z) * y) * y) * y\n- LHS is bare variable x\n- x does NOT appear on RHS\n- This forces a singleton magma \u2192 all equations hold\n\nWait, let me reconsider. The equation x = (((y * z) * y) * y) * y must hold for ALL assignments of y and z. For any fixed y, z, the RHS evaluates to some element. Since x is universally quantified, every element must equal that value. This means the magma has one element.\n\nIn a singleton magma, both equations trivially hold.\n\n**Answer: TRUE**\n\nHowever, let me verify this reasoning is sound by checking Step 5 requirements.\n\nSTEP 5: DEFAULT JUDGMENT\n\nBefore concluding TRUE based on singleton detection, I should verify there's no flaw in the logic.\n\nThe singleton detection rule states: if LHS is a bare variable x not appearing on RHS, and the equation must hold for ALL variable assignments, then every element equals the RHS value for any y, z assignment. This forces |M| = 1.\n\nIn a 1-element magma {e}, every equation holds trivially because all variables must be e.\n\nTherefore Equation 1 forces a singleton, and in a singleton, Equation 2 automatically holds.\n\nVERDICT: TRUE\n\nREASONING: Equation 1 has the form x = f(y,z) where x is a bare variable on the LHS and does not appear on the RHS. Since this equation must hold for all assignments of y and z, every element of the magma must equal the value of (((y * z) * y) * y) * y for any choi"
+    },
+    {
+      "id": "normal_0059",
+      "equation1": "x = x * (y * ((z * z) * z))",
+      "equation2": "x = ((y * (z * w)) * w) * z",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = x * (y * ((z * z) * z))\n  - LHS is bare x, but x DOES appear on RHS \u2192 NO singleton detection\n- Equation 2: x = ((y * (z * w)) * w) * z\n  - LHS is bare x, but x does NOT appear on RHS \u2192 This would force singleton IF it were the only equation\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\nBoth have the same complexity on LHS.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = x * (y * ((z * z) * z)) \u2192 x = 0 (RHS has operations)\n  - This fails for x \u2260 0, so EQ1 does NOT hold universally. Skip.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = x * (y * ((z * z) * z))\n  - RHS: x * (y * (z)) = x * y = y\n  - So EQ1 becomes: x = y (must hold for all x, y) \u2192 FAILS. Skip.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = x * (y * ((z * z) * z))\n  - RHS: x * (y * (z)) = x\n  - So EQ1 becomes: x = x \u2713 (holds universally)\n- EQ2: x = ((y * (z * w)) * w) * z\n  - RHS: ((y * z) * w) * z = (y * w) * z = y\n  - So EQ2 becomes: x = y (must hold for all x, y) \u2192 FAILS\n\n**COUNTEREXAMPLE FOUND:** Left Projection magma satisfies EQ1 but violates EQ2.\n\nVerification:\n- In Left Projection, EQ1 is x = x (always true)\n- In Left Projection, EQ2 is x = y (false when x \u2260 y, e.g., x=a, y=b with a\u2260b)\n\nVERDICT: FALSE\n\nREASONING: The Left Projection magma (x*y = x for all x,y) satisfies Equati"
+    },
+    {
+      "id": "normal_0060",
+      "equation1": "x = y * (((z * y) * x) * y)",
+      "equation2": "x * y = y * (z * w)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * (((z * y) * x) * y)\n- LHS is bare variable x\n- RHS is y * (((z * y) * x) * y), which CONTAINS x\n- This does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * y (1 operation)\n- Equation 2 has MORE operations on LHS than Equation 1. This is suspicious for implication.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = y * (((z * y) * x) * y) becomes x = 0. This fails for x \u2260 0.\n- EQ1 does NOT hold universally. Skip.\n\nMagma B - \"Right Projection\": x*y = y for all x,y\n- EQ1: x = y * (((z * y) * x) * y)\n  - RHS: y * (((z * y) * x) * y) = y (rightmost is y)\n  - So x = y for all x, y. This fails (e.g., x=0, y=1).\n- EQ1 does NOT hold universally. Skip.\n\nMagma C - \"Left Projection\": x*y = x for all x,y\n- EQ1: x = y * (((z * y) * x) * y)\n  - RHS: y * (((z * y) * x) * y) = y (leftmost of the outer product)\n  - So x = y for all x, y. This fails.\n- EQ1 does NOT hold universally. Skip.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = y * (((z * y) * x) * y)\n  - LHS: x (count: x appears 1 time, odd)\n  - RHS: y * (((z * y) * x) * y) has variables: y, z, y, x, y\n    - x: 1 time (odd)\n    - y: 3 times (odd)\n    - z: 1 time (odd)\n  - For EQ1 to hold: x parity must match (1=1 \u2713), y parity must match (1=3, both odd \u2713), z parity must match (0=1, diffe"
+    },
+    {
+      "id": "normal_0061",
+      "equation1": "x * y = x * (y * (y * z))",
+      "equation2": "x = y * (z * (w * x))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * y = x * (y * (y * z))\n  - LHS: x * y (not a bare variable)\n  - Does NOT trigger singleton detection\n- Equation 2: x = y * (z * (w * x))\n  - LHS: x (bare variable)\n  - RHS: y * (z * (w * x)) \u2014 x APPEARS on RHS\n  - Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x (0 operations)\n- Equation 2 has fewer operations on LHS. This suggests FALSE. Proceed to Step 2.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: 0 = 0 \u2713 (both sides evaluate to 0)\n- EQ2: x = 0 (LHS is bare x, RHS contains *, evaluates to 0)\n  - This fails when x \u2260 0. So EQ2 does NOT hold universally.\n- Magma A satisfies EQ1 but violates EQ2. **COUNTEREXAMPLE FOUND.**\n\nLet me verify this carefully:\n- In Magma A, every product is 0.\n- EQ1: x * y = x * (y * (y * z)) becomes 0 = 0 \u2713\n- EQ2: x = y * (z * (w * x)) becomes x = 0\n  - For any assignment where x \u2260 0, this fails.\n  - For example: x=0, y=0, z=0, w=0 gives 0 = 0 \u2713, but x=1, y=0, z=0, w=0 gives 1 = 0 \u2717\n\nWait, I need to reconsider. In Magma A, there is only one element (0). So x can only be 0. Let me reconsider whether Magma A is actually a valid counterexample or if it's a singleton.\n\nActually, Magma A can have multiple elements {0,1,2,...}, but the operation always returns 0. So x can be any element, but x*y alw"
+    },
+    {
+      "id": "normal_0062",
+      "equation1": "x = ((y * x) * (y * z)) * y",
+      "equation2": "x = ((y * z) * (y * w)) * u",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = ((y * x) * (y * z)) * y\n- LHS is bare variable x\n- RHS contains x (appears in (y * x))\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\n- Both sides are bare x, so complexity is equal\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = ((y * x) * (y * z)) * y \u2192 x = 0 (all * give 0)\n  This means x must equal 0 for all x. Fails for x=1. EQ1 does NOT hold universally.\n\nMagma B - \"Right Projection\": x*y = y\n- EQ1: x = ((y * x) * (y * z)) * y\n  RHS: ((y * x) * (y * z)) * y = (x * z) * y = z * y = y\n  So EQ1 becomes: x = y (for all x, y, z)\n  This does NOT hold universally (e.g., x=0, y=1). EQ1 fails.\n\nMagma C - \"Left Projection\": x*y = x\n- EQ1: x = ((y * x) * (y * z)) * y\n  RHS: ((y * x) * (y * z)) * y = (y * y) * y = y * y = y\n  So EQ1 becomes: x = y (for all x, y, z)\n  This does NOT hold universally. EQ1 fails.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = ((y * x) * (y * z)) * y\n  LHS: x (count: x appears 1 time)\n  RHS: ((y * x) * (y * z)) * y\n    - y appears: 1 + 1 + 1 = 3 times\n    - x appears: 1 time\n    - z appears: 1 time\n  Parity check: x appears 1 time on LHS, 1 time on RHS (both odd) \u2713\n               y appears 0 times on LHS, 3 times on RHS (different parity) \u2717\n  EQ1 does NOT hold universally. EQ1 fails.\n\nMagma E - \"Constan"
+    },
+    {
+      "id": "normal_0063",
+      "equation1": "x = ((y * (x * y)) * y) * z",
+      "equation2": "x = ((y * z) * x) * (z * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = ((y * (x * y)) * y) * z\n- LHS is bare x\n- RHS contains x (in the subexpression x * y)\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\n- Both sides are bare x, so this check doesn't help differentiate\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = ((y * (x * y)) * y) * z \u2192 x = ((y * 0) * y) * z \u2192 x = (0 * y) * z \u2192 x = 0\n  This forces x = 0 for all x, so only holds if magma is singleton. Not universally satisfied.\n\nMagma B - \"Right Projection\": x*y = y for all x,y\n- EQ1: x = ((y * (x * y)) * y) * z\n  - RHS: ((y * y) * y) * z \u2192 (y * y) * z \u2192 y * z \u2192 z\n  - So x = z for all x, y, z. This is NOT universally satisfied (fails when x \u2260 z).\n\nMagma C - \"Left Projection\": x*y = x for all x,y\n- EQ1: x = ((y * (x * y)) * y) * z\n  - RHS: ((y * x) * y) * z \u2192 (y * y) * z \u2192 y * z \u2192 y\n  - So x = y for all x, y, z. This is NOT universally satisfied.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = ((y * (x * y)) * y) * z\n  - Count x: LHS has 1, RHS has 1 (in x*y). Total RHS: 1 + 1 (y appears 3 times) + 1 (z appears 1 time)\n  - For x: LHS count = 1, RHS count = 1 (same parity \u2713)\n  - For y: LHS count = 0, RHS count = 3 (different parity \u2717)\n  - EQ1 fails in XOR magma.\n\nMagma E - \"Constant 1\": x*y = 1 for all x,y\n- EQ1: x = ((y * (x * y)) * y) * z \u2192 "
+    },
+    {
+      "id": "normal_0064",
+      "equation1": "x = x * ((y * y) * (z * z))",
+      "equation2": "x = y * (z * (w * z))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = x * ((y * y) * (z * z))\n- LHS is bare x\n- RHS contains x\n- Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: 0 operations (bare x)\n- Equation 2 LHS: 0 operations (bare x)\n- No immediate signal from operation count\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = x * ((y*y) * (z*z)) \u2192 x = x * (0 * 0) \u2192 x = x * 0 \u2192 x = 0\n  This forces x=0 for all x, so the magma is a singleton. EQ1 holds universally.\n- EQ2: x = y * (z * (w*z)) \u2192 x = y * (z * 0) \u2192 x = y * 0 \u2192 x = 0\n  EQ2 also holds universally.\n- Not a counterexample.\n\nMagma B - \"Right Projection\": x*y = y for all x,y\n- EQ1: x = x * ((y*y) * (z*z))\n  RHS: x * ((y*y) * (z*z)) = x * (y * z) = y * z\n  So EQ1 becomes: x = y * z\n  This does NOT hold for all assignments (e.g., x=1, y=2, z=3 in a 3-element magma).\n  EQ1 fails universally. Skip this magma.\n\nMagma C - \"Left Projection\": x*y = x for all x,y\n- EQ1: x = x * ((y*y) * (z*z))\n  RHS: x * ((y*y) * (z*z)) = x * (y * z) = x\n  So EQ1 becomes: x = x \u2713 (holds for all assignments)\n- EQ2: x = y * (z * (w*z))\n  RHS: y * (z * (w*z)) = y * z = y\n  So EQ2 becomes: x = y\n  This does NOT hold for all assignments (e.g., x=1, y=2).\n  EQ2 fails.\n- COUNTEREXAMPLE FOUND: Left Projection satisfies EQ1 but violates EQ2.\n\nVERDICT: FALSE\n\nREASONING: The Left Projection magma (x*y = x f"
+    },
+    {
+      "id": "normal_0065",
+      "equation1": "x = ((y * z) * w) * (x * y)",
+      "equation2": "x * y = y * (y * (z * z))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = ((y * z) * w) * (x * y)\n- LHS is bare variable x\n- RHS contains x (in the subexpression x * y)\n- Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * y (1 operation)\n- Equation 2 has MORE operations on LHS than Equation 1. This is unusual but doesn't immediately rule out the implication.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = ((y * z) * w) * (x * y) becomes x = 0 * 0 = 0. So x = 0 for all x. This forces a singleton.\n- EQ2: x * y = y * (y * (z * z)) becomes 0 = 0. Holds.\n- Not a counterexample (magma is singleton).\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = ((y * z) * w) * (x * y)\n  - RHS: ((y * z) * w) * (x * y) = w * y = y\n  - So x = y for all x, y. This forces a singleton.\n- Not a counterexample (magma is singleton).\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = ((y * z) * w) * (x * y)\n  - RHS: ((y * z) * w) * (x * y) = ((y * z) * w) = (y * z) = y\n  - So x = y for all x, y. This forces a singleton.\n- Not a counterexample (magma is singleton).\n\n**Magma D - XOR (x*y = x + y mod 2):**\n- EQ1: x = ((y * z) * w) * (x * y)\n  - Count occurrences: LHS has x (1 time). RHS has y, z, w, x, y (y appears 2 times, z once, w once, x once).\n  - For parity: x appears 1 time on LHS, 1 time on RHS \u2713; y appears 0 tim"
+    },
+    {
+      "id": "normal_0066",
+      "equation1": "x * y = (z * z) * (w * x)",
+      "equation2": "x * x = (x * (y * x)) * z",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x * y = (z * z) * (w * x)\n- LHS is \"x * y\" (not a bare single variable)\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x * x (1 operation)\n- Same complexity on LHS, so no immediate lean toward FALSE\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: 0 = 0 \u2713 (holds universally)\n- EQ2: 0 = 0 \u2713 (holds universally)\nNot a counterexample.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: y = x (rightmost of each side)\n  - LHS: x*y \u2192 y\n  - RHS: (z*z)*(w*x) \u2192 x\n  - Requires y = x for all assignments \u2192 FAILS universally\n- EQ1 does not hold, so B cannot be a counterexample.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = z (leftmost of each side)\n  - LHS: x*y \u2192 x\n  - RHS: (z*z)*(w*x) \u2192 z\n  - Requires x = z for all assignments \u2192 FAILS universally\n- EQ1 does not hold, so C cannot be a counterexample.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x*y = (z*z)*(w*x)\n  - LHS: x + y (mod 2)\n  - RHS: (z+z) + (w+x) = 0 + w + x = w + x (mod 2)\n  - Requires x + y = w + x, so y = w for all assignments \u2192 FAILS universally\n- EQ1 does not hold, so D cannot be a counterexample.\n\n**Magma E - Constant 1 (x*y = 1):**\n- EQ1: 1 = 1 \u2713 (holds universally)\n- EQ2: 1 = 1 \u2713 (holds universally)\nNot a counterexample.\n\n**Magma F - Negate-right (x*y = 1-y):**\n- EQ1: x*y = (z*z)*(w*x)"
+    },
+    {
+      "id": "normal_0067",
+      "equation1": "x = y * (((z * y) * y) * w)",
+      "equation2": "x = (((y * x) * y) * y) * y",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = y * (((z * y) * y) * w)\n  - LHS is bare x, but x appears... wait, let me reread. LHS is \"x\" (bare), RHS is \"y * (((z * y) * y) * w)\". Does x appear on RHS? No.\n  - This DOES trigger singleton detection! Equation 1 forces a singleton magma.\n\nSince Equation 1 forces the magma to be a singleton (one element), every equation holds in such a magma, including Equation 2.\n\nWait, let me verify this logic carefully. If x = y * (((z * y) * y) * w) must hold for ALL assignments of x, y, z, w:\n- For any fixed y, z, w, the RHS evaluates to some element e.\n- Since x is universally quantified, we need x = e for all x.\n- This means all elements equal e, so |magma| = 1.\n\nIn a singleton magma, both equations trivially hold.\n\n**STEP 2: VERIFY WITH COUNTEREXAMPLE MAGMAS (sanity check)**\n\nEven though singleton detection suggests TRUE, let me verify Equation 1 actually forces singleton by testing a non-singleton magma.\n\nMagma B (Right Projection): x*y = y\n- Equation 1: x = y * (((z * y) * y) * w)\n  - RHS: y * (((z * y) * y) * w) = y * ((y * y) * w) = y * (y * w) = y * w = w\n  - So Equation 1 becomes: x = w\n  - This does NOT hold for all assignments (e.g., x=0, w=1 fails).\n  - Equation 1 is NOT satisfied universally in this magma.\n\nMagma A (Zero): x*y = 0\n- Equation 1: x = y * (((z * y) * y) * w)\n  - RHS: y * (((z * y) * y) * w) = y * (0 * w) = y * 0 = 0\n  - So Equation 1 b"
+    },
+    {
+      "id": "normal_0068",
+      "equation1": "x * y = (z * w) * (z * x)",
+      "equation2": "x * y = z * (z * (x * x))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * y = (z * w) * (z * x) \u2014 LHS is x*y (not bare x), so no singleton detection.\n- Equation 2: x * y = z * (z * (x * x)) \u2014 LHS is x*y (not bare x), so no singleton detection.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x * y (1 operation)\nBoth have the same LHS complexity. However, Equation 2's RHS is more deeply nested and uses fewer distinct variables (only x and z, vs x, y, z, w in Equation 1).\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: 0 = 0 * 0 = 0 \u2713 (holds)\n- EQ2: 0 = 0 * (0 * 0) = 0 \u2713 (holds)\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: y = w * x (rightmost of (z*w)*(z*x) is x, rightmost of z*x is x... wait, let me recalculate)\n  - (z*w) evaluates to w\n  - (z*x) evaluates to x\n  - (z*w)*(z*x) = w*x evaluates to x\n  - So EQ1 becomes: y = x. This does NOT hold for all assignments (e.g., y=0, x=1). \u2717\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = (z*w) * (z*x)\n  - (z*w) = z\n  - (z*x) = z\n  - z*z = z\n  - So EQ1 becomes: x = z. This does NOT hold for all assignments. \u2717\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x*y = (z*w)*(z*x)\n  - LHS: x+y (mod 2)\n  - RHS: (z+w)+(z+x) = 2z+w+x = w+x (mod 2)\n  - EQ1 requires: x+y = w+x (mod 2), i.e., y = w (mod 2). Does NOT hold universally. \u2717\n\n**Magma E - Constant 1 (x*y = 1):**\n- EQ1: 1 = 1*1 = 1 \u2713 (holds)\n- EQ2: 1 = 1*1 ="
+    },
+    {
+      "id": "normal_0069",
+      "equation1": "x = ((y * (z * z)) * x) * w",
+      "equation2": "(x * y) * z = (y * x) * z",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = ((y * (z * z)) * x) * w\n- LHS is bare variable x\n- RHS is ((y * (z * z)) * x) * w, which CONTAINS x\n- This does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: (x * y) * z (2 operations)\n- Equation 2 has MORE operations than Equation 1's LHS\n- This suggests we should look for counterexamples\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = ((y * (z * z)) * x) * w \u2192 x = 0 (since all * give 0)\n  This means x must equal 0 for all assignments. This fails when we assign x=1. EQ1 does NOT hold universally.\n\nMagma B - \"Right Projection\": x*y = y for all x,y\n- EQ1: x = ((y * (z * z)) * x) * w\n  RHS: ((y * (z * z)) * x) * w = (z * x) * w = x * w = w\n  So x = w for all assignments. This fails (e.g., x=0, w=1). EQ1 does NOT hold.\n\nMagma C - \"Left Projection\": x*y = x for all x,y\n- EQ1: x = ((y * (z * z)) * x) * w\n  RHS: ((y * (z * z)) * x) * w = (y * x) * w = y * w = y\n  So x = y for all assignments. This fails. EQ1 does NOT hold.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = ((y * (z * z)) * x) * w\n  Count parities: LHS has x (count 1). RHS: y appears 1 time, z appears 2 times, x appears 1 time, w appears 1 time.\n  For x: LHS count = 1 (odd), RHS count = 1 (odd) \u2713\n  For y: LHS count = 0 (even), RHS count = 1 (odd) \u2717\n  EQ1 does NOT hold univ"
+    },
+    {
+      "id": "normal_0070",
+      "equation1": "x * y = (y * y) * z",
+      "equation2": "x * (y * z) = (x * x) * y",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * y = (y * y) * z\n  - LHS: x * y (x is not bare; it's inside an operation)\n  - Does NOT trigger singleton detection\n  \n- Equation 2: x * (y * z) = (x * x) * y\n  - LHS: x * (y * z) (x is not bare)\n  - Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x * (y * z) (2 operations)\n- Equation 2 has MORE operations on LHS, not fewer. This doesn't immediately suggest FALSE, but let's proceed.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x * y = (y * y) * z \u2192 0 = 0 \u2713 (holds universally)\n- EQ2: x * (y * z) = (x * x) * y \u2192 0 = 0 \u2713 (holds universally)\n- Not a counterexample.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x * y = (y * y) * z\n  - LHS: y\n  - RHS: (y * y) * z = y * z = z\n  - Requires y = z for all y, z. This does NOT hold universally.\n  - EQ1 fails in this magma.\n- Not useful.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x * y = (y * y) * z\n  - LHS: x\n  - RHS: (y * y) * z = y * z = y\n  - Requires x = y for all x, y, z. This does NOT hold universally.\n  - EQ1 fails in this magma.\n- Not useful.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x * y = (y * y) * z\n  - LHS: x + y (mod 2)\n  - RHS: (y + y) * z = 0 * z = 0 + z = z (mod 2)\n  - Requires x + y \u2261 z (mod 2) for all x, y, z. Does NOT hold universally.\n  - EQ1 fails in this magma.\n- Not"
+    },
+    {
+      "id": "normal_0071",
+      "equation1": "x * y = ((z * w) * z) * w",
+      "equation2": "x = ((y * (y * y)) * x) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * y = ((z * w) * z) * w\n  - LHS has x in a product (x * y), not bare. Does NOT trigger singleton detection.\n- Equation 2: x = ((y * (y * y)) * x) * x\n  - LHS is bare x, but x appears on RHS. Does NOT trigger singleton detection.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x (0 operations)\n- Equation 2 has fewer operations on LHS. This suggests leaning toward FALSE.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: 0 = 0 \u2713 (both sides evaluate to 0)\n- EQ2: x = 0 \u2717 (LHS is bare x, RHS is 0; fails when x \u2260 0)\n- EQ1 holds universally, EQ2 fails. **COUNTEREXAMPLE FOUND.**\n\nLet me verify this carefully:\n- In the Zero magma, every product is 0.\n- EQ1: x * y = ((z * w) * z) * w becomes 0 = 0 \u2713\n- EQ2: x = ((y * (y * y)) * x) * x becomes x = 0\n  - For any assignment where x is a variable distinct from 0, this fails.\n  - For example, if the magma has elements {0, 1}, assign x=1, y=0, z=0, w=0:\n    - EQ1: 1 * 0 = ((0 * 0) * 0) * 0 \u2192 0 = 0 \u2713\n    - EQ2: 1 = ((0 * (0 * 0)) * 1) * 1 \u2192 1 = 0 \u2717\n\nThe Zero magma satisfies EQ1 universally but violates EQ2.\n\nVERDICT: FALSE\n\nREASONING: The Zero magma (where x*y = 0 for all x,y) satisfies Equation 1 universally (both sides reduce to 0), but violates Equation 2 whenever x is assigned a non-zero value. Since EQ1 holds but EQ2 fails in this magma, the im"
+    },
+    {
+      "id": "normal_0072",
+      "equation1": "x = ((y * (z * y)) * w) * x",
+      "equation2": "x = (x * (y * (z * z))) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = ((y * (z * y)) * w) * x\n- LHS is bare x\n- RHS contains x on the right side\n- Does NOT trigger singleton detection (x appears in RHS)\n\nEquation 2: x = (x * (y * (z * z))) * x\n- LHS is bare x\n- RHS contains x on the right side\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: 0 operations (bare x)\n- Equation 2 LHS: 0 operations (bare x)\nBoth have the same complexity on LHS.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\" (x*y = 0):\n- EQ1: x = ((y * (z * y)) * w) * x \u2192 x = 0 * x \u2192 x = 0. Fails for x \u2260 0.\n- Not universally satisfied. Skip.\n\nMagma B - \"Right Projection\" (x*y = y):\n- EQ1: x = ((y * (z * y)) * w) * x \u2192 x = y. This requires x = y for all assignments. Fails.\n- Not universally satisfied. Skip.\n\nMagma C - \"Left Projection\" (x*y = x):\n- EQ1: x = ((y * (z * y)) * w) * x \u2192 x = y. This requires x = y for all assignments. Fails.\n- Not universally satisfied. Skip.\n\nMagma D - \"XOR\" (x*y = x+y mod 2):\n- EQ1: x = ((y * (z * y)) * w) * x\n  - RHS: y + (z + y) + w + x = y + z + y + w + x = z + w + x (mod 2)\n  - LHS: x\n  - Requires: x = z + w + x (mod 2), so z + w = 0 (mod 2). Fails for z \u2260 w.\n- Not universally satisfied. Skip.\n\nMagma E - \"Constant 1\" (x*y = 1):\n- EQ1: x = ((y * (z * y)) * w) * x \u2192 x = 1. Fails for x \u2260 1.\n- Not universally satisfied. Skip.\n\nMagma F - \"Negate-right\" (x*y = 1-y):\n- EQ1: x = ((y * (z "
+    },
+    {
+      "id": "normal_0073",
+      "equation1": "x * (x * y) = (x * z) * x",
+      "equation2": "x = (y * z) * (z * (w * w))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * (x * y) = (x * z) * x\n  - LHS: x * (x * y) \u2014 x is NOT bare (it's inside operations)\n  - Does NOT trigger singleton detection\n- Equation 2: x = (y * z) * (z * (w * w))\n  - LHS: x is bare\n  - RHS: (y * z) * (z * (w * w)) \u2014 contains operations, x does NOT appear on RHS\n  - **This DOES trigger singleton detection**\n\nWait, let me reconsider. If Equation 2 has the form \"x = f(y,z,w)\" where x is bare on the left and absent from the right, then Equation 2 forces any magma satisfying it to be a singleton. But the question is whether Equation 1 *implies* Equation 2.\n\nFor Equation 1 to imply Equation 2, every magma satisfying Equation 1 must also satisfy Equation 2. If Equation 2 forces a singleton, then Equation 1 must also force a singleton for the implication to be true.\n\nEquation 1 (x * (x * y) = (x * z) * x) does NOT force a singleton \u2014 it's not of the form \"bare variable = expression without that variable.\"\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * (x * y) \u2014 2 operations\n- Equation 2 LHS: x \u2014 0 operations\n- Equation 2 has FEWER operations on LHS \u2192 lean toward FALSE\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma B - Right Projection: x*y = y**\n\nEquation 1: x * (x * y) = (x * z) * x\n- LHS: x * (x * y) = x * y = y\n- RHS: (x * z) * x = z * x = x\n- For this to hold: y = x (must hold for ALL x, y)\n- This does NOT hold universally \u2192 Equation 1 "
+    },
+    {
+      "id": "normal_0074",
+      "equation1": "x * y = (z * (w * x)) * z",
+      "equation2": "x = y * (z * (z * (z * x)))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * y = (z * (w * x)) * z\n  - LHS: x * y (x is inside an operation, not bare)\n  - Not a singleton-forcing equation\n- Equation 2: x = y * (z * (z * (z * x)))\n  - LHS: x (bare variable)\n  - RHS: y * (z * (z * (z * x))) (contains operations and x appears on RHS)\n  - Not a singleton-forcing equation\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x (0 operations)\n- Equation 2 has fewer operations on LHS. This suggests FALSE. Proceed to find a counterexample.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x * y = (z * (w * x)) * z \u2192 0 = 0 \u2713 (holds universally)\n- EQ2: x = y * (z * (z * (z * x))) \u2192 x = 0\n  - For x = 1, y = 0, z = 0: LHS = 1, RHS = 0 \u2717 (fails)\n- **COUNTEREXAMPLE FOUND**: Magma A satisfies EQ1 but violates EQ2.\n\nLet me verify this carefully:\n- In Magma A, every product equals 0.\n- EQ1: x * y = (z * (w * x)) * z becomes 0 = 0 \u2713\n- EQ2: x = y * (z * (z * (z * x))) becomes x = 0\n  - This only holds if x = 0 for all x, which is false (e.g., x = 1 \u2260 0)\n  - So EQ2 fails in Magma A\n\nSince Magma A satisfies EQ1 but violates EQ2, the implication is FALSE.\n\nVERDICT: FALSE\n\nREASONING: Magma A (the zero magma where x*y = 0 for all x,y) satisfies Equation 1 universally (both sides evaluate to 0), but violates Equation 2. In Magma A, Equation 2 reduces to x = 0, which does not hold for a"
+    },
+    {
+      "id": "normal_0075",
+      "equation1": "x = y * ((y * (z * w)) * y)",
+      "equation2": "x * y = y * ((y * y) * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * ((y * (z * w)) * y)\n- LHS is bare variable x\n- x does NOT appear on RHS\n- This forces a singleton magma \u2192 all equations hold\n\nHowever, let me verify this is truly the form. The RHS contains operations, so this DOES trigger singleton detection.\n\n**Wait \u2014 let me reconsider.** The equation x = y * ((y * (z * w)) * y) must hold for ALL assignments of x, y, z, w. For any fixed y, z, w, the RHS evaluates to some element e. Since x is universally quantified, every element must equal e. This means the magma has exactly one element.\n\nIn a singleton magma, every equation holds trivially. So Equation 2 would also hold.\n\n**Answer: TRUE**\n\nBut let me verify this reasoning is sound before finalizing.\n\nActually, I need to be more careful. Let me check if there could be a non-singleton magma satisfying Equation 1.\n\nFor Equation 1 to hold in a non-singleton magma: for every choice of y, z, w, and every x, we need x = y * ((y * (z * w)) * y).\n\nThis means for fixed y, z, w, the value y * ((y * (z * w)) * y) must equal every element x in the magma. This is only possible if the magma is a singleton.\n\nTherefore, Equation 1 forces the magma to be a singleton.\n\n**STEP 5: DEFAULT JUDGMENT**\n\nSince Equation 1 forces a singleton magma, and all equations hold in a singleton magma, Equation 2 must also hold.\n\n**PROOF:**\nEquation 1 has the form x = f(y, z, w) where x is a bare v"
+    },
+    {
+      "id": "normal_0076",
+      "equation1": "x = ((y * z) * (x * w)) * u",
+      "equation2": "x = y * (x * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = ((y * z) * (x * w)) * u\n- LHS is bare variable x\n- RHS contains x (in the subexpression x * w)\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\n- Equation 1 RHS: ((y * z) * (x * w)) * u (4 operations)\n- Equation 2 RHS: y * (x * x) (2 operations)\n- Equation 2 has fewer operations on RHS, but both have bare x on LHS\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = ((y * z) * (x * w)) * u \u2192 x = 0 (RHS all operations \u2192 0)\n  This forces x = 0 for all assignments. EQ1 holds universally.\n- EQ2: x = y * (x * x) \u2192 x = 0 (RHS all operations \u2192 0)\n  This also forces x = 0 for all assignments. EQ2 holds universally.\n- Both hold; not a counterexample.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = ((y * z) * (x * w)) * u\n  RHS rightmost leaf: u. So x = u for all assignments.\n  This forces x = u universally. EQ1 holds.\n- EQ2: x = y * (x * x)\n  RHS rightmost leaf: x. So x = x universally. EQ2 holds.\n- Both hold; not a counterexample.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = ((y * z) * (x * w)) * u\n  RHS leftmost leaf: y. So x = y for all assignments.\n  This forces x = y universally. EQ1 holds.\n- EQ2: x = y * (x * x)\n  RHS leftmost leaf: y. So x = y universally. EQ2 holds.\n- Both hold; not a counterexample.\n\n**Magma D - XOR"
+    },
+    {
+      "id": "normal_0077",
+      "equation1": "x * y = (y * y) * (z * w)",
+      "equation2": "x * y = ((z * w) * x) * w",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * y = (y * y) * (z * w)\n  - LHS is \"x * y\" (not a bare single variable), so NO singleton detection.\n- Equation 2: x * y = ((z * w) * x) * w\n  - LHS is \"x * y\" (not a bare single variable), so NO singleton detection.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * y (1 operation)\n- Equation 2 LHS: x * y (1 operation)\n- Same complexity on LHS. No immediate signal from this check.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A (Zero): x*y = 0 for all x,y**\n- EQ1: x * y = (y * y) * (z * w) \u2192 0 = 0 * 0 \u2192 0 = 0 \u2713 (holds)\n- EQ2: x * y = ((z * w) * x) * w \u2192 0 = (0 * 0) * 0 \u2192 0 = 0 \u2713 (holds)\n- Not a counterexample.\n\n**Magma B (Right Projection): x*y = y for all x,y**\n- EQ1: x * y = (y * y) * (z * w)\n  - LHS: y\n  - RHS: (y * y) * (z * w) = y * w = w\n  - Requires y = w for all assignments. This fails (e.g., y=0, w=1). \u2717 (fails)\n- EQ1 does not hold universally in Magma B.\n\n**Magma C (Left Projection): x*y = x for all x,y**\n- EQ1: x * y = (y * y) * (z * w)\n  - LHS: x\n  - RHS: (y * y) * (z * w) = y * z = y\n  - Requires x = y for all assignments. This fails. \u2717 (fails)\n- EQ1 does not hold universally in Magma C.\n\n**Magma D (XOR): x*y = x+y mod 2**\n- EQ1: x * y = (y * y) * (z * w)\n  - LHS: x + y (mod 2)\n  - RHS: (y + y) + (z + w) = 0 + z + w = z + w (mod 2)\n  - Requires x + y = z + w for all assignments. This fails. \u2717 (fails)\n- EQ1 does not hold universal"
+    },
+    {
+      "id": "normal_0078",
+      "equation1": "x = y * (z * (z * (z * x)))",
+      "equation2": "x = y * (x * ((z * w) * y))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = y * (z * (z * (z * x)))\n  - LHS is bare x\n  - RHS contains x (appears once on the right)\n  - Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\n- Both have same complexity on LHS\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = y * (z * (z * (z * x))) \u2192 x = 0 (RHS all operations \u2192 0)\n  - This forces x = 0 for all x, so magma is singleton. Holds universally.\n- EQ2: x = y * (x * ((z * w) * y)) \u2192 x = 0 (RHS all operations \u2192 0)\n  - Also forces x = 0. Holds universally.\n- Both hold \u2192 not a counterexample.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = y * (z * (z * (z * x)))\n  - RHS: y * (z * (z * (z * x))) \u2192 rightmost leaf is x\n  - So x = x. Holds universally.\n- EQ2: x = y * (x * ((z * w) * y))\n  - RHS: y * (x * ((z * w) * y)) \u2192 rightmost leaf is y\n  - So x = y. Does NOT hold universally (fails when x \u2260 y).\n- EQ1 holds, EQ2 fails \u2192 **COUNTEREXAMPLE FOUND**\n\nLet me verify: In Right Projection, for any assignment where x \u2260 y:\n- EQ1: x = x \u2713 (always true)\n- EQ2: x = y \u2717 (false when x \u2260 y)\n\nThis is a valid counterexample.\n\n**VERDICT: FALSE**\n\n**REASONING:** The Right Projection magma (x*y = y for all x,y) satisfies Equation 1 universally but violates Equation 2 for any assignment where x and y differ. Specific"
+    },
+    {
+      "id": "normal_0079",
+      "equation1": "x = y * (((x * y) * y) * z)",
+      "equation2": "x * (y * z) = (x * y) * w",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * (((x * y) * y) * z)\n- LHS is bare variable x\n- RHS contains x (appears in (x*y))\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * (y * z) (2 operations)\n- Equation 2 has MORE operations than Equation 1's LHS\n- This suggests we should look for counterexamples\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = y * (((x * y) * y) * z) becomes x = y * 0 = 0\n  - This holds only if x = 0 for all assignments. Not universal. EQ1 fails.\n\nMagma B - \"Right Projection\": x*y = y\n- EQ1: x = y * (((x * y) * y) * z)\n  - RHS: y * (((x*y)*y)*z) = y * ((y*y)*z) = y * (y*z) = y * z = z\n  - So EQ1 becomes: x = z. This doesn't hold universally. EQ1 fails.\n\nMagma C - \"Left Projection\": x*y = x\n- EQ1: x = y * (((x * y) * y) * z)\n  - RHS: y * (((x*y)*y)*z) = y * ((x*y)*z) = y * x = y\n  - So EQ1 becomes: x = y. This doesn't hold universally. EQ1 fails.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = y * (((x * y) * y) * z)\n  - Count parities: LHS has x (count 1). RHS: y\u2295(((x\u2295y)\u2295y)\u2295z) = y\u2295((x\u22950)\u2295z) = y\u2295(x\u2295z) = x\u2295y\u2295z\n  - LHS: x appears 1 time (odd)\n  - RHS: x appears 1 time, y appears 1 time, z appears 1 time\n  - For x: parity match (1 vs 1). For y: 0 vs 1 (mismatch). EQ1 fails.\n\nMagma E - \"Constant 1\": x*y = 1\n- EQ1: x = y * (((x * y) * y) * z)\n  - RHS: y * "
+    },
+    {
+      "id": "normal_0080",
+      "equation1": "x * x = x * ((y * x) * x)",
+      "equation2": "x = (y * z) * (w * (x * u))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x * x = x * ((y * x) * x)\n  - LHS: x * x (not a bare variable)\n  - Does NOT trigger singleton detection\n- Equation 2: x = (y * z) * (w * (x * u))\n  - LHS: x (bare variable)\n  - RHS: (y * z) * (w * (x * u)) \u2014 contains x on RHS\n  - Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * x (1 operation)\n- Equation 2 LHS: x (0 operations)\n- Equation 2 has fewer operations on LHS. This suggests FALSE. Proceed to find a counterexample.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: 0 = 0 \u2713 (holds universally)\n- EQ2: x = 0 (since all * expressions \u2192 0)\n  - This requires x = 0 for all x, which fails when x \u2260 0\n  - EQ2 does NOT hold universally \u2717\n\n**Magma A is a counterexample!**\n\nLet me verify: In the zero magma, every product is 0.\n- EQ1: x * x = x * ((y * x) * x) becomes 0 = 0 \u2713 (holds for all assignments)\n- EQ2: x = (y * z) * (w * (x * u)) becomes x = 0\n  - For assignment x=1, y=0, z=0, w=0, u=0: we get 1 = 0 \u2717 (fails)\n\nEQ1 holds universally in Magma A, but EQ2 fails for some assignments.\n\n**VERDICT: FALSE**\n\n**REASONING:** The zero magma (where x*y = 0 for all x,y) satisfies Equation 1 universally (both sides evaluate to 0), but violates Equation 2 (which requires x = 0 for all x, failing when x is any non-zero element). This is a valid counterexample showing the implica"
+    },
+    {
+      "id": "normal_0081",
+      "equation1": "x = (y * y) * ((y * y) * y)",
+      "equation2": "x * y = (x * y) * (z * z)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * y) * ((y * y) * y)\n- LHS: bare variable x\n- RHS: contains only y, no x\n- This is the EXACT form for singleton detection!\n\nFor any fixed y, the RHS evaluates to some element e in the magma. Since x is universally quantified, EVERY element must equal e. Therefore the magma has exactly one element.\n\nA singleton magma satisfies ALL equations trivially.\n\n**STEP 2: VERIFICATION**\n\nIn a singleton magma {a}:\n- Equation 1: a = (a * a) * ((a * a) * a) \u2713 (both sides are a)\n- Equation 2: a * a = (a * a) * (a * a) \u2713 (both sides are a)\n\nSince Equation 1 forces the magma to be a singleton, and every singleton satisfies Equation 2, the implication holds.\n\n**STEP 5: DEFAULT JUDGMENT**\n\nThe singleton detection in Step 1 is definitive. No further testing needed.\n\nVERDICT: TRUE\n\nREASONING: Equation 1 has the form \"x = f(y)\" where x is a bare variable on the left and does not appear on the right. This forces any magma satisfying Equation 1 to be a singleton (one-element magma). Every equation, including Equation 2, is trivially satisfied in a singleton magma.\n\nPROOF: Let M be any magma satisfying Equation 1. For any assignment of y to an element of M, the expression (y * y) * ((y * y) * y) evaluates to some element e \u2208 M. Since x is universally quantified in Equation 1, every element of M must equal e. Thus |M| = 1. In a singleton magma, all equations hold. Therefore E"
+    },
+    {
+      "id": "normal_0082",
+      "equation1": "x = (y * ((x * x) * x)) * x",
+      "equation2": "x = ((y * z) * w) * (w * y)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * ((x * x) * x)) * x\n- LHS is bare x\n- RHS contains x (appears multiple times)\n- Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: ((y * z) * w) (2 operations)\n- Equation 2 has MORE operations on LHS than Equation 1\n- This is unusual but doesn't immediately rule out the implication\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = (y * ((x * x) * x)) * x becomes x = 0. Fails for x \u2260 0.\n- Not a magma satisfying EQ1.\n\nMagma B - \"Right Projection\": x*y = y\n- EQ1: x = (y * ((x * x) * x)) * x\n  - RHS: (y * ((x * x) * x)) * x = (y * x) * x = x * x = x \u2713\n  - EQ1 holds universally\n- EQ2: x = ((y * z) * w) * (w * y)\n  - RHS: ((y * z) * w) * (w * y) = (z * w) * y = w * y = y\n  - So EQ2 becomes x = y, which fails when x \u2260 y\n  - EQ2 does NOT hold universally\n- COUNTEREXAMPLE FOUND: Magma B satisfies EQ1 but violates EQ2\n\nVERDICT: FALSE\n\nREASONING: The right projection magma (x*y = y) satisfies Equation 1 universally. In this magma, Equation 1 simplifies to x = x, which is always true. However, Equation 2 simplifies to x = y, which is false for assignments where x and y differ. Therefore, Equation 1 does not imply Equation 2.\n\nCOUNTEREXAMPLE: Right Projection magma where x*y = y for all x,y. Take the assignment x=0, y=1, z=0, w=0. Then E"
+    },
+    {
+      "id": "normal_0083",
+      "equation1": "x = (y * ((x * z) * x)) * y",
+      "equation2": "x = (y * z) * ((x * y) * w)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * ((x * z) * x)) * y\n- LHS is bare x\n- RHS contains x (appears twice: in (x*z) and after it)\n- Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: (y * z) (1 operation)\n- Equation 2 has MORE operations on LHS than Equation 1\n- This is unusual but doesn't immediately signal FALSE\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = (y * ((x * z) * x)) * y \u2192 x = 0 (RHS all operations \u2192 0)\n  This fails when x \u2260 0. Does NOT satisfy EQ1 universally.\n\nMagma B - \"Right Projection\": x*y = y\n- EQ1: x = (y * ((x * z) * x)) * y\n  RHS: (y * ((x * z) * x)) * y \u2192 rightmost is y\n  So x = y for all x, y. This fails (e.g., x=0, y=1). Does NOT satisfy EQ1.\n\nMagma C - \"Left Projection\": x*y = x\n- EQ1: x = (y * ((x * z) * x)) * y\n  RHS: (y * ((x * z) * x)) * y \u2192 leftmost is y\n  So x = y for all x, y. Does NOT satisfy EQ1.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = (y * ((x * z) * x)) * y\n  LHS: x (count: x appears 1 time)\n  RHS: y * ((x * z) * x) * y \u2192 variables: y, x, z, x, y\n  Count on RHS: x appears 2 times, y appears 2 times, z appears 1 time\n  Parity mismatch for x (1 vs 2) and z (0 vs 1). Does NOT satisfy EQ1.\n\nMagma E - \"Constant 1\": x*y = 1\n- EQ1: x = (y * ((x * z) * x)) * y \u2192 x = 1\n  This fails when x \u2260 1. Does NOT satisfy EQ1.\n\nMagma F -"
+    },
+    {
+      "id": "normal_0084",
+      "equation1": "x = (y * (z * w)) * (w * z)",
+      "equation2": "(x * y) * x = (z * w) * w",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * (z * w)) * (w * z)\n- LHS is bare variable x\n- RHS is (y * (z * w)) * (w * z), which contains x? No.\n- This has the form \"x = f(y,z,w)\" where x doesn't appear on RHS.\n- **This forces a singleton magma.**\n\nIn a singleton magma {e}, every equation holds trivially because there's only one element.\n\nTherefore, any magma satisfying Equation 1 is a singleton.\n\nIn a singleton magma, Equation 2: (x * y) * x = (z * w) * w\n- LHS: (e * e) * e = e * e = e\n- RHS: (e * e) * e = e * e = e\n- Both sides equal e, so Equation 2 holds.\n\n**STEP 5: DEFAULT JUDGMENT**\n\nSince Equation 1 forces the magma to be a singleton (by Check 1a), and every equation holds in a singleton magma, Equation 2 must hold in any magma satisfying Equation 1.\n\nVERDICT: TRUE\n\nREASONING: Equation 1 has the form x = f(y,z,w) where x is a bare variable on the LHS and does not appear on the RHS. This forces any magma satisfying this equation to be a singleton (one-element magma). In a singleton magma, all equations are trivially satisfied, including Equation 2.\n\nPROOF: Let M be any magma satisfying Equation 1: x = (y * (z * w)) * (w * z). For any assignment of y, z, w to elements of M, the RHS evaluates to some element e \u2208 M. Since x is universally quantified and must equal e for all choices of y, z, w, every element of M must equal e. Thus M = {e} is a singleton. In a singleton magma, every subexpr"
+    },
+    {
+      "id": "normal_0085",
+      "equation1": "x = (x * (x * y)) * (y * y)",
+      "equation2": "x * x = y * (x * z)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (x * (x * y)) * (y * y)\n- LHS is bare variable x\n- RHS contains x, so this does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * x (1 operation)\n- Equation 2 has MORE operations on LHS than Equation 1, which is suspicious for implication\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A (Zero): x*y = 0**\n- Equation 1: x = (x * (x * y)) * (y * y) becomes x = 0 * 0 = 0\n  - This holds only if x = 0 for all x, which is false. EQ1 fails universally.\n\n**Magma B (Right Projection): x*y = y**\n- Equation 1: x = (x * (x * y)) * (y * y)\n  - RHS: (x * (x * y)) * (y * y) = (x * y) * y = y * y = y\n  - So: x = y for all x, y. This is false. EQ1 fails.\n\n**Magma C (Left Projection): x*y = x**\n- Equation 1: x = (x * (x * y)) * (y * y)\n  - RHS: (x * (x * y)) * (y * y) = (x * x) * y = x * y = x\n  - So: x = x. This is TRUE for all assignments. EQ1 holds universally.\n- Equation 2: x * x = y * (x * z)\n  - LHS: x * x = x\n  - RHS: y * (x * z) = y * x = y\n  - So: x = y for all x, y, z. This is FALSE. EQ2 fails.\n\n**COUNTEREXAMPLE FOUND**: Magma C (Left Projection) satisfies Equation 1 but violates Equation 2.\n\nLet me verify with a concrete assignment in Magma C:\n- Let x = 0, y = 1, z = 0\n- Equation 1: 0 = (0 * (0 * 1)) * (1 * 1) = (0 * 0) * 1 = 0 * 1 = 0 \u2713\n- Equation 2: 0 * 0 = 1 * (0 * 0) becomes 0 = 1"
+    },
+    {
+      "id": "normal_0086",
+      "equation1": "x = (y * y) * (z * (z * z))",
+      "equation2": "x = (((x * y) * y) * y) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * y) * (z * (z * z))\n- LHS is bare variable x\n- RHS contains y and z but NOT x\n- This forces a singleton magma \u2192 all equations hold \u2192 TRUE\n\nWait, let me verify this logic carefully. If Equation 1 holds for ALL assignments of x, y, z, then:\n- For any choice of y, z, the RHS evaluates to some element e\n- Since x is universally quantified, x must equal e for ALL x\n- This means every element equals e, so |M| = 1\n- A singleton magma satisfies every equation\n\nThis would give TRUE immediately.\n\nHowever, let me double-check by testing if there's a non-singleton magma satisfying Equation 1.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A (Zero): x*y = 0\n- EQ1: x = (y*y)*(z*(z*z)) \u2192 x = 0*0 = 0. Holds only if x=0 always, which is false for all x. FAILS EQ1.\n\nMagma B (Right Projection): x*y = y\n- EQ1: x = (y*y)*(z*(z*z)) \u2192 x = y*(z) = z. Holds only if x=z for all assignments. FAILS EQ1.\n\nMagma C (Left Projection): x*y = x\n- EQ1: x = (y*y)*(z*(z*z)) \u2192 x = y*z = y. Holds only if x=y for all assignments. FAILS EQ1.\n\nMagma D (XOR): x*y = x+y mod 2\n- EQ1: x = (y*y)*(z*(z*z))\n  - RHS: y*y = 0 (mod 2), z*z = 0, z*0 = z, y*z = y+z\n  - So x = 0 + (y+z) = y+z (mod 2)\n  - This holds only when x = y+z for all assignments. FAILS EQ1.\n\nMagma E (Constant 1): x*y = 1\n- EQ1: x = (y*y)*(z*(z*z)) \u2192 x = 1*1 = 1. Holds only if x=1 always. FAILS EQ1.\n\nMagma F (Negate-right): x*y ="
+    },
+    {
+      "id": "normal_0087",
+      "equation1": "x = y * ((x * y) * (z * y))",
+      "equation2": "x * y = (z * (w * w)) * w",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * ((x * y) * (z * y))\n- LHS is bare variable x\n- RHS is y * ((x * y) * (z * y)), which contains x\n- Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * y (1 operation)\n- Equation 2 has MORE operations on LHS than Equation 1. This is unusual but doesn't immediately determine the answer.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0 for all x,y):**\n- EQ1: x = y * ((x * y) * (z * y)) becomes x = 0 * (0 * 0) = 0 * 0 = 0\n  - This holds only if x = 0 for all assignments. Since x is universally quantified and can be any element, this fails for x \u2260 0.\n  - EQ1 does NOT hold universally in Magma A.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = y * ((x * y) * (z * y))\n  - RHS: y * ((x * y) * (z * y)) = y * (y * y) = y * y = y\n  - So EQ1 becomes x = y, which does NOT hold for all assignments (e.g., x=a, y=b with a\u2260b).\n  - EQ1 does NOT hold universally in Magma B.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = y * ((x * y) * (z * y))\n  - RHS: y * ((x * y) * (z * y)) = y * (x * z) = y\n  - So EQ1 becomes x = y, which does NOT hold universally.\n  - EQ1 does NOT hold universally in Magma C.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x = y * ((x * y) * (z * y))\n  - LHS: x (count: x appears 1 time)\n  - RHS: y * ((x * y) * (z * y)) expand"
+    },
+    {
+      "id": "normal_0088",
+      "equation1": "x = (x * x) * ((y * z) * z)",
+      "equation2": "x = y * (z * (z * (z * z)))",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (x * x) * ((y * z) * z)\n- LHS is bare x\n- RHS contains x (appears twice on RHS)\n- Does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: y (0 operations)\nBoth have 0 operations on LHS. No immediate signal from complexity.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = (x*x)*((y*z)*z) becomes x = 0*0 = 0. Holds only if x=0 for all x. FAILS universally.\n- Not a valid test (EQ1 doesn't hold universally).\n\nMagma B - \"Right Projection\": x*y = y for all x,y\n- EQ1: x = (x*x)*((y*z)*z) becomes x = x*z. This requires x = z for all x,z. FAILS universally.\n- Not a valid test.\n\nMagma C - \"Left Projection\": x*y = x for all x,y\n- EQ1: x = (x*x)*((y*z)*z) becomes x = x*y = x. This holds universally. \u2713\n- EQ2: x = y*(z*(z*(z*z))) becomes x = y*z. This requires x = y for all x,y. FAILS universally.\n- COUNTEREXAMPLE FOUND: Magma C satisfies EQ1 but violates EQ2.\n\nLet me verify Magma C carefully:\n- Left projection: x*y = x\n- EQ1: x = (x*x)*((y*z)*z)\n  - RHS: (x*x) = x, (y*z) = y, (y*z)*z = y*z = y, so x*y = x. \u2713 Holds for all assignments.\n- EQ2: x = y*(z*(z*(z*z)))\n  - RHS: z*z = z, z*z = z, z*z = z, y*z = y. So y = y. But LHS is x.\n  - This requires x = y for all x,y, which is false. \u2717 Fails for x\u2260y.\n\nMagma C satisfies EQ1 universally but violates "
+    },
+    {
+      "id": "normal_0089",
+      "equation1": "x = (y * (z * w)) * (w * u)",
+      "equation2": "x = ((y * (x * z)) * y) * w",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * (z * w)) * (w * u)\n- LHS is bare variable x\n- RHS contains operations and does NOT contain x\n- This forces a singleton magma \u2192 all equations hold \u2192 TRUE\n\nWait, let me verify this is correct. If x = (y * (z * w)) * (w * u) must hold for ALL assignments of x, y, z, w, u, then for any fixed y, z, w, u, the RHS evaluates to some element e. Since x is universally quantified, every element must equal e. This means the magma has exactly one element.\n\nIn a singleton magma, every equation trivially holds.\n\nTherefore, Equation 1 implies Equation 2.\n\nSTEP 5: DEFAULT JUDGMENT\n\nBefore concluding, I should verify there are no edge cases. The singleton detection is definitive: if Equation 1 holds universally, the magma must be a singleton, and in a singleton all equations hold.\n\nVERDICT: TRUE\n\nREASONING: Equation 1 has the form x = f(y, z, w, u) where x appears bare on the left side and does not appear anywhere on the right side. This equation, when required to hold for ALL assignments of variables, forces the magma to be a singleton (one element). In a singleton magma, every equation is trivially satisfied, including Equation 2.\n\nPROOF: Suppose a magma M satisfies Equation 1: x = (y * (z * w)) * (w * u) for all x, y, z, w, u \u2208 M. Fix arbitrary y, z, w, u \u2208 M. The RHS evaluates to some element e \u2208 M. Since the equation must hold for all x \u2208 M, we have x = e for all x"
+    },
+    {
+      "id": "normal_0090",
+      "equation1": "x = (y * (z * (z * x))) * x",
+      "equation2": "x = (x * ((y * x) * x)) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = (y * (z * (z * x))) * x\n  - LHS is bare x\n  - RHS contains x (appears twice)\n  - Does NOT trigger singleton detection\n\n- Equation 2: x = (x * ((y * x) * x)) * x\n  - LHS is bare x\n  - RHS contains x (appears multiple times)\n  - Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: 0 operations (bare x)\n- Equation 2 LHS: 0 operations (bare x)\n- Both have the same complexity on LHS\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = (y * (z * (z * x))) * x \u2192 x = 0 * x \u2192 x = 0\n  - Fails for x \u2260 0. Does not universally satisfy EQ1.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = (y * (z * (z * x))) * x\n  - RHS: (y * (z * (z * x))) * x \u2192 rightmost is x \u2192 x\n  - EQ1 becomes: x = x \u2713 (holds for all assignments)\n  \n- EQ2: x = (x * ((y * x) * x)) * x\n  - RHS: (x * ((y * x) * x)) * x \u2192 rightmost is x \u2192 x\n  - EQ2 becomes: x = x \u2713 (holds for all assignments)\n  \nBoth hold in Magma B.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = (y * (z * (z * x))) * x\n  - RHS: (y * (z * (z * x))) * x \u2192 leftmost is y \u2192 y\n  - EQ1 becomes: x = y\n  - This fails when x \u2260 y. Does not universally satisfy EQ1.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x = (y * (z * (z * x))) * x\n  - Count occurrences: LHS has x (1 time). \n  - RHS: y appears 1 time, z appears 2 times, x appears 2 times.\n  - For parity: x app"
+    },
+    {
+      "id": "normal_0091",
+      "equation1": "x = (y * ((y * x) * z)) * w",
+      "equation2": "x * y = z * ((y * x) * x)",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * ((y * x) * z)) * w\n- LHS is bare variable x\n- RHS contains x (appears in (y * x))\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * y (1 operation)\n- Equation 2 has MORE operations on LHS than Equation 1\n- This is unusual but doesn't immediately determine the answer\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = (y * ((y * x) * z)) * w \u2192 x = 0 (all * give 0)\n  This forces x = 0 for all assignments. EQ1 fails universally (x can be any element).\n  Actually: EQ1 requires x = 0 always, which is false when x is free. Skip.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = (y * ((y * x) * z)) * w\n  RHS: (y * ((y * x) * z)) * w \u2192 ((y * x) * z) \u2192 z \u2192 w\n  So EQ1 becomes: x = w\n  This does NOT hold for all assignments (e.g., x=0, w=1). EQ1 fails.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = (y * ((y * x) * z)) * w\n  RHS: (y * ((y * x) * z)) * w \u2192 y \u2192 y\n  So EQ1 becomes: x = y\n  This does NOT hold universally. EQ1 fails.\n\n**Magma D - XOR (x*y = x \u2295 y):**\n- EQ1: x = (y * ((y * x) * z)) * w\n  Count parities: LHS has x once (odd). \n  RHS: y appears 2 times, x appears 1 time, z appears 1 time, w appears 1 time.\n  For x: LHS odd (1), RHS odd (1) \u2713\n  For y: LHS even (0), RHS even (2) \u2713\n  For z: LHS even (0), RHS odd (1) \u2717\n  EQ1 fails in "
+    },
+    {
+      "id": "normal_0092",
+      "equation1": "x = (y * ((z * x) * w)) * z",
+      "equation2": "x = x * (y * (y * (z * z)))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (y * ((z * x) * w)) * z\n- LHS is bare x\n- RHS contains x (appears in (z * x))\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: 0 operations (bare x)\n- Equation 2 LHS: 0 operations (bare x)\n- Both sides are bare variables, so this check doesn't distinguish them\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = (y * ((z * x) * w)) * z \u2192 x = 0 (RHS has operations)\n  This fails for any x \u2260 0. Does NOT satisfy EQ1 universally.\n\nMagma B - \"Right Projection\": x*y = y for all x,y\n- EQ1: x = (y * ((z * x) * w)) * z\n  RHS: (y * ((z * x) * w)) * z \u2192 ((z * x) * w) * z \u2192 w * z \u2192 z\n  So EQ1 becomes: x = z. This does NOT hold for all assignments (e.g., x=0, z=1).\n  Does NOT satisfy EQ1 universally.\n\nMagma C - \"Left Projection\": x*y = x for all x,y\n- EQ1: x = (y * ((z * x) * w)) * z\n  RHS: (y * ((z * x) * w)) * z \u2192 y * z \u2192 y\n  So EQ1 becomes: x = y. This does NOT hold for all assignments.\n  Does NOT satisfy EQ1 universally.\n\nMagma D - \"XOR\": x*y = x+y mod 2\n- EQ1: x = (y * ((z * x) * w)) * z\n  Count occurrences: LHS has x once. RHS: y, z, x, w, z \u2192 y(1), z(2), x(1), w(1)\n  For parity: x appears 1 time on each side \u2713, y appears 1 time on RHS only \u2717\n  Does NOT satisfy EQ1 universally.\n\nMagma E - \"Constant 1\": x*y = 1 for all x,y\n- EQ1: x = (y * ((z * x) * w)) * z \u2192 x = 1 (RHS has operations)\n  T"
+    },
+    {
+      "id": "normal_0093",
+      "equation1": "x = y * ((z * z) * (z * y))",
+      "equation2": "x = ((y * z) * (z * y)) * x",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * ((z * z) * (z * y))\n- LHS is bare variable x\n- RHS is y * ((z * z) * (z * y)), which contains operations and does NOT contain x\n- This triggers singleton detection \u2192 the magma must be a singleton\n- In a singleton magma, ALL equations hold trivially\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: 0 operations (bare x)\n- Equation 2 LHS: ((y * z) * (z * y)) * x has 3 operations\n- Equation 2 has MORE operations on LHS than Equation 1\n\nSTEP 2: VERIFY SINGLETON DETECTION\n\nSince Equation 1 has the form \"x = f(y,z)\" where x is bare on the left and absent from the right, it forces any magma satisfying it to be a singleton.\n\nProof: For any fixed values of y and z, the RHS evaluates to some element e. Since the equation must hold for ALL x, every element of the magma must equal e. Therefore the magma has exactly one element.\n\nIn a singleton magma {a}, every equation holds because:\n- Every variable is assigned to a\n- Every subexpression evaluates to a\n- Both sides of any equation equal a\n\nTherefore Equation 2 also holds in any singleton magma.\n\nSTEP 3: VERIFY NO OTHER MAGMAS SATISFY EQUATION 1\n\nAny magma with more than one element cannot satisfy Equation 1. Here's why:\n\nTake any two distinct elements a, b in the magma. Set y = a and z = b.\nThen x = a * ((b * b) * (b * a)) must hold for ALL x.\nBut x can be any element (including both a and b), while the RHS evaluates "
+    },
+    {
+      "id": "normal_0094",
+      "equation1": "x * (x * y) = z * (x * z)",
+      "equation2": "x * y = (z * w) * w",
+      "answer": false,
+      "verdict": "TRUE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x * (x * y) = z * (x * z)\n- LHS: x * (x * y) \u2014 not a bare variable\n- Not a singleton-forcing equation\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x * (x * y) \u2014 2 operations\n- Equation 2 LHS: x * y \u2014 1 operation\n- Equation 2 has fewer operations. This suggests FALSE. Proceed to counterexample search.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A (Zero): x*y = 0 for all x,y**\n- Equation 1: 0 = 0 \u2713 (both sides are 0)\n- Equation 2: 0 = 0 \u2713 (both sides are 0)\n- Not a counterexample.\n\n**Magma B (Right Projection): x*y = y**\n- Equation 1: x * (x * y) = z * (x * z)\n  - LHS: x * (x * y) = x * y = y\n  - RHS: z * (x * z) = z * z = z\n  - Holds iff y = z for all assignments. This fails (e.g., y=0, z=1). EQ1 does NOT hold universally.\n- Not applicable.\n\n**Magma C (Left Projection): x*y = x**\n- Equation 1: x * (x * y) = z * (x * z)\n  - LHS: x * (x * y) = x * x = x\n  - RHS: z * (x * z) = z * x = z\n  - Holds iff x = z for all assignments. This fails. EQ1 does NOT hold universally.\n- Not applicable.\n\n**Magma D (XOR): x*y = x + y mod 2**\n- Equation 1: x * (x * y) = z * (x * z)\n  - LHS: x + (x + y) = 2x + y \u2261 y (mod 2)\n  - RHS: z + (x + z) = x + 2z \u2261 x (mod 2)\n  - Holds iff x = y for all assignments. EQ1 does NOT hold universally.\n- Not applicable.\n\n**Magma E (Constant 1): x*y = 1**\n- Equation 1: 1 = 1 \u2713\n- Equation 2: 1 = 1 \u2713\n- Not a counterexample.\n\n**Magma F "
+    },
+    {
+      "id": "normal_0095",
+      "equation1": "x = ((x * y) * x) * (y * y)",
+      "equation2": "x = ((y * (y * y)) * z) * x",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = ((x * y) * x) * (y * y)\n  - LHS is bare x\n  - RHS contains x, so this does NOT trigger singleton detection\n- No singleton forced.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x (0 operations)\n- Both have the same complexity on LHS. Proceed to test magmas.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = ((x * y) * x) * (y * y) becomes x = (0 * 0) * 0 = 0 * 0 = 0\n  - This holds only if x = 0 for all x. Not universally satisfied. \u2717\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = ((x * y) * x) * (y * y)\n  - RHS: ((x * y) * x) * (y * y) = (y * x) * y = x * y = y\n  - So x = y for all x, y. Not universally satisfied. \u2717\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = ((x * y) * x) * (y * y)\n  - RHS: ((x * y) * x) * (y * y) = (x * x) * y = x * y = x\n  - So x = x. This is universally satisfied! \u2713\n- EQ2: x = ((y * (y * y)) * z) * x\n  - RHS: ((y * (y * y)) * z) * x = ((y * y) * z) * x = (y * z) * x = y\n  - So x = y for all x, y, z. Not universally satisfied. \u2717\n- **COUNTEREXAMPLE FOUND**: Left Projection satisfies EQ1 but violates EQ2.\n\n**VERDICT: FALSE**\n\n**REASONING:** In the Left Projection magma (x*y = x for all x,y), Equation 1 is universally satisfied because both sides reduce to x. However, Equation 2 requires x = y for all assignments, which is not a universal law in "
+    },
+    {
+      "id": "normal_0096",
+      "equation1": "x = (((x * y) * z) * x) * z",
+      "equation2": "x = ((y * (y * z)) * z) * y",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (((x * y) * z) * x) * z\n- LHS: bare variable x\n- RHS: contains x (appears twice)\n- Does NOT trigger singleton detection (x appears on RHS)\n\nEquation 2: x = ((y * (y * z)) * z) * y\n- LHS: bare variable x\n- RHS: contains no x\n- This WOULD trigger singleton detection IF Equation 1 forced it, but Equation 1 doesn't force singleton.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: 0 operations (bare x)\n- Equation 2 LHS: 0 operations (bare x)\n- Both equal, no signal here.\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = (((x*y)*z)*x)*z \u2192 x = 0 (RHS all operations \u2192 0)\n  Fails unless x=0 always. Does NOT hold universally.\n- Skip this magma.\n\nMagma B - \"Right Projection\": x*y = y for all x,y\n- EQ1: x = (((x*y)*z)*x)*z\n  - (x*y) = y\n  - ((x*y)*z) = (y*z) = z\n  - (((x*y)*z)*x) = (z*x) = x\n  - (((x*y)*z)*x)*z = (x*z) = z\n  - So EQ1 becomes: x = z\n  - This does NOT hold for all assignments (e.g., x=0, z=1). EQ1 fails universally.\n- Skip this magma.\n\nMagma C - \"Left Projection\": x*y = x for all x,y\n- EQ1: x = (((x*y)*z)*x)*z\n  - (x*y) = x\n  - ((x*y)*z) = (x*z) = x\n  - (((x*y)*z)*x) = (x*x) = x\n  - (((x*y)*z)*x)*z = (x*z) = x\n  - So EQ1 becomes: x = x \u2713 (holds universally)\n\n- EQ2: x = ((y*(y*z))*z)*y\n  - (y*z) = y\n  - (y*(y*z)) = (y*y) = y\n  - ((y*(y*z))*z) = (y*z) = y\n  - ((y*(y*z))*z)*y = (y*y) = y\n  - So EQ2 becomes: x = y\n  "
+    },
+    {
+      "id": "normal_0097",
+      "equation1": "x = (x * (x * y)) * (z * z)",
+      "equation2": "x * y = (z * z) * (z * y)",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = (x * (x * y)) * (z * z)\n- LHS is bare variable x\n- RHS contains x, so this does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * y (1 operation)\n- Equation 2 has MORE operations on LHS than Equation 1. This is unusual but doesn't immediately rule out the implication.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = (x * (x * y)) * (z * z) becomes x = 0 * 0 = 0. So x = 0 for all x. This forces a singleton.\n- In a singleton, EQ2 also holds.\n- Not a counterexample.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = (x * (x * y)) * (z * z)\n  - RHS: (x * (x * y)) * (z * z) = (x * y) * z = y * z = z\n  - So x = z for all x, y, z. This forces a singleton.\n- Not a counterexample.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = (x * (x * y)) * (z * z)\n  - RHS: (x * (x * y)) * (z * z) = x * z = x\n  - So x = x, which is always true. EQ1 holds universally.\n- EQ2: x * y = (z * z) * (z * y)\n  - LHS: x * y = x\n  - RHS: (z * z) * (z * y) = z * (z * y) = z * z = z\n  - So x = z for all x, y, z. This fails when x \u2260 z.\n- **COUNTEREXAMPLE FOUND**: Left Projection satisfies EQ1 but violates EQ2.\n\nLet me verify: In Left Projection (x*y = x):\n- EQ1 for all x,y,z: x = (x*(x*y))*(z*z) becomes x = x*z = x \u2713\n- EQ2 for x=0, y=0, z=1: 0*0 = (1*1)*(1*0) becomes 0 = 1*1"
+    },
+    {
+      "id": "normal_0098",
+      "equation1": "x = y * (y * z)",
+      "equation2": "x = (y * x) * (x * (y * x))",
+      "answer": true,
+      "verdict": "TRUE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\n- Equation 1: x = y * (y * z)\n  - LHS is bare variable x\n  - x does NOT appear on RHS\n  - This forces a singleton magma \u2192 all equations hold\n  - This would suggest TRUE, but let me verify the structure more carefully.\n\nActually, wait. The equation x = y * (y * z) must hold for ALL assignments of x, y, z. For any fixed y, z, the RHS evaluates to some element e. Since x is universally quantified, every element must equal e. This means the magma has exactly one element.\n\nIn a singleton magma, every equation trivially holds, so Equation 2 would also hold.\n\n**However**, let me reconsider: does the singleton detection truly apply here? The equation x = y * (y * z) is a universally quantified statement over all x, y, z. For it to hold universally, for any choice of y and z, the value y * (y * z) must be the same for all x. This means every element equals y * (y * z) for any y, z. This forces the magma to be a singleton.\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: (y * x) * (x * (y * x)) (3 operations)\n- Equation 2 has MORE operations on LHS, which is unusual but doesn't immediately refute.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\nSince Equation 1 forces a singleton magma (every element must equal y * (y * z) for all y, z), let me verify this reasoning:\n\nIn any magma satisfying x = y * (y * z) for all x, y, z:\n- Pick any y, z. Then"
+    },
+    {
+      "id": "normal_0099",
+      "equation1": "x = y * ((x * x) * (z * w))",
+      "equation2": "x * y = (y * z) * (w * u)",
+      "answer": true,
+      "verdict": "FALSE",
+      "correct": false,
+      "response": "I'll work through this systematically.\n\n**STEP 1: QUICK STRUCTURAL CHECKS**\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * ((x * x) * (z * w))\n- LHS is bare variable x\n- RHS is y * ((x * x) * (z * w)), which CONTAINS x\n- This does NOT trigger singleton detection (x appears on RHS)\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: x * y (1 operation)\n- Equation 2 has MORE operations on LHS, not fewer. This doesn't immediately suggest FALSE, but note Equation 2 introduces new variables (u) not in Equation 1.\n\n**STEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS**\n\n**Magma A - Zero (x*y = 0):**\n- EQ1: x = y * ((x * x) * (z * w)) \u2192 x = y * 0 \u2192 x = 0\n  This forces x = 0 for all assignments. EQ1 does NOT hold universally (fails when we want x \u2260 0).\n  Skip this magma.\n\n**Magma B - Right Projection (x*y = y):**\n- EQ1: x = y * ((x * x) * (z * w))\n  RHS: y * ((x * x) * (z * w)) = y * (x * (z * w)) = y * (z * w) = y * w = w\n  So EQ1 becomes: x = w. This does NOT hold for all assignments (e.g., x=0, w=1).\n  Skip this magma.\n\n**Magma C - Left Projection (x*y = x):**\n- EQ1: x = y * ((x * x) * (z * w))\n  RHS: y * ((x * x) * (z * w)) = y * (x * (z * w)) = y * x = y\n  So EQ1 becomes: x = y. This does NOT hold universally.\n  Skip this magma.\n\n**Magma D - XOR (x*y = x+y mod 2):**\n- EQ1: x = y * ((x * x) * (z * w))\n  Count occurrences: LHS has x (1 time). RHS has y (1), x (2), z (1), w (1).\n  For EQ1 to hold: x must appear odd times on both sides. LHS: x appears 1 t"
+    },
+    {
+      "id": "normal_0100",
+      "equation1": "x = y * ((z * (x * y)) * x)",
+      "equation2": "x = ((y * x) * (z * x)) * z",
+      "answer": false,
+      "verdict": "FALSE",
+      "correct": true,
+      "response": "I'll work through this systematically.\n\nSTEP 1: QUICK STRUCTURAL CHECKS\n\nCheck 1a - Singleton Detection:\nEquation 1: x = y * ((z * (x * y)) * x)\n- LHS is bare x\n- RHS contains x (appears twice: in \"x * y\" and final \"* x\")\n- Does NOT trigger singleton detection\n\nCheck 1b - LHS Complexity:\n- Equation 1 LHS: x (0 operations)\n- Equation 2 LHS: ((y * x) * (z * x)) * z (3 operations)\n- Equation 2 has MORE operations on LHS\n- This is unusual but doesn't immediately refute; proceed to testing\n\nSTEP 2: TEST SPECIFIC COUNTEREXAMPLE MAGMAS\n\nMagma A - \"Zero\": x*y = 0 for all x,y\n- EQ1: x = y * ((z * (x * y)) * x) \u2192 x = y * (0 * 0) \u2192 x = y * 0 \u2192 x = 0\n  This forces x = 0 for all x. EQ1 holds universally only if magma is singleton.\n- Not a useful test for non-singleton behavior.\n\nMagma B - \"Right Projection\": x*y = y\n- EQ1: x = y * ((z * (x * y)) * x)\n  - RHS: y * ((z * y) * x) = y * (y * x) = y * x = x \u2713\n  - EQ1 holds\n- EQ2: x = ((y * x) * (z * x)) * z\n  - RHS: ((y * x) * (z * x)) * z = (x * x) * z = x * z = z\n  - For EQ2 to hold: x = z for all x, z. This fails (e.g., x=0, z=1).\n  - EQ2 does NOT hold universally\n- COUNTEREXAMPLE FOUND: Magma B satisfies EQ1 but violates EQ2\n\nLet me verify this carefully:\n- Right Projection: x*y = y\n- EQ1: x = y * ((z * (x * y)) * x)\n  - Evaluate RHS: y * ((z * (x * y)) * x)\n  - x * y = y\n  - z * (x * y) = z * y = y\n  - (z * (x * y)) * x = y * x = x\n  - y * ((z * (x * y)) * x) = y * x = x \u2713\n  - EQ1 holds for all assignments\n\n- EQ2: x = ((y * x) * (z * x)) "
+    }
+  ]
+}
