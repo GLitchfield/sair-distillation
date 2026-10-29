@@ -2,24 +2,11 @@
 
 A competition to write a ≤10,000 byte cheatsheet that helps small LLMs determine whether one equational law implies another over all magmas.
 
-## Key Results
+## Results
 
-Our best cheatsheets on the hard3 test set (400 problems, order ≤4 equations) at 16k token budget:
+Finished 17th of about 350 entries.
 
-| Model | v33 (2.8KB) | v34 (3.1KB) |
-|---|---|---|
-| **Gemma 4 31B** | **93.9%** (F1=0.966) | 80.8% |
-| **GPT-OSS 120B** | **88.9%** (F1=0.906) | 87.9% |
-| Llama 3.3 70B | ~52% | ~52% |
-
-On the hard2 test set (200 problems, harder curated):
-
-| Model | v33 | v34 |
-|---|---|---|
-| Gemma | 64.5% | **72.5%** |
-| GPT-OSS | 52.5% | **68.5%** |
-
-Best cheatsheets: [`cheatsheets/cheatsheet_v33.txt`](cheatsheets/cheatsheet_v33.txt) and [`cheatsheets/cheatsheet_v34.txt`](cheatsheets/cheatsheet_v34.txt).
+The best cheatsheet, [`v33`](cheatsheets/cheatsheet_v33.txt) (2.8 KB), scored 88.9% with GPT-OSS 120B and 93.9% with Gemma 4 31B on a 99-problem subset of the hard3 problem set. Adding three more magmas ([`v34`](cheatsheets/cheatsheet_v34.txt)) helped most on the harder hard2 set, where it scored 68.5% and 72.5%. Llama 3.3 70B stayed near 52% with every cheatsheet.
 
 ## The Problem
 
@@ -132,7 +119,7 @@ python analysis/cohomology_scan.py datasets/order5_half.jsonl
 
 3. **Token budget is the binding constraint.** Raising from 8k to 16k tokens was worth more than weeks of cheatsheet iteration.
 
-4. **Models are complementary.** GPT-OSS and Gemma fail on different problems — an oracle ensemble reaches 99%.
+4. **Models are complementary.** GPT-OSS and Gemma fail on different problems. Taking whichever model is right would reach 99% on the same 99-problem subset.
 
 5. **Order-5 equations are unsolvable by battery approach.** No counterexample exists in any 3-element magma, 4-element structured search, or cohomological analysis.
 
