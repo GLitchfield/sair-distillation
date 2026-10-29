@@ -121,7 +121,7 @@ python analysis/cohomology_scan.py datasets/order5_half.jsonl
 
 4. **Models are complementary.** GPT-OSS and Gemma fail on different problems. Taking whichever model is right would reach 99% on the same 99-problem subset.
 
-5. **Order-5 equations are unsolvable by battery approach.** No counterexample exists in any 3-element magma, 4-element structured search, or cohomological analysis.
+5. **The magma approach doesn't reach order-5 equations.** For the false order-5 problems tested, no counterexample turned up among all 3-element magmas, a structured search of 4-element magmas, or a cohomology analysis. Those problems need larger or more unusual magmas than a cheatsheet can teach.
 
 See [`docs/project_retrospective.md`](docs/project_retrospective.md) for the full narrative of what we tried and learned.
 
